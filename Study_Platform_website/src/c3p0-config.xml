@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- c3p0配置文件 -->
+<c3p0-config>
+    <!-- 默认数据源（本项目使用） -->
+    <default-config>
+        <property name="driverClass">com.mysql.jdbc.Driver</property>
+        <property name="jdbcUrl">jdbc:mysql://localhost:3306/study_platform?useUnicode=true&amp;characterEncoding=utf8</property>
+        <property name="user">root</property>
+        <property name="password">root</property>
+    
+        <property name="acquireIncrement">5</property>
+        <property name="initialPoolSize">10</property>
+        <property name="minPoolSize">5</property>
+        <property name="maxPoolSize">20</property>
+    </default-config>
+    
+    <named-config name="platform-use-config">
+        <property name="driverClass">com.mysql.jdbc.Driver</property>
+        <property name="jdbcUrl">jdbc:mysql://localhost:3306/study_platform?useUnicode=true&amp;characterEncoding=utf8</property>
+        <property name="user">root</property>
+        <property name="password">root</property>
+    
+        <property name="acquireIncrement">5</property>
+        <property name="initialPoolSize">10</property>
+        <property name="minPoolSize">5</property>
+        <property name="maxPoolSize">20</property>
+    </named-config>
+    
+    <!-- 第二数据源（本项目不起作用）（） -->
+    <named-config name="mysql-config">
+        <property name="driverClass">null</property>
+        <property name="jdbcUrl">null</property>
+        <property name="user">null</property>
+        <property name="password">null</property>
+    
+        <property name="acquireIncrement">5</property>
+        <property name="initialPoolSize">10</property>
+        <property name="minPoolSize">5</property>
+        <property name="maxPoolSize">20</property>
+    </named-config>
+    
+    <!-- 第三数据源（本项目不起作用） -->
+    <named-config name="oracle-config">
+        <property name="driverClass">null</property>
+        <property name="jdbcUrl">null</property>
+        <property name="user">null</property>
+        <property name="password">null</property>
+    
+        <property name="acquireIncrement">5</property>
+        <property name="initialPoolSize">10</property>
+        <property name="minPoolSize">5</property>
+        <property name="maxPoolSize">20</property>
+    </named-config>
+</c3p0-config>

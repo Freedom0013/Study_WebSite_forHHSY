@@ -8,8 +8,8 @@ package com.studyplatform.web.utils;
  */
 public class DebugUtils {
 	/** 是否显示调试信息标识 */
-	public static final boolean isDebug = true;
-
+    public static final boolean isDebug = true;
+	
 	/**
 	 * 调试信息调用方法
 	 * @param message 需要显示的信息

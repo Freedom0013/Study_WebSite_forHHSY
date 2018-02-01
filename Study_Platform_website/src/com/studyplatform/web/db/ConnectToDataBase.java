@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import com.studyplatform.web.utils.DebugUtils;
 
 /**
- * 数据库链接类
+ * 手动数据库链接类
  * Title: ConnectToDataBase
  * @date 2018年1月21日
  * @author Freedom0013
