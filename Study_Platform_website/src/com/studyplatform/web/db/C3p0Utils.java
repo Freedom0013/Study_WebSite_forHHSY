@@ -1,6 +1,8 @@
 package com.studyplatform.web.db;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.sql.DataSource;
@@ -36,6 +38,38 @@ public class C3p0Utils {
             throw new RuntimeException("服务器忙");
         }
     }
+    
+    /**
+     * 关闭（释放）C3p0连接池链接
+     */
+    public static void close(Connection conn) throws SQLException{
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                throw e;
+            }
+        }
+    }  
+    
+    /**
+     * 关闭Statement接口
+     */
+    public static void close(PreparedStatement pstate) throws SQLException{    
+        if(pstate!=null){    
+            pstate.close();    
+        }    
+    }    
+    
+    /**
+     * 关闭结果集
+     */
+    public static void close(ResultSet rs) throws SQLException{    
+        if(rs!=null){    
+            rs.close();    
+        }    
+    }    
     
     /**
      * 链接测试
