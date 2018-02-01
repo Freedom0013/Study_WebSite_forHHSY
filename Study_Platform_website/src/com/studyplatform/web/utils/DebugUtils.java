@@ -12,11 +12,31 @@ public class DebugUtils {
 	
 	/**
 	 * 调试信息调用方法
-	 * @param message 需要显示的信息
+	 * @param message 需要显示的信息String
 	 */
 	public static void showLog(String message) {
 		if (isDebug) {
 			System.out.println("----Study_Platform----"+message);
 		}
 	}
+	
+	/**
+     * 调试信息调用方法
+     * @param message 需要显示的信息boolean
+     */
+	public static void showLog(boolean message) {
+        if (isDebug) {
+            System.out.println("----Study_Platform----"+message);
+        }
+    }
+	
+	/**
+     * 调试信息调用方法
+     * @param message 需要显示的信息int
+     */
+	public static void showLog(int message) {
+        if (isDebug) {
+            System.out.println("----Study_Platform----"+message);
+        }
+    }
 }

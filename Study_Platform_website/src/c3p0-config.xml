@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
 <!-- c3p0配置文件 -->
 <c3p0-config>
     <!-- 默认数据源（本项目不起作用） -->
