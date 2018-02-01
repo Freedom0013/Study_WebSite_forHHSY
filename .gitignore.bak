@@ -17,3 +17,24 @@ hs_err_pid*
 
 # 2018/1/21 #
 /.metadata
+/Servers
+
+# JDT-specific (Eclipse Java Development Tools) #
+.classpath
+
+# Eclipse Core #
+.project
+
+# Eclipse #
+*.pydevproject  
+.metadata  
+.gradle  
+bin/  
+tmp/  
+*.tmp  
+*.bak  
+*.swp  
+*~.nib  
+local.properties  
+/.settings/  
+.loadpath  
