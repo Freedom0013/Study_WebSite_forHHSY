@@ -66,7 +66,7 @@ public class MD5Utils {
      * 测试
      */
     public static void main(String[] args) {
-        String md5 = getMD5("Freedom");
+        String md5 = getMD5("admin");
         DebugUtils.showLog(md5);
         String md52 = getmd5("1234569");
         DebugUtils.showLog(md52);
