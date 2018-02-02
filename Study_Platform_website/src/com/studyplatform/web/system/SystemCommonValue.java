@@ -1,4 +1,4 @@
-package com.studyplatform.web.config;
+package com.studyplatform.web.system;
 
 /**
  * 系统通用状态码

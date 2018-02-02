@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.studyplatform.web.bean.UserBean;
-import com.studyplatform.web.config.SystemCommonValue;
 import com.studyplatform.web.dao.UserDao;
 import com.studyplatform.web.db.C3p0Utils;
+import com.studyplatform.web.system.SystemCommonValue;
 import com.studyplatform.web.utils.DebugUtils;
 import com.studyplatform.web.utils.MD5Utils;
 
