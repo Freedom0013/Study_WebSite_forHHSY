@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 
 import com.studyplatform.web.bean.UserBean;
 import com.studyplatform.web.dao.UserDao;
@@ -209,9 +210,10 @@ public class UserDaoImpl implements UserDao {
                 user.setUser_name(resultset.getString(3));
                 user.setUser_password(resultset.getString(4));
                 user.setUser_nickname(resultset.getString(5));
-//                String registtime = resultset.getString(6);
-//                registtime.substring(0, registtime.length() - 3);
-                user.setUser_register_time(resultset.getString(6));
+//                user.setUser_register_time(resultset.getTimestamp(17).toLocaleString());
+                //此处从Mysql中取出的DateTime字段精确到毫秒，会多出一个毫秒的.0，故要使用DateFormat进行格式化
+                DateFormat ddtf = DateFormat.getDateTimeInstance();
+                user.setUser_register_time(ddtf.format(resultset.getTimestamp(17)));
                 user.setUser_realname(resultset.getString(7));
                 user.setUser_age(resultset.getInt(8));
                 user.setUser_gendar(resultset.getInt(9));
@@ -222,10 +224,7 @@ public class UserDaoImpl implements UserDao {
                 user.setUser_integral(resultset.getInt(14));
                 user.setUser_city(resultset.getString(15));
                 user.setUser_qq(resultset.getBigDecimal(16));
-//                String lasttime = resultset.getString(17);
-//                lasttime.substring(0, lasttime.length() - 3);
-//                resultset.getTimestamp(17)
-                user.setUser_lastlogin_time(resultset.getString(17));
+                user.setUser_lastlogin_time(ddtf.format(resultset.getTimestamp(17)));
                 user.setUser_grade(resultset.getString(18));
                 user.setUser_status(resultset.getInt(19));
                 user.setUser_admin_flag(resultset.getInt(20));
