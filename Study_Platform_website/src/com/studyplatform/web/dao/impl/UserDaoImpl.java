@@ -22,7 +22,7 @@ import com.studyplatform.web.utils.MD5Utils;
 public class UserDaoImpl implements UserDao {
     @Override
     public int add(UserBean user) {
-     // 获取数据库连接
+        // 获取数据库连接
         Connection connection = null;
         // 执行插入
         // 获取操作SQL语句的Statement对象：
@@ -258,5 +258,67 @@ public class UserDaoImpl implements UserDao {
             }
         }
         return user;
+    }
+
+    @Override
+    public int UpdataUser(UserBean user) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = C3p0Utils.getConnection();
+            String sql = "UPDATE users SET user_picture_id = '" + user.getUser_picture_id() 
+                        + "',user_name = '" + user.getUser_name() 
+                        + "',user_password = '" + user.getUser_password() 
+                        + "',user_nickname = '" + user.getUser_nickname() 
+                        + "',user_register_time = '" + user.getUser_register_time()
+                        + "',user_realname = '" + user.getUser_realname() 
+                        + "',user_age = '" + user.getUser_age()
+                        + "',user_gendar = '" + user.getUser_gendar() 
+                        + "',user_phone = '" + user.getUser_phone()
+                        + "',user_email = '" + user.getUser_email() 
+                        + "',user_fraction_id = '" + user.getUser_fraction_id()
+                        + "',user_university = '" + user.getUser_university() 
+                        + "',user_integral = '" + user.getUser_integral() 
+                        + "',user_city = '" + user.getUser_city() 
+                        + "',user_qq = '" + user.getUser_qq() 
+                        + "',user_lastlogin_time = '" + user.getUser_lastlogin_time()
+                        + "',user_status = '" + user.getUser_status() 
+                        + "', user_admin_flag= '" + user.getUser_admin_flag()
+                        + "' WHERE user_id = " + user.getUser_id() + "";
+            DebugUtils.showLog("更新语句：" + sql);
+            statement = connection.prepareStatement(sql);
+            // 调用Statement对象的executeUpdate(sql) 执行SQL 语句的插入
+            int result = statement.executeUpdate(sql);
+            if(result>0){
+                return SystemCommonValue.OPERATION_SUCCESS;
+            }else{
+                return SystemCommonValue.OPERATION_FAILED;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return SystemCommonValue.OPERATION_FAILED;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return SystemCommonValue.OPERATION_FAILED;
+        } finally {
+            // 关闭Statement对象
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return SystemCommonValue.OPERATION_FAILED;
+                }
+            }
+            if (connection != null) {
+                // 关闭连接
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return SystemCommonValue.OPERATION_FAILED;
+                }
+            }
+        }
     }
 }

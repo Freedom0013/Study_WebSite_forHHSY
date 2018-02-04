@@ -46,10 +46,12 @@ public class DaoImplTest {
         int qq = 587458548;
         BigDecimal big_qq = new BigDecimal(qq);
         //注册测试
-        UserBean addUser = new UserBean(big_picture_id,"dogeee","123456789","小鸟",df.format(time).toString(),"张婷",20,0,"15847854854","888444555@gmail.com",0,"陕师大",0,"西安",big_qq,df.format(time).toString(),"大二",1,1);
-        int success = ud.add(addUser);
+        UserBean addUser = new UserBean(0,big_picture_id,"xixixixi","987654321","胡一菲",df.format(time).toString(),"娄艺潇",28,0,"15965884578","11223344@gmail.com",0,"上海戏剧学院",0,"上海",big_qq,df.format(time).toString(),"大四",1,1);
+        
+        int success = ud.add(addUser);    //新增
+//        int success = ud.UpdataUser(addUser);   //更新
         if(success == SystemCommonValue.OPERATION_SUCCESS){
-            DebugUtils.showLog("插入执行成功！");
+            DebugUtils.showLog("执行成功！");
         }
     }
 }

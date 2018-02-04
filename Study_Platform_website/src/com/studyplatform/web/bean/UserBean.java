@@ -87,12 +87,13 @@ public class UserBean {
 	/**
 	 * 全参数构造函数
 	 */
-	public UserBean(BigDecimal user_picture_id,String user_name,String user_password,
+	public UserBean(int user_id, BigDecimal user_picture_id,String user_name,String user_password,
 			String user_nickname,String user_register_time,String user_realname,int user_age,
 			int user_gendar,String user_phone,String user_email,int user_fraction_id,
 			String user_university,int user_integral,String user_city,BigDecimal user_qq,
 			String user_lastlogin_time,String user_grade,int user_status,int user_admin_flag) {
-		this.user_name = user_name;
+	    this.user_id = user_id;
+	    this.user_name = user_name;
 		this.user_password = user_password;
 		this.user_picture_id = user_picture_id;
 		this.user_nickname = user_nickname;
