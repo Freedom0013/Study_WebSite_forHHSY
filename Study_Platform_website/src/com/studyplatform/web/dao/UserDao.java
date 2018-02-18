@@ -17,7 +17,7 @@ public interface UserDao {
      * 注册用户
      * @param user 要注册的用户
      */
-    public int add(UserBean user) ;
+    int add(UserBean user) ;
     
     /**
      * 根据用户名和密码查询用户（用户登录）
@@ -25,19 +25,26 @@ public interface UserDao {
      * @param password 密码
      * @return 查询到用户返回此用户，否则返回null
      */
-    public UserBean findUserByUserNameAndPassword(String username,String password) ;
+    UserBean findUserByUserNameAndPassword(String username,String password) ;
     
     /**
      * 根据用户的名字查找用户（判断是否用户存在）
      * @param name 用户的名字
      * @return 查询到了返回此用户，否则返回null
      */
-    public UserBean findUserByUserName(String name) ;
+    UserBean findUserByUserName(String name) ;
     
     /**
      * 更新用户信息
      * @param user 需要被更新的user
      * @return 更新是否成功
      */
-    public int UpdataUser(UserBean user);
+    int UpdataUser(UserBean user);
+    
+    /**
+     * 删除用户
+     * @param User_id 用户id
+     * @return 删除成功状态码
+     */
+    int DeleteUser(int User_id);
 }

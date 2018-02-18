@@ -30,11 +30,13 @@ public class QuestionBean {
 	/** 题目所属章节 */
 	private String question_chapter;
 	
+	private OptionBean option = null;
+	
 	/**
 	 * 空参数构造函数
 	 */
 	public QuestionBean(){
-		
+	    super();
 	}
 	
 	/**
@@ -42,7 +44,7 @@ public class QuestionBean {
 	 */
 	public QuestionBean(BigDecimal question_id, String question_stem, BigDecimal question_option_id, int question_level,
 			String question_answer, String question_analysis, int question_type, String question_addtime,
-			int question_course_id, String question_chapter) {
+			int question_course_id, String question_chapter,OptionBean option) {
 		super();
 		this.question_id = question_id;
 		this.question_stem = question_stem;
@@ -54,6 +56,7 @@ public class QuestionBean {
 		this.question_addtime = question_addtime;
 		this.question_course_id = question_course_id;
 		this.question_chapter = question_chapter;
+		this.option = option;
 	}
 	
 	public BigDecimal getQuestion_id() {
@@ -117,12 +120,20 @@ public class QuestionBean {
 		this.question_chapter = question_chapter;
 	}
 	
-	@Override
-	public String toString() {
-		return "QuestionBean [question_id=" + question_id + ", question_stem=" + question_stem + ", question_option_id="
-				+ question_option_id + ", question_level=" + question_level + ", question_answer=" + question_answer
-				+ ", question_analysis=" + question_analysis + ", question_type=" + question_type
-				+ ", question_addtime=" + question_addtime + ", question_course_id=" + question_course_id
-				+ ", question_chapter=" + question_chapter + "]";
-	}
+	public OptionBean getOption() {
+        return option;
+    }
+
+    public void setOption(OptionBean option) {
+        this.option = option;
+    }
+
+    @Override
+    public String toString() {
+        return "QuestionBean [question_id=" + question_id + ", question_stem=" + question_stem + ", question_option_id="
+                + question_option_id + ", question_level=" + question_level + ", question_answer=" + question_answer
+                + ", question_analysis=" + question_analysis + ", question_type=" + question_type
+                + ", question_addtime=" + question_addtime + ", question_course_id=" + question_course_id
+                + ", question_chapter=" + question_chapter + ", option=" + option.toString() + "]";
+    }
 }
