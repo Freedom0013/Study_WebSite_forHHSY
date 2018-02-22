@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import com.studyplatform.web.bean.OptionBean;
@@ -11,6 +13,7 @@ import com.studyplatform.web.bean.QuestionBean;
 import com.studyplatform.web.dao.QuestionDao;
 import com.studyplatform.web.db.C3p0Utils;
 import com.studyplatform.web.system.SystemCommonValue;
+import com.studyplatform.web.utils.DaoUtils;
 import com.studyplatform.web.utils.DebugUtils;
 
 /**
@@ -86,7 +89,6 @@ public class QuestionDaoImpl implements QuestionDao {
             questions = new ArrayList<QuestionBean>();            
             while (resultset.next()) {
                 QuestionBean question_easy = new QuestionBean();
-                
                 question_easy.setQuestion_id(resultset.getBigDecimal(1));
                 question_easy.setQuestion_stem(resultset.getString(2));
                 question_easy.setQuestion_option_id(resultset.getBigDecimal(3));
@@ -94,13 +96,11 @@ public class QuestionDaoImpl implements QuestionDao {
                 question_easy.setQuestion_answer(resultset.getString(5));
                 question_easy.setQuestion_analysis(resultset.getString(6));
                 question_easy.setQuestion_type(resultset.getInt(7));
-                //TODO:此处不能再用dataformat格式化
-//                DateFormat ddtf = DateFormat.getDateTimeInstance();
-//                question.setQuestion_addtime(ddtf.format(resultset.getString(8)));
+                //TODO:此处毫秒未格式化
+                question_easy.setQuestion_addtime(resultset.getString(8));
                 question_easy.setQuestion_addtime(resultset.getString(8));
                 question_easy.setQuestion_course_id(resultset.getInt(9));
                 question_easy.setQuestion_chapter(resultset.getString(10));
-                
                 OptionBean option_easy = new OptionBean();
                 option_easy.setOption_id(resultset.getBigDecimal(11));
                 option_easy.setOption_a(resultset.getString(12));
@@ -125,7 +125,6 @@ public class QuestionDaoImpl implements QuestionDao {
             resultset = statement.executeQuery();
             while (resultset.next()) {
                 QuestionBean question_nomal = new QuestionBean();
-
                 question_nomal.setQuestion_id(resultset.getBigDecimal(1));
                 question_nomal.setQuestion_stem(resultset.getString(2));
                 question_nomal.setQuestion_option_id(resultset.getBigDecimal(3));
@@ -133,13 +132,10 @@ public class QuestionDaoImpl implements QuestionDao {
                 question_nomal.setQuestion_answer(resultset.getString(5));
                 question_nomal.setQuestion_analysis(resultset.getString(6));
                 question_nomal.setQuestion_type(resultset.getInt(7));
-                // TODO:此处不能再用dataformat格式化
-                // DateFormat ddtf = DateFormat.getDateTimeInstance();
-                // question.setQuestion_addtime(ddtf.format(resultset.getString(8)));
+                //TODO:此处毫秒未格式化
                 question_nomal.setQuestion_addtime(resultset.getString(8));
                 question_nomal.setQuestion_course_id(resultset.getInt(9));
                 question_nomal.setQuestion_chapter(resultset.getString(10));
-
                 OptionBean option_nomal = new OptionBean();
                 option_nomal.setOption_id(resultset.getBigDecimal(11));
                 option_nomal.setOption_a(resultset.getString(12));
@@ -164,7 +160,6 @@ public class QuestionDaoImpl implements QuestionDao {
             resultset = statement.executeQuery();
             while (resultset.next()) {
                 QuestionBean question_hard = new QuestionBean();
-
                 question_hard.setQuestion_id(resultset.getBigDecimal(1));
                 question_hard.setQuestion_stem(resultset.getString(2));
                 question_hard.setQuestion_option_id(resultset.getBigDecimal(3));
@@ -172,13 +167,10 @@ public class QuestionDaoImpl implements QuestionDao {
                 question_hard.setQuestion_answer(resultset.getString(5));
                 question_hard.setQuestion_analysis(resultset.getString(6));
                 question_hard.setQuestion_type(resultset.getInt(7));
-                // TODO:此处不能再用dataformat格式化
-                // DateFormat ddtf = DateFormat.getDateTimeInstance();
-                // question.setQuestion_addtime(ddtf.format(resultset.getString(8)));
+                // TODO:此处毫秒未格式化
                 question_hard.setQuestion_addtime(resultset.getString(8));
                 question_hard.setQuestion_course_id(resultset.getInt(9));
                 question_hard.setQuestion_chapter(resultset.getString(10));
-
                 OptionBean option_hard = new OptionBean();
                 option_hard.setOption_id(resultset.getBigDecimal(11));
                 option_hard.setOption_a(resultset.getString(12));
@@ -198,30 +190,7 @@ public class QuestionDaoImpl implements QuestionDao {
         } catch (SQLException e) {
             DebugUtils.showLog(e.getMessage());
         } finally {
-            // 关闭结果集
-            if (resultset != null) {
-                try {
-                    resultset.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            // 关闭Statement对象
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (connection != null) {
-                // 关闭连接
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+           DaoUtils.closeResource(connection,statement,resultset);
         }
         return questions;
     }

@@ -13,11 +13,11 @@ public class SystemCommonValue {
     public static final int OPERATION_FAILED = 1;
     
     
-    /** 基础试题状态码 :: 0*/
+    /** 基础试题类型码 :: 0*/
     public static final int EXAM_QUESTION_EASY_VALUE = 0;
-    /** 中级试题状态码  :: 1*/
+    /** 中级试题类型码  :: 1*/
     public static final int EXAM_QUESTION_NOMAL_VALUE = 1;
-    /** 高级试题状态码 :: 2 */
+    /** 高级试题类型码 :: 2 */
     public static final int EXAM_QUESTION_HARD_VALUE = 2;
     /** 单选试题状态码  :: 0*/
     public static final int EXAM_QUESTION_TYPE_SINGLE = 0;

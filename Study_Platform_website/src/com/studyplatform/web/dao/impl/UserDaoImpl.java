@@ -10,6 +10,7 @@ import com.studyplatform.web.bean.UserBean;
 import com.studyplatform.web.dao.UserDao;
 import com.studyplatform.web.db.C3p0Utils;
 import com.studyplatform.web.system.SystemCommonValue;
+import com.studyplatform.web.utils.DaoUtils;
 import com.studyplatform.web.utils.DebugUtils;
 import com.studyplatform.web.utils.MD5Utils;
 
@@ -158,31 +159,7 @@ public class UserDaoImpl implements UserDao {
         } catch (SQLException e) {
             DebugUtils.showLog(e.getMessage());
         } finally {
-            // 关闭结果集
-            if (resultset != null) {
-                try {
-                    resultset.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            // 关闭Statement对象
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (connection != null) {
-                // 关闭连接
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            DaoUtils.closeResource(connection,statement,resultset);
         }
         return user;
     }
@@ -229,30 +206,7 @@ public class UserDaoImpl implements UserDao {
         } catch (SQLException e) {
             DebugUtils.showLog(e.getMessage());
         } finally {
-            // 关闭结果集
-            if (resultset != null) {
-                try {
-                    resultset.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            // 关闭Statement对象
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (connection != null) {
-                // 关闭连接
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            DaoUtils.closeResource(connection,statement,resultset);
         }
         return user;
     }

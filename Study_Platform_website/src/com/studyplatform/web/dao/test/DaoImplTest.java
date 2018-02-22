@@ -58,6 +58,6 @@ public class DaoImplTest {
 //        }
         
         QuestionDao dao = new QuestionDaoImpl();
-        dao.ObtainExaminationList(1, 6, 2, 2);
+        dao.ObtainExaminationList(1, 4, 3, 3);
     }
 }
