@@ -1,0 +1,278 @@
+@charset "utf-8";
+.XYTipsWindow .boxLoading {
+	position: absolute;
+	display: block;
+	width: 90px;
+	height: 30px;
+	line-height: 30px;
+	margin-left: -45px;
+	margin-top: -15px;
+	left: 50%;
+	top: 50%;
+	color: #f00;
+}
+.XYTipsWindow .boxLoading {
+	width:28px;
+	margin-left: -14px;
+	background:url("../images/loading.gif") no-repeat;
+	text-indent: -999em;
+	text-align: center;
+}
+.XYTipsWindow .boxTitle, .XYTipsWindow .boxTitle span, .XYTipsWindow .boxTitle span.hover, .XYTipsWindow .loadinglayer, .XYTipsWindow .tipslayer, .XYTipsWindow .arrowLeft, .XYTipsWindow .colseBtn, .XYTipsWindow .boxError em, .XYTipsWindow .dialogBtn, .XYTipsWindow .dialogBtn.hover {
+	background-image: url("../images/ico.png");
+	background-repeat: no-repeat;
+}
+.XYTipsWindow .boxTitle {
+	position: relative;
+	border: 1px solid #A6C9E1;
+	border-bottom: none;
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	height: 30px;
+	line-height: 30px;
+}
+.XYTipsWindow .boxTitle h3 {
+	float: left;
+	font-weight: normal;
+	color: #666;
+	font-size: 14px;
+	margin: 0;
+	text-indent: 10px;
+}
+.XYTipsWindow .boxTitle span {
+	position: absolute;
+	width: 10px;
+	background-position: -80px -40px;
+	text-indent: -10em;
+	right: 10px;
+	top: 10px;
+	height: 16px;
+	overflow: hidden;
+	cursor: pointer;
+}
+.XYTipsWindow .boxTitle span.hover {
+	background-position: -90px -40px;
+}
+.XYTipsWindow .loadinglayer {
+	line-height: 40px;
+	background-position: 0 -100px!important;
+}
+.XYTipsWindow .tipslayer {
+	line-height: 20px;
+	text-align: left;
+}
+.XYTipsWindow .arrowLeft {
+	position: absolute;
+	width: 8px;
+	height: 16px;
+	background-position: -20px -170px;
+	text-indent: -9999em;
+	z-index: 20591;
+	overflow: hidden;
+}
+.XYTipsWindow .colseBtn {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	width: 8px;
+	height: 8px;
+	background-position: -55px -170px;
+	text-indent: -9999em;
+	cursor: pointer;
+	z-index: 20591;
+	overflow: hidden;
+}
+.XYTipsWindow .boxError {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -60px;
+	margin-top: -15px;
+	width: 120px;
+	height: 30px;
+	line-height: 30px;
+	color: #f00;
+}
+.XYTipsWindow .boxError em {
+	float: left;
+	width:30px;
+	height: 30px;
+	background-position: -35px -140px;
+}
+.XYTipsWindow .dialogBtn {
+	margin: 5px 5px 0 0;
+	width:80px;
+	height:35px;
+	background-position: 0 -30px;
+	border:none;
+	color:#333;
+}
+.XYTipsWindow .dialogBtn.hover {
+	background-position: 0 -65px;
+}
+.XYTipsWindow.shadow {
+	box-shadow:2px 2px 5px #C0BBB5;
+	-moz-box-shadow: 2px 2px 5px #C0BBB5;
+	-webkit-box-shadow:2px 2px 5px #C0BBB5;
+}
+.XYTipsWindow .boxLoading {
+	position: absolute;
+	display: block;
+	width: 90px;
+	height: 30px;
+	line-height: 30px;
+	margin-left: -45px;
+	margin-top: -15px;
+	left: 50%;
+	top: 50%;
+	color: #f00;
+}
+.XYTipsWindow .boxLoading {
+	width:28px;
+	margin-left: -14px;
+	background:url("../images/loading.gif") no-repeat;
+	text-indent: -999em;
+	text-align: center;
+}
+.XYTipsWindow .boxTitle, .XYTipsWindow .boxTitle span, .XYTipsWindow .boxTitle span.hover, .XYTipsWindow .loadinglayer, .XYTipsWindow .tipslayer, .XYTipsWindow .arrowLeft, .XYTipsWindow .colseBtn, .XYTipsWindow .boxError em, .XYTipsWindow .dialogBtn, .XYTipsWindow .dialogBtn.hover {
+	background-image: url("../images/ico.png");
+	background-repeat: no-repeat;
+}
+.XYTipsWindow .boxTitle {
+	position: relative;
+	border: 1px solid #A6C9E1;
+	border-bottom: none;
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	height: 30px;
+	line-height: 30px;
+}
+.XYTipsWindow .boxTitle h3 {
+	float: left;
+	font-weight: normal;
+	color: #666;
+	font-size: 14px;
+	margin: 0;
+	text-indent: 10px;
+}
+.XYTipsWindow .boxTitle span {
+	position: absolute;
+	width: 10px;
+	background-position: -80px -40px;
+	text-indent: -10em;
+	right: 10px;
+	top: 10px;
+	height: 16px;
+	overflow: hidden;
+	cursor: pointer;
+}
+.XYTipsWindow .boxTitle span.hover {
+	background-position: -90px -40px;
+}
+.XYTipsWindow .loadinglayer {
+	line-height: 40px;
+	background-position: 0 -100px!important;
+}
+.XYTipsWindow .tipslayer {
+	line-height: 20px;
+	text-align: left;
+}
+.XYTipsWindow .arrowLeft {
+	position: absolute;
+	width: 8px;
+	height: 16px;
+	background-position: -20px -170px;
+	text-indent: -9999em;
+	z-index: 20591;
+	overflow: hidden;
+}
+.XYTipsWindow .colseBtn {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	width: 8px;
+	height: 8px;
+	background-position: -55px -170px;
+	text-indent: -9999em;
+	cursor: pointer;
+	z-index: 20591;
+	overflow: hidden;
+}
+.XYTipsWindow .boxError {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -60px;
+	margin-top: -15px;
+	width: 120px;
+	height: 30px;
+	line-height: 30px;
+	color: #f00;
+}
+.XYTipsWindow .boxError em {
+	float: left;
+	width:30px;
+	height: 30px;
+	background-position: -35px -140px;
+}
+.XYTipsWindow .dialogBtn {
+	margin: 5px 5px 0 0;
+	width:80px;
+	height:35px;
+	background-position: 0 -30px;
+	border:none;
+	color:#333;
+}
+.XYTipsWindow .dialogBtn.hover {
+	background-position: 0 -65px;
+}
+.XYTipsWindow.shadow {
+	box-shadow:2px 2px 5px #C0BBB5;
+	-moz-box-shadow: 2px 2px 5px #C0BBB5;
+	-webkit-box-shadow:2px 2px 5px #C0BBB5;
+}#Top-login {
+	height: 50px;
+	width: 20px;
+}
+#content #box002 ul li {
+	float: left;
+	height: 35px;
+	width: 70px;
+	padding-left: 20px;
+	padding-top: 8px;
+}
+#content #box002 ul li a {
+	font-family: "微软雅黑";
+	font-size: 18px;
+	font-weight: bold;
+	color: #333;
+}
+#content #box002 ul li a:hover {
+	color: #09C;
+}
+#content #box003 h2 {
+	font-family: "微软雅黑";
+	font-size: 24px;
+}
+#content #box003 p {
+	font-family: "微软雅黑";
+	font-size: 18px;
+	text-align: left;
+	margin-top: 20px;
+	margin-bottom: 70px;
+}
+#content #box001 #shoucang {
+	margin: 20px;
+	float: right;
+	height: 20px;
+	width: 40px;
+	border: 1px solid #999;
+}
+#content #box001 #shoucang h2 {
+	font-family: "微软雅黑";
+	font-size: 14px;
+	margin-left: 5px;
+}
+#content #box001 a:hover {
+	color: #09C;
+}
