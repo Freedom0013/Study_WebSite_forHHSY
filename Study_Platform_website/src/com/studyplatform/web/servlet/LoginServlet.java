@@ -17,7 +17,7 @@ public class LoginServlet extends HttpServlet {
     /**
      * 版本控制
      */
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
     
     /**
      * 处理get请求
