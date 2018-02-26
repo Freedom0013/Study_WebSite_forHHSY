@@ -12,6 +12,13 @@
     <servlet-name>WrittenOffServlet</servlet-name>
     <servlet-class>com.studyplatform.web.servlet.WrittenOffServlet</servlet-class>
   </servlet>
+  
+  <!-- 用户注册 -->
+  <servlet>
+    <servlet-name>RegisterServlet</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.RegisterServlet</servlet-class>
+  </servlet>
+
 
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
@@ -20,6 +27,10 @@
   <servlet-mapping>
     <servlet-name>WrittenOffServlet</servlet-name>
     <url-pattern>/servlet/WrittenOffServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RegisterServlet</servlet-name>
+    <url-pattern>/servlet/RegisterServlet</url-pattern>
   </servlet-mapping>
   
   

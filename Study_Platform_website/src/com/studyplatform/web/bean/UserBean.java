@@ -81,7 +81,6 @@ public class UserBean {
 		Date d = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		this.user_register_time = sdf.format(d);		
-		
 	}
 
 	/**

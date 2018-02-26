@@ -22,50 +22,48 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </head>
 
 	<body>
-		<div id="Top">
-			<br> <img src="${pageContext.request.contextPath }/images/logo.png" width="315" height="60" />
-			<div id="center">
-				<div class="nav">
-					<ul>
-						<li class="cur"><a href="${pageContext.request.contextPath }/index.html">首页</a></li>
-						<li><a href="${pageContext.request.contextPath }/zhuanye/zhuanye1.html" target="_blank">专业</a></li>
-						<li><a href="${pageContext.request.contextPath }/资源.html" target="_blank">资源</a></li>
-						<li><a href="${pageContext.request.contextPath }/推荐书籍.html" target="_blank">推荐书籍</a></li>
-						<li><a href="#" target="_blank">移动课堂</a></li>
-					</ul>
-					<div class="curBg"></div>
-					<div class="cls"></div>
-				</div>
+	<div id="Top">
+		<br> <img
+			src="${pageContext.request.contextPath }/images/logo.png" width="315" height="60" />
+		<div id="center">
+			<div class="nav">
+				<ul>
+					<li class="cur"><a href="${pageContext.request.contextPath }/index.html">首页</a></li>
+					<li><a href="${pageContext.request.contextPath }/zhuanye/zhuanye1.html" target="_blank">专业</a></li>
+					<li><a href="${pageContext.request.contextPath }/资源.html" target="_blank">资源</a></li>
+					<li><a href="${pageContext.request.contextPath }/推荐书籍.html" target="_blank">推荐书籍</a></li>
+					<li><a href="#" target="_blank">移动课堂</a></li>
+				</ul>
+				<div class="curBg"></div>
+				<div class="cls"></div>
 			</div>
-			<div id="Top-login">
-				<!-- 这里为el表达式的if-else判断，在用户登录成功后显示登录成功的用户，在用户未登录时，显示登录按钮 -->
-				<!-- 这里的el表达式判断用户名是否过长，如果过长隐藏过长用户名 -->
-				<c:choose>
-					<c:when test="${!empty user.user_name}">
-						<c:if test="${fn:length(user.user_name)>6 }">
-							<font color=red>${fn:substring(user.user_name, 0, 6)}...,欢迎你
-							&nbsp;
+		</div>
+		<div id="Top-login">
+			<!-- 这里为el表达式的if-else判断，在用户登录成功后显示登录成功的用户，在用户未登录时，显示登录按钮 -->
+			<!-- 下面的el表达式判断用户名是否过长，如果过长隐藏过长用户名 -->
+			<c:choose>
+				<c:when test="${!empty user.user_name}">
+					<c:if test="${fn:length(user.user_name)>6 }">
+						<font color=red>${fn:substring(user.user_name, 0, 6)}...,欢迎你
+							&nbsp; <a href="${pageContext.request.contextPath }/servlet/WrittenOffServlet">退出登录</a>
+						</font>
+					</c:if>
+					<c:if test="${fn:length(user.user_name)<=6}">
+						<font color=red>${user.user_name},欢迎你 
+                            &nbsp;&nbsp; 
                             <a href="${pageContext.request.contextPath }/servlet/WrittenOffServlet">退出登录</a>
-							</font>
-						</c:if>
-						<c:if test="${fn:length(user.user_name)<=6}">
-							<font color=red>${user.user_name},欢迎你
-							&nbsp;&nbsp;
-							<a href="${pageContext.request.contextPath }/servlet/WrittenOffServlet">退出登录</a>
-							</font>
-						</c:if>
-					</c:when>
-					<c:otherwise>
-						<a href="${pageContext.request.contextPath }/login.jsp"
-							target="_blank">登录</a>
-			                    &nbsp; 
-			            <a href="${pageContext.request.contextPath }/login.jsp#toregister"
-							target="_blank">注册</a>
-					</c:otherwise>
-                </c:choose>
-			</div>
+						</font>
+					</c:if>
+				</c:when>
+				<c:otherwise>
+					<a href="${pageContext.request.contextPath }/login.jsp" target="_blank">登录</a>
+			        &nbsp; 
+			        <a href="${pageContext.request.contextPath }/login.jsp#toregister" target="_blank">注册</a>
+				</c:otherwise>
+			</c:choose>
+		</div>
 	</div>
-		<div class="banner">
+	<div class="banner">
 			<ul class="list">
 				<li style="display: list-item;" class="bg2">
 				    <a href="#" target="_blank"> 

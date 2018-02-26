@@ -13,16 +13,22 @@ import com.studyplatform.web.service.UserService;
  * @author Freedom0013
  */
 public class UserServiceImpl implements UserService {
+    /** 初始化dao */
+    UserDao dao = new UserDaoImpl();
     @Override
     public UserBean login(String username, String password) {
-        UserDao dao = new UserDaoImpl();
         return dao.findUserByUserNameAndPassword(username, password);
     }
 
     @Override
     public void register(UserBean user) throws UserExistException {
-        // TODO Auto-generated method stub
-
+     // 查找用户
+        UserBean u = dao.findUserByUserName(user.getUser_name());
+        if (u == null){
+            // 说明用户没有注册过,执行添加
+            dao.add(user);
+        }else{
+            throw new UserExistException();
+        }
     }
-
 }

@@ -66,7 +66,7 @@ public class MD5Utils {
      * 测试
      */
     public static void main(String[] args) {
-        String md5 = getMD5("abcdef");
+        String md5 = getMD5("111111");
         DebugUtils.showLog(md5);
         String md53 = getmd5("1234569");
         DebugUtils.showLog(md53);
