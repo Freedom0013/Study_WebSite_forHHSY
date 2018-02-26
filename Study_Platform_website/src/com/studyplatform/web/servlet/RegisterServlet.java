@@ -37,20 +37,20 @@ public class RegisterServlet extends HttpServlet {
         long tokenInSession = Long.parseLong(request.getSession().getAttribute("token") + "");
 //        DebugUtils.showLog("token："+token +",tokenInSession:"+tokenInSession);
         
-        for(String key:request.getParameterMap().keySet()){
-            DebugUtils.showLog(key);
-        }
-        for(String[] value:request.getParameterMap().values()){
-            for(int i = 0;i<value.length;i++){
-                DebugUtils.showLog(value[i]);
-            }
-        }
-//        if (token == tokenInSession) {
-//            response.getWriter().println("ok"); // 如果是第一次请求，则产生新的token
-//            request.getSession().setAttribute("token", System.currentTimeMillis());
-//        } else {
-//            response.getWriter().println("do not repeat submit");
+//        for(String key:request.getParameterMap().keySet()){
+//            DebugUtils.showLog(key);
 //        }
+//        for(String[] value:request.getParameterMap().values()){
+//            for(int i = 0;i<value.length;i++){
+//                DebugUtils.showLog(value[i]);
+//            }
+//        }
+        if (token == tokenInSession) {
+            response.getWriter().println("ok"); // 如果是第一次请求，则产生新的token
+            request.getSession().setAttribute("token", System.currentTimeMillis());
+        } else {
+            response.getWriter().println("do not repeat submit");
+        }
         
         //封装数据到userbean中
         UserFormBean ufb = WebUtils.fillFormBean(UserFormBean.class, request);
@@ -70,7 +70,7 @@ public class RegisterServlet extends HttpServlet {
             BigDecimal volumn = new BigDecimal("0");
             user.setUser_picture_id(volumn);
             user.setUser_qq(volumn);
-            user.setUser_status(0);
+            user.setUser_status(1);
             user.setUser_admin_flag(1);
             user.setUser_integral(0);
             DebugUtils.showLog("拷贝："+user.toString());
