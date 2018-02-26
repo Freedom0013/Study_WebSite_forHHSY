@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>Study_Platform_website</display-name>
-  
+  <!-- 用户登录 -->
   <servlet>
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>com.studyplatform.web.servlet.LoginServlet</servlet-class>
   </servlet>
+  
+  <!-- 用户注销 -->
+  <servlet>
+    <servlet-name>WrittenOffServlet</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.WrittenOffServlet</servlet-class>
+  </servlet>
+
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/servlet/LoginServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>WrittenOffServlet</servlet-name>
+    <url-pattern>/servlet/WrittenOffServlet</url-pattern>
   </servlet-mapping>
   
   

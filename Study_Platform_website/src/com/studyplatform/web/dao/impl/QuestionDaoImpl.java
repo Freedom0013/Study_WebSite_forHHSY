@@ -96,9 +96,10 @@ public class QuestionDaoImpl implements QuestionDao {
                 question_easy.setQuestion_answer(resultset.getString(5));
                 question_easy.setQuestion_analysis(resultset.getString(6));
                 question_easy.setQuestion_type(resultset.getInt(7));
-                //TODO:此处毫秒未格式化
-                question_easy.setQuestion_addtime(resultset.getString(8));
-                question_easy.setQuestion_addtime(resultset.getString(8));
+                //毫秒格式化
+                DateFormat ddtf = DateFormat.getDateTimeInstance();
+                question_easy.setQuestion_addtime(ddtf.format(resultset.getTimestamp(8)));
+//                question_easy.setQuestion_addtime(resultset.getString(8));
                 question_easy.setQuestion_course_id(resultset.getInt(9));
                 question_easy.setQuestion_chapter(resultset.getString(10));
                 OptionBean option_easy = new OptionBean();
@@ -132,8 +133,9 @@ public class QuestionDaoImpl implements QuestionDao {
                 question_nomal.setQuestion_answer(resultset.getString(5));
                 question_nomal.setQuestion_analysis(resultset.getString(6));
                 question_nomal.setQuestion_type(resultset.getInt(7));
-                //TODO:此处毫秒未格式化
-                question_nomal.setQuestion_addtime(resultset.getString(8));
+                //毫秒格式化
+                DateFormat ddtf = DateFormat.getDateTimeInstance();
+                question_nomal.setQuestion_addtime(ddtf.format(resultset.getTimestamp(8)));
                 question_nomal.setQuestion_course_id(resultset.getInt(9));
                 question_nomal.setQuestion_chapter(resultset.getString(10));
                 OptionBean option_nomal = new OptionBean();
@@ -167,8 +169,9 @@ public class QuestionDaoImpl implements QuestionDao {
                 question_hard.setQuestion_answer(resultset.getString(5));
                 question_hard.setQuestion_analysis(resultset.getString(6));
                 question_hard.setQuestion_type(resultset.getInt(7));
-                // TODO:此处毫秒未格式化
-                question_hard.setQuestion_addtime(resultset.getString(8));
+                //毫秒格式化
+                DateFormat ddtf = DateFormat.getDateTimeInstance();
+                question_hard.setQuestion_addtime(ddtf.format(resultset.getTimestamp(8)));
                 question_hard.setQuestion_course_id(resultset.getInt(9));
                 question_hard.setQuestion_chapter(resultset.getString(10));
                 OptionBean option_hard = new OptionBean();

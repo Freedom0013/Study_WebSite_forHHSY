@@ -1,6 +1,8 @@
 package com.studyplatform.web.service.impl;
 
 import com.studyplatform.web.bean.UserBean;
+import com.studyplatform.web.dao.UserDao;
+import com.studyplatform.web.dao.impl.UserDaoImpl;
 import com.studyplatform.web.exception.UserExistException;
 import com.studyplatform.web.service.UserService;
 
@@ -11,11 +13,10 @@ import com.studyplatform.web.service.UserService;
  * @author Freedom0013
  */
 public class UserServiceImpl implements UserService {
-
     @Override
     public UserBean login(String username, String password) {
-        // TODO Auto-generated method stub
-        return null;
+        UserDao dao = new UserDaoImpl();
+        return dao.findUserByUserNameAndPassword(username, password);
     }
 
     @Override

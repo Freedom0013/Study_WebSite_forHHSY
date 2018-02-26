@@ -128,7 +128,7 @@ public class UserDaoImpl implements UserDao {
             statement = connection.prepareStatement(sql);
             statement.setString(1, username);
             statement.setString(2, MD5Utils.getMD5(password));
-            DebugUtils.showLog("登录查询语句："+sql);
+//            DebugUtils.showLog("登录查询语句："+sql);
             resultset = statement.executeQuery();
             while (resultset.next()) {
                 user = new UserBean();
@@ -139,7 +139,8 @@ public class UserDaoImpl implements UserDao {
                 user.setUser_nickname(resultset.getString(5));
                 //此处从Mysql中取出的DateTime字段精确到毫秒，会多出一个毫秒的.0，故要使用DateFormat进行格式化
                 DateFormat ddtf = DateFormat.getDateTimeInstance();
-                user.setUser_register_time(ddtf.format(resultset.getString(6)));
+                user.setUser_register_time(ddtf.format(resultset.getTimestamp(6)));
+//                user.setUser_register_time(resultset.getString(6));
                 user.setUser_realname(resultset.getString(7));
                 user.setUser_age(resultset.getInt(8));
                 user.setUser_gendar(resultset.getInt(9));
@@ -150,7 +151,8 @@ public class UserDaoImpl implements UserDao {
                 user.setUser_integral(resultset.getInt(14));
                 user.setUser_city(resultset.getString(15));
                 user.setUser_qq(resultset.getBigDecimal(16));
-                user.setUser_lastlogin_time(ddtf.format(resultset.getString(17)));
+                user.setUser_lastlogin_time(ddtf.format(resultset.getTimestamp(17)));
+//                user.setUser_lastlogin_time(resultset.getString(17));
                 user.setUser_grade(resultset.getString(18));
                 user.setUser_status(resultset.getInt(19));
                 user.setUser_admin_flag(resultset.getInt(20));
@@ -176,7 +178,7 @@ public class UserDaoImpl implements UserDao {
             String sql = "SELECT * FROM `users` WHERE user_name=?";
             statement = connection.prepareStatement(sql);
             statement.setString(1, name);
-            DebugUtils.showLog("查询语句："+sql);
+//            DebugUtils.showLog("查询语句："+sql);
             resultset = statement.executeQuery();
             while (resultset.next()) {
                 user = new UserBean();

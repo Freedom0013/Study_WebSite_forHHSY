@@ -10,5 +10,5 @@ public class UserExistException extends Exception {
     /**
      * 版本控制
      */
-    private static final long serialVersionUID = 3L;
+    private static final long serialVersionUID = 1L;
 }
