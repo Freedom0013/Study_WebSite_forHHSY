@@ -3,7 +3,7 @@ package com.studyplatform.web.dao;
 import com.studyplatform.web.bean.UserBean;
 
 /**
- * UserDao接口（数据库处理层）
+ * UserDao接口（用户数据库处理层接口）
  * Title: UserDao
  * @date 2018年2月1日
  * @author Freedom0013

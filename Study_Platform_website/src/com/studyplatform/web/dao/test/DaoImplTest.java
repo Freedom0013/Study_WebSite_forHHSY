@@ -2,15 +2,26 @@ package com.studyplatform.web.dao.test;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
+import com.studyplatform.web.bean.CourseBean;
+import com.studyplatform.web.bean.DepartmentBean;
+import com.studyplatform.web.bean.ProfessionBean;
 import com.studyplatform.web.bean.UserBean;
+import com.studyplatform.web.dao.CourseDao;
+import com.studyplatform.web.dao.DepartmentDao;
+import com.studyplatform.web.dao.ProfessionalDao;
 import com.studyplatform.web.dao.QuestionDao;
 import com.studyplatform.web.dao.UserDao;
+import com.studyplatform.web.dao.impl.CourseDaoImpl;
+import com.studyplatform.web.dao.impl.DepartmentDaoImpl;
+import com.studyplatform.web.dao.impl.ProfessionalDapImpl;
 import com.studyplatform.web.dao.impl.QuestionDaoImpl;
 import com.studyplatform.web.dao.impl.UserDaoImpl;
 import com.studyplatform.web.system.SystemCommonValue;
 import com.studyplatform.web.utils.DebugUtils;
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 /**
  * Dao测试类（冗余）
@@ -56,8 +67,46 @@ public class DaoImplTest {
 //        if(success == SystemCommonValue.OPERATION_SUCCESS){
 //            DebugUtils.showLog("执行成功！");
 //        }
+//        
+//-----------------------QuestionDao---------------------------        
+//        QuestionDao dao = new QuestionDaoImpl();
+//        dao.ObtainExaminationList(1, 4, 3, 3);
         
-        QuestionDao dao = new QuestionDaoImpl();
-        dao.ObtainExaminationList(1, 4, 3, 3);
+//--------------------------DepartmentDao----------------------        
+//        DepartmentDao dao = new DepartmentDaoImpl();
+//        ArrayList<DepartmentBean> list = (ArrayList<DepartmentBean>) dao.getAllDepartment();
+//        for(DepartmentBean bean:list){
+//            DebugUtils.showLog("test:::"+bean.toString());
+//        }
+//        DepartmentBean bean = dao.getDepartmentById(1);
+//        DebugUtils.showLog("testbean:::"+bean.toString());
+
+//-----------------------------ProfessionalDao-----------------------
+//        ProfessionalDao dao = new ProfessionalDapImpl();
+//        ArrayList<ProfessionBean> list = (ArrayList<ProfessionBean>) dao.getAllProfession();
+//        for (ProfessionBean bean : list) {
+//            DebugUtils.showLog("test1:::" + bean.toString());
+//        }
+//        
+//        ArrayList<ProfessionBean> list1 = (ArrayList<ProfessionBean>) dao.getAllProfessionByDepartmentId(7);
+//        for (ProfessionBean bean : list1) {
+//            DebugUtils.showLog("test2:::" + bean.toString());
+//        }
+//        ProfessionBean bean = dao.getProfessionById(1);
+//        DebugUtils.showLog("testbean3:::" + bean.toString());
+
+//-----------------------------ProfessionalDao-----------------------
+//      CourseDao dao = new CourseDaoImpl();
+//      ArrayList<CourseBean> list = (ArrayList<CourseBean>) dao.getAllCourse();
+//      for (CourseBean bean : list) {
+//          DebugUtils.showLog("test1:::" + bean.toString());
+//      }
+//      
+//      ArrayList<CourseBean> list1 = (ArrayList<CourseBean>) dao.getAllCourseByProfessionId(2);
+//      for (CourseBean bean : list1) {
+//          DebugUtils.showLog("test2:::" + bean.toString());
+//      }
+//      CourseBean bean = dao.getCourseById(1);
+//      DebugUtils.showLog("testbean3:::" + bean.toString());
     }
 }
