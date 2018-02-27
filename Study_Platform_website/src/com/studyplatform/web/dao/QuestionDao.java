@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.studyplatform.web.bean.QuestionBean;
 
 /**
- * QuestionDao试题操作接口
+ * QuestionDao（试题数据处理层接口）
  * Title: QuestionDao
  * @date 2018年2月2日
  * @author Freedom0013

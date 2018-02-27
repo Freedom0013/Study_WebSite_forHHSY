@@ -9,18 +9,21 @@ import com.studyplatform.web.bean.CourseBean;
 import com.studyplatform.web.bean.DepartmentBean;
 import com.studyplatform.web.bean.FractionBean;
 import com.studyplatform.web.bean.ProfessionBean;
+import com.studyplatform.web.bean.ResourceBean;
 import com.studyplatform.web.bean.UserBean;
 import com.studyplatform.web.dao.CourseDao;
 import com.studyplatform.web.dao.DepartmentDao;
 import com.studyplatform.web.dao.FractionDao;
 import com.studyplatform.web.dao.ProfessionalDao;
 import com.studyplatform.web.dao.QuestionDao;
+import com.studyplatform.web.dao.ResourceDao;
 import com.studyplatform.web.dao.UserDao;
 import com.studyplatform.web.dao.impl.CourseDaoImpl;
 import com.studyplatform.web.dao.impl.DepartmentDaoImpl;
 import com.studyplatform.web.dao.impl.FractionDaoImpl;
 import com.studyplatform.web.dao.impl.ProfessionalDapImpl;
 import com.studyplatform.web.dao.impl.QuestionDaoImpl;
+import com.studyplatform.web.dao.impl.ResourceDaoImpl;
 import com.studyplatform.web.dao.impl.UserDaoImpl;
 import com.studyplatform.web.system.SystemCommonValue;
 import com.studyplatform.web.utils.DebugUtils;
@@ -74,7 +77,6 @@ public class DaoImplTest {
 //-----------------------QuestionDao---------------------------        
 //        QuestionDao dao = new QuestionDaoImpl();
 //        dao.ObtainExaminationList(1, 4, 3, 3);
-        
 //--------------------------DepartmentDao----------------------        
 //        DepartmentDao dao = new DepartmentDaoImpl();
 //        ArrayList<DepartmentBean> list = (ArrayList<DepartmentBean>) dao.getAllDepartment();
@@ -83,7 +85,6 @@ public class DaoImplTest {
 //        }
 //        DepartmentBean bean = dao.getDepartmentById(1);
 //        DebugUtils.showLog("testbean:::"+bean.toString());
-
 //-----------------------------ProfessionalDao-----------------------
 //        ProfessionalDao dao = new ProfessionalDapImpl();
 //        ArrayList<ProfessionBean> list = (ArrayList<ProfessionBean>) dao.getAllProfession();
@@ -97,7 +98,6 @@ public class DaoImplTest {
 //        }
 //        ProfessionBean bean = dao.getProfessionById(1);
 //        DebugUtils.showLog("testbean3:::" + bean.toString());
-
 //-----------------------------ProfessionalDao-----------------------
 //      CourseDao dao = new CourseDaoImpl();
 //      ArrayList<CourseBean> list = (ArrayList<CourseBean>) dao.getAllCourse();
@@ -111,7 +111,6 @@ public class DaoImplTest {
 //      }
 //      CourseBean bean = dao.getCourseById(1);
 //      DebugUtils.showLog("testbean3:::" + bean.toString());
-        
 //-------------------------------FractionDao--------------------------
 //        FractionDao dao = new FractionDaoImpl();
 //        Date time=new Date();    
@@ -131,6 +130,18 @@ public class DaoImplTest {
 //        
 //        FractionBean bean = dao.getFractionByFractionId(11);
 //        DebugUtils.showLog("test2:::"+bean.toString());
-        
+//-----------------------------ResourceDao-----------------------
+//      ResourceDao dao = new ResourceDaoImpl();
+//      ArrayList<ResourceBean> list = (ArrayList<ResourceBean>) dao.getAllResourceByCourseId(1);
+//      for (ResourceBean bean : list) {
+//          DebugUtils.showLog("test1:::" + bean.toString());
+//      }
+//      
+//      ArrayList<ResourceBean> list1 = (ArrayList<ResourceBean>) dao.getAllbyDegree(3, 1);
+//      for (ResourceBean bean : list1) {
+//          DebugUtils.showLog("test2:::" + bean.toString());
+//      }
+//      ResourceBean bean = dao.getResourceById(1);
+//      DebugUtils.showLog("testbean3:::" + bean.toString());
     }
 }
