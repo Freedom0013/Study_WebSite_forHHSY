@@ -12,7 +12,6 @@ public class SystemCommonValue {
     /** 执行失败状态码  :: 1*/
     public static final int OPERATION_FAILED = 1;
     
-    
     /** 基础试题类型码 :: 0*/
     public static final int EXAM_QUESTION_EASY_VALUE = 0;
     /** 中级试题类型码  :: 1*/
@@ -25,4 +24,21 @@ public class SystemCommonValue {
     public static final int EXAM_QUESTION_TYPE_MULTI = 1;
     /** 判断试题状态码  :: 2*/
     public static final int EXAM_QUESTION_TYPE_JUDGE = 2;
+
+    /** 高级资源类别码 （80-100分）*/
+    public static final int RESOURCE_TYPE_EXPERT = 1;
+    /** 中级资源类别码（80-60分） */
+    public static final int RESOURCE_TYPE_MIDDLE = 2;
+    /** 初级资源类别码 （60分以下）*/
+    public static final int RESOURCE_TYPE_PRIMARY = 3;
+    
+    /** 视频资源分类标识码 */
+    public static final int RESOURCE_CATEGORY_VIDEO = 1;
+    /** 书籍资源分类标识码 */
+    public static final int RESOURCE_CATEGORY_BOOK = 2;
+    
+    /** 管理员标识码 */
+    public static final int USER_IS_ADMINISTRATOR = 0;
+    /** 正常用户标识码 */
+    public static final int USER_IS_NOMAL = 1;
 }
