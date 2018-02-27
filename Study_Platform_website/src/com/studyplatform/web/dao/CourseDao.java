@@ -3,7 +3,6 @@ package com.studyplatform.web.dao;
 import java.util.List;
 
 import com.studyplatform.web.bean.CourseBean;
-import com.studyplatform.web.bean.ProfessionBean;
 
 /**
  * CourseDao（课程数据处理层接口）

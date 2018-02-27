@@ -24,10 +24,9 @@ public class FractionBean {
 	/**
 	 * 全参数构造函数
 	 */
-	public FractionBean(BigDecimal fraction_id, int fraction_content, String fraction_addtime, int fraction_course_id,
+	public FractionBean(int fraction_content, String fraction_addtime, int fraction_course_id,
 			int fraction_user_id) {
 		super();
-		this.fraction_id = fraction_id;
 		this.fraction_content = fraction_content;
 		this.fraction_addtime = fraction_addtime;
 		this.fraction_course_id = fraction_course_id;

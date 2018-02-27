@@ -7,15 +7,18 @@ import java.util.Date;
 
 import com.studyplatform.web.bean.CourseBean;
 import com.studyplatform.web.bean.DepartmentBean;
+import com.studyplatform.web.bean.FractionBean;
 import com.studyplatform.web.bean.ProfessionBean;
 import com.studyplatform.web.bean.UserBean;
 import com.studyplatform.web.dao.CourseDao;
 import com.studyplatform.web.dao.DepartmentDao;
+import com.studyplatform.web.dao.FractionDao;
 import com.studyplatform.web.dao.ProfessionalDao;
 import com.studyplatform.web.dao.QuestionDao;
 import com.studyplatform.web.dao.UserDao;
 import com.studyplatform.web.dao.impl.CourseDaoImpl;
 import com.studyplatform.web.dao.impl.DepartmentDaoImpl;
+import com.studyplatform.web.dao.impl.FractionDaoImpl;
 import com.studyplatform.web.dao.impl.ProfessionalDapImpl;
 import com.studyplatform.web.dao.impl.QuestionDaoImpl;
 import com.studyplatform.web.dao.impl.UserDaoImpl;
@@ -108,5 +111,26 @@ public class DaoImplTest {
 //      }
 //      CourseBean bean = dao.getCourseById(1);
 //      DebugUtils.showLog("testbean3:::" + bean.toString());
+        
+//-------------------------------FractionDao--------------------------
+//        FractionDao dao = new FractionDaoImpl();
+//        Date time=new Date();    
+//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+//        FractionBean testbean = new FractionBean(53,df.format(time),1,8);
+//        
+//        int re = dao.addFraction(testbean);
+//        if(re == SystemCommonValue.OPERATION_SUCCESS){
+//            DebugUtils.showLog("添加成功");
+//        }else{
+//            DebugUtils.showLog("添加失败");
+//        }
+//        ArrayList<FractionBean> list = (ArrayList<FractionBean>) dao.getAllFractionByUserId(1);
+//        for(FractionBean bean : list){
+//            DebugUtils.showLog("test1:::"+bean.toString());
+//        }
+//        
+//        FractionBean bean = dao.getFractionByFractionId(11);
+//        DebugUtils.showLog("test2:::"+bean.toString());
+        
     }
 }
