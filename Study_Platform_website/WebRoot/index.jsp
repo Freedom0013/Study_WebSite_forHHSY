@@ -11,6 +11,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <head>
         <meta charset="utf-8">
         <base href="<%=basePath%>">
+        <!-- 设置jsp地址栏小图标 -->
+        <link rel="icon" href="<%=basePath%>images/system_image/logo_page_icon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="<%=basePath%>images/system_image/logo_page_icon.ico" type="image/x-icon">
+        
         <title>学习平台</title>
         <link rel="stylesheet" href="${pageContext.request.contextPath }/css/test.css" type="text/css" />
         <link type="text/css" href="${pageContext.request.contextPath }/css/css.css" rel="stylesheet">
