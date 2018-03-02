@@ -1,10 +1,15 @@
 package com.studyplatform.web.utils;
 
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.beanutils.BeanUtils;
+
+import com.studyplatform.web.system.SystemCommonValue;
 
 /**
  * web工具
@@ -41,5 +46,19 @@ public class WebUtils {
 		SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
 		Date date = new Date(millSec);
 		return sdf.format(date);
+	}
+	
+	/**
+	 * 设置Servlet字符集
+	 * @param request 请求
+	 * @param response 响应
+	 */
+	public static void setCharSet(HttpServletRequest request, HttpServletResponse response){
+	    try {
+            request.setCharacterEncoding(SystemCommonValue.WEB_REQUEST_ENCODING);
+            response.setContentType(SystemCommonValue.WEB_RESPONSE_CONTENT_TYPE);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 	}
 }

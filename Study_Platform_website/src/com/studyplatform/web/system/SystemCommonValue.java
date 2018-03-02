@@ -41,4 +41,9 @@ public class SystemCommonValue {
     public static final int USER_IS_ADMINISTRATOR = 0;
     /** 正常用户标识码 */
     public static final int USER_IS_NOMAL = 1;
+    
+    /** 页面请求编码格式 */
+    public static final String WEB_REQUEST_ENCODING = "UTF-8";
+    /** 页面响应编码格式 */
+    public static final String WEB_RESPONSE_CONTENT_TYPE = "text/html;charset=UTF-8";
 }

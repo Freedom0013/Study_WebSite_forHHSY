@@ -24,7 +24,9 @@ import com.studyplatform.web.utils.WebUtils;
  * @author Freedom0013
  */
 public class RegisterServlet extends HttpServlet {
-    //版本控制
+    /**
+     * 版本控制
+     */
     private static final long serialVersionUID = 1L;
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

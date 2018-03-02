@@ -5,6 +5,67 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+<%@ page import="net.sf.json.JSONArray" %>
+<%@ page import="net.sf.json.JSONObject" %>
+
+<%-- <jsp:forward page="/servlet/DepartmentServlet"></jsp:forward>  --%>
+
+<script type="text/javascript">
+    function init() {
+		$.ajax({
+			url : "${pageContext.request.contextPath }/servlet/DepartmentServlet", //servlet文件的名称  
+			type : "GET",
+			success : function(msg) {
+				var doms = eval("(" + msg + ")");
+				var data = doms.root;
+				var department_box_div = document.getElementById('department_box');
+				if(data != null){
+					for(var i in data){
+						//表示遍历数组，而i表示的是数组的下标值，
+						//data[i]表示获得第i个json对象即JSONObject
+						//data[i]通过.字段名称即可获得指定字段的值
+						
+						data[i].department_addtime;
+						data[i].department_caption;
+						data[i].department_picture_id;
+						
+						var department_item_box = document.createElement('div');
+						department_item_box.id = 'department_item_box' + i;
+						department_item_box.className = "box";
+						department_box_div.appendChild(department_item_box);
+						
+						var image_a = document.createElement("a");
+						var url = '${pageContext.request.contextPath }/servlet/ProfessionalServlet?department_id=' +data[i].department_id;
+						image_a.setAttribute('href',url);
+						image_a.setAttribute('target','_blank');
+						department_item_box.appendChild(image_a);
+						
+						var department_img = document.createElement("img");
+						department_img.src = "${pageContext.request.contextPath }/images/box1.png";
+						department_img.width = '291';
+						department_img.height = '179';
+						image_a.appendChild(department_img);
+						
+						var h2 = document.createElement("h2"); 
+						h2.className = "title1";
+						
+						var title_a = document.createElement("a");
+                        var url = '${pageContext.request.contextPath }/servlet/ProfessionalServlet?department_id=' + data[i].department_id;
+                        title_a.setAttribute('href',url);
+                        title_a.setAttribute('target','_blank');
+                        var department_name = document.createTextNode(data[i].department_name);
+                        title_a.appendChild(department_name);
+                        
+                        h2.appendChild(title_a); 
+                        department_item_box.appendChild(h2);
+			    	}
+				}
+			},error : function() {
+				alert("院系数据获取失败!请稍后重试!");
+			}
+		});
+	}
+</script>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -22,10 +83,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<script type="text/javascript" src="${pageContext.request.contextPath }/js/zzsc.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.4.4.min.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.XYTipsWindow.min.2.8.js"></script>
+        <%-- <script type="text/javascript" src="${pageContext.request.contextPath }/js/index.js"></script> --%>
 		<link type="text/css" href="${pageContext.request.contextPath }/css/box_style.css" rel="stylesheet" />
     </head>
 
-	<body>
+	<body onload="init()">
 	<div id="Top">
 		<br> <img
 			src="${pageContext.request.contextPath }/images/logo.png" width="315" height="60" />
@@ -175,101 +237,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</fieldset>
 					</form>
 				</div>
-	
-	
-	
 			</div>
 		</div>
+		
+		
 		<div id="content">
 			<div class="biaoti">
 				<h2>院 系</h2>
 			</div>
-			<div id="box1">
-				<div class="box">
-					<a href="${pageContext.request.contextPath }/zhuanye/zhuanye2.html" target="_blank"><img
-						src="${pageContext.request.contextPath }/images/box1.png" width="291" height="179"></a>
-					<h2>
-						<a href="${pageContext.request.contextPath }/zhuanye/zhuanye2.html" target="_blank">水利工程学院</a>
-					</h2>
-				</div>
-				<div class="box">
-					<a href="${pageContext.request.contextPath }/zhuanye/zhuanye3.html" target="_blank"><img
-						src="${pageContext.request.contextPath }/images/box1.png" width="291" height="179"></a>
-					<h2>
-						<a href="${pageContext.request.contextPath }/zhuanye/zhuanye3.html" target="_blank">土木与交通工程学院</a>
-					</h2>
-				</div>
-				<div class="box">
-					<a href="${pageContext.request.contextPath }/zhuanye/zhuanye10.html" target="_blank"><img
-						src="${pageContext.request.contextPath }/images/box1.png" width="291" height="179"></a>
-					<h2>
-						<a href="${pageContext.request.contextPath }/zhuanye/zhuanye10.html" target="_blank">测绘工程学院</a>
-					</h2>
-				</div>
-				<div class="box">
-					<a href="${pageContext.request.contextPath }/zhuanye/zhuanye11.html" target="_blank"><img
-						src="${pageContext.request.contextPath }/images/box1.png" width="291" height="179"></a>
-					<h2>
-						<a href="${pageContext.request.contextPath }/zhuanye/zhuanye11.html" target="_blank">机械工程学院</a>
-					</h2>
-				</div>
-				<div class="box">
-					<a href="${pageContext.request.contextPath }/zhuanye/zhuanye7.html" target="_blank"><img
-						src="${pageContext.request.contextPath }/images/box1.png" width="291" height="179"></a>
-					<h2>
-						<a href="${pageContext.request.contextPath }/zhuanye/zhuanye7.html" target="_blank">国际教育学院</a>
-					</h2>
-				</div>
-				<div class="box">
-					<a href="${pageContext.request.contextPath }/zhuanye/zhuanye9.html" target="_blank"><img
-						src="${pageContext.request.contextPath }/images/box1.png" width="291" height="179"></a>
-					<h2>
-						<a href="${pageContext.request.contextPath }/zhuanye/zhuanye9.html" target="_blank">环境与化学工程系</a>
-					</h2>
-				</div>
-				<div class="box">
-					<a href="${pageContext.request.contextPath }/zhuanye/zhuanye1.html" target="_blank"><img
-						src="${pageContext.request.contextPath }/images/box1.png" width="291" height="179"></a>
-					<h2>
-						<a href="${pageContext.request.contextPath }/zhuanye/zhuanye1.html" target="_blank">信息工程系</a>
-					</h2>
-				</div>
-				<div class="box">
-					<a href="${pageContext.request.contextPath }/zhuanye/zhuanye8.html" target="_blank"><img
-						src="${pageContext.request.contextPath }/images/box1.png" width="291" height="179"></a>
-					<h2>
-						<a href="${pageContext.request.contextPath }/zhuanye/zhuanye8.html" target="_blank">自动化工程系</a>
-					</h2>
-				</div>
-				<div class="box">
-					<a href="${pageContext.request.contextPath }/zhuanye/zhuanye5.html" target="_blank"><img
-						src="${pageContext.request.contextPath }/images/box1.png" width="291" height="179"></a>
-					<h2>
-						<a href="${pageContext.request.contextPath }/zhuanye/zhuanye5.html" target="_blank">财经系</a>
-					</h2>
-				</div>
-				<div class="box">
-					<a href="${pageContext.request.contextPath }/zhuanye/zhuanye6.html" target="_blank"><img
-						src="${pageContext.request.contextPath }/images/box1.png" width="291" height="179"></a>
-					<h2>
-						<a href="${pageContext.request.contextPath }/zhuanye/zhuanye6.html" target="_blank">管理系</a>
-					</h2>
-				</div>
-				<div class="box">
-					<a href="${pageContext.request.contextPath }/zhuanye/zhuanye12.html" target="_blank"><img
-						src="${pageContext.request.contextPath }/images/box1.png" width="291" height="179"></a>
-					<h2>
-						<a href="${pageContext.request.contextPath }/zhuanye/zhuanye12.html" target="_blank">旅游系</a>
-					</h2>
-				</div>
-				<div class="box">
-					<a href="${pageContext.request.contextPath }/zhuanye/zhuanye4.html" target="_blank"><img
-						src="${pageContext.request.contextPath }/images/box1.png" width="291" height="179"></a>
-					<h2>
-						<a href="${pageContext.request.contextPath }/zhuanye/zhuanye4.html" target="_blank">艺术系 （艺术教育中心） </a>
-					</h2>
-				</div>
-			</div>
+        
+            <div id="department_box"></div>
+            
 		</div>
 		<div id="footer">
 	

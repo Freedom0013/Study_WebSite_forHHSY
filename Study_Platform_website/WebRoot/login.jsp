@@ -9,6 +9,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <head lang="en" class="no-js">
 	    <meta charset="UTF-8" />
 	    <base href="<%=basePath%>">
+	    <link rel="icon" href="<%=basePath%>images/system_image/logo_page_icon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="<%=basePath%>images/system_image/logo_page_icon.ico" type="image/x-icon">
 	    <title>用户登录</title>
 	    <link rel="stylesheet" type="text/css" href="css/demo.css" />
 	    <link rel="stylesheet" type="text/css" href="css/style.css" />

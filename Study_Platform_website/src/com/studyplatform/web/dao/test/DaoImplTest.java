@@ -29,6 +29,9 @@ import com.studyplatform.web.system.SystemCommonValue;
 import com.studyplatform.web.utils.DebugUtils;
 import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 /**
  * Dao测试类（冗余）
  * Title: DaoImplTest
@@ -78,13 +81,24 @@ public class DaoImplTest {
 //        QuestionDao dao = new QuestionDaoImpl();
 //        dao.ObtainExaminationList(1, 4, 3, 3);
 //--------------------------DepartmentDao----------------------        
-//        DepartmentDao dao = new DepartmentDaoImpl();
-//        ArrayList<DepartmentBean> list = (ArrayList<DepartmentBean>) dao.getAllDepartment();
+        DepartmentDao dao = new DepartmentDaoImpl();
+        ArrayList<DepartmentBean> list = (ArrayList<DepartmentBean>) dao.getAllDepartment();
 //        for(DepartmentBean bean:list){
 //            DebugUtils.showLog("test:::"+bean.toString());
 //        }
 //        DepartmentBean bean = dao.getDepartmentById(1);
 //        DebugUtils.showLog("testbean:::"+bean.toString());
+//        JSONArray array = new JSONArray();
+//        for (DepartmentBean bean : list) {
+//            JSONObject json = JSONObject.fromObject();
+//            array.add(bean);
+//        }
+//        DebugUtils.showLog(JSONArray.fromObject(list).toString());
+        
+        JSONObject json = new JSONObject();
+        json.element("root", JSONArray.fromObject(list));
+        DebugUtils.showLog(json.toString());
+        
 //-----------------------------ProfessionalDao-----------------------
 //        ProfessionalDao dao = new ProfessionalDapImpl();
 //        ArrayList<ProfessionBean> list = (ArrayList<ProfessionBean>) dao.getAllProfession();

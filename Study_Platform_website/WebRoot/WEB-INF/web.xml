@@ -18,19 +18,57 @@
     <servlet-name>RegisterServlet</servlet-name>
     <servlet-class>com.studyplatform.web.servlet.RegisterServlet</servlet-class>
   </servlet>
+  
+  <!-- 获取院系列表 -->
+  <servlet>
+    <servlet-name>DepartmentServlet</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.DepartmentServlet</servlet-class>
+  </servlet>
+  
+  <!-- 获取专业列表 -->
+  <servlet>
+    <servlet-name>ProfessionalServlet</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.ProfessionalServlet</servlet-class>
+  </servlet>
+  
+  <!-- 获取课程列表 -->
+  <servlet>
+    <servlet-name>CourseServlet</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.CourseServlet</servlet-class>
+  </servlet>
+
+
+
 
 
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/servlet/LoginServlet</url-pattern>
   </servlet-mapping>
+  
   <servlet-mapping>
     <servlet-name>WrittenOffServlet</servlet-name>
     <url-pattern>/servlet/WrittenOffServlet</url-pattern>
   </servlet-mapping>
+  
   <servlet-mapping>
     <servlet-name>RegisterServlet</servlet-name>
     <url-pattern>/servlet/RegisterServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>DepartmentServlet</servlet-name>
+    <url-pattern>/servlet/DepartmentServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>ProfessionalServlet</servlet-name>
+    <url-pattern>/servlet/ProfessionalServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>CourseServlet</servlet-name>
+    <url-pattern>/servlet/CourseServlet</url-pattern>
   </servlet-mapping>
   
   

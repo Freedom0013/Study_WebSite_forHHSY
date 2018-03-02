@@ -18,6 +18,15 @@ a:focus { outline:none;}
 a { text-decoration:none; blr:expression(this.onFocus=this.blur());}
 a { outline:none;}
 
+#content .title1{
+    font-family: "微软雅黑";
+    font-size: 22px;
+    font-weight: normal;
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+}
+
 /*广告*/
 .banner{ width:100%; height:408px; position:relative;}
 .banner .list{ width:100%; height:408px; overflow:hidden; position:relative; z-index:1;}
@@ -191,6 +200,7 @@ a { outline:none;}
 	margin-top: 35px;
 	color: #333;
 }
+
 #content .box  {
 	float: left;
 	height: 260px;
