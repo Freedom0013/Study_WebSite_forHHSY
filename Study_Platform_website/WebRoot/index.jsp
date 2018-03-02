@@ -8,8 +8,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%@ page import="net.sf.json.JSONArray" %>
 <%@ page import="net.sf.json.JSONObject" %>
 
-<%-- <jsp:forward page="/servlet/DepartmentServlet"></jsp:forward>  --%>
-
 <script type="text/javascript">
     function init() {
 		$.ajax({
