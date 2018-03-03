@@ -9,13 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.studyplatform.web.bean.DepartmentBean;
 import com.studyplatform.web.bean.ProfessionBean;
+import com.studyplatform.web.service.DepartmentService;
 import com.studyplatform.web.service.ProfessionalService;
+import com.studyplatform.web.service.impl.DepartmentServiceImpl;
 import com.studyplatform.web.service.impl.ProfessionalServiceImpl;
 import com.studyplatform.web.utils.DebugUtils;
 
@@ -47,6 +45,13 @@ public class ProfessionalServlet extends HttpServlet {
         DebugUtils.showLog(profession_json.toString());
         
         request.setAttribute("profession_list_json",profession_json.toString());
+        request.setAttribute("department_id", departmentid);
+        
+        DepartmentService department_service = new DepartmentServiceImpl();
+        ArrayList<DepartmentBean> departmentlist = (ArrayList<DepartmentBean>) department_service.getallDepartment();
+        JSONObject department_json = new JSONObject();
+        department_json.element("root", JSONArray.fromObject(departmentlist));
+        request.setAttribute("all_department_list", department_json.toString());
         
         RequestDispatcher dispatcher = request.getRequestDispatcher("/professional_detail.jsp");
         dispatcher.forward(request, response);

@@ -230,9 +230,10 @@
 	box-shadow:2px 2px 5px #C0BBB5;
 	-moz-box-shadow: 2px 2px 5px #C0BBB5;
 	-webkit-box-shadow:2px 2px 5px #C0BBB5;
+	
 }#Top-login {
 	height: 50px;
-	width: 20px;
+	width: 25px;
 }
 #content #box002 ul li {
 	float: left;
