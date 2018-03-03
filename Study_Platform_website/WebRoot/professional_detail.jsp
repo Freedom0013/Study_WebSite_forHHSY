@@ -149,7 +149,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                 if(professions.size()!=0){
 	                    for(ProfessionBean bean : professions){ %>
                             <div class="box">
-                                <% String url = basePath+"/servlet/CourseServlet?professions_id="+bean.getProfession_id(); %>
+                                <% String url = basePath+"servlet/CourseServlet?professions_id="+bean.getProfession_id(); %>
 			                    <a href="<%=url%>">
 			                        <img src="${pageContext.request.contextPath }/images/xxzz_2.jpg" width="291" height="179">
 			                    </a>

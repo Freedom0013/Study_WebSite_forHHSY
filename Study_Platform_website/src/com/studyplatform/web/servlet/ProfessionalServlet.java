@@ -16,6 +16,7 @@ import com.studyplatform.web.service.ProfessionalService;
 import com.studyplatform.web.service.impl.DepartmentServiceImpl;
 import com.studyplatform.web.service.impl.ProfessionalServiceImpl;
 import com.studyplatform.web.utils.DebugUtils;
+import com.studyplatform.web.utils.WebUtils;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -33,8 +34,10 @@ public class ProfessionalServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //控制字符集
+        WebUtils.setCharSet(request, response);
+        
         String department_id = (String) request.getParameter("department_id");
-        DebugUtils.showLog(department_id);
         int departmentid = Integer.parseInt(department_id);
         
         ProfessionalService service = new ProfessionalServiceImpl();

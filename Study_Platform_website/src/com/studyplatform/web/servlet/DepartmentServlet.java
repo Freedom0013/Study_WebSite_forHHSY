@@ -24,7 +24,6 @@ import net.sf.json.JSONObject;
  * @author Freedom0013
  */
 public class DepartmentServlet extends HttpServlet {
-
     /**
      * 版本控制
      */
