@@ -42,6 +42,20 @@
     <servlet-name>CourseDetailServlet</servlet-name>
     <servlet-class>com.studyplatform.web.servlet.CourseDetailServlet</servlet-class>
   </servlet>
+  
+  <!-- 获取试题 -->
+  <servlet>
+    <servlet-name>QuestionServlet</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.QuestionServlet</servlet-class>
+  </servlet>
+  
+  <!-- 测试提交 -->
+  <servlet>
+    <servlet-name>ExaminationServlet</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.ExaminationServlet</servlet-class>
+  </servlet>
+
+
 
 
 
@@ -77,9 +91,20 @@
     <servlet-name>CourseServlet</servlet-name>
     <url-pattern>/servlet/CourseServlet</url-pattern>
   </servlet-mapping>
+  
   <servlet-mapping>
     <servlet-name>CourseDetailServlet</servlet-name>
     <url-pattern>/servlet/CourseDetailServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>QuestionServlet</servlet-name>
+    <url-pattern>/servlet/QuestionServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>ExaminationServlet</servlet-name>
+    <url-pattern>/servlet/ExaminationServlet</url-pattern>
   </servlet-mapping>
   
   

@@ -44,10 +44,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div id="center">
                     <div class="nav">
 	                    <ul>
-	                        <li><a href="index.jsp">首页</a></li>
-	                        <li class="cur"><a href="zhuanye/zhuanye1.html">专业</a></li>
-	                        <li><a href="资源.html">资源</a></li>
-	                        <li><a href="推荐书籍.html">推荐书籍</a></li>
+	                        <li><a href="${pageContext.request.contextPath }/index.jsp">首页</a></li>
+	                        <li class="cur"><a href="${pageContext.request.contextPath }/zhuanye/zhuanye1.html">专业</a></li>
+	                        <li><a href="${pageContext.request.contextPath }/资源.html">资源</a></li>
+	                        <li><a href="${pageContext.request.contextPath }/推荐书籍.html">推荐书籍</a></li>
 	                        <li><a href="#">移动课堂</a></li>
 	                    </ul> 
 	                    <div class="curBg"></div>
@@ -55,8 +55,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>  
                 </div>
                 <div id="Top-login">
-                    <a href="dlzc.html" target="_blank">登录</a>&nbsp;
-                    <a href="dlzc.html#toregister" target="_blank">注册</a>
+                    <c:choose>
+	                    <c:when test="${!empty user.user_name}">
+	                        <c:if test="${fn:length(user.user_name)>6 }">
+	                            <font color=red>${fn:substring(user.user_name, 0, 6)}...,欢迎你
+	                                &nbsp; <a href="${pageContext.request.contextPath }/servlet/WrittenOffServlet">退出登录</a>
+	                            </font>
+	                        </c:if>
+	                        <c:if test="${fn:length(user.user_name)<=6}">
+	                            <font color=red>${user.user_name},欢迎你 
+	                                &nbsp;&nbsp; 
+	                                <a href="${pageContext.request.contextPath }/servlet/WrittenOffServlet">退出登录</a>
+	                            </font>
+	                        </c:if>
+	                    </c:when>
+	                    <c:otherwise>
+	                        <a href="${pageContext.request.contextPath }/login.jsp" target="_blank">登录</a>
+	                        &nbsp; 
+	                        <a href="${pageContext.request.contextPath }/login.jsp#toregister" target="_blank">注册</a>
+	                    </c:otherwise>
+	                </c:choose>
                 </div>
             </div>
         </div>
@@ -94,7 +112,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                        <h2><%=course.getCourse_name() %></h2>
 	                    </div>
 	                    <div id="submit">
-	                        <h2>立即参加</h2>
+	                        <h2><a href="${pageContext.request.contextPath }/servlet/QuestionServlet?course_id=<%=course.getCourse_id() %>" target="_blank">立即参加</a></h2>
 	                    </div>
 	                </div>
 	                <div id="shoucang">
