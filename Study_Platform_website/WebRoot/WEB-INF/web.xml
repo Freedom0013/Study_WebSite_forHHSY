@@ -36,6 +36,13 @@
     <servlet-name>CourseServlet</servlet-name>
     <servlet-class>com.studyplatform.web.servlet.CourseServlet</servlet-class>
   </servlet>
+  
+  <!-- 获取课程详情 -->
+  <servlet>
+    <servlet-name>CourseDetailServlet</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.CourseDetailServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -69,6 +76,10 @@
   <servlet-mapping>
     <servlet-name>CourseServlet</servlet-name>
     <url-pattern>/servlet/CourseServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CourseDetailServlet</servlet-name>
+    <url-pattern>/servlet/CourseDetailServlet</url-pattern>
   </servlet-mapping>
   
   

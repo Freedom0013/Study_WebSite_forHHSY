@@ -17,4 +17,11 @@ public interface CourseService {
      * @return 课程列表
      */
     List<CourseBean> getAllCourseByProId(int professions_id);
+    
+    /**
+     * 根据课程id获取对应课程详情
+     * @param course_id 课程id
+     * @return 课程详情
+     */
+    CourseBean getCourseDetailByCouId(int course_id);
 }

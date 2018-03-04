@@ -3,7 +3,6 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page import="net.sf.json.JSONArray" %>
@@ -13,24 +12,120 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%@ page import="java.util.*" %>
 <%@ page import="java.math.*" %>
 <%@ page import="com.google.gson.*" %>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-    <base href="<%=basePath%>">
-    <link rel="icon" href="<%=basePath%>images/system_image/logo_page_icon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="<%=basePath%>images/system_image/logo_page_icon.ico" type="image/x-icon">
-        
-    <title>课程详情</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-  </head>
+    <head>
+	    <base href="<%=basePath%>">
+	    <link rel="icon" href="<%=basePath%>images/system_image/logo_page_icon.ico" type="image/x-icon">
+	    <link rel="shortcut icon" href="<%=basePath%>images/system_image/logo_page_icon.ico" type="image/x-icon">
+	        
+	    <title>课程详情</title>
+	    
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">    
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="This is my page">
+		
+		<link rel="stylesheet" href="${pageContext.request.contextPath }/css/test1.css" type="text/css"/>
+	    <link type="text/css" href="${pageContext.request.contextPath }/css/css1.css" rel="stylesheet">
+	    <script type="text/javascript" src="${pageContext.request.contextPath }/js/JQ.js"></script>
+	    <script type="text/javascript" src="${pageContext.request.contextPath }/js/zzsc.js"></script>
+	    <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.4.4.min.js"></script>
+	    <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.XYTipsWindow.min.2.8.js"></script>
+	    <link type="text/css" href="${pageContext.request.contextPath }/css/box_style.css" rel="stylesheet" />
+    </head>
   
-  <body>
-    This is my JSP page. <br>
-  </body>
+    <body style="background:#CCC">
+        <div id="top-p">
+            <div id="Top">
+                <br>
+                <img src="${pageContext.request.contextPath }/images/logo.png" width="315" height="60" />
+                <div id="center">
+                    <div class="nav">
+	                    <ul>
+	                        <li><a href="index.jsp">首页</a></li>
+	                        <li class="cur"><a href="zhuanye/zhuanye1.html">专业</a></li>
+	                        <li><a href="资源.html">资源</a></li>
+	                        <li><a href="推荐书籍.html">推荐书籍</a></li>
+	                        <li><a href="#">移动课堂</a></li>
+	                    </ul> 
+	                    <div class="curBg"></div>
+	                    <div class="cls"></div>
+                    </div>  
+                </div>
+                <div id="Top-login">
+                    <a href="dlzc.html" target="_blank">登录</a>&nbsp;
+                    <a href="dlzc.html#toregister" target="_blank">注册</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="middle">
+            <div id="middle-1">
+                <div id="mid">
+                    <h2>学习平台</h2>
+                </div>
+			    <div class="style_1">
+			        <form method="get" id="searchform" action="#"><!--搜索跳转网址 -->
+			            <fieldset>
+			            <input id="s" name="s" type="text" value="输入要搜索的内容" class="text_input" onblur="if(this.value=='输入要搜索的内容'){this.value='';}" onfocus="if(this.value =='输入要搜索的内容') {this.value=''; }" />
+			            <input name="submit" type="submit" value /> </fieldset>
+			        </form>
+			    </div>
+            </div>
+        </div>
+        
+        <div id="content">
+	        <% 
+	            String course_detail_json = (String)request.getAttribute("course_detail_json");
+	            Gson gson = new Gson();
+	            JsonObject rootJson = new JsonParser().parse(course_detail_json).getAsJsonObject();
+	            JsonObject coursejson = rootJson.get("root").getAsJsonObject();
+	            CourseBean course = gson.fromJson(coursejson, CourseBean.class);
+	        %>
+            <% 
+                if(course != null){
+                    %>
+	            <div id="box001">
+	                <img src="${pageContext.request.contextPath }/images/box1.png" width="459" height="310">
+	                <div id="word">
+	                    <div id="h2">
+	                        <h2><%=course.getCourse_name() %></h2>
+	                    </div>
+	                    <div id="submit">
+	                        <h2>立即参加</h2>
+	                    </div>
+	                </div>
+	                <div id="shoucang">
+	                    <h2><a href="#">收藏</a></h2>
+	                </div>
+	            </div>
+	            
+	            <div id="box002">
+	                <ul>
+	                    <li><a href="#" style="color:#09C;">介绍</a></li>
+	                    <%
+	                    //TODO: 此处未处理目录问题
+	                    %>
+	                    <!-- <li><a href="详细课程1.html">目录</a></li> -->
+	                </ul>
+	            </div>
+	            
+	            <div id="box003">
+	                <h2>适用人群</h2>
+	                <p><%=course.getCourse_applypeople() %></p>
+	                <h2>课程概述</h2>
+	                <p><%=course.getCourse_summary() %></p>
+	            </div>
+            <%
+                }
+            %>
+        </div>
+        
+        <div id="footer">
+            <p>Copyright © 2017 YRCTI. All Rights Reserved.</p>
+            <p>黄河水利职业技术学院 版权所有 | <a href="#" target="_blank" rel="nofollow">博知课堂服务协议</a> | <a href="#">站点地图</a> | <a href="#" target="_blank">侵权投诉</a> | <a href="#" rel="nofollow" report-tdw="action=Feedback" target="_blank">问题反馈</a> | <a href="#" target="_blank">帮助</a></p>
+        </div>
+    </body>
 </html>

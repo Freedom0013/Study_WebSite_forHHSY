@@ -141,7 +141,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <img src="${pageContext.request.contextPath }/images/tjkc_1.jpg" width="291" height="179">
                                 </a>
                                 <h2>
-                                    <a href="<%=url %>"><%=bean.getCourse_name() %></a>
+                                    <a href="<%=url %>" target="_blank"><%=bean.getCourse_name() %></a>
                                 </h2>
                             </div>
                         <%  	                            
@@ -169,7 +169,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <img src="${pageContext.request.contextPath }/images/tjkc_1.jpg" width="291" height="179">
                                 </a>
                                 <h2>
-                                    <a href="<%=url %>"><%=bean.getCourse_name() %></a>
+                                    <a href="<%=url %>" target="_blank"><%=bean.getCourse_name() %></a>
                                 </h2>
                             </div>
                         <%                                  
@@ -197,7 +197,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <img src="${pageContext.request.contextPath }/images/tjkc_1.jpg" width="291" height="179">
                                 </a>
                                 <h2>
-                                    <a href="<%=url %>"><%=bean.getCourse_name() %></a>
+                                    <a href="<%=url %>" target="_blank"><%=bean.getCourse_name() %></a>
                                 </h2>
                             </div>
                         <%                                  
@@ -225,7 +225,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <img src="${pageContext.request.contextPath }/images/tjkc_1.jpg" width="291" height="179">
                                 </a>
                                 <h2>
-                                    <a href="<%=url %>"><%=bean.getCourse_name() %></a>
+                                    <a href="<%=url %>" target="_blank"><%=bean.getCourse_name() %></a>
                                 </h2>
                             </div>
                         <%                                  
@@ -236,10 +236,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <%
                }
             %>
-	    </div>
+            
+             <% 
+                int allsize = courses_first.size()+courses_second.size() + courses_third.size() + courses_fourth.size();
+                if(allsize == 0){
+             %>
+	            <div class="biaoti">
+	                <h2>没有该专业课程，正拼命完善中..</h2>
+	            </div>
+            <%
+               }
+            %>
+        </div>
 
-	    <div id="footer">
-	        <p>Copyright © 2017 YRCTI. All Rights Reserved.</p>
+        <div id="footer">
+            <p>Copyright © 2017 YRCTI. All Rights Reserved.</p>
 	        <p>黄河水利职业技术学院 版权所有 | <a href="#" target="_blank" rel="nofollow">博知课堂服务协议</a> | <a href="#">站点地图</a> | <a href="#" target="_blank">侵权投诉</a> | <a href="#" rel="nofollow" report-tdw="action=Feedback" target="_blank">问题反馈</a> | <a href="#" target="_blank">帮助</a></p>
 	    </div>
     </body>

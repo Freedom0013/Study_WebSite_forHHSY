@@ -150,14 +150,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                    for(ProfessionBean bean : professions){ %>
                             <div class="box">
                                 <% String url = basePath+"servlet/CourseServlet?professions_id="+bean.getProfession_id(); %>
-			                    <a href="<%=url%>">
+			                    <a href="<%=url%>" target="_blank">
 			                        <img src="${pageContext.request.contextPath }/images/xxzz_2.jpg" width="291" height="179">
 			                    </a>
 			                    <h2>
-			                        <a href="<%=url%>"><%=bean.getProfession_name()%></a>
+			                        <a href="<%=url%>" target="_blank"><%=bean.getProfession_name()%></a>
 			                    </h2>
 			                </div> 
 	            <%      }
+	                }else{
+	                %> 
+		                <div class="biaoti">
+	                        <h2>没有该院系专业，正拼命完善中..</h2>
+	                    </div> 
+                    <%
 	                }
                 %>
 				<p>&nbsp;</p>
