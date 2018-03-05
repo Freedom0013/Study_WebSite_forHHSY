@@ -19,6 +19,7 @@ import com.studyplatform.web.bean.QuestionBean;
 import com.studyplatform.web.bean.ResourceBean;
 import com.studyplatform.web.service.ResourceService;
 import com.studyplatform.web.service.impl.ResourceServiceImpl;
+import com.studyplatform.web.servlet.formbean.AnswerQuestionBean;
 import com.studyplatform.web.system.SystemCommonValue;
 import com.studyplatform.web.utils.DebugUtils;
 import com.studyplatform.web.utils.WebUtils;
@@ -56,7 +57,6 @@ public class ExaminationServlet extends HttpServlet {
 //            int userid = Integer.parseInt(user_id);
 //        }
         
-        
         Gson gson = new Gson();
         JsonObject rootJson = new JsonParser().parse(text_questions).getAsJsonObject();
         JsonArray question_list = rootJson.get("root").getAsJsonArray();
@@ -66,13 +66,25 @@ public class ExaminationServlet extends HttpServlet {
             QuestionBean question = gson.fromJson(jo, QuestionBean.class);
             page_questions.add(question);
         }
+        
         int score = 0;
+        int index = 0;
+        JSONObject user_answer_json = new JSONObject();
+        ArrayList<AnswerQuestionBean> user_answer_list = new ArrayList<AnswerQuestionBean>();
         for(QuestionBean bean : page_questions){
-            String user_answer = request.getParameter(bean.getQuestion_id()+""); 
+            AnswerQuestionBean user_answer_bean = new AnswerQuestionBean();
+            user_answer_bean.setTest_index(index);
+            user_answer_bean.setQuestion_id(bean.getQuestion_id());
+            String user_answer = request.getParameter(bean.getQuestion_id()+"");
+            user_answer_bean.setUser_answer(user_answer);
             if(user_answer.equals(bean.getQuestion_answer())){
                 score+=10;
             }
+            index++;
+            user_answer_list.add(user_answer_bean);
         }
+        user_answer_json.element("root", JSONArray.fromObject(user_answer_list));
+        
         
         ResourceService rescourse_service = new ResourceServiceImpl();
         ArrayList<ResourceBean> resourseslist = null;
@@ -84,13 +96,18 @@ public class ExaminationServlet extends HttpServlet {
             resourseslist = (ArrayList<ResourceBean>) rescourse_service.getResourceByDegree(SystemCommonValue.RESOURCE_TYPE_PRIMARY, courseid);
         }
         
+        
+        
         if(resourseslist!=null && resourseslist.size()!=0){
             JSONObject resourses = new JSONObject();
             resourses.element("root", JSONArray.fromObject(resourseslist));
             DebugUtils.showLog(resourses.toString());
             request.setAttribute("resourses_json",resourses.toString());
         }
-       
+        
+        DebugUtils.showLog(user_answer_json.toString());
+        request.setAttribute("user_answer_json",user_answer_json.toString());
+        request.setAttribute("question_json_text", question_json_text);
         request.setAttribute("user_score",score);
         
         RequestDispatcher dispatcher = request.getRequestDispatcher("/test_result.jsp");

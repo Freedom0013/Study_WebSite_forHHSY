@@ -13,20 +13,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%@ page import="java.util.*" %>
 <%@ page import="java.math.*" %>
 <%@ page import="com.google.gson.*" %>
+<%@ page import="com.studyplatform.web.servlet.formbean.*" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
     <head>
 	    <base href="<%=basePath%>">
 	    <link rel="icon" href="<%=basePath%>images/system_image/logo_page_icon.ico" type="image/x-icon">
 	    <link rel="shortcut icon" href="<%=basePath%>images/system_image/logo_page_icon.ico" type="image/x-icon">
-	    <title>测试</title>
-	    
+	    <title>查看答案</title>
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">    
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<meta http-equiv="description" content="This is my page">
-	
 	    <link rel="stylesheet" href="${pageContext.request.contextPath }/css/test1.css" type="text/css"/>
 	    <link type="text/css" href="${pageContext.request.contextPath }/css/css1.css" rel="stylesheet">
 	    <script type="text/javascript" src="${pageContext.request.contextPath }/js/JQ.js"></script>
@@ -38,23 +37,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
     <body>
         <div id="Top">
-	        <br>
-	        <img src="${pageContext.request.contextPath }/images/logo.png" width="315" height="60" />
+            <br>
+            <img src="${pageContext.request.contextPath }/images/logo.png" width="315" height="60" />
             <div id="center">
                 <div class="nav">
                     <ul>
-				        <li><a href="${pageContext.request.contextPath }/index.jsp">首页</a></li>
-				        <li class="cur"><a href="${pageContext.request.contextPath }/zhuanye/zhuanye1.html">专业</a></li>
-				        <li><a href="${pageContext.request.contextPath }/资源.html">资源</a></li>
-				        <li><a href="${pageContext.request.contextPath }/推荐书籍.html">推荐书籍</a></li>
-				        <li><a href="#">移动课堂</a></li>
+                        <li><a href="${pageContext.request.contextPath }/index.jsp">首页</a></li>
+                        <li class="cur"><a href="${pageContext.request.contextPath }/zhuanye/zhuanye1.html">专业</a></li>
+                        <li><a href="${pageContext.request.contextPath }/资源.html">资源</a></li>
+                        <li><a href="${pageContext.request.contextPath }/推荐书籍.html">推荐书籍</a></li>
+                        <li><a href="#">移动课堂</a></li>
                     </ul> 
-	                <div class="curBg"></div>
-	                <div class="cls"></div>
+                    <div class="curBg"></div>
+                    <div class="cls"></div>
                 </div>  
             </div>
-	        <div id="Top-login">
-	            <c:choose>
+            <div id="Top-login">
+                <c:choose>
                     <c:when test="${!empty user.user_name}">
                         <c:if test="${fn:length(user.user_name)>6 }">
                             <font color=red>${fn:substring(user.user_name, 0, 6)}...,欢迎你
@@ -62,10 +61,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </font>
                         </c:if>
                         <c:if test="${fn:length(user.user_name)<=6}">
-	                        <font color=red>${user.user_name},欢迎你 
-	                            &nbsp;&nbsp; 
-	                            <a href="${pageContext.request.contextPath }/servlet/WrittenOffServlet">退出登录</a>
-	                        </font>
+                            <font color=red>${user.user_name},欢迎你 
+                                &nbsp;&nbsp; 
+                                <a href="${pageContext.request.contextPath }/servlet/WrittenOffServlet">退出登录</a>
+                            </font>
                         </c:if>
                     </c:when>
                     <c:otherwise>
@@ -74,38 +73,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <a href="${pageContext.request.contextPath }/login.jsp#toregister" target="_blank">注册</a>
                     </c:otherwise>
                 </c:choose>
-	        </div>
+            </div>
         </div>
 
         <div id="middle">
             <div id="middle-1">
                 <div id="mid"><h2>学习平台</h2></div>
-			    <div class="style_1">
-			        <form method="get" id="searchform" action="#"><!--搜索跳转网址 -->
-			            <fieldset>
-			            <input id="s" name="s" type="text" value="输入要搜索的内容" class="text_input" onblur="if(this.value=='输入要搜索的内容'){this.value='';}" onfocus="if(this.value =='输入要搜索的内容') {this.value=''; }" />
-			            <input name="submit" type="submit" value /> </fieldset>
-			        </form>
-			    </div>
+                <div class="style_1">
+                    <form method="get" id="searchform" action="#"><!--搜索跳转网址 -->
+                        <fieldset>
+                        <input id="s" name="s" type="text" value="输入要搜索的内容" class="text_input" onblur="if(this.value=='输入要搜索的内容'){this.value='';}" onfocus="if(this.value =='输入要搜索的内容') {this.value=''; }" />
+                        <input name="submit" type="submit" value /> </fieldset>
+                    </form>
+                </div>
             </div>
         </div>
         
         <div id="csbody">
-            <h3>测试</h3>
+            <h3>答案详解</h3>
         </div>
         <div id="csbody_box">
             <%
-                String question_json = (String)request.getAttribute("question_json");
-                String course_id = (String)request.getAttribute("course_id");
+                String user_answer_json = (String)request.getAttribute("user_answer_json");
+                
                 Gson gson = new Gson();
-                JsonObject rootJson = new JsonParser().parse(question_json).getAsJsonObject();
-                JsonArray question_list = rootJson.get("root").getAsJsonArray();
-                ArrayList<QuestionBean> single_questions = new ArrayList<QuestionBean>();
-                ArrayList<QuestionBean> multi_questions = new ArrayList<QuestionBean>();
-                ArrayList<QuestionBean> judge_questions = new ArrayList<QuestionBean>();
+                JsonObject answer_json = new JsonParser().parse(user_answer_json).getAsJsonObject();
+                JsonArray question_list = answer_json.get("root").getAsJsonArray();
+                ArrayList<ReplayQuestion> single_questions = new ArrayList<ReplayQuestion>();
+                ArrayList<ReplayQuestion> multi_questions = new ArrayList<ReplayQuestion>();
+                ArrayList<ReplayQuestion> judge_questions = new ArrayList<ReplayQuestion>();
                 for(JsonElement jsonElement : question_list){
                     JsonObject jo = jsonElement.getAsJsonObject();
-                    QuestionBean question = gson.fromJson(jo, QuestionBean.class);
+                    ReplayQuestion question = gson.fromJson(jo, ReplayQuestion.class);
                     switch(question.getQuestion_type()){
                         case SystemCommonValue.EXAM_QUESTION_TYPE_SINGLE:
                             single_questions.add(question);
@@ -123,95 +122,104 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             break;
                     }
                 }
+                
+               /*  for(JsonElement jsonElement : user_answer_list){
+                    JsonObject jo = jsonElement.getAsJsonObject();
+                    String answer = gson.fromJson(jo, String.class);
+                    user_answers.add(answer);
+                } */
+                
              %>
              <%-- ?question_json=<%=question_json %> --%>
-            <form action="${pageContext.request.contextPath }/servlet/ExaminationServlet" method="post">
                 <%  
                     int num = 0;
                     if(single_questions.size()!=0){
                     %>
                     <p>单项选择</p>
                     <%
-	                    for(QuestionBean bean:single_questions){
-	                       num++;
-	                       OptionBean option = bean.getOption();
-	                       String stem = "第" + num + "题：" + bean.getQuestion_stem();
-                            %>  
-                                <label><%=stem %>(&nbsp;&nbsp;)</label><br>
-                                <input type="radio" name="<%=bean.getQuestion_id()%>" class="radio0" value="A">A、<%=option.getOption_a()%><br>
-                                <input type="radio" name="<%=bean.getQuestion_id()%>" class="radio0" value="B">B、<%=option.getOption_b()%><br>
-                                <input type="radio" name="<%=bean.getQuestion_id()%>" class="radio0" value="C">C、<%=option.getOption_c()%><br>
-                                <input type="radio" name="<%=bean.getQuestion_id()%>" class="radio0" value="D">D、<%=option.getOption_d()%><br><br>
-                            <%                     	                       
-	                    } 
-                    }
-                %>
-				
-				<%  
-                    if(multi_questions.size()!=0){
-                    %>
-                    <p>多项选择</p>
-                    <%
-                        for(QuestionBean bean:multi_questions){
+                        for(ReplayQuestion bean:single_questions){
                            num++;
                            OptionBean option = bean.getOption();
                            String stem = "第" + num + "题：" + bean.getQuestion_stem();
                             %>  
-                                <label><%=stem %>(&nbsp;&nbsp;)</label><br>
-                                <input type="checkbox" name="<%=bean.getQuestion_id()%>" class="radio0" value="A">A、 <%=option.getOption_a()%><br>
-                                <input type="checkbox" name="<%=bean.getQuestion_id()%>" class="radio0" value="B">B、 <%=option.getOption_b()%><br>
-                                <input type="checkbox" name="<%=bean.getQuestion_id()%>" class="radio0" value="C">C、 <%=option.getOption_c()%><br>
-                                <input type="checkbox" name="<%=bean.getQuestion_id()%>" class="radio0" value="D">D、<%=option.getOption_d()%><br>
+                                <label><%=stem %></label><br>
+                                <label>A、<%=option.getOption_a()%></label><br>
+                                <label>B、<%=option.getOption_b()%></label><br>
+                                <label>C、<%=option.getOption_c()%></label><br>
+                                <label>D、<%=option.getOption_d()%></label><br>
+                                <label>您的答案为：<%=bean.getUser_answer()%></label><br>
+                                <label>正确答案为：<%=bean.getQuestion_answer()%></label><br>
+                                <label>试题解析：<%=bean.getQuestion_analysis()%></label><br>
+                                <br>
+                            <%                                             
+                        } 
+                    }
+                %>
+                
+                <%  
+                    if(multi_questions.size()!=0){
+                    %>
+                    <p>多项选择</p>
+                    <%
+                        for(ReplayQuestion bean:multi_questions){
+                           num++;
+                           OptionBean option = bean.getOption();
+                           String stem = "第" + num + "题：" + bean.getQuestion_stem();
+                            %>  
+                                <label><%=stem %></label><br>
+                                <label>A、<%=option.getOption_a()%></label><br>
+                                <label>B、<%=option.getOption_b()%></label><br>
+                                <label>C、<%=option.getOption_c()%></label><br>
+                                <label>D、<%=option.getOption_d()%></label><br>
                                 <%  
                                     if(option.getOption_e()!=null){
                                         %>
-                                        <input type="checkbox" name="<%=bean.getQuestion_id()%>" class="radio0" value="E">E、<%=option.getOption_e()%><br><br>
+                                        <label>E、<%=option.getOption_e()%></label><br>
                                         <%
                                     }
                                 %>
                                 <%  
                                     if(option.getOption_f()!=null){
                                         %>
-                                        <input type="checkbox" name="<%=bean.getQuestion_id()%>" class="radio0" value="F">F、<%=option.getOption_f()%><br><br>
+                                        <label>F、<%=option.getOption_f()%></label><br>
                                         <%
                                     }
                                 %>
                                 <%  
                                     if(option.getOption_g()!=null){
                                         %>
-                                        <input type="checkbox" name="<%=bean.getQuestion_id()%>" class="radio0" value="G">G、<%=option.getOption_g()%><br><br>
+                                        <label>G、<%=option.getOption_g()%></label><br>
                                         <%
                                     }
                                 %>
+                                <label>您的答案为：<%=bean.getUser_answer()%></label><br>
+                                <label>正确答案为：<%=bean.getQuestion_answer()%></label><br>
+                                <label>试题解析：<%=bean.getQuestion_analysis()%></label><br>
+                                <br>
                             <%                                             
                         } 
                     }
                 %>
-				
-				<%  
+                
+                <%  
                     if(judge_questions.size()!=0){
                     %>
                     <p>判断题</p>
                     <%
-                        for(QuestionBean bean:judge_questions){
+                        for(ReplayQuestion bean:judge_questions){
                            num++;
                            String stem = "第" + num + "题：" + bean.getQuestion_stem();
                             %>  
-                                <label><%=stem %>(&nbsp;&nbsp;)</label><br>
-                                <input type="radio" name="<%=bean.getQuestion_id()%>" value="right" class="radio0">对<br>
-                                <input type="radio" name="<%=bean.getQuestion_id()%>" value="wrong" class="radio0">错<br>
-                            <%                                             
+                                <label><%=stem %></label><br>
+                                <label>您的答案为：<%=bean.getUser_answer()%></label><br>
+                                <label>正确答案为：<%=bean.getQuestion_answer()%></label><br>
+                                <label>试题解析：<%=bean.getQuestion_analysis()%></label><br>
+                                <br>
+                            <%        
                         } 
                     }    
-                    String qu = question_json.replaceAll("\"", "\'");
                  %>
-                 <input type="hidden" value="<%=qu %>" name="question_json_text" />
-                 <input type="hidden" value="<%=course_id %>" name="course_id" />
-                 <input type="hidden" value="${user.user_id}" name="user_id" />
-                 <div id="pagesubmit">
-                    <input id="button1111" type="submit" value="提交">
-                 </div>
-            </form>
+                 
         </div>
         
         <div id="footer">

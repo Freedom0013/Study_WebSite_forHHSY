@@ -94,12 +94,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div id="tjbody_box">
                 <% 
                     int user_score = (Integer)request.getAttribute("user_score");
+                    String question_json_text = (String)request.getAttribute("question_json_text");
+                    String user_answer_json = (String)request.getAttribute("user_answer_json");
+                    String user_ans = user_answer_json.replaceAll("\"", "\'");
                 %>
                 
                 <p>您的测试成绩是：</p>
                 <font color=red><p><%=user_score %>分！</p></font>
                 <div id="tjbody_box_box">
-                    <form action="daan.html" target="_blank">
+                    <form action="${pageContext.request.contextPath }/servlet/AnswerServlet" target="_blank">
+                        <%-- <input type="hidden" value="<%=question_json_text %>" name="question_json_text"> --%>
+                        <input type="hidden" value="<%=user_ans %>" name="user_answer_json">
                         <input type="submit" value="查看答案" id="tjbox_submit">
                     </form>
                 </div>

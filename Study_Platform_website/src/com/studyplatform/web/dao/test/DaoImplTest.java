@@ -9,6 +9,7 @@ import com.studyplatform.web.bean.CourseBean;
 import com.studyplatform.web.bean.DepartmentBean;
 import com.studyplatform.web.bean.FractionBean;
 import com.studyplatform.web.bean.ProfessionBean;
+import com.studyplatform.web.bean.QuestionBean;
 import com.studyplatform.web.bean.ResourceBean;
 import com.studyplatform.web.bean.UserBean;
 import com.studyplatform.web.dao.CourseDao;
@@ -79,6 +80,10 @@ public class DaoImplTest {
 //        
 //-----------------------QuestionDao---------------------------        
 //        QuestionDao dao = new QuestionDaoImpl();
+//        QuestionBean bean = (QuestionBean)dao.getQuestionById(1);
+//        if(bean!=null){
+//            DebugUtils.showLog(bean.toString());
+//        }
 //        dao.ObtainExaminationList(1, 4, 3, 3);
 //--------------------------DepartmentDao----------------------        
 //        DepartmentDao dao = new DepartmentDaoImpl();

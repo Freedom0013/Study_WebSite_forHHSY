@@ -54,6 +54,13 @@
     <servlet-name>ExaminationServlet</servlet-name>
     <servlet-class>com.studyplatform.web.servlet.ExaminationServlet</servlet-class>
   </servlet>
+  
+  <!-- 显示答案 -->
+  <servlet>
+    <servlet-name>AnswerServlet</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.AnswerServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -105,6 +112,11 @@
   <servlet-mapping>
     <servlet-name>ExaminationServlet</servlet-name>
     <url-pattern>/servlet/ExaminationServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>AnswerServlet</servlet-name>
+    <url-pattern>/servlet/AnswerServlet</url-pattern>
   </servlet-mapping>
   
   

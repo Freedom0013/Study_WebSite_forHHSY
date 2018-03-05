@@ -1,5 +1,6 @@
 package com.studyplatform.web.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.studyplatform.web.bean.QuestionBean;
@@ -24,5 +25,10 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public List<QuestionBean> getRandomExaminationByCourseAndDiff(int course_id, int Easy, int nomal, int hard) {
         return dao.ObtainExaminationList(course_id, Easy, nomal, hard);
+    }
+
+    @Override
+    public QuestionBean getQuestionById(BigDecimal question_id) {
+        return dao.getQuestionById(question_id);
     }
 }

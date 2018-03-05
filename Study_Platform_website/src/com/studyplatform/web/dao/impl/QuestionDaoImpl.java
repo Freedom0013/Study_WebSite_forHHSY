@@ -1,5 +1,6 @@
 package com.studyplatform.web.dao.impl;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -217,8 +218,57 @@ public class QuestionDaoImpl implements QuestionDao {
     }
 
     @Override
-    public int DeleteQuestion(int question_id) {
+    public QuestionBean getQuestionById(BigDecimal question_id) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        QuestionBean question = null;
+        ResultSet resultset = null;
+        try {
+            connection = C3p0Utils.getConnection();
+            String sql = "SELECT * FROM questions AS A , `options` AS B WHERE A.question_option_id = B.option_id AND A.question_id = ?";
+            statement = connection.prepareStatement(sql);
+            statement.setBigDecimal(1, question_id);
+            resultset = statement.executeQuery();
+            while (resultset.next()) {
+                question = new QuestionBean();
+                question.setQuestion_id(resultset.getBigDecimal(1));
+                question.setQuestion_stem(resultset.getString(2));
+                question.setQuestion_option_id(resultset.getBigDecimal(3));
+                question.setQuestion_level(resultset.getInt(4));
+                question.setQuestion_answer(resultset.getString(5));
+                question.setQuestion_analysis(resultset.getString(6));
+                question.setQuestion_type(resultset.getInt(7));
+                //毫秒格式化
+                DateFormat ddtf = DateFormat.getDateTimeInstance();
+                question.setQuestion_addtime(ddtf.format(resultset.getTimestamp(8)));
+                question.setQuestion_course_id(resultset.getInt(9));
+                question.setQuestion_chapter(resultset.getString(10));
+                OptionBean option = new OptionBean();
+                option.setOption_id(resultset.getBigDecimal(11));
+                option.setOption_a(resultset.getString(12));
+                option.setOption_b(resultset.getString(13));
+                option.setOption_c(resultset.getString(14));
+                option.setOption_d(resultset.getString(15));
+                if (question.getQuestion_type() == SystemCommonValue.EXAM_QUESTION_TYPE_MULTI) {
+                    option.setOption_e(resultset.getString(16));
+                    option.setOption_f(resultset.getString(17));
+                    option.setOption_g(resultset.getString(18));
+                }
+                question.setOption(option);
+//                DebugUtils.showLog(question.toString());
+            }
+        } catch (SQLException e) {
+            DebugUtils.showLog(e.getMessage());
+        } finally {
+            DaoUtils.closeResource(connection,statement,resultset);
+        }
+        return question;
+    }
+
+    @Override
+    public int DeleteQuestion(BigDecimal question_id) {
         // TODO Auto-generated method stub
         return 0;
     }
+
 }

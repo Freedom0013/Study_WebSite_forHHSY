@@ -1,5 +1,6 @@
 package com.studyplatform.web.dao;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import com.studyplatform.web.bean.QuestionBean;
@@ -43,6 +44,13 @@ public interface QuestionDao {
     ArrayList<QuestionBean> ObtainUsersExam(int course_id);
     
     /**
+     * 根据试题id查找试题
+     * @param question_id 试题id
+     * @return 试题详细信息
+     */
+    QuestionBean getQuestionById(BigDecimal question_id);
+    
+    /**
      * 修改试题
      * @param question 试题Bean
      * @return 修改状态码
@@ -54,5 +62,5 @@ public interface QuestionDao {
      * @param question 试题id
      * @return 修改状态码
      */
-    int DeleteQuestion(int question_id);
+    int DeleteQuestion(BigDecimal question_id);
 }

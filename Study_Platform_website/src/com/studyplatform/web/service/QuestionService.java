@@ -1,5 +1,6 @@
 package com.studyplatform.web.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.studyplatform.web.bean.QuestionBean;
@@ -27,4 +28,11 @@ public interface QuestionService {
      * @return 十道对应难度随机试题列表
      */
     List<QuestionBean> getRandomExaminationByCourseAndDiff(int course_id, int Easy, int nomal, int hard);
+
+    /**
+     * 根据试题id查找试题详细信息
+     * @param question_id 试题id
+     * @return 试题详情
+     */
+    QuestionBean getQuestionById(BigDecimal question_id);
 }
