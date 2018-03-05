@@ -81,8 +81,8 @@ public class DaoImplTest {
 //        QuestionDao dao = new QuestionDaoImpl();
 //        dao.ObtainExaminationList(1, 4, 3, 3);
 //--------------------------DepartmentDao----------------------        
-        DepartmentDao dao = new DepartmentDaoImpl();
-        ArrayList<DepartmentBean> list = (ArrayList<DepartmentBean>) dao.getAllDepartment();
+//        DepartmentDao dao = new DepartmentDaoImpl();
+//        ArrayList<DepartmentBean> list = (ArrayList<DepartmentBean>) dao.getAllDepartment();
 //        for(DepartmentBean bean:list){
 //            DebugUtils.showLog("test:::"+bean.toString());
 //        }
@@ -94,11 +94,9 @@ public class DaoImplTest {
 //            array.add(bean);
 //        }
 //        DebugUtils.showLog(JSONArray.fromObject(list).toString());
-        
-        JSONObject json = new JSONObject();
-        json.element("root", JSONArray.fromObject(list));
-        DebugUtils.showLog(json.toString());
-        
+//        JSONObject json = new JSONObject();
+//        json.element("root", JSONArray.fromObject(list));
+//        DebugUtils.showLog(json.toString());
 //-----------------------------ProfessionalDao-----------------------
 //        ProfessionalDao dao = new ProfessionalDapImpl();
 //        ArrayList<ProfessionBean> list = (ArrayList<ProfessionBean>) dao.getAllProfession();
@@ -157,5 +155,9 @@ public class DaoImplTest {
 //      }
 //      ResourceBean bean = dao.getResourceById(1);
 //      DebugUtils.showLog("testbean3:::" + bean.toString());
+//        ArrayList<ResourceBean> list = (ArrayList<ResourceBean>) dao.getAllResourceListByPage(2, 8);
+//        for (ResourceBean bean : list) {
+//            DebugUtils.showLog("test1:::" + bean.toString());
+//        }
     }
 }

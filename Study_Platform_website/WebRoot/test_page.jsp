@@ -63,11 +63,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </font>
                         </c:if>
                         <c:if test="${fn:length(user.user_name)<=6}">
-                        <font color=red>${user.user_name},欢迎你 
-                            &nbsp;&nbsp; 
-                            <a href="${pageContext.request.contextPath }/servlet/WrittenOffServlet">退出登录</a>
-                        </font>
-                    </c:if>
+	                        <font color=red>${user.user_name},欢迎你 
+	                            &nbsp;&nbsp; 
+	                            <a href="${pageContext.request.contextPath }/servlet/WrittenOffServlet">退出登录</a>
+	                        </font>
+                        </c:if>
                     </c:when>
                     <c:otherwise>
                         <a href="${pageContext.request.contextPath }/login.jsp" target="_blank">登录</a>
@@ -97,6 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div id="csbody_box">
             <%
                 String question_json = (String)request.getAttribute("question_json");
+                String course_id = (String)request.getAttribute("course_id");
                 Gson gson = new Gson();
                 JsonObject rootJson = new JsonParser().parse(question_json).getAsJsonObject();
                 JsonArray question_list = rootJson.get("root").getAsJsonArray();
@@ -206,6 +207,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     String qu = question_json.replaceAll("\"", "\'");
                  %>
                  <input type="hidden" value="<%=qu %>" name="question_json_text" />
+                 <input type="hidden" value="<%=course_id %>" name="course_id" />
+                 <input type="hidden" value="${user.user_id}" name="user_id" />
                  <div id="pagesubmit">
                     <input id="button1111" type="submit" value="提交">
                  </div>

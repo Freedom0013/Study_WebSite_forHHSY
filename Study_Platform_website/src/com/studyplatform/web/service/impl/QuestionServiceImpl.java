@@ -9,7 +9,7 @@ import com.studyplatform.web.service.QuestionService;
 
 /**
  * 业务逻辑封装接口实现（试题操作） 
- * Title: UserServiceImpl
+ * Title: QuestionServiceImpl
  * @date 2018年2月22日
  * @author Freedom0013
  */

@@ -105,25 +105,105 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
             </div>
             
+            <%
+                String resourses_json = (String)request.getAttribute("resourses_json");
+                Gson gson = new Gson();
+                JsonObject rootJson = new JsonParser().parse(resourses_json).getAsJsonObject();
+                JsonArray resourses_list = rootJson.get("root").getAsJsonArray();
+                ArrayList<ResourceBean> allres = new ArrayList<ResourceBean>();
+                ArrayList<ResourceBean> video_list = new ArrayList<ResourceBean>();
+                ArrayList<ResourceBean> book_list = new ArrayList<ResourceBean>();
+                for(JsonElement jsonElement : resourses_list){
+                    JsonObject jo = jsonElement.getAsJsonObject();
+                    ResourceBean resource = gson.fromJson(jo, ResourceBean.class);
+                    switch(resource.getResource_type()){
+                        case SystemCommonValue.RESOURCE_CATEGORY_VIDEO:
+                            video_list.add(resource);
+                            break;
+                        case SystemCommonValue.RESOURCE_CATEGORY_BOOK:
+                            book_list.add(resource);
+                            break;
+                    }
+                    allres.add(resource);
+                }
+             %>
             <div id="tjbody_box1">
                 <p>根据您的成绩，为您推荐以下课程：</p>
             </div>
             
             <div id="tjbody_box2">
                 <div class="biaoti">
+                    <h3>推荐学习视频和书籍</h3>
+                </div>
+                <div id="box1">
+                    <%
+                        for(ResourceBean bean : allres){
+                            %>
+                            <div class="box">
+                               <a href="<%=bean.getResource_detail() %>" target="_blank">
+                                   <img src="${pageContext.request.contextPath }/images/box1.png" width="291" height="179">
+                               </a>
+                               <h2>
+                                   <a href="<%=bean.getResource_detail() %>" target="_blank"><%=bean.getResource_name() %>
+	                                   <%if(bean.getResource_type() == SystemCommonValue.RESOURCE_CATEGORY_VIDEO){
+	                                       %>(视频)<%
+	                                    }else if(bean.getResource_type() == SystemCommonValue.RESOURCE_CATEGORY_BOOK){
+	                                       %>(书籍)<%
+	                                    } %>
+                                   </a>
+                               </h2>
+                            </div>
+                            <%
+                        }
+                     %>
+                    <p>&nbsp;</p> 
+                </div>
+            
+            
+            <%--<div id="tjbody_box2">
+                <div class="biaoti">
                     <h3>推荐学习视频</h3>
                 </div>
                 <div id="box1">
-					<div class="box"><a href="测试.html" target="_blank"><img src="images/box1.png" width="291" height="179"></a><h2><a href="详细课程.html">Java基础教程</a></h2></div>
-					<div class="box"><a href="详细课程.html" target="_blank"><img src="images/box2.png" width="291" height="179"></a><h2><a href="详细课程.html">网页设计HTML</a></h2></div>
-					<div class="box"><a href="详细课程.html" target="_blank"><img src="images/box4.png" width="291" height="179"></a><h2><a href="详细课程.html">PS教程零基础到精通</a></h2></div>
-					<div class="box"><a href="详细课程.html" target="_blank"><img src="images/box4.png" width="291" height="179"></a><h2><a href="详细课程.html">软件工程</a></h2></div>
-					<div class="box"><a href="测试.html" target="_blank"><img src="images/box1.png" width="291" height="179"></a><h2><a href="详细课程.html">Java基础教程</a></h2></div>
-					<div class="box"><a href="详细课程.html" target="_blank"><img src="images/box2.png" width="291" height="179"></a><h2><a href="详细课程.html">网页设计HTML</a></h2></div>
-					<div class="box"><a href="详细课程.html" target="_blank"><img src="images/box4.png" width="291" height="179"></a><h2><a href="详细课程.html">PS教程零基础到精通</a></h2></div>
-					<div class="box"><a href="详细课程.html" target="_blank"><img src="images/box4.png" width="291" height="179"></a><h2><a href="详细课程.html">软件工程</a></h2></div>
-					<p>&nbsp;</p>
+	                <%
+	                    for(ResourceBean bean : video_list){
+	                        %>
+	                        <div class="box">
+	                           <a href="<%=bean.getResource_detail() %>" target="_blank">
+	                               <img src="${pageContext.request.contextPath }/images/box1.png" width="291" height="179">
+	                           </a>
+	                           <h2>
+	                               <a href="<%=bean.getResource_detail() %>" target="_blank"><%=bean.getResource_name() %></a>
+	                           </h2>
+	                        </div>
+	                        <%
+	                    }
+	                 %>
+                    <p>&nbsp;</p> 
                 </div>
+                
+             <div id="tjbody_box2">
+                <div class="biaoti">
+                    <h3>推荐学习书籍</h3>
+                </div>
+				<div id="box1">
+                    <%
+                        for(ResourceBean bean : book_list){
+                            %>
+                            <div class="box">
+                               <a href="<%=bean.getResource_detail() %>" target="_blank">
+                                   <img src="${pageContext.request.contextPath }/images/box1.png" width="291" height="179">
+                               </a>
+                               <h2>
+                                   <a href="<%=bean.getResource_detail() %>" target="_blank"><%=bean.getResource_name() %></a>
+                               </h2>
+                            </div>
+                            <%
+                        }
+                     %>
+                    <p>&nbsp;</p> 
+                </div>	
+            </div> --%>
             </div>
         </div>
 

@@ -6,7 +6,7 @@ import com.studyplatform.web.bean.CourseBean;
 
 /**
  * 业务逻辑封装接口（课程列表）
- * Title: UserService
+ * Title: CourseService
  * @date 2018年2月22日
  * @author Freedom0013
  */

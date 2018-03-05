@@ -6,7 +6,7 @@ import com.studyplatform.web.bean.QuestionBean;
 
 /**
  * 业务逻辑封装接口（试题服务）
- * Title: UserService
+ * Title: QuestionService
  * @date 2018年2月22日
  * @author Freedom0013
  */

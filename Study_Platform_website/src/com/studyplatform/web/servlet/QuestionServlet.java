@@ -46,6 +46,7 @@ public class QuestionServlet extends HttpServlet {
         DebugUtils.showLog(question_json.toString());
         
         request.setAttribute("question_json",question_json.toString());
+        request.setAttribute("course_id", course_id);
         
         RequestDispatcher dispatcher = request.getRequestDispatcher("/test_page.jsp");
         dispatcher.forward(request, response);

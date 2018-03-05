@@ -53,4 +53,12 @@ public interface ResourceDao {
      * @return 资源bean
      */
     ResourceBean getResourceById(int resource_id);
+    
+    /**
+     * 获取所有资源数据（分页）
+     * @param page_Num 当前页码
+     * @param page_Size 每页数据大小
+     * @return 当前分页数据列表
+     */
+    List<ResourceBean> getAllResourceListByPage(int page_Num,int page_Size);
 }

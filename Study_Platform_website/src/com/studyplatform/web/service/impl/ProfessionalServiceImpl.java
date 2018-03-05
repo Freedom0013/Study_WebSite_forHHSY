@@ -9,7 +9,7 @@ import com.studyplatform.web.service.ProfessionalService;
 
 /**
  * 业务逻辑封装接口实现（专业操作） 
- * Title: UserServiceImpl
+ * Title: ProfessionalServiceImpl
  * @date 2018年2月22日
  * @author Freedom0013
  */

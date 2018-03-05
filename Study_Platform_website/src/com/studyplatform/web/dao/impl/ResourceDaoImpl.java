@@ -63,7 +63,7 @@ public class ResourceDaoImpl implements ResourceDao {
                 DateFormat ddtf = DateFormat.getDateTimeInstance();
                 resource.setResource_addtime(ddtf.format(resultset.getTimestamp(7)));
                 resource.setResource_course_id(resultset.getInt(8));
-//                DebugUtils.showLog(course.toString());
+//                DebugUtils.showLog(resource.toString());
                 resourcelist.add(resource);
             }
         } catch (SQLException e) {
@@ -99,7 +99,7 @@ public class ResourceDaoImpl implements ResourceDao {
                 DateFormat ddtf = DateFormat.getDateTimeInstance();
                 resource.setResource_addtime(ddtf.format(resultset.getTimestamp(7)));
                 resource.setResource_course_id(resultset.getInt(8));
-//                DebugUtils.showLog(course.toString());
+//                DebugUtils.showLog(resource.toString());
                 resourcelist.add(resource);
             }
         } catch (SQLException e) {
@@ -140,5 +140,41 @@ public class ResourceDaoImpl implements ResourceDao {
             DaoUtils.closeResource(connection,statement,resultset);
         }
         return resource;
+    }
+
+    @Override
+    public List<ResourceBean> getAllResourceListByPage(int page_Num, int page_Size) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        List<ResourceBean> resourcelist = null;
+        ResultSet resultset = null;
+        try {
+            connection = C3p0Utils.getConnection();
+            String sql = "SELECT * FROM resources LIMIT ?,?";
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, (page_Num-1)*page_Size);
+            statement.setInt(2, page_Size*page_Num);
+            resultset = statement.executeQuery();
+            resourcelist = new ArrayList<ResourceBean>();
+            while (resultset.next()) {
+                ResourceBean resource = new ResourceBean();
+                resource.setResource_id(resultset.getBigDecimal(1));
+                resource.setResource_name(resultset.getString(2));
+                resource.setResource_detail(resultset.getString(3));
+                resource.setResource_type(resultset.getInt(4));
+                resource.setResource_caption(resultset.getString(5));
+                resource.setResource_degree(resultset.getInt(6));
+                DateFormat ddtf = DateFormat.getDateTimeInstance();
+                resource.setResource_addtime(ddtf.format(resultset.getTimestamp(7)));
+                resource.setResource_course_id(resultset.getInt(8));
+//                DebugUtils.showLog(resource.toString());
+                resourcelist.add(resource);
+            }
+        } catch (SQLException e) {
+            DebugUtils.showLog(e.getMessage());
+        } finally {
+            DaoUtils.closeResource(connection,statement,resultset);
+        }
+        return resourcelist;
     }
 }

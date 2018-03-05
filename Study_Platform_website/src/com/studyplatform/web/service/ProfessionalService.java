@@ -6,7 +6,7 @@ import com.studyplatform.web.bean.ProfessionBean;
 
 /**
  * 业务逻辑封装接口（专业列表）
- * Title: UserService
+ * Title: ProfessionalService
  * @date 2018年2月22日
  * @author Freedom0013
  */

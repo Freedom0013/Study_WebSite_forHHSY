@@ -16,8 +16,16 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.studyplatform.web.bean.QuestionBean;
+import com.studyplatform.web.bean.ResourceBean;
+import com.studyplatform.web.service.ResourceService;
+import com.studyplatform.web.service.impl.ResourceServiceImpl;
+import com.studyplatform.web.system.SystemCommonValue;
 import com.studyplatform.web.utils.DebugUtils;
 import com.studyplatform.web.utils.WebUtils;
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 /**
  * 测试提交Servlet
@@ -41,6 +49,14 @@ public class ExaminationServlet extends HttpServlet {
         String question_json_text = request.getParameter("question_json_text");
         String text_questions = question_json_text.replaceAll("\'", "\"");
         
+        String course_id = request.getParameter("course_id");
+//        String user_id = request.getParameter("user_id");
+        int courseid = Integer.parseInt(course_id);
+//        if(user_id!=null){
+//            int userid = Integer.parseInt(user_id);
+//        }
+        
+        
         Gson gson = new Gson();
         JsonObject rootJson = new JsonParser().parse(text_questions).getAsJsonObject();
         JsonArray question_list = rootJson.get("root").getAsJsonArray();
@@ -56,6 +72,23 @@ public class ExaminationServlet extends HttpServlet {
             if(user_answer.equals(bean.getQuestion_answer())){
                 score+=10;
             }
+        }
+        
+        ResourceService rescourse_service = new ResourceServiceImpl();
+        ArrayList<ResourceBean> resourseslist = null;
+        if(score>=80 && score<=100){
+            resourseslist = (ArrayList<ResourceBean>) rescourse_service.getResourceByDegree(SystemCommonValue.RESOURCE_TYPE_EXPERT, courseid);
+        }else if(score>=60 && score<80){
+            resourseslist = (ArrayList<ResourceBean>) rescourse_service.getResourceByDegree(SystemCommonValue.RESOURCE_TYPE_MIDDLE, courseid);
+        }else{
+            resourseslist = (ArrayList<ResourceBean>) rescourse_service.getResourceByDegree(SystemCommonValue.RESOURCE_TYPE_PRIMARY, courseid);
+        }
+        
+        if(resourseslist!=null && resourseslist.size()!=0){
+            JSONObject resourses = new JSONObject();
+            resourses.element("root", JSONArray.fromObject(resourseslist));
+            DebugUtils.showLog(resourses.toString());
+            request.setAttribute("resourses_json",resourses.toString());
         }
        
         request.setAttribute("user_score",score);

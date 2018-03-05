@@ -9,7 +9,7 @@ import com.studyplatform.web.service.DepartmentService;
 
 /**
  * 业务逻辑封装接口实现（院系操作） 
- * Title: UserServiceImpl
+ * Title: DepartmentServiceImpl
  * @date 2018年3月3日
  * @author Freedom0013
  */
