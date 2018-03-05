@@ -20,7 +20,7 @@ import net.sf.json.JSONObject;
 
 /**
  * 请求试题列表Servlet
- * Title: ProfessionalServlet
+ * Title: QuestionServlet
  * @date 2018年3月2日
  * @author Freedom0013
  */
