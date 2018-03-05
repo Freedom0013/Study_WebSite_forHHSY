@@ -11,12 +11,30 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
-*.war
-*.ear
-*.zip
-*.tar.gz
-*.rar
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+# 2018/1/21 #
+/.metadata
+/Servers
+
+# JDT-specific (Eclipse Java Development Tools) #
+.classpath
+
+# Eclipse Core #
+.project
+
+# Eclipse #
+*.pydevproject  
+.metadata  
+.gradle  
+bin/  
+tmp/  
+*.tmp  
+*.bak  
+*.swp  
+*~.nib  
+local.properties  
+/Study_Platform_website/.settings
+.loadpath  

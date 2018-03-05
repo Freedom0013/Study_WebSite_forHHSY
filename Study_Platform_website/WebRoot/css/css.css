@@ -1,0 +1,236 @@
+@charset "utf-8";
+/* CSS Document */
+body,div,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dd,dt,img,form{ padding:0px; margin:0px; border:0; font-size:12px;}
+h1,h2,h3,h4,h5,h6 { font-size:12px; font-weight:100;}
+select{ padding:0px; margin:0px; overflow:scroll;}
+td,tr,td { font-size:12px;}
+ul,ol li{ list-style:none;}
+input { padding:0px; margin:0px;}
+.left { float:left;}
+.right { float:right;}
+.clear { clear:both; font-size:0px; height:0px; overflow:hidden;}
+a:link, a:visited { text-decoration:none;}
+a:hover {
+	text-decoration: none;
+	color: #000;
+}
+a:focus { outline:none;}
+a { text-decoration:none; blr:expression(this.onFocus=this.blur());}
+a { outline:none;}
+
+#content .title1{
+    font-family: "微软雅黑";
+    font-size: 22px;
+    font-weight: normal;
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+}
+
+/*广告*/
+.banner{ width:100%; height:408px; position:relative;}
+.banner .list{ width:100%; height:408px; overflow:hidden; position:relative; z-index:1;}
+.banner .list li{ width:100%; height:408px; position:absolute; left:0px; top:0px; display:none;}
+.banner .list li a{ width:980px; margin:0 auto; position:relative; display:block; overflow:hidden; height:408px;}
+.banner .list li a:hover{ text-decoration:none;}
+.banner .list li.bg1{ background:#2398f8;}
+.banner .list li.bg1 a .text1{ width:200px; left:180px; height:200px; top:60px; position:absolute; z-index:3;}
+.banner .list li.bg1 a .text1.hover{animation: img1 1s ease-out;-webkit-animation: img1 1s ease-out;}
+.banner .list li.bg1 a .text2{ right:90px; top:95px; position:absolute; z-index:3; width:423px;}
+.banner .list li.bg1 a .text2.hover{animation: img2 0.7s ease-out;-webkit-animation: img2 0.7s ease-out;}
+.banner .list li.bg1 a .text3{ right:220px; width:286px; top:165px; position:absolute; z-index:3;}
+.banner .list li.bg1 a .text3.hover{animation: img3 1s ease-out;-webkit-animation: img3 1s ease-out;}
+.banner .btn{ position:absolute; top:20px; left:50%; margin-left:340px; z-index:100;}
+.banner .btn li{ margin-left: 12px; background: #fff; text-indent: -999em; float: left; width: 14px; height: 14px; cursor: pointer; border-radius:50%; }
+.banner .btn li.hover{ background: #FC3; }
+@keyframes img1 {0% { left:-200px; transform:rotate(-180deg);} 100% { left:180px; transform:rotate(0deg);}}
+@-webkit-keyframes img1 {0% {left:-200px; -webkit-transform:rotate(-180deg);} 100% {left:180px; -webkit-transform:rotate(0deg);}}
+@keyframes img2 {0% {right:-350px; opacity:0.3;} 100% {right:90px; opacity:1;}}
+@-webkit-keyframes img2 {0% {right:-350px; opacity:0.3;} 100% {right:90px; opacity:1;}}
+@keyframes img3 {0% {right:-350px; opacity:0.3;} 100% {right:220px; opacity:1;}}
+@-webkit-keyframes img3 {0% {right:-350px; opacity:0.3;} 100% {right:220px; opacity:1;}}
+.banner .list li.bg2{ background:#0ecbc9;}
+.banner .list li.bg2 .text1{ position:absolute; left:22px; top:-15px;}
+.banner .list li.bg2 .text1.hover{ animation: img2_1 1.5s ease; -webkit-animation: img2_1 1.5s ease;}
+.banner .list li.bg2 .text2{ position:absolute; left:0; top:-20px;}
+.banner .list li.bg2 .text2.hover{ animation: img2_2 2s ease; -webkit-animation: img2_2 2s ease;}
+.banner .list li.bg2 .text3{ position:absolute; left:20px; top:90px;}
+.banner .list li.bg2 .text3.hover{ animation: img2_3 1.2s ease-out; -webkit-animation: img2_3 1.2s ease-out;}
+.banner .list li.bg2 .text4{ position:absolute; left:262px; top:253px; transform:scale(1); -webkit-transform:scale(1);}
+.banner .list li.bg2 .text4.hover{ animation: img2_4 1.7s ease-out; -webkit-animation: img2_4 1.7s ease-out;}
+.banner .list li.bg2 .text5{ position:absolute; right:48px; top:95px;}
+.banner .list li.bg2 .text5.hover{ animation: img2_5 1.5s ease-out; -webkit-animation: img2_5 1.5s ease-out;}
+.banner .list li.bg2 .text6{ position:absolute; right:90px; top:180px;}
+.banner .list li.bg2 .text6.hover{ animation: img2_6 1.8s ease-out; -webkit-animation: img2_6 1.8s ease-out;}
+.banner .list li.bg2 .text7{ position:absolute; right:28px; top:235px;}
+.banner .list li.bg2 .text7.hover{ animation: img2_7 2s ease-out; -webkit-animation: img2_7 2s ease-out;}
+@keyframes img2_1 { 0% {transform:rotate(150deg);} 100% { transform:rotate(0deg);}}
+@-webkit-keyframes img2_1 { 0% { -webkit-transform:rotate(150deg);} 100% { -webkit-transform:rotate(0deg);}}
+@keyframes img2_2 { 0% {transform:rotate(280deg);} 100% { transform:rotate(0deg);}}
+@-webkit-keyframes img2_2 { 0% { -webkit-transform:rotate(280deg);} 100% { -webkit-transform:rotate(0deg);}}
+@keyframes img2_3 { 20%{ transform:rotateY(180deg); left:-500px;} 90% { transform:rotateY(0deg); left:20px;} 92%{ top:85px;} 94%{ top:95px;} 96%{ top:83px;} 98%{ top:97px;} 100%{ top:90px;}}
+@-webkit-keyframes img2_3 { 20%{ -webkit-transform:rotateY(180deg); left:-500px;} 90% { -webkit-transform:rotateY(0deg); left:20px;} 92%{ top:85px;} 94%{ top:95px;} 96%{ top:83px;} 98%{ top:97px;} 100%{ top:90px;}}
+@keyframes img2_4 {0%{ transform:scale(0);} 40%{ transform:scale(0);} 100% { transform:scale(1);}}
+@-webkit-keyframes img2_4 {0%{ -webkit-transform:scale(0);} 40%{ -webkit-transform:scale(0);} 100% { -webkit-transform:scale(1);}}
+@keyframes img2_5{0%{right:-400px;}  50%{right:-400px; opacity:0.3;} 100% {right:48px; opacity:1;}}
+@-webkit-keyframes img2_5{0%{right:-400px;}  50%{right:-400px; opacity:0.3;} 100% {right:48px; opacity:1;}}
+@keyframes img2_6{0%{right:-400px;}  50%{right:-400px; opacity:0.3;} 100% {right:90px; opacity:1;}}
+@-webkit-keyframes img2_6{0%{right:-400px;}  50%{right:-400px; opacity:0.3;} 100% {right:90px; opacity:1;}}
+@keyframes img2_7{0%{right:-400px;}  50%{right:-400px; opacity:0.3;} 100% {right:28px; opacity:1;}}
+@-webkit-keyframes img2_7{0%{right:-400px;}  50%{right:-400px; opacity:0.3;} 100% {right:28px; opacity:1;}}
+.banner .list li.bg3{ background:#ffc028;}
+.banner .list li.bg3 .text1{ position:absolute; left:0px; top:85px; z-index:10;}
+.banner .list li.bg3 .text2-1{ position:absolute; left:32px; top:131px;}
+.banner .list li.bg3 .text2-2{ position:absolute; left:389px; top:0px;}
+.banner .list li.bg3 .text3{ position:absolute; left:106px; top:0px;}
+.banner .list li.bg3 .text4{ position:absolute; left:345px; top:162px; font-size:30px; color:#fff; text-align:center;}
+.banner .list li.bg3 .text5{ position:absolute; left:99px; top:218px;}
+.banner .list li.bg3 .text6{ position:absolute; left:130px; top:220px; font-size:30px; color:#e9dcff; text-align:center;}
+.banner .list li.bg3 .text7{ position:absolute; left:386px; top:220px; font-size:30px; color:#e9dcff; text-align:center;}
+.banner .list li.bg3 .text8{ position:absolute; left:640px; top:220px; font-size:30px; color:#e9dcff; text-align:center;}
+.banner .list li.bg3 .text1.hover{ animation:img3_1 1s ease; -webkit-animation:img3_1 1s ease;}
+.banner .list li.bg3 .text2-1.hover{ transform-origin:right bottom; -webkit-transform-origin:right bottom; animation:img3_2-1 30s linear; -webkit-animation:img3_2-1 30s linear;}
+.banner .list li.bg3 .text2-2.hover{ transform-origin:left bottom; -webkit-transform-origin:left bottom; animation: img3_2-2 30s linear; -webkit-animation: img3_2-2 30s linear;}
+.banner .list li.bg3 .text4.hover{ animation: img3_4 1.5s ease; -webkit-animation: img3_4 1.5s ease;}
+.banner .list li.bg3 .text6.hover{ animation: img3_6 0.7s ease; -webkit-animation: img3_6 0.7s ease;}
+.banner .list li.bg3 .text7.hover{ animation: img3_7 0.7s ease; -webkit-animation: img3_7 0.7s ease;}
+.banner .list li.bg3 .text8.hover{ animation: img3_8 0.7s ease; -webkit-animation: img3_8 0.7s ease;}
+@keyframes img3_1 { 0% { top:-100px;} 50%{ top:-80px;} 100% { top:85px;}}
+@-webkit-keyframes img3_1 { 0% { top:-100px;} 50%{ top:-80px;} 100% { top:85px;}}
+@keyframes img3_2-1 { 0% {transform:rotate(-20deg);} 10% {transform:rotate(100deg);} 20% {transform:rotate(-20deg);} 30% {transform:rotate(100deg);} 40% {transform:rotate(-20deg);} 50% {transform:rotate(100deg);} 60% {transform:rotate(-20deg);} 70% {transform:rotate(100deg);} 80% {transform:rotate(-20deg);} 90% {transform:rotate(100deg);} 100% { transform:rotate(0deg);}}
+@-webkit-keyframes img3_2-1 { 0% {-webkit-transform:rotate(-20deg);} 10% {-webkit-transform:rotate(100deg);} 20% {-webkit-transform:rotate(-20deg);} 30% {-webkit-transform:rotate(100deg);} 40% {-webkit-transform:rotate(-20deg);} 50% {-webkit-transform:rotate(100deg);} 60% {-webkit-transform:rotate(-20deg);} 70% {-webkit-transform:rotate(100deg);} 80% {-webkit-transform:rotate(-20deg);} 90% {-webkit-transform:rotate(100deg);} 100% { -webkit-transform:rotate(0deg);}}
+@keyframes img3_2-2 { 0% {transform:rotate(10deg);} 10% {transform:rotate(-100deg);} 20% {transform:rotate(10deg);} 30% {transform:rotate(-100deg);} 40% {transform:rotate(10deg);} 50% {transform:rotate(-100deg);} 60% {transform:rotate(10deg);} 70% {transform:rotate(-100deg);} 80% {transform:rotate(10deg);} 90% {transform:rotate(-100deg);} 100% { transform:rotate(0deg);}}
+@-webkit-keyframes img3_2-2 { 0% {-webkit-transform:rotate(10deg);} 10% {-webkit-transform:rotate(-100deg);} 20% {-webkit-transform:rotate(10deg);} 30% {-webkit-transform:rotate(-100deg);} 40% {-webkit-transform:rotate(10deg);} 50% {-webkit-transform:rotate(-100deg);} 60% {-webkit-transform:rotate(10deg);} 70% {-webkit-transform:rotate(-100deg);} 80% {-webkit-transform:rotate(10deg);} 90% {-webkit-transform:rotate(-100deg);} 100% {-webkit-transform:rotate(0deg);}}
+@keyframes img3_4 { 0%{ opacity:0; transform: scale(0);} 30%{ opacity:0; transform: scale(0);} 80%{ opacity:0.7; transform: scale(1.2);} 100%{ opacity:1; transform: scale(1);}}
+@-webkit-keyframes img3_4 { 0%{ opacity:0; -webkit-transform: scale(0);} 30%{ opacity:0; -webkit-transform: scale(0);} 80%{ opacity:0.7; -webkit-transform: scale(1.2);} 100%{ opacity:1; -webkit-transform: scale(1);}}
+@keyframes img3_6 { 0% { left:-210px;} 100% { left:130px;}}
+@-webkit-keyframes img3_6 { 0% { left:-210px;} 100% { left:130px;}}
+@keyframes img3_7 { 0%{ opacity:0; transform: scale(4);} 100%{ opacity:1; transform: scale(1);}}
+@-webkit-keyframes img3_7 { 0%{ opacity:0; -webkit-transform: scale(4);} 100%{ opacity:1; -webkit-transform: scale(1);}}
+@keyframes img3_8 { 0% { right:-210px;} 100% { right:130px;}}
+@-webkit-keyframes img3_8 { 0% { right:-210px;} 100% { right:130px;}}
+.banner .list li.bg4{ background:#ff7575;}
+.banner .list li.bg4 .text1{ position:absolute; left:250px; top:45px; font-size:69px; color:#ffe9e9;}
+.banner .list li.bg4 .text2{ overflow:hidden; width:66px; position:absolute; left:251px; top:137px;}
+.banner .list li.bg4 .text3{ opacity:0; position:absolute; left:485px; top:55px;}
+.banner .list li.bg4 .text4{ opacity:0; transform-origin:left bottom; -webkit-transform-origin:left bottom; position:absolute; left:500px; top:105px;}
+.banner .list li.bg4 .text5{ opacity:0; position:absolute; left:508px; top:192px;}
+.banner .list li.bg4 .text6{ opacity:0; transform-origin: left bottom; -webkit-transform-origin: left bottom; position:absolute; left:510px; top:230px;}
+.banner .list li.bg4 .text7{ position:absolute; left:5px; bottom:40px;}
+.banner .list li.bg4 .text3.hover{ animation:img4_3 1s 0.5s ease forwards; -webkit-animation:img4_3 1s 0.5s ease forwards;}
+.banner .list li.bg4 .text4.hover{ animation:img4_4 1.2s 0.5s ease forwards; -webkit-animation:img4_4 1.2s 0.5s ease forwards;}
+.banner .list li.bg4 .text5.hover{ animation:img4_5 1.5s 0.5s ease forwards; -webkit-animation:img4_5 1.5s 0.5s ease forwards;}
+.banner .list li.bg4 .text6.hover{ animation:img4_6 0.3s 1.5s ease-out forwards; -webkit-animation:img4_6 0.3s 1.5s ease-out forwards;}
+.banner .list li.bg4 .text7.hover{ animation:img4_7 0.8s ease-in; -webkit-animation:img4_7 0.8s ease-in;}
+@keyframes img4_3 { 0%{ top:-100px; opacity:0;} 100%{ top:50px; opacity:1;}}
+@-webkit-keyframes img4_3 { 0%{ top:-100px; opacity:0;} 100%{ top:50px; opacity:1;}}
+@keyframes img4_4 { 0%{ transform:scale(0);} 100%{ transform:scale(1); opacity:1;}}
+@-webkit-keyframes img4_4 { 0%{ -webkit-transform:scale(0);} 100%{ -webkit-transform:scale(1); opacity:1;}}
+@keyframes img4_5 { 0%{ transform:scale(0);} 100%{ transform:scale(1); opacity:1;}}
+@-webkit-keyframes img4_5 { 0%{ -webkit-transform:scale(0);} 100%{ -webkit-transform:scale(1); opacity:1;}}
+@keyframes img4_6 { 0%{ transform:rotate(30deg); opacity:0;} 100%{ transform:rotate(0deg); opacity:1;}}
+@-webkit-keyframes img4_6 { 0%{ -webkit-transform:rotate(30deg); opacity:0;} 100%{ -webkit-transform:rotate(0deg); opacity:1;}}
+@keyframes img4_7{0%{ bottom:-300px; opacity:0;} 100%{ bottom:40px; opacity:1;}}
+@-webkit-keyframes img4_7{0%{ bottom:-300px; opacity:0;} 100%{ bottom:40px; opacity:1;}}
+#middle #middle-1 #mid h2 {
+	font-family: "微软雅黑";
+	font-size: 30px;
+	font-weight: bold;
+	color: #666;
+}
+#middle #middle-1 #mid {
+	float: left;
+	margin-top: 30px;
+	margin-left: 50px;
+}
+	#searchform { float:left; margin-left:20px; margin:9px 0px 0px; padding:0px; }
+	#searchform fieldset { padding:0px; border:none; margin:0px; }
+	#searchform input[type="text"] { 
+		background:#e8e8e8;
+		border:none;
+		float:left;		
+		padding:0px 10px 0px 15px;
+		margin:0px;
+		width:150px; 
+		height:38px;
+		line-height:38px;
+		transition:all 300ms cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+		-moz-transition:all 300ms cubic-bezier(0.215, 0.61, 0.355, 1) 0s; 
+		-webkit-transition:all 300ms cubic-bezier(0.215, 0.61, 0.355, 1) 0s; 
+		-o-transition:all 300ms cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+		color:#585858; 
+	}
+	#searchform input[type="text"]:hover, #searchform input[type="text"]:focus {
+	width: 200px;
+	background-image: url(../images/gradient.png);
+	background-repeat: repeat-x;
+}
+	#searchform input[type="submit"] { background:url(images\icon-search.png) center 11px no-repeat; cursor:pointer; margin:0px; padding:0px; width:37px; height:38px; line-height:38px; }
+	
+	input[type="submit"] { padding:4px 17px; color:#ffffcolor:#585858; ff; text-transform:uppercase; border:none; font-size:20px; background:url(images\gradient.png) bottom repeat-x; cursor:pointer; margin-top:10px; float:left; overflow:visible; transition: all .3s linear; -moz-transition: all .3s linear; -o-transition: all .3s linear; -webkit-transition: all .3s linear; }
+	
+	#searchform input[type="submit"]:hover { background-color:#333232; }
+	.style_1 #searchform input[type='submit'] {
+	background-color: #25ade4;
+	background-image: url(../images/icon-search.png);
+}
+	.style_2 #searchform input[type='submit'] { background-color:#ff26a0; }
+	.style_3 #searchform input[type='submit'] { background-color:#e024e3; }
+	.style_4 #searchform input[type='submit'] { background-color:#e32424; }
+	.style_5 #searchform input[type='submit'] { background-color:#ff8a00; }
+	.style_1, .style_2, .style_3, .style_4, .style_5 {
+	float: right;
+	width: 300px;
+	margin-top: 25px;
+}
+#content {
+	height:1000px;
+	width: 1300px;
+	margin-right: auto;
+	margin-left: auto;
+}
+#content .biaoti {
+	height: 100px;
+}
+#content .biaoti h2 {
+	font-family: "微软雅黑";
+	font-size: 36px;
+	font-weight: normal;
+	text-align: center;
+	margin-top: 35px;
+	color: #333;
+}
+
+#content .box  {
+	float: left;
+	height: 260px;
+	width: 292px;
+	margin-right: 15px;
+	margin-left: 15px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border: 1px solid #999;
+}
+#content #box1 {
+	height: 700px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #999;
+}
+#content #box2 {
+	height: 800px;
+}
+#footer {
+	text-align: center;
+	background-color: #999;
+	height: 120px;
+	padding-top: 50px;
+}
+#footer p  {
+	font-family: "微软雅黑";
+	color: #FFF;
+	line-height: 40px;
+}
+#footer p a  {
+	color: #FFF;
+}

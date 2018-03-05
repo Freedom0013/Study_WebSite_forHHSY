@@ -1,0 +1,113 @@
+﻿@charset "utf-8";/* CSS Document */
+body,div,address,blockquote,iframe,ul,ol,dl,dt,dd,li,h1,h2,h3,h4,h5,h6,p,pre,table,caption,th,td,form,legend,fieldset,input,button,select,textarea{
+	margin: 0;
+	/* [disabled]font-weight: normal; */
+	font-family: inherit;
+	/* [disabled]padding: 0; */
+}
+ol,ul,li{list-style:none;}
+img{margin:0;padding:0;border:none}
+table{border-collapse:collapse;}
+#Top #center {
+	width: 720px;
+	float: left;
+	margin-left: 30px;
+	margin-top: 20px;
+}
+#Top img {
+	float: left;
+}
+#Top #Top-login {
+	float: right;
+	margin-top: 30px;
+	font-family: "微软雅黑";
+	font-size: 18px;
+	margin-right:50px;
+	width: 150px;
+}
+
+
+
+
+.cls{clear:both;}
+.notxt{text-indent:-9999px;}
+body{font-size:14px;font-family:Tahoma;font-family:Arial, Hel,Microsoft YaHei;}
+a{color:#000;text-decoration:none;outline:none;blr:expression(this.onFocus=this.blur());}
+a:hover{color:#FF0000;}
+i { font-style:normal;}
+
+.nav {
+	width: 720px;
+	position: relative;
+	height: 40px;
+	margin: 0;
+}
+.nav  ul li {
+	float: left;
+	text-align: center;
+	height: 40px;
+	line-height: 40px;
+	padding-top: 0;
+	padding-right: 20px;
+	padding-bottom: 0;
+	padding-left: 20px;
+}
+.curBg {
+	background: #F00;
+	height: 3px;
+	position: absolute;
+	bottom: -5px;
+	width: 68px;
+	left: -165px;
+}
+#Top {
+	background-color: #FFF;
+	height: 90px;
+	width: 1300px;
+	margin-right: auto;
+	margin-left: auto;
+}
+#Top #center .nav ul .cur a {
+	font-size: 20px;
+	font-family: "微软雅黑";
+	text-decoration: none;
+}
+#Top #center .nav ul li a {
+	font-family: "微软雅黑";
+	font-size: 20px;
+	text-decoration: none;
+}
+#middle #middle-1 {
+	height: 100px;
+	width: 1300px;
+	margin-right: auto;
+	margin-left: auto;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #999;
+}
+#middle {
+	background-color: #FFFFFF;
+}
+#content #box2 .box h2 {
+	text-align: center;
+	font-family: "微软雅黑";
+	font-size: 18px;
+}
+#content #box1 .box h2 {
+	font-family: "微软雅黑";
+	font-size: 18px;
+	text-align: center;
+	margin-top: 30px;
+}
+.gengduo   {
+	float: right;
+	width: 80px;
+	font-family: "微软雅黑";
+	font-size: 18px;
+	font-weight: bold;
+	margin-top: 50px;
+}
+.box h2 a:hover {
+	color: #06C;
+}

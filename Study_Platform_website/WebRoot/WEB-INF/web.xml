@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>Study_Platform_website</display-name>
+  <!-- 用户登录 -->
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.LoginServlet</servlet-class>
+  </servlet>
+  
+  <!-- 用户注销 -->
+  <servlet>
+    <servlet-name>WrittenOffServlet</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.WrittenOffServlet</servlet-class>
+  </servlet>
+  
+  <!-- 用户注册 -->
+  <servlet>
+    <servlet-name>RegisterServlet</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.RegisterServlet</servlet-class>
+  </servlet>
+  
+  <!-- 获取院系列表 -->
+  <servlet>
+    <servlet-name>DepartmentServlet</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.DepartmentServlet</servlet-class>
+  </servlet>
+  
+  <!-- 获取专业列表 -->
+  <servlet>
+    <servlet-name>ProfessionalServlet</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.ProfessionalServlet</servlet-class>
+  </servlet>
+  
+  <!-- 获取课程列表 -->
+  <servlet>
+    <servlet-name>CourseServlet</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.CourseServlet</servlet-class>
+  </servlet>
+  
+  <!-- 获取课程详情 -->
+  <servlet>
+    <servlet-name>CourseDetailServlet</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.CourseDetailServlet</servlet-class>
+  </servlet>
+  
+  <!-- 获取试题 -->
+  <servlet>
+    <servlet-name>QuestionServlet</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.QuestionServlet</servlet-class>
+  </servlet>
+  
+  <!-- 测试提交 -->
+  <servlet>
+    <servlet-name>ExaminationServlet</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.ExaminationServlet</servlet-class>
+  </servlet>
+  
+  <!-- 显示答案 -->
+  <servlet>
+    <servlet-name>AnswerServlet</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.AnswerServlet</servlet-class>
+  </servlet>
+
+
+
+
+
+
+
+
+
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/servlet/LoginServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>WrittenOffServlet</servlet-name>
+    <url-pattern>/servlet/WrittenOffServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>RegisterServlet</servlet-name>
+    <url-pattern>/servlet/RegisterServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>DepartmentServlet</servlet-name>
+    <url-pattern>/servlet/DepartmentServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>ProfessionalServlet</servlet-name>
+    <url-pattern>/servlet/ProfessionalServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>CourseServlet</servlet-name>
+    <url-pattern>/servlet/CourseServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>CourseDetailServlet</servlet-name>
+    <url-pattern>/servlet/CourseDetailServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>QuestionServlet</servlet-name>
+    <url-pattern>/servlet/QuestionServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>ExaminationServlet</servlet-name>
+    <url-pattern>/servlet/ExaminationServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>AnswerServlet</servlet-name>
+    <url-pattern>/servlet/AnswerServlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
