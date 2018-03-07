@@ -1,6 +1,7 @@
 package com.studyplatform.web.utils;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -69,5 +70,26 @@ public class WebUtils {
 	 */
 	public static boolean isNullOrEmpty(final String str) {
         return str == null || "".equals(str);
+    }
+	
+	/**
+	 * 判断两个BigDecimal是否相等
+	 * @param decimal1  参数1
+	 * @param decimal2 参数2
+	 * @param scale decaimal保留的小数位数 
+	 * @return 是否相等
+	 */
+    public static boolean isEquals(BigDecimal decimal1, BigDecimal decimal2, int scale) {
+        boolean is = false;
+        if (decimal1 != null && decimal2 != null) {
+            BigDecimal a = decimal1.setScale(scale, BigDecimal.ROUND_HALF_DOWN);
+            DebugUtils.showLog("--a =" + a);
+            BigDecimal b = decimal1.setScale(scale, BigDecimal.ROUND_HALF_DOWN);
+            DebugUtils.showLog("--a =" + a);
+            if (a.equals(b)) {
+                is = true;
+            }
+        }
+        return is;
     }
 }

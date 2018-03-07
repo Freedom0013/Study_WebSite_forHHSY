@@ -10,10 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.studyplatform.web.bean.DepartmentBean;
+import com.studyplatform.web.bean.PictureBean;
 import com.studyplatform.web.bean.ProfessionBean;
 import com.studyplatform.web.service.DepartmentService;
+import com.studyplatform.web.service.PictureService;
 import com.studyplatform.web.service.ProfessionalService;
 import com.studyplatform.web.service.impl.DepartmentServiceImpl;
+import com.studyplatform.web.service.impl.PictureServiceImpl;
 import com.studyplatform.web.service.impl.ProfessionalServiceImpl;
 import com.studyplatform.web.utils.DebugUtils;
 import com.studyplatform.web.utils.WebUtils;
@@ -43,12 +46,27 @@ public class ProfessionalServlet extends HttpServlet {
         ProfessionalService service = new ProfessionalServiceImpl();
         
         ArrayList<ProfessionBean> professionlist = (ArrayList<ProfessionBean>) service.getAllProfessionsByDepId(departmentid);
+        
+        PictureService pic_service = new PictureServiceImpl();
+        ArrayList<PictureBean> pic_list = new ArrayList<PictureBean>();
+        for(ProfessionBean bean : professionlist){
+            PictureBean pic = pic_service.getPictureById(bean.getProfession_picture_id());
+            pic_list.add(pic);
+        }
+        JSONObject pic_json = new JSONObject();
+        pic_json.element("pic", JSONArray.fromObject(pic_list));
+        DebugUtils.showLog(pic_json.toString());
+        
+        
+        
+        
         JSONObject profession_json = new JSONObject();
         profession_json.element("root", JSONArray.fromObject(professionlist));
         DebugUtils.showLog(profession_json.toString());
         
         request.setAttribute("profession_list_json",profession_json.toString());
         request.setAttribute("department_id", departmentid);
+        request.setAttribute("pic_json", pic_json.toString());
         
         DepartmentService department_service = new DepartmentServiceImpl();
         ArrayList<DepartmentBean> departmentlist = (ArrayList<DepartmentBean>) department_service.getallDepartment();
