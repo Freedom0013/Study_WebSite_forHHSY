@@ -8,6 +8,7 @@ import java.util.Date;
 import com.studyplatform.web.bean.CourseBean;
 import com.studyplatform.web.bean.DepartmentBean;
 import com.studyplatform.web.bean.FractionBean;
+import com.studyplatform.web.bean.PictureBean;
 import com.studyplatform.web.bean.ProfessionBean;
 import com.studyplatform.web.bean.QuestionBean;
 import com.studyplatform.web.bean.ResourceBean;
@@ -15,6 +16,7 @@ import com.studyplatform.web.bean.UserBean;
 import com.studyplatform.web.dao.CourseDao;
 import com.studyplatform.web.dao.DepartmentDao;
 import com.studyplatform.web.dao.FractionDao;
+import com.studyplatform.web.dao.PictureDao;
 import com.studyplatform.web.dao.ProfessionalDao;
 import com.studyplatform.web.dao.QuestionDao;
 import com.studyplatform.web.dao.ResourceDao;
@@ -22,6 +24,7 @@ import com.studyplatform.web.dao.UserDao;
 import com.studyplatform.web.dao.impl.CourseDaoImpl;
 import com.studyplatform.web.dao.impl.DepartmentDaoImpl;
 import com.studyplatform.web.dao.impl.FractionDaoImpl;
+import com.studyplatform.web.dao.impl.PictureDaoImpl;
 import com.studyplatform.web.dao.impl.ProfessionalDapImpl;
 import com.studyplatform.web.dao.impl.QuestionDaoImpl;
 import com.studyplatform.web.dao.impl.ResourceDaoImpl;
@@ -164,5 +167,14 @@ public class DaoImplTest {
 //        for (ResourceBean bean : list) {
 //            DebugUtils.showLog("test1:::" + bean.toString());
 //        }
+//-----------------------------PictureDao-----------------------   
+//        PictureDao dao = new PictureDaoImpl();
+//        int pic_id = 1;
+//        BigDecimal big_pic_id = new BigDecimal(pic_id);
+//        PictureBean bean = dao.getPictureById(big_pic_id);
+//        DebugUtils.showLog(bean.toString());
+//        
+//        String url = dao.getPicrureAddressById(big_pic_id);
+//        DebugUtils.showLog(url);
     }
 }

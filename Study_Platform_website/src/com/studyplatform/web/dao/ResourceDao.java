@@ -1,5 +1,6 @@
 package com.studyplatform.web.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.studyplatform.web.bean.ResourceBean;
@@ -23,7 +24,7 @@ public interface ResourceDao {
      * @param resource_id 资源id
      * @return 删除成功标识
      */
-    int deleteResource(int resource_id);
+    int deleteResource(BigDecimal resource_id);
     
     /**
      * 修改资源信息
@@ -52,7 +53,7 @@ public interface ResourceDao {
      * @param resource_id 资源id
      * @return 资源bean
      */
-    ResourceBean getResourceById(int resource_id);
+    ResourceBean getResourceById(BigDecimal resource_id);
     
     /**
      * 获取所有资源数据（分页）

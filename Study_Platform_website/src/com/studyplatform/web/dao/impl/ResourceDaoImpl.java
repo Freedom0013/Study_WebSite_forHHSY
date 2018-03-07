@@ -1,5 +1,6 @@
 package com.studyplatform.web.dao.impl;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,12 +24,6 @@ import com.studyplatform.web.utils.DebugUtils;
 public class ResourceDaoImpl implements ResourceDao {
     @Override
     public int addResource(ResourceBean resourcebean) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int deleteResource(int resource_id) {
         // TODO Auto-generated method stub
         return 0;
     }
@@ -63,6 +58,7 @@ public class ResourceDaoImpl implements ResourceDao {
                 DateFormat ddtf = DateFormat.getDateTimeInstance();
                 resource.setResource_addtime(ddtf.format(resultset.getTimestamp(7)));
                 resource.setResource_course_id(resultset.getInt(8));
+                resource.setResource_picture_id(resultset.getBigDecimal(9));
 //                DebugUtils.showLog(resource.toString());
                 resourcelist.add(resource);
             }
@@ -99,6 +95,7 @@ public class ResourceDaoImpl implements ResourceDao {
                 DateFormat ddtf = DateFormat.getDateTimeInstance();
                 resource.setResource_addtime(ddtf.format(resultset.getTimestamp(7)));
                 resource.setResource_course_id(resultset.getInt(8));
+                resource.setResource_picture_id(resultset.getBigDecimal(9));
 //                DebugUtils.showLog(resource.toString());
                 resourcelist.add(resource);
             }
@@ -111,7 +108,7 @@ public class ResourceDaoImpl implements ResourceDao {
     }
 
     @Override
-    public ResourceBean getResourceById(int resource_id) {
+    public ResourceBean getResourceById(BigDecimal resource_id) {
         Connection connection = null;
         PreparedStatement statement = null;
         ResourceBean resource = null;
@@ -120,7 +117,7 @@ public class ResourceDaoImpl implements ResourceDao {
             connection = C3p0Utils.getConnection();
             String sql = "SELECT * FROM `resources` WHERE resource_id = ?";
             statement = connection.prepareStatement(sql);
-            statement.setInt(1, resource_id);
+            statement.setBigDecimal(1, resource_id);
             resultset = statement.executeQuery();
             while (resultset.next()) {
                 resource = new ResourceBean();
@@ -133,6 +130,7 @@ public class ResourceDaoImpl implements ResourceDao {
                 DateFormat ddtf = DateFormat.getDateTimeInstance();
                 resource.setResource_addtime(ddtf.format(resultset.getTimestamp(7)));
                 resource.setResource_course_id(resultset.getInt(8));
+                resource.setResource_picture_id(resultset.getBigDecimal(9));
             }
         } catch (SQLException e) {
             DebugUtils.showLog(e.getMessage());
@@ -167,6 +165,7 @@ public class ResourceDaoImpl implements ResourceDao {
                 DateFormat ddtf = DateFormat.getDateTimeInstance();
                 resource.setResource_addtime(ddtf.format(resultset.getTimestamp(7)));
                 resource.setResource_course_id(resultset.getInt(8));
+                resource.setResource_picture_id(resultset.getBigDecimal(9));
 //                DebugUtils.showLog(resource.toString());
                 resourcelist.add(resource);
             }
@@ -176,5 +175,11 @@ public class ResourceDaoImpl implements ResourceDao {
             DaoUtils.closeResource(connection,statement,resultset);
         }
         return resourcelist;
+    }
+
+    @Override
+    public int deleteResource(BigDecimal resource_id) {
+        // TODO Auto-generated method stub
+        return 0;
     }
 }

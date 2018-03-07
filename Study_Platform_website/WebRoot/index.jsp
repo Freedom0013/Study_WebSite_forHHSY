@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						
 						data[i].department_addtime;
 						data[i].department_caption;
-						data[i].department_picture_id;
+						
 						
 						var department_item_box = document.createElement('div');
 						department_item_box.id = 'department_item_box' + i;
@@ -39,7 +39,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						department_item_box.appendChild(image_a);
 						
 						var department_img = document.createElement("img");
-						department_img.src = "${pageContext.request.contextPath }/images/box1.png";
+						
+						var pic_request = '${pageContext.request.contextPath }/servlet/PictureServlet?pic_id=' +data[i].department_picture_id
+                        getImg(department_img);
+                        function getImg(department_img){
+                            $.ajax({
+                                url : pic_request,
+                                type : "GET",
+                                async:false,
+                                success : function(msg1) {
+                                    var doms1 = eval("(" + msg1 + ")");
+                                    var data1 = doms1.root;
+                                    if(data1 != null){
+                                        for(var i in data1){
+                                            department_img.src = data1[i].picture_img;
+                                        }
+                                    }
+                                },error : function() {
+                                   alert("图片数据获取失败!请稍后重试!");
+                                }
+                            });
+                        }
 						department_img.width = '291';
 						department_img.height = '179';
 						image_a.appendChild(department_img);

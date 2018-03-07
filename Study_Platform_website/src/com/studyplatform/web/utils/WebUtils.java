@@ -61,4 +61,13 @@ public class WebUtils {
             e.printStackTrace();
         }
 	}
+	
+	/**
+	 * 判断一个字符串是否为空
+	 * @param string 要判断的字符串
+	 * @return 结果
+	 */
+	public static boolean isNullOrEmpty(final String str) {
+        return str == null || "".equals(str);
+    }
 }

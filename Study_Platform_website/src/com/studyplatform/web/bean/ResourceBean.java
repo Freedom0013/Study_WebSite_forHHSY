@@ -25,6 +25,8 @@ public class ResourceBean {
 	private String resource_addtime;
 	/** 资源所属课程 */
 	private int resource_course_id;
+	/** 资源所述图片id */
+	private BigDecimal resource_picture_id;
 	
 	/**
 	 * 空参构造函数
@@ -37,7 +39,7 @@ public class ResourceBean {
 	 * 全参构造函数
 	 */
 	public ResourceBean(BigDecimal resource_id, String resource_name, String resource_detail, int resource_type,
-			String resource_caption, int resource_degree, String resource_addtime, int resource_course_id) {
+			String resource_caption, int resource_degree, String resource_addtime, int resource_course_id, BigDecimal resource_picture_id) {
 		super();
 		this.resource_id = resource_id;
 		this.resource_name = resource_name;
@@ -47,6 +49,7 @@ public class ResourceBean {
 		this.resource_degree = resource_degree;
 		this.resource_addtime = resource_addtime;
 		this.resource_course_id = resource_course_id;
+		this.resource_picture_id = resource_picture_id;
 	}
 	
 	public BigDecimal getResource_id() {
@@ -97,12 +100,18 @@ public class ResourceBean {
 	public void setResource_course_id(int resource_course_id) {
 		this.resource_course_id = resource_course_id;
 	}
-	
-	@Override
-	public String toString() {
-		return "ResourceBean [resource_id=" + resource_id + ", resource_name=" + resource_name + ", resource_detail="
-				+ resource_detail + ", resource_type=" + resource_type + ", resource_caption=" + resource_caption
-				+ ", resource_degree=" + resource_degree + ", resource_addtime=" + resource_addtime
-				+ ", resource_course_id=" + resource_course_id + "]";
-	}
+	public BigDecimal getResource_picture_id() {
+        return resource_picture_id;
+    }
+    public void setResource_picture_id(BigDecimal resource_picture_id) {
+        this.resource_picture_id = resource_picture_id;
+    }
+
+    @Override
+    public String toString() {
+        return "ResourceBean [resource_id=" + resource_id + ", resource_name=" + resource_name + ", resource_detail="
+                + resource_detail + ", resource_type=" + resource_type + ", resource_caption=" + resource_caption
+                + ", resource_degree=" + resource_degree + ", resource_addtime=" + resource_addtime
+                + ", resource_course_id=" + resource_course_id + ", resource_picture_id=" + resource_picture_id + "]";
+    }
 }

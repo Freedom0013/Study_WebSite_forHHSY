@@ -1,5 +1,6 @@
 package com.studyplatform.web.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.studyplatform.web.bean.ResourceBean;
@@ -32,7 +33,7 @@ public interface ResourceService {
      * @param resource_id 资源id
      * @return 单个资源详细信息
      */
-    ResourceBean getResourceById(int resource_id);
+    ResourceBean getResourceById(BigDecimal resource_id);
     
     /**
      * 根据课程id获取对应课程资源

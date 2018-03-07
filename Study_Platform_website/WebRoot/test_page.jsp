@@ -141,7 +141,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <input type="radio" name="<%=bean.getQuestion_id()%>" class="radio0" value="A">A、<%=option.getOption_a()%><br>
                                 <input type="radio" name="<%=bean.getQuestion_id()%>" class="radio0" value="B">B、<%=option.getOption_b()%><br>
                                 <input type="radio" name="<%=bean.getQuestion_id()%>" class="radio0" value="C">C、<%=option.getOption_c()%><br>
-                                <input type="radio" name="<%=bean.getQuestion_id()%>" class="radio0" value="D">D、<%=option.getOption_d()%><br><br>
+                                <input type="radio" name="<%=bean.getQuestion_id()%>" class="radio0" value="D">D、<%=option.getOption_d()%><br>
+                                <input type="radio" name="<%=bean.getQuestion_id()%>" class="radio0" value="null" checked="checked">E、不知道<br>
+                                <br>
                             <%                     	                       
 	                    } 
                     }

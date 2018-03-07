@@ -1,5 +1,6 @@
 package com.studyplatform.web.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.studyplatform.web.bean.ResourceBean;
@@ -27,7 +28,7 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
-    public ResourceBean getResourceById(int resource_id) {
+    public ResourceBean getResourceById(BigDecimal resource_id) {
         return dao.getResourceById(resource_id);
     }
 

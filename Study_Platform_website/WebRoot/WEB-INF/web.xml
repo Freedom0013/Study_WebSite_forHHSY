@@ -60,6 +60,11 @@
     <servlet-name>AnswerServlet</servlet-name>
     <servlet-class>com.studyplatform.web.servlet.AnswerServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>PictureServlet</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.PictureServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -117,6 +122,10 @@
   <servlet-mapping>
     <servlet-name>AnswerServlet</servlet-name>
     <url-pattern>/servlet/AnswerServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PictureServlet</servlet-name>
+    <url-pattern>/servlet/PictureServlet</url-pattern>
   </servlet-mapping>
   
   
