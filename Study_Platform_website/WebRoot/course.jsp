@@ -123,6 +123,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             break;
                     }
                 }
+                
+                
+                String pic_json = (String)request.getAttribute("pic_json");
+                Gson gson_pic = new Gson();
+                JsonObject rootJson_pic = new JsonParser().parse(pic_json).getAsJsonObject();
+                JsonArray pic_list = rootJson_pic.get("pic").getAsJsonArray();
+                ArrayList<PictureBean> piclist = new ArrayList<PictureBean>();
+                for(JsonElement jsonElement : pic_list){
+                    JsonObject jo = jsonElement.getAsJsonObject();
+                    PictureBean picture = gson.fromJson(jo, PictureBean.class);
+                    piclist.add(picture);
+                }
             %>
             
             <% 
@@ -138,7 +150,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         %>
                             <div class="box">
                                 <a href="<%=url %>" target="_blank">
-                                    <img src="${pageContext.request.contextPath }/images/tjkc_1.jpg" width="291" height="179">
+                                    <%for(PictureBean pics : piclist){
+                                        int is = bean.getCourse_picture_id().compareTo(pics.getPicture_id());
+                                        if(is == 0){
+                                            String pic_urls = basePath+pics.getPicture_img();
+                                            %>
+                                                <img src="<%=pic_urls %>" width="291" height="179">
+                                    <%      break;
+                                        }
+                                      } 
+                                    %>
                                 </a>
                                 <h2>
                                     <a href="<%=url %>" target="_blank"><%=bean.getCourse_name() %></a>
@@ -166,7 +187,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         %>
                             <div class="box">
                                 <a href="<%=url %>" target="_blank">
-                                    <img src="${pageContext.request.contextPath }/images/tjkc_1.jpg" width="291" height="179">
+                                    <%for(PictureBean pics : piclist){
+                                        int is = bean.getCourse_picture_id().compareTo(pics.getPicture_id());
+                                        if(is == 0){
+                                            String pic_urls = basePath+pics.getPicture_img();
+                                            %>
+                                                <img src="<%=pic_urls %>" width="291" height="179">
+                                    <%      break;
+                                        }
+                                      } 
+                                    %>
                                 </a>
                                 <h2>
                                     <a href="<%=url %>" target="_blank"><%=bean.getCourse_name() %></a>
@@ -194,7 +224,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         %>
                             <div class="box">
                                 <a href="<%=url %>" target="_blank">
-                                    <img src="${pageContext.request.contextPath }/images/tjkc_1.jpg" width="291" height="179">
+                                    <%for(PictureBean pics : piclist){
+                                        int is = bean.getCourse_picture_id().compareTo(pics.getPicture_id());
+                                        if(is == 0){
+                                            String pic_urls = basePath+pics.getPicture_img();
+                                            %>
+                                                <img src="<%=pic_urls %>" width="291" height="179">
+                                    <%      break;
+                                        }
+                                      } 
+                                    %>
                                 </a>
                                 <h2>
                                     <a href="<%=url %>" target="_blank"><%=bean.getCourse_name() %></a>
@@ -222,7 +261,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         %>
                             <div class="box">
                                 <a href="<%=url %>" target="_blank">
-                                    <img src="${pageContext.request.contextPath }/images/tjkc_1.jpg" width="291" height="179">
+                                    <%for(PictureBean pics : piclist){
+                                        int is = bean.getCourse_picture_id().compareTo(pics.getPicture_id());
+                                        if(is == 0){
+                                            String pic_urls = basePath+pics.getPicture_img();
+                                            %>
+                                                <img src="<%=pic_urls %>" width="291" height="179">
+                                    <%      break;
+                                        }
+                                      } 
+                                    %>
                                 </a>
                                 <h2>
                                     <a href="<%=url %>" target="_blank"><%=bean.getCourse_name() %></a>

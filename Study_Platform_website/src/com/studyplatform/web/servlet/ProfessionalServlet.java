@@ -44,7 +44,6 @@ public class ProfessionalServlet extends HttpServlet {
         int departmentid = Integer.parseInt(department_id);
         
         ProfessionalService service = new ProfessionalServiceImpl();
-        
         ArrayList<ProfessionBean> professionlist = (ArrayList<ProfessionBean>) service.getAllProfessionsByDepId(departmentid);
         
         PictureService pic_service = new PictureServiceImpl();
@@ -56,9 +55,6 @@ public class ProfessionalServlet extends HttpServlet {
         JSONObject pic_json = new JSONObject();
         pic_json.element("pic", JSONArray.fromObject(pic_list));
         DebugUtils.showLog(pic_json.toString());
-        
-        
-        
         
         JSONObject profession_json = new JSONObject();
         profession_json.element("root", JSONArray.fromObject(professionlist));

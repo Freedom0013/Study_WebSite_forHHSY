@@ -10,8 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.studyplatform.web.bean.CourseBean;
+import com.studyplatform.web.bean.PictureBean;
+import com.studyplatform.web.bean.ProfessionBean;
 import com.studyplatform.web.service.CourseService;
+import com.studyplatform.web.service.PictureService;
 import com.studyplatform.web.service.impl.CourseServiceImpl;
+import com.studyplatform.web.service.impl.PictureServiceImpl;
 import com.studyplatform.web.utils.DebugUtils;
 import com.studyplatform.web.utils.WebUtils;
 
@@ -41,7 +45,19 @@ public class CourseServlet extends HttpServlet {
         course_json.element("root", JSONArray.fromObject(courseList));
         DebugUtils.showLog(course_json.toString());
         
+        
+        PictureService pic_service = new PictureServiceImpl();
+        ArrayList<PictureBean> pic_list = new ArrayList<PictureBean>();
+        for(CourseBean bean : courseList){
+            PictureBean pic = pic_service.getPictureById(bean.getCourse_picture_id());
+            pic_list.add(pic);
+        }
+        JSONObject pic_json = new JSONObject();
+        pic_json.element("pic", JSONArray.fromObject(pic_list));
+        DebugUtils.showLog(pic_json.toString());
+        
         request.setAttribute("course_json",course_json.toString());
+        request.setAttribute("pic_json",pic_json.toString());
         
         RequestDispatcher dispatcher = request.getRequestDispatcher("/course.jsp");
         dispatcher.forward(request, response);
