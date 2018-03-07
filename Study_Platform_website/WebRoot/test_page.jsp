@@ -43,11 +43,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div id="center">
                 <div class="nav">
                     <ul>
-				        <li><a href="${pageContext.request.contextPath }/index.jsp">首页</a></li>
-				        <li class="cur"><a href="${pageContext.request.contextPath }/zhuanye/zhuanye1.html">专业</a></li>
-				        <li><a href="${pageContext.request.contextPath }/资源.html">资源</a></li>
-				        <li><a href="${pageContext.request.contextPath }/推荐书籍.html">推荐书籍</a></li>
-				        <li><a href="#">移动课堂</a></li>
+	                    <li class="cur"><a href="${pageContext.request.contextPath }/index.jsp">首页</a></li>
+	                    <li><a href="#" target="_blank">专业</a></li>
+	                    <li><a href="#" target="_blank">资源</a></li>
+	                    <li><a href="#" target="_blank">推荐书籍</a></li>
+	                    <li><a href="#" target="_blank">移动课堂</a></li>
                     </ul> 
 	                <div class="curBg"></div>
 	                <div class="cls"></div>
@@ -124,96 +124,99 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     }
                 }
              %>
-             <%-- ?question_json=<%=question_json %> --%>
-            <form action="${pageContext.request.contextPath }/servlet/ExaminationServlet" method="post">
-                <%  
-                    int num = 0;
-                    if(single_questions.size()!=0){
+             <%
+	            if(single_questions.size()==0 && multi_questions.size()==0 && judge_questions.size()==0){
                     %>
-                    <p>单项选择</p>
-                    <%
-	                    for(QuestionBean bean:single_questions){
-	                       num++;
-	                       OptionBean option = bean.getOption();
-	                       String stem = "第" + num + "题：" + bean.getQuestion_stem();
-                            %>  
-                                <label><%=stem %>(&nbsp;&nbsp;)</label><br>
-                                <input type="radio" name="<%=bean.getQuestion_id()%>" class="radio0" value="A">A、<%=option.getOption_a()%><br>
-                                <input type="radio" name="<%=bean.getQuestion_id()%>" class="radio0" value="B">B、<%=option.getOption_b()%><br>
-                                <input type="radio" name="<%=bean.getQuestion_id()%>" class="radio0" value="C">C、<%=option.getOption_c()%><br>
-                                <input type="radio" name="<%=bean.getQuestion_id()%>" class="radio0" value="D">D、<%=option.getOption_d()%><br>
-                                <input type="radio" name="<%=bean.getQuestion_id()%>" class="radio0" value="null" checked="checked">E、不知道<br>
-                                <br>
-                            <%                     	                       
-	                    } 
-                    }
-                %>
-				
-				<%  
-                    if(multi_questions.size()!=0){
-                    %>
-                    <p>多项选择</p>
-                    <%
-                        for(QuestionBean bean:multi_questions){
-                           num++;
-                           OptionBean option = bean.getOption();
-                           String stem = "第" + num + "题：" + bean.getQuestion_stem();
-                            %>  
-                                <label><%=stem %>(&nbsp;&nbsp;)</label><br>
-                                <input type="checkbox" name="<%=bean.getQuestion_id()%>" class="radio0" value="A">A、 <%=option.getOption_a()%><br>
-                                <input type="checkbox" name="<%=bean.getQuestion_id()%>" class="radio0" value="B">B、 <%=option.getOption_b()%><br>
-                                <input type="checkbox" name="<%=bean.getQuestion_id()%>" class="radio0" value="C">C、 <%=option.getOption_c()%><br>
-                                <input type="checkbox" name="<%=bean.getQuestion_id()%>" class="radio0" value="D">D、<%=option.getOption_d()%><br>
-                                <%  
-                                    if(option.getOption_e()!=null){
-                                        %>
-                                        <input type="checkbox" name="<%=bean.getQuestion_id()%>" class="radio0" value="E">E、<%=option.getOption_e()%><br><br>
-                                        <%
-                                    }
-                                %>
-                                <%  
-                                    if(option.getOption_f()!=null){
-                                        %>
-                                        <input type="checkbox" name="<%=bean.getQuestion_id()%>" class="radio0" value="F">F、<%=option.getOption_f()%><br><br>
-                                        <%
-                                    }
-                                %>
-                                <%  
-                                    if(option.getOption_g()!=null){
-                                        %>
-                                        <input type="checkbox" name="<%=bean.getQuestion_id()%>" class="radio0" value="G">G、<%=option.getOption_g()%><br><br>
-                                        <%
-                                    }
-                                %>
-                            <%                                             
-                        } 
-                    }
-                %>
-				
-				<%  
-                    if(judge_questions.size()!=0){
-                    %>
-                    <p>判断题</p>
-                    <%
-                        for(QuestionBean bean:judge_questions){
-                           num++;
-                           String stem = "第" + num + "题：" + bean.getQuestion_stem();
-                            %>  
-                                <label><%=stem %>(&nbsp;&nbsp;)</label><br>
-                                <input type="radio" name="<%=bean.getQuestion_id()%>" value="right" class="radio0">对<br>
-                                <input type="radio" name="<%=bean.getQuestion_id()%>" value="wrong" class="radio0">错<br>
-                            <%                                             
-                        } 
-                    }    
-                    String qu = question_json.replaceAll("\"", "\'");
-                 %>
-                 <input type="hidden" value="<%=qu %>" name="question_json_text" />
-                 <input type="hidden" value="<%=course_id %>" name="course_id" />
-                 <input type="hidden" value="${user.user_id}" name="user_id" />
-                 <div id="pagesubmit">
-                    <input id="button1111" type="submit" value="提交">
-                 </div>
-            </form>
+                    <div>
+                        <h2>没有该课程试题，正拼命完善中..</h2>
+                    </div>
+                    <%     
+	            }else{
+	               %>
+		            <form action="${pageContext.request.contextPath }/servlet/ExaminationServlet" method="post">
+		                <%  
+		                    int num = 0;
+		                    if(single_questions.size()!=0 && single_questions !=null){
+		                    %>
+		                    <p>单项选择</p>
+		                    <%
+			                    for(QuestionBean bean:single_questions){
+			                       num++;
+			                       OptionBean option = bean.getOption();
+			                       String stem = "第" + num + "题：" + bean.getQuestion_stem();
+		                            %>  
+		                                <label><%=stem %>(&nbsp;&nbsp;)</label><br>
+		                                <input type="radio" name="<%=bean.getQuestion_id()%>" class="radio0" value="A">A、<%=option.getOption_a()%><br>
+		                                <input type="radio" name="<%=bean.getQuestion_id()%>" class="radio0" value="B">B、<%=option.getOption_b()%><br>
+		                                <input type="radio" name="<%=bean.getQuestion_id()%>" class="radio0" value="C">C、<%=option.getOption_c()%><br>
+		                                <input type="radio" name="<%=bean.getQuestion_id()%>" class="radio0" value="D">D、<%=option.getOption_d()%><br>
+		                                <input type="radio" name="<%=bean.getQuestion_id()%>" class="radio0" value="null" checked="checked">E、不知道<br>
+		                                <br>
+		                            <%                     	                       
+			                    } 
+		                    }else if(multi_questions.size()!=0 && multi_questions !=null){
+		                    %>
+		                    <p>多项选择</p>
+		                    <%
+		                        for(QuestionBean bean:multi_questions){
+		                           num++;
+		                           OptionBean option = bean.getOption();
+		                           String stem = "第" + num + "题：" + bean.getQuestion_stem();
+		                            %>  
+		                                <label><%=stem %>(&nbsp;&nbsp;)</label><br>
+		                                <input type="checkbox" name="<%=bean.getQuestion_id()%>" class="radio0" value="A">A、 <%=option.getOption_a()%><br>
+		                                <input type="checkbox" name="<%=bean.getQuestion_id()%>" class="radio0" value="B">B、 <%=option.getOption_b()%><br>
+		                                <input type="checkbox" name="<%=bean.getQuestion_id()%>" class="radio0" value="C">C、 <%=option.getOption_c()%><br>
+		                                <input type="checkbox" name="<%=bean.getQuestion_id()%>" class="radio0" value="D">D、<%=option.getOption_d()%><br>
+		                                <%  
+		                                    if(option.getOption_e()!=null){
+		                                        %>
+		                                        <input type="checkbox" name="<%=bean.getQuestion_id()%>" class="radio0" value="E">E、<%=option.getOption_e()%><br><br>
+		                                        <%
+		                                    }
+		                                %>
+		                                <%  
+		                                    if(option.getOption_f()!=null){
+		                                        %>
+		                                        <input type="checkbox" name="<%=bean.getQuestion_id()%>" class="radio0" value="F">F、<%=option.getOption_f()%><br><br>
+		                                        <%
+		                                    }
+		                                %>
+		                                <%  
+		                                    if(option.getOption_g()!=null){
+		                                        %>
+		                                        <input type="checkbox" name="<%=bean.getQuestion_id()%>" class="radio0" value="G">G、<%=option.getOption_g()%><br><br>
+		                                        <%
+		                                    }
+		                                %>
+		                            <%                                             
+		                        } 
+		                    }else if(judge_questions.size()!=0 && judge_questions !=null){
+		                    %>
+		                    <p>判断题</p>
+		                    <%
+		                        for(QuestionBean bean:judge_questions){
+		                           num++;
+		                           String stem = "第" + num + "题：" + bean.getQuestion_stem();
+		                            %>  
+		                                <label><%=stem %>(&nbsp;&nbsp;)</label><br>
+		                                <input type="radio" name="<%=bean.getQuestion_id()%>" value="right" class="radio0">对<br>
+		                                <input type="radio" name="<%=bean.getQuestion_id()%>" value="wrong" class="radio0">错<br>
+		                            <%                                             
+		                        } 
+		                    }    
+		                    String qu = question_json.replaceAll("\"", "\'");
+		                 %>
+		                 <input type="hidden" value="<%=qu %>" name="question_json_text" />
+		                 <input type="hidden" value="<%=course_id %>" name="course_id" />
+		                 <input type="hidden" value="${user.user_id}" name="user_id" />
+		                 <div id="pagesubmit">
+		                    <input id="button1111" type="submit" value="提交">
+		                 </div>
+		            </form>
+	            <%
+	                }
+	              %>
         </div>
         
         <div id="footer">

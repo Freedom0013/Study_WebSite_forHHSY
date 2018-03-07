@@ -113,9 +113,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="nav">
 				<ul>
 					<li class="cur"><a href="${pageContext.request.contextPath }/index.jsp">首页</a></li>
-					<li><a href="${pageContext.request.contextPath }/zhuanye/zhuanye1.html" target="_blank">专业</a></li>
-					<li><a href="${pageContext.request.contextPath }/资源.html" target="_blank">资源</a></li>
-					<li><a href="${pageContext.request.contextPath }/推荐书籍.html" target="_blank">推荐书籍</a></li>
+					<li><a href="#" target="_blank">专业</a></li>
+					<li><a href="#" target="_blank">资源</a></li>
+					<li><a href="#" target="_blank">推荐书籍</a></li>
 					<li><a href="#" target="_blank">移动课堂</a></li>
 				</ul>
 				<div class="curBg"></div>
