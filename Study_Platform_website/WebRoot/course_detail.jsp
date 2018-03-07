@@ -101,12 +101,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            JsonObject rootJson = new JsonParser().parse(course_detail_json).getAsJsonObject();
 	            JsonObject coursejson = rootJson.get("root").getAsJsonObject();
 	            CourseBean course = gson.fromJson(coursejson, CourseBean.class);
+	            
+	            
+	            String pic_json = (String)request.getAttribute("pic_json");
+                Gson gson_pic = new Gson();
+                JsonObject rootJson_pic = new JsonParser().parse(pic_json).getAsJsonObject();
+                JsonArray pic_list = rootJson_pic.get("pic").getAsJsonArray();
+                ArrayList<PictureBean> piclist = new ArrayList<PictureBean>();
+                for(JsonElement jsonElement : pic_list){
+                    JsonObject jo = jsonElement.getAsJsonObject();
+                    PictureBean picture = gson.fromJson(jo, PictureBean.class);
+                    piclist.add(picture);
+                }
 	        %>
             <% 
                 if(course != null){
                     %>
 	            <div id="box001">
-	                <img src="${pageContext.request.contextPath }/images/box1.png" width="459" height="310">
+	                <%
+	                   for(PictureBean pics : piclist){
+                           int is = course.getCourse_picture_id().compareTo(pics.getPicture_id());
+                           if(is == 0){
+                               String pic_urls = basePath+pics.getPicture_img();
+                    %>
+                        <img src="<%=pic_urls %>" width="459" height="310">
+                   <%      break;
+                           }
+                        } 
+                    %>
 	                <div id="word">
 	                    <div id="h2">
 	                        <h2><%=course.getCourse_name() %></h2>

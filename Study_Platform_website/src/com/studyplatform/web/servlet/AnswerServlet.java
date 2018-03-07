@@ -1,8 +1,6 @@
 package com.studyplatform.web.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -16,7 +14,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.studyplatform.web.bean.OptionBean;
 import com.studyplatform.web.bean.QuestionBean;
 import com.studyplatform.web.service.QuestionService;
 import com.studyplatform.web.service.impl.QuestionServiceImpl;

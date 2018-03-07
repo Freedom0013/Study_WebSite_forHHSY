@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.studyplatform.web.bean.CourseBean;
 import com.studyplatform.web.bean.PictureBean;
-import com.studyplatform.web.bean.ProfessionBean;
 import com.studyplatform.web.service.CourseService;
 import com.studyplatform.web.service.PictureService;
 import com.studyplatform.web.service.impl.CourseServiceImpl;

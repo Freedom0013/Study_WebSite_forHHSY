@@ -2,7 +2,6 @@ package com.studyplatform.web.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,7 +22,6 @@ import com.studyplatform.web.servlet.formbean.AnswerQuestionBean;
 import com.studyplatform.web.system.SystemCommonValue;
 import com.studyplatform.web.utils.DebugUtils;
 import com.studyplatform.web.utils.WebUtils;
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;

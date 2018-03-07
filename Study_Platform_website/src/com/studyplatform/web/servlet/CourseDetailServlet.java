@@ -1,6 +1,7 @@
 package com.studyplatform.web.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,8 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.studyplatform.web.bean.CourseBean;
+import com.studyplatform.web.bean.PictureBean;
 import com.studyplatform.web.service.CourseService;
+import com.studyplatform.web.service.PictureService;
 import com.studyplatform.web.service.impl.CourseServiceImpl;
+import com.studyplatform.web.service.impl.PictureServiceImpl;
 import com.studyplatform.web.utils.DebugUtils;
 import com.studyplatform.web.utils.WebUtils;
 
@@ -42,7 +46,16 @@ public class CourseDetailServlet extends HttpServlet {
         JSONObject course_detail_json = new JSONObject();
         course_detail_json.element("root", JSONObject.fromObject(bean));
         
+        
+        PictureService pic_service = new PictureServiceImpl();
+        PictureBean pic = pic_service.getPictureById(bean.getCourse_picture_id());
+        JSONObject pic_json = new JSONObject();
+        pic_json.element("pic", JSONArray.fromObject(pic));
+        DebugUtils.showLog(bean.toString());
+        DebugUtils.showLog(pic_json.toString());
+        
         request.setAttribute("course_detail_json",course_detail_json.toString());
+        request.setAttribute("pic_json",pic_json.toString());
         
         RequestDispatcher dispatcher = request.getRequestDispatcher("/course_detail.jsp");
         dispatcher.forward(request, response);

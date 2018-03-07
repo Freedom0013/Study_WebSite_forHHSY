@@ -1,7 +1,6 @@
 package com.studyplatform.web.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.math.BigDecimal;
 
 import javax.servlet.ServletException;
