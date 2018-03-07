@@ -14,9 +14,12 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.studyplatform.web.bean.PictureBean;
 import com.studyplatform.web.bean.QuestionBean;
 import com.studyplatform.web.bean.ResourceBean;
+import com.studyplatform.web.service.PictureService;
 import com.studyplatform.web.service.ResourceService;
+import com.studyplatform.web.service.impl.PictureServiceImpl;
 import com.studyplatform.web.service.impl.ResourceServiceImpl;
 import com.studyplatform.web.servlet.formbean.AnswerQuestionBean;
 import com.studyplatform.web.system.SystemCommonValue;
@@ -94,13 +97,22 @@ public class ExaminationServlet extends HttpServlet {
             resourseslist = (ArrayList<ResourceBean>) rescourse_service.getResourceByDegree(SystemCommonValue.RESOURCE_TYPE_PRIMARY, courseid);
         }
         
-        
-        
         if(resourseslist!=null && resourseslist.size()!=0){
             JSONObject resourses = new JSONObject();
             resourses.element("root", JSONArray.fromObject(resourseslist));
             DebugUtils.showLog(resourses.toString());
             request.setAttribute("resourses_json",resourses.toString());
+            
+            PictureService pic_service = new PictureServiceImpl();
+            ArrayList<PictureBean> pic_list = new ArrayList<PictureBean>();
+            for(ResourceBean bean : resourseslist){
+                PictureBean pic = pic_service.getPictureById(bean.getResource_picture_id());
+                pic_list.add(pic);
+            }
+            JSONObject pic_json = new JSONObject();
+            pic_json.element("pic", JSONArray.fromObject(pic_list));
+            DebugUtils.showLog(pic_json.toString());
+            request.setAttribute("pic_json",pic_json.toString());
         }
         
         DebugUtils.showLog(user_answer_json.toString());
