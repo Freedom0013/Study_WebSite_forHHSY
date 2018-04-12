@@ -56,7 +56,6 @@ public class RegisterServlet extends HttpServlet {
         
         //封装数据到userbean中
         UserFormBean ufb = WebUtils.fillFormBean(UserFormBean.class, request);
-        DebugUtils.showLog("拷贝："+ufb.toString());
         ufb.setToken(WebUtils.transferLongToDate("yyyy-MM-dd HH:mm:ss", token));
         
         //验证数据
@@ -75,11 +74,11 @@ public class RegisterServlet extends HttpServlet {
             user.setUser_status(1);
             user.setUser_admin_flag(1);
             user.setUser_integral(0);
-            DebugUtils.showLog("拷贝："+user.toString());
             // 第四步,注册用户
             // 调用业务逻辑层完成注册
             UserService us = new UserServiceImpl();
             try {
+                DebugUtils.showLog("注册");
                 us.register(user);
                 // 注册成功
                 // 返回登陆页面
@@ -96,9 +95,9 @@ public class RegisterServlet extends HttpServlet {
             // 验证不通过
             // 完成数据的回显操作，把ufb对象存放到request
             request.setAttribute("user", ufb);
+            DebugUtils.showLog("拷贝："+ufb.toString());
             request.getRequestDispatcher(request.getContextPath() + "/login.jsp#toregister").forward(request, response);
         }
-        
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

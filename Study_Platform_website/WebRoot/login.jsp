@@ -48,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<input type="submit" value="登录" />
 								</p>
 								<p class="change_link">
-									还未注册？ <a href="#toregister" class="to_register">点击注册</a>
+									还未注册？ <a href="${pageContext.request.contextPath }/login.jsp#toregister" class="to_register">点击注册</a>
 								</p>
 							</form>
 						</div>  
@@ -84,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<input type="submit" value="注册" />
 								</p>
 								<p class="change_link">
-									已经注册? <a href="#tologin" class="to_register">点击登录</a>
+									已经注册? <a href="${pageContext.request.contextPath }/login.jsp#tologin" class="to_register">点击登录</a>
 								</p>
 							</form>
 						</div>
