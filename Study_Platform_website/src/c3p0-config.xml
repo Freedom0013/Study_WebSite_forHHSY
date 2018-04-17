@@ -37,11 +37,11 @@
     </named-config>
     
     <!-- 第二数据源（本项目不起作用）（MySQL） -->
-    <named-config name="mysql-config">
-        <property name="driverClass">null</property>
-        <property name="jdbcUrl">null</property>
-        <property name="user">null</property>
-        <property name="password">null</property>
+    <named-config name="mysql-tencent-config">
+        <property name="driverClass">com.mysql.jdbc.Driver</property>
+        <property name="jdbcUrl">jdbc:mysql://gz-cdb-qsvq1xw0.sql.tencentcdb.com:62883/study_platform?useUnicode=true&amp;characterEncoding=utf8</property>
+        <property name="user">HHSY_test</property>
+        <property name="password">s123456789</property>
     
         <property name="acquireIncrement">5</property>
         <property name="initialPoolSize">10</property>

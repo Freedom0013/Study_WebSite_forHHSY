@@ -21,9 +21,9 @@ public class C3p0Utils {
     private static DataSource ds ;
     
     static{
-        ds = new ComboPooledDataSource("platform-use-config");
+//        ds = new ComboPooledDataSource("platform-use-config");
         //此处注释掉了两个冗余数据源设置，如果后期项目拓展可以在此更换数据源及数据库
-        //ds = new ComboPooledDataSource("mysql-config");
+        ds = new ComboPooledDataSource("mysql-tencent-config");
         //ds = new ComboPooledDataSource("orcale-config");
     }
     
