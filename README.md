@@ -695,10 +695,14 @@ Study\_WebSite\_forHHSY
 		<th width="24%">等course_id</th>
 	</tr>
 </table>
-**补充：资源所属等级说明：<br>**
-**1：100-80 高级资源<br>**
-**2：80-60 中级资源<br>**
-**3：60以下 基础资源<br>**
+
+**补充：资源所属等级说明：**
+<br>
+**1：100-80 高级资源**
+<br>
+**2：80-60 中级资源**
+<br>
+**3：60以下 基础资源**
 
 **9.用户收藏表（collects）**
 <table>
@@ -827,6 +831,7 @@ Study\_WebSite\_forHHSY
 		<th width="24%">default 3  1~5级</th>
 	</tr>
 </table>
+
 **11.用户自定义组卷表（待定功能）（userstests）**
 <table>
 	<tr>
@@ -918,6 +923,7 @@ Study\_WebSite\_forHHSY
 		<th width="24%">等user_id</th>
 	</tr>
 </table>
+
 **12.用户自定义组卷内容表（待定）（userstests_contents）**
 <table>
 	<tr>
@@ -1017,7 +1023,9 @@ Study\_WebSite\_forHHSY
 		<th width="24%"></th>
 	</tr>
 </table>
+
 **题目难度等级：0：基础题		1：中级题		2：高级题**
+
 
 **13.用户分数历史信息表（fractions）**
 <table>
