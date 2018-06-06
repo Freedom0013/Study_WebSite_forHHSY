@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><!-- 判断el表达式是否为空的标准函数声明 -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %><!-- 判断el集合是否为空的声明 -->
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -95,23 +96,25 @@
                             <ul id="thumbs" class="col3">
                                 <!-- 1 -->
                                 <li class="item web">
-                                    <div class="portfolio-image-wrapper">
-                                        <img src="${pageContext.request.contextPath }/images/system_images/course_xinxi1.1_icon.jpg" width="531" hight="387" alt="" />
-                                        <!-- 鼠标停留覆盖栏 -->
-                                        <div class="item-info-overlay">
-                                            <div>
-                                                <h3 class="text-white semi-bold p-t-60 project-title ">java基础教程</h3>
-                                                <p class="project-description">2018-01-25 17:49:46</p>
+                                    <a href="${pageContext.request.contextPath }/course.jsp">
+                                        <div class="portfolio-image-wrapper">
+                                            <img src="${pageContext.request.contextPath }/images/system_images/course_xinxi1.1_icon.jpg" width="531" hight="387" alt="" />
+                                            <!-- 鼠标停留覆盖栏 -->
+                                            <div class="item-info-overlay">
+                                                <div>
+                                                    <h3 class="text-white semi-bold p-t-60 project-title ">java基础教程</h3>
+                                                    <p class="project-description">2018-01-25 17:49:46</p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <!-- 说明 -->
-                                    <div class="item-info">
-                                        <h4 class="text-dark no-margin p-t-10 title semi-bold">java基础教程</h4>
-                                        <p>2018-01-25 17:49:46</p>
-                                    </div>
-                                    <div class="clearfix">
-                                    </div>
+                                        <!-- 说明 -->
+                                        <div class="item-info">
+                                            <h4 class="text-dark no-margin p-t-10 title semi-bold">java基础教程</h4>
+                                            <p>2018-01-25 17:49:46</p>
+                                        </div>
+                                        <div class="clearfix">
+                                        </div>
+                                    </a>
                                 </li>
 
                                 <li class="item web">
