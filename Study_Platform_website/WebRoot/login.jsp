@@ -1,14 +1,29 @@
-<!doctype html>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML>
 <html>
 	<head>
-		<meta charset="UTF-8">
+		<!-- 编码设置 -->
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+		<meta charset="utf-8"/>
+		<base href="<%=basePath%>">
 		<!-- IE8兼容性设置 -->
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
 		<!-- 移动设备兼容 -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- 设置jsp地址栏小图标 -->
+		<link rel="icon" href="<%=basePath%>images/logo_icon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="<%=basePath%>images/logo_icon.ico" type="image/x-icon">
 		<title>用户登录</title>
-		<link rel="stylesheet" type="text/css" href="css/login_styles.css">
+
+		<link rel="stylesheet" type="text/css" href="<%=basePath%>css/login_styles.css">
 	</head>
+  
 	<body>
 		<!-- <div style="height:30px;"/> -->
 		<div class="login-wrap">
