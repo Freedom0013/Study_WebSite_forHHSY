@@ -3459,3 +3459,108 @@ margin-bottom:0px;
 .bg-white {
   background-color: #ffffff !important;
 }
+
+.score-container {
+  width: 800px;
+  margin: auto;
+}
+.score-row {
+  position: relative;
+  height: 50px;
+  z-index: 1;
+  clear: both;
+  margin-bottom: 30px;
+  text-align: center;
+}
+.score-row--intro {
+  padding-top: 20px;
+  font-size: 16px;
+  line-height: 28px;
+  font-weight: 300;
+  color: #fff;
+  opacity: 0.4;
+}
+.score-row--intro span {
+  font-size: 11px;
+}
+.score-skew-title {
+  font-size: 25px;
+}
+.score-skew-title span {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 50px;
+  margin: auto;
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+  font-family: 'roboto condensed';
+  font-weight: 700;
+  font-size: 35.714285714285715px;
+  line-height: 50px;
+  -webkit-transform: skewY(-15deg);
+          transform: skewY(-15deg);
+  -webkit-transform-origin: 0 100%;
+          transform-origin: 0 100%;
+  transition: all 0.2s;
+  cursor: default;
+}
+.score-skew-title span:after,
+.score-skew-title span:before {
+  display: block;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 50px;
+  position: absolute;
+  background: #185a81;
+  content: ' ';
+  z-index: -1;
+  transition: all 0.2s;
+}
+.score-skew-title span:before {
+  background: rgba(0,0,0,0.1);
+  -webkit-transform: skewY(15deg);
+          transform: skewY(15deg);
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0;
+}
+.score-skew-title span:nth-child(even) {
+  background-color: #144c6e;
+  -webkit-transform: skewY(15deg);
+          transform: skewY(15deg);
+  -webkit-transform-origin: 100% 100%;
+          transform-origin: 100% 100%;
+  color: #d9d9d9;
+}
+.score-skew-title span:nth-child(even):after {
+  background-color: #144c6e;
+}
+.score-skew-title span:nth-child(even):before {
+  -webkit-transform-origin: 100% 0;
+          transform-origin: 100% 0;
+  -webkit-transform: skewY(-15deg);
+          transform: skewY(-15deg);
+}
+.score-skew-title span.flat {
+  -webkit-transform: skewY(0);
+          transform: skewY(0);
+  color: #fff;
+}
+.score-skew-title span.flat:before {
+  -webkit-transform: skewY(0);
+          transform: skewY(0);
+}
+.score-skew-title span.flat:nth-child(even):after {
+  background-color: #185a81;
+}
+.score-skew-title span.alt:after {
+  background-color: #b94a2c;
+}
+.score-skew-title span.alt:nth-child(even):after {
+  background-color: #9d3f25;
+}
+.score-skew-title span.alt.flat:nth-child(even):after {
+  background-color: #b94a2c;
+}

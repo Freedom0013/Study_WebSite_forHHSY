@@ -192,7 +192,7 @@
         </div>
 
         <div class="p-t-10 p-b-20 text-center">
-        	<a href="#" class="btn btn-primary btn-lg  btn-large m-r-10">现在交卷！</a>
+        	<a href="${pageContext.request.contextPath }/test_result.jsp" class="btn btn-primary btn-lg  btn-large m-r-10">现在交卷！</a>
         </div>
 
         <!-- footer块 -->
