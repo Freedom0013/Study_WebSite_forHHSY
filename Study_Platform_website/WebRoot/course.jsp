@@ -104,7 +104,7 @@
 	                            of research and discovery. We dig through the values, strategy, and organizational
 	                            culture that make you unique.
 	                        </p>
-	                        <button type="button" class="btn btn-info btn-cons m-t-10">开始做题</button>
+	                        <a href="${pageContext.request.contextPath }/test_page.jsp" class="btn btn-primary btn-lg  btn-large m-r-10">开始测试！</a>
 	                    </div>
 	                </div>
 	            </article>
