@@ -105,7 +105,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 				</div>
 				<div class="text-center">
-					<a href="#" class="btn btn-primary btn-lg  btn-large m-r-10">查看答案</a>
+					<a href="${pageContext.request.contextPath }/answer_page.jsp" class="btn btn-primary btn-lg  btn-large m-r-10">查看答案</a>
 				</div>
 			</div>
 		</div>
