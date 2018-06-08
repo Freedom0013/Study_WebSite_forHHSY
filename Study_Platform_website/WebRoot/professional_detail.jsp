@@ -65,7 +65,7 @@
 								<li><a href="${pageContext.request.contextPath }/index.jsp">首&nbsp;页</a></li>
 								<li><a href="#">专&nbsp;业&nbsp;大&nbsp;类</a></li>
 								<li><a href="#">推&nbsp;荐&nbsp;资&nbsp;源</a></li>
-								<li><a href="#">移&nbsp;动&nbsp;课&nbsp;堂</a></li>
+								<li><a href="${pageContext.request.contextPath }/app_download.jsp">移&nbsp;动&nbsp;课&nbsp;堂</a></li>
 								<li><a href="${pageContext.request.contextPath }/login.jsp">登&nbsp;录&nbsp;/&nbsp;注&nbsp;册</a></li>
 							</ul>
 						</div>
