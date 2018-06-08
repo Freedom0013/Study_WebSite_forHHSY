@@ -218,7 +218,7 @@
                     <div class="p-t-40 p-b-40  text-center">
                         <h3 class="text-center">
                             配合移动端探索知识效率更高！更多精彩活动尽在知之森驿站app!</h3>
-                        <a href="#" class="btn btn-primary btn-lg  btn-large m-r-10">现在下载</a>
+                        <a href="${pageContext.request.contextPath }/app_download.jsp" class="btn btn-primary btn-lg  btn-large m-r-10">现在下载</a>
                     </div>
                 </div>
             </div>
