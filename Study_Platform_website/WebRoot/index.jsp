@@ -233,6 +233,7 @@
                             	<!-- 此处容器调整错误，加了很多空行以补全bug -->
                                 </br></br></br></br></br></br></br></br></br></br></br></br>
                                 </br></br></br></br></br></br></br></br></br></br>
+                                <a href="${pageContext.request.contextPath }/professional_detail.jsp">
                                 <article class="card">
                                 	<!-- item图片 -->
                                     <header class="card__thumb">
@@ -243,8 +244,8 @@
             						<!-- item说明 -->
                                     <div class="card__body">
                                         <!-- <div class="card__category"><a href="#">小标签</a></div> -->
-                                        <h2 class="card__title"><a href="${pageContext.request.contextPath }/professional_detail.jsp">土木交通工程大类</a></h2>
-                                        <div class="card__subtitle">副标题</div> 
+                                        <h2 class="card__title">土木交通工程大类</h2>
+                                        <!-- <div class="card__subtitle">副标题</div>  -->
                                         <p class="card__description">正文的详细内容描述，我们在通往地狱的高速公路上，本德医生正在煎熬。正文的详细内容描述，我们在通往地狱的高速公路上，本德医生正在煎熬。我们在通往地狱的高速公路上。</p>
                                     </div>
             						<!-- 被隐藏的评论 -->
@@ -254,6 +255,7 @@
                                         <a href="#"> 42 评论</a>
                                     </footer> -->
                                 </article>
+                                </a>
                                 <br/>
                             </div>
                             <div class="col-md-4 wow fadeInRight" data-wow-delay="300ms">
