@@ -308,16 +308,11 @@
 	                                    }
 	                                }else{
                                 %>
-	                                    <!--app宣传div块-->
-	                                    <div class="section ">
-	                                        <div class="container">
-	                                            <div class="p-t-40 p-b-40  text-center">
-	                                                <h3 class="text-center">
-	                                                    项目大类加载失败，请重新尝试！</h3>
-	                                            </div>
-	                                        </div>
-	                                    </div>
-                              <%
+	                                <div class="col-md-6">
+	                                    <h2 class="semi-bold">
+	                                                                                                                         项目大类加载失败，请重新尝试！</h2>
+	                                </div>  	                                    
+                               <%
                                     } 
                                %>
                         </div>           			

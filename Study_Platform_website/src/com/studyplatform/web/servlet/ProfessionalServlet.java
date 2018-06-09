@@ -40,22 +40,28 @@ public class ProfessionalServlet extends HttpServlet {
         //控制字符集
         WebUtils.setCharSet(request, response);
         
+        //获取上级页面传入的department_id
         String department_id = (String) request.getParameter("department_id");
         int departmentid = Integer.parseInt(department_id);
         
+        //获取专业列表
         ProfessionalService service = new ProfessionalServiceImpl();
         ArrayList<ProfessionBean> professionlist = (ArrayList<ProfessionBean>) service.getAllProfessionsByDepId(departmentid);
         
+        //获取专业图片列表
         PictureService pic_service = new PictureServiceImpl();
         ArrayList<PictureBean> pic_list = new ArrayList<PictureBean>();
         for(ProfessionBean bean : professionlist){
             PictureBean pic = pic_service.getPictureById(bean.getProfession_picture_id());
             pic_list.add(pic);
         }
+        
+        //封装图片json
         JSONObject pic_json = new JSONObject();
         pic_json.element("pic", JSONArray.fromObject(pic_list));
         DebugUtils.showLog(pic_json.toString());
         
+        //封装专业json
         JSONObject profession_json = new JSONObject();
         profession_json.element("root", JSONArray.fromObject(professionlist));
         DebugUtils.showLog(profession_json.toString());
@@ -64,12 +70,14 @@ public class ProfessionalServlet extends HttpServlet {
         request.setAttribute("department_id", departmentid);
         request.setAttribute("pic_json", pic_json.toString());
         
+        //--------冗余---------
         DepartmentService department_service = new DepartmentServiceImpl();
         ArrayList<DepartmentBean> departmentlist = (ArrayList<DepartmentBean>) department_service.getallDepartment();
         JSONObject department_json = new JSONObject();
         department_json.element("root", JSONArray.fromObject(departmentlist));
         request.setAttribute("all_department_list", department_json.toString());
         
+        //页面跳转
         RequestDispatcher dispatcher = request.getRequestDispatcher("/professional_detail.jsp");
         dispatcher.forward(request, response);
     }
