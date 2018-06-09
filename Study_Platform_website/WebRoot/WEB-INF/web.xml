@@ -60,10 +60,12 @@
     <servlet-name>AnswerServlet</servlet-name>
     <servlet-class>com.studyplatform.web.servlet.AnswerServlet</servlet-class>
   </servlet>
+  
   <servlet>
     <servlet-name>PictureServlet</servlet-name>
     <servlet-class>com.studyplatform.web.servlet.PictureServlet</servlet-class>
   </servlet>
+
 
 
 
@@ -123,19 +125,18 @@
     <servlet-name>AnswerServlet</servlet-name>
     <url-pattern>/servlet/AnswerServlet</url-pattern>
   </servlet-mapping>
+  
   <servlet-mapping>
     <servlet-name>PictureServlet</servlet-name>
     <url-pattern>/servlet/PictureServlet</url-pattern>
   </servlet-mapping>
   
-  
-  
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
+<!--     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
     <welcome-file>index.jsp</welcome-file>
     <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.htm</welcome-file> -->
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
 </web-app>

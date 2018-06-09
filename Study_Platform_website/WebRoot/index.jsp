@@ -5,6 +5,15 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+<%@ page import="net.sf.json.JSONArray" %>
+<%@ page import="net.sf.json.JSONObject" %>
+<%@ page import="com.studyplatform.web.utils.*" %>
+<%@ page import="com.studyplatform.web.bean.*" %>
+<%@ page import="java.util.*" %>
+<%@ page import="java.math.*" %>
+<%@ page import="org.apache.commons.lang3.math.*" %>
+<%@ page import="com.google.gson.*" %>
+
 <!-- 该 DTD 包含所有 HTML 元素和属性，但不包括展示性的和弃用的元素（比如 font）。不允许框架集（Framesets）。 -->
 <!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> -->
 <!-- html5 -->
@@ -26,33 +35,33 @@
 		<meta content="" name="description" />
 		<meta content="" name="author" />  
 		<!-- 轮播插件 -->
-		<link href="<%=basePath%>plugins/owl-carousel/owl.carousel.css" rel="stylesheet" type="text/css"/>
-		<link href="<%=basePath%>plugins/owl-carousel/owl.theme.css" rel="stylesheet" type="text/css"/>
+		<link href="${pageContext.request.contextPath }/plugins/owl-carousel/owl.carousel.css" rel="stylesheet" type="text/css"/>
+		<link href="${pageContext.request.contextPath }/plugins/owl-carousel/owl.theme.css" rel="stylesheet" type="text/css"/>
 		<!-- 地址栏插件 -->
-		<link href="<%=basePath%>plugins/headereffects/css/component.css" rel="stylesheet" type="text/css"/>
-		<link href="<%=basePath%>plugins/headereffects/css/normalize.css" rel="stylesheet" type="text/css"/>
-		<link href="<%=basePath%>plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" media="screen"/>
+		<link href="${pageContext.request.contextPath }/plugins/headereffects/css/component.css" rel="stylesheet" type="text/css"/>
+		<link href="${pageContext.request.contextPath }/plugins/headereffects/css/normalize.css" rel="stylesheet" type="text/css"/>
+		<link href="${pageContext.request.contextPath }/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" media="screen"/>
 		<!-- bootstrap支持 -->
-		<link href="<%=basePath%>plugins/boostrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-		<link href="<%=basePath%>plugins/boostrapv3/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+		<link href="${pageContext.request.contextPath }/plugins/boostrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="${pageContext.request.contextPath }/plugins/boostrapv3/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
 		<!-- 图标字体库支持 -->
-		<link href="<%=basePath%>plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+		<link href="${pageContext.request.contextPath }/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 		<!-- 动画支持 -->
-		<link href="<%=basePath%>css/animate.css" rel="stylesheet">
+		<link href="${pageContext.request.contextPath }/css/animate.css" rel="stylesheet">
 		<!-- css样式 -->
-		<link href="<%=basePath%>css/style.css" rel="stylesheet" type="text/css" />
-		<link href="<%=basePath%>css/magic_space.css" rel="stylesheet" type="text/css" />
-		<link href="<%=basePath%>css/responsive.css" rel="stylesheet" type="text/css" />    
+		<link href="${pageContext.request.contextPath }/css/style.css" rel="stylesheet" type="text/css" />
+		<link href="${pageContext.request.contextPath }/css/magic_space.css" rel="stylesheet" type="text/css" />
+		<link href="${pageContext.request.contextPath }/css/responsive.css" rel="stylesheet" type="text/css" />    
 		<!-- 大类item小图标（评论暂时隐藏）地址 -->
 		<link href='http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css' rel='stylesheet prefetch' >
-		<link href="<%=basePath%>plugins/slider-plugin/css/settings.css" rel="stylesheet" type="text/css" media="screen" />
+		<link href="${pageContext.request.contextPath }/plugins/slider-plugin/css/settings.css" rel="stylesheet" type="text/css" media="screen" />
 		<!-- jquery支持 -->
-	    <script type="text/javascript" src="<%=basePath%>js/jquery-2.1.3.min.js"></script>
+	    <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-2.1.3.min.js"></script>
 	    <%-- <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-3.3.1.js"></script> --%>
 		<!-- 旋转滑动4.x脚本 -->
 		
-		<script type="text/javascript" src="<%=basePath%>plugins/slider-plugin/js/slider1.min.js"></script>
-		<script type="text/javascript" src="<%=basePath%>plugins/slider-plugin/js/slider2.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath }/plugins/slider-plugin/js/slider1.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath }/plugins/slider-plugin/js/slider2.min.js"></script>
 		<!-- 排行榜轮播函数 -->
 		<script type="text/javascript"> 
 			function autoScroll(obj){  
@@ -88,7 +97,7 @@
                             </div>
                             <div class="navbar-collapse collapse">
                                 <ul class="nav navbar-nav navbar-right">
-                                    <li><a href="${pageContext.request.contextPath }/index.jsp">首&nbsp;页</a></li>
+                                    <li><a href="${pageContext.request.contextPath }/default.jsp">首&nbsp;页</a></li>
                                     <li><a href="#">专&nbsp;业&nbsp;大&nbsp;类</a></li>
                                     <li><a href="#">推&nbsp;荐&nbsp;资&nbsp;源</a></li>
                                     <li><a href="${pageContext.request.contextPath }/app_download.jsp">移&nbsp;动&nbsp;课&nbsp;堂</a></li>
@@ -118,7 +127,7 @@
                             </div>
                             <div class="navbar-collapse collapse">
                                 <ul class="nav navbar-nav navbar-right">
-                                    <li><a href="${pageContext.request.contextPath }/index.jsp">首&nbsp;页</a></li>
+                                    <li><a href="${pageContext.request.contextPath }/default.jsp">首&nbsp;页</a></li>
                                     <li><a href="#">专&nbsp;业&nbsp;大&nbsp;类</a></li>
                                     <li><a href="#">推&nbsp;荐&nbsp;资&nbsp;源</a></li>
                                     <li><a href="${pageContext.request.contextPath }/app_download.jsp">移&nbsp;动&nbsp;课&nbsp;堂</a></li>
@@ -212,7 +221,8 @@
                 </div>
                 <!--banner轮播结束 -->
             </div>
-<!--app宣传div块-->
+
+            <!--app宣传div块-->
             <div class="section ">
                 <div class="container">
                     <div class="p-t-40 p-b-40  text-center">
@@ -229,170 +239,89 @@
                     <div class="p-t-60">
 						<!-- 大类列表 -->
                         <div class="row">
-                            <div class="col-md-4 wow fadeInRight" data-wow-delay="200ms">
-                            	<!-- 此处容器调整错误，加了很多空行以补全bug -->
-                                </br></br></br></br></br></br></br></br></br></br></br></br>
-                                </br></br></br></br></br></br></br></br></br></br>
-                                <a href="${pageContext.request.contextPath }/professional_detail.jsp">
-                                <article class="card">
-                                	<!-- item图片 -->
-                                    <header class="card__thumb">
-                                        <a href="${pageContext.request.contextPath }/professional_detail.jsp">
-                                            <img src="${pageContext.request.contextPath }/images/department_tumu_icon.jpg"/ width="370" height="245">
-                                        </a>
-                                    </header>
-            						<!-- item说明 -->
-                                    <div class="card__body">
-                                        <!-- <div class="card__category"><a href="#">小标签</a></div> -->
-                                        <h2 class="card__title">土木交通工程大类</h2>
-                                        <!-- <div class="card__subtitle">副标题</div>  -->
-                                        <p class="card__description">正文的详细内容描述，我们在通往地狱的高速公路上，本德医生正在煎熬。正文的详细内容描述，我们在通往地狱的高速公路上，本德医生正在煎熬。我们在通往地狱的高速公路上。</p>
-                                    </div>
-            						<!-- 被隐藏的评论 -->
-                                    <!-- <footer class="card__footer">
-                                        <span class="icon ion-clock"> 6分钟前</span>
-                                        <span class="icon ion-chatbox"></span>
-                                        <a href="#"> 42 评论</a>
-                                    </footer> -->
-                                </article>
-                                </a>
-                                <br/>
-                            </div>
-                            <div class="col-md-4 wow fadeInRight" data-wow-delay="300ms">
-                                </br></br></br></br></br></br></br></br></br></br></br></br>
-                                </br></br></br></br></br></br></br></br></br></br>
-                                <article class="card">
-                                    <header class="card__thumb">
-                                        <a href="${pageContext.request.contextPath }/professional_detail.jsp">
-                                            <img src="${pageContext.request.contextPath }/images/department_tumu_icon.jpg"/ width="370" height="245">
-                                        </a>
-                                    </header>
-            
-                                    <div class="card__body">
-                                        <!-- <div class="card__category"><a href="#">小标签</a></div> -->
-                                        <h2 class="card__title"><a href="${pageContext.request.contextPath }/professional_detail.jsp">土木交通工程大类</a></h2>
-                                        <div class="card__subtitle">副标题</div> 
-                                        <p class="card__description">正文的详细内容描述，我们在通往地狱的高速公路上，本德医生正在煎熬。正文的详细内容描述，我们在通往地狱的高速公路上，本德医生正在煎熬。我们在通往地狱的高速公路上。</p>
-                                    </div>
-            
-                                    <!-- <footer class="card__footer">
-                                        <span class="icon ion-clock"> 6分钟前</span>
-                                        <span class="icon ion-chatbox"></span>
-                                        <a href="#"> 42 评论</a>
-                                    </footer> -->
-                                </article>
-                                <br/>
-                            </div>
-            				
-                            <div class="col-md-4 wow fadeInRight" data-wow-delay="400ms">
-                                </br></br></br></br></br></br></br></br></br></br></br></br>
-                                </br></br></br></br></br></br></br></br></br></br>
-                                <article class="card">
-                                    <header class="card__thumb">
-                                        <a href="${pageContext.request.contextPath }/professional_detail.jsp">
-                                            <img src="${pageContext.request.contextPath }/images/department_tumu_icon.jpg"/ width="370" height="245">
-                                        </a>
-                                    </header>
-            
-                                    <div class="card__body">
-                                        <!-- <div class="card__category"><a href="#">小标签</a></div> -->
-                                        <h2 class="card__title"><a href="${pageContext.request.contextPath }/professional_detail.jsp">土木交通工程大类</a></h2>
-                                        <div class="card__subtitle">副标题</div> 
-                                        <p class="card__description">正文的详细内容描述，我们在通往地狱的高速公路上，本德医生正在煎熬。正文的详细内容描述，我们在通往地狱的高速公路上，本德医生正在煎熬。我们在通往地狱的高速公路上。</p>
-                                    </div>
-            
-                                    <!-- <footer class="card__footer">
-                                        <span class="icon ion-clock"> 6分钟前</span>
-                                        <span class="icon ion-chatbox"></span>
-                                        <a href="#"> 42 评论</a>
-                                    </footer> -->
-                                </article>
-                                <br/>
-                            </div>
-                        </div>
-            			
-                        <div class="row">
-                            <div class="col-md-4 wow fadeInRight" data-wow-delay="200ms">
-                                </br></br></br></br></br></br></br></br></br></br></br></br>
-                                </br></br></br></br></br></br></br></br></br></br>
-                                <article class="card">
-                                    <header class="card__thumb">
-                                        <a href="#">
-                                            <img src="${pageContext.request.contextPath }/images/department_tumu_icon.jpg"/ width="370" height="245">
-                                        </a>
-                                    </header>
-            
-                                    <div class="card__body">
-                                        <!-- <div class="card__category"><a href="#">小标签</a></div> -->
-                                        <h2 class="card__title"><a href="#">土木交通工程大类</a></h2>
-                                        <div class="card__subtitle">副标题</div> 
-                                        <p class="card__description">正文的详细内容描述，我们在通往地狱的高速公路上，本德医生正在煎熬。正文的详细内容描述，我们在通往地狱的高速公路上，本德医生正在煎熬。我们在通往地狱的高速公路上。</p>
-                                    </div>
-            
-                                    <!-- <footer class="card__footer">
-                                        <span class="icon ion-clock"> 6分钟前</span>
-                                        <span class="icon ion-chatbox"></span>
-                                        <a href="#"> 42 评论</a>
-                                    </footer> -->
-                                </article>
-                                <br/>
-                            </div>
-            
-                            <div class="col-md-4 wow fadeInRight" data-wow-delay="300ms">
-                                </br></br></br></br></br></br></br></br></br></br></br></br>
-                                </br></br></br></br></br></br></br></br></br></br>
-                                <article class="card">
-                                    <header class="card__thumb">
-                                        <a href="#">
-                                            <img src="${pageContext.request.contextPath }/images/department_tumu_icon.jpg"/ width="370" height="245">
-                                        </a>
-                                    </header>
-            
-                                    <div class="card__body">
-                                        <!-- <div class="card__category"><a href="#">小标签</a></div> -->
-                                        <h2 class="card__title"><a href="#">土木交通工程大类</a></h2>
-                                        <div class="card__subtitle">副标题</div> 
-                                        <p class="card__description">正文的详细内容描述，我们在通往地狱的高速公路上，本德医生正在煎熬。正文的详细内容描述，我们在通往地狱的高速公路上，本德医生正在煎熬。我们在通往地狱的高速公路上。</p>
-                                    </div>
-            
-                                    <!-- <footer class="card__footer">
-                                        <span class="icon ion-clock"> 6分钟前</span>
-                                        <span class="icon ion-chatbox"></span>
-                                        <a href="#"> 42 评论</a>
-                                    </footer> -->
-                                </article>
-                                <br/>
-                            </div>
-            
-                            <div class="col-md-4 wow fadeInRight" data-wow-delay="400ms">
-                                </br></br></br></br></br></br></br></br></br></br></br></br>
-                                </br></br></br></br></br></br></br></br></br></br>
-                                <article class="card">
-                                    <header class="card__thumb">
-                                        <a href="#">
-                                            <img src="${pageContext.request.contextPath }/images/department_tumu_icon.jpg"/ width="370" height="245">
-                                        </a>
-                                    </header>
-            
-                                    <div class="card__body">
-                                        <!-- <div class="card__category"><a href="#">小标签</a></div> -->
-                                        <h2 class="card__title"><a href="#">土木交通工程大类</a></h2>
-                                        <div class="card__subtitle">副标题</div> 
-                                        <p class="card__description">正文的详细内容描述，我们在通往地狱的高速公路上，本德医生正在煎熬。正文的详细内容描述，我们在通往地狱的高速公路上，本德医生正在煎熬。我们在通往地狱的高速公路上。</p>
-                                    </div>
-            
-                                    <!-- <footer class="card__footer">
-                                        <span class="icon ion-clock"> 6分钟前</span>
-                                        <span class="icon ion-chatbox"></span>
-                                        <a href="#"> 42 评论</a>
-                                    </footer> -->
-                                </article>
-                                <br/>
-                            </div>
-    					</div>
-
+                            <% 
+                                //解析大类json数据
+                                String all_department_list = (String)request.getAttribute("all_department_list");
+                                Gson gson = new Gson();
+                                JsonObject rootJson1 = new JsonParser().parse(all_department_list).getAsJsonObject();
+                                JsonArray dep_list = rootJson1.get("root").getAsJsonArray();
+                                ArrayList<DepartmentBean> departments = new ArrayList<DepartmentBean>();
+                                for(JsonElement jsonElement : dep_list){
+                                    JsonObject jo = jsonElement.getAsJsonObject();
+                                    DepartmentBean department = gson.fromJson(jo, DepartmentBean.class);
+                                    departments.add(department);
+                                }
+                                
+                                //解析图片json数据
+                                String pic_json = (String)request.getAttribute("pic_json");
+				                Gson gson_pic = new Gson();
+				                JsonObject rootJson_pic = new JsonParser().parse(pic_json).getAsJsonObject();
+				                JsonArray pic_list = rootJson_pic.get("pic").getAsJsonArray();
+				                ArrayList<PictureBean> piclist = new ArrayList<PictureBean>();
+				                for(JsonElement jsonElement : pic_list){
+				                    JsonObject jo = jsonElement.getAsJsonObject();
+				                    PictureBean picture = gson.fromJson(jo, PictureBean.class);
+				                    piclist.add(picture);
+				                }                                
+                                if(departments.size()!=0){
+                                    for(DepartmentBean bean : departments){ 
+                            %>                                        
+                                        <div class="col-md-4 wow fadeInRight" data-wow-delay="200ms">
+                                            <!-- 此处容器调整错误，加了很多空行以补全bug -->
+                                            </br></br></br></br></br></br></br></br></br></br></br></br>
+                                            </br></br></br></br></br></br></br></br></br></br>
+                                            <% String url = basePath+"servlet/ProfessionalServlet?department_id="+bean.getDepartment_id(); %>
+                                            <a href="<%=url%>" target="_blank">
+                                            <article class="card">
+                                                <!-- item图片 -->
+                                                <header class="card__thumb">
+                                                    <% 
+	                                                    for(PictureBean pics : piclist){
+				                                            int is = bean.getDepartment_picture_id().compareTo(pics.getPicture_id());
+					                                        if(is == 0){
+					                                            String pic_url = basePath+pics.getPicture_img(); 
+					                                            %>
+	                                                               <img src="<%=pic_url%>" width="370" height="245">
+	                                                            <%				                                            
+		                                                    }
+	                                                    }
+                                                    %>
+                                                </header>
+                                                <!-- item说明 -->
+                                                <div class="card__body">
+                                                    <!-- <div class="card__category"><a href="#">小标签</a></div> -->
+                                                    <h2 class="card__title"><%=bean.getDepartment_name()%></h2>
+                                                    <div class="card__subtitle">查看详情>></div>
+                                                    <p class="card__description"><%=bean.getDepartment_caption()%></p>
+                                                </div>
+                                                <!-- 被隐藏的评论 -->
+                                                <!-- <footer class="card__footer">
+                                                    <span class="icon ion-clock"> 6分钟前</span>
+                                                    <span class="icon ion-chatbox"></span>
+                                                    <a href="#"> 42 评论</a>
+                                                </footer> -->
+                                            </article>
+                                            </a>
+                                            <br/>
+                                        </div>
+                                <%  
+	                                    }
+	                                }else{
+                                %>
+	                                    <!--app宣传div块-->
+	                                    <div class="section ">
+	                                        <div class="container">
+	                                            <div class="p-t-40 p-b-40  text-center">
+	                                                <h3 class="text-center">
+	                                                    项目大类加载失败，请重新尝试！</h3>
+	                                            </div>
+	                                        </div>
+	                                    </div>
+                              <%
+                                    } 
+                               %>
+                        </div>           			
                     	<div class="clearfix">
-
                     	</br></br>
                     	</div>
                 	</div>
@@ -628,21 +557,21 @@
     	</div>
     	
 	    <!-- bootstrap js支持 -->
-	    <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
+	    <script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
 	    <!-- 动画支持 -->
-	    <script type="text/javascript" src="<%=basePath%>plugins/pace/pace.min.js"></script>
-	    <script type="text/javascript" src="<%=basePath%>plugins/jquery-unveil/jquery.unveil.min.js"></script>
-	    <script type="text/javascript" src="<%=basePath%>plugins/owl-carousel/owl.carousel.min.js"></script>
-	    <script type="text/javascript" src="<%=basePath%>plugins/waypoints.min.js"></script>
-	    <!-- <script type="text/javascript" src="plugins/parrallax/js/jquery.parallax-1.1.3.js"></script> -->
-	    <script type="text/javascript" src="<%=basePath%>plugins/jquery-nicescroll/jquery.nicescroll.min.js"></script>
-	    <script type="text/javascript" src="<%=basePath%>plugins/jquery-appear/jquery.appear.js"></script>
-	    <script type="text/javascript" src="<%=basePath%>plugins/jquery-numberAnimate/jquery.animateNumbers.js"></script>
-	    <script type="text/javascript" src="<%=basePath%>js/core.js"></script>
+	    <script type="text/javascript" src="${pageContext.request.contextPath }/plugins/pace/pace.min.js"></script>
+	    <script type="text/javascript" src="${pageContext.request.contextPath }/plugins/jquery-unveil/jquery.unveil.min.js"></script>
+	    <script type="text/javascript" src="${pageContext.request.contextPath }/plugins/owl-carousel/owl.carousel.min.js"></script>
+	    <script type="text/javascript" src="${pageContext.request.contextPath }/plugins/waypoints.min.js"></script>
+	    <!-- <script type="text/javascript" src="${pageContext.request.contextPath }/plugins/parrallax/js/jquery.parallax-1.1.3.js"></script> -->
+	    <script type="text/javascript" src="${pageContext.request.contextPath }/plugins/jquery-nicescroll/jquery.nicescroll.min.js"></script>
+	    <script type="text/javascript" src="${pageContext.request.contextPath }/plugins/jquery-appear/jquery.appear.js"></script>
+	    <script type="text/javascript" src="${pageContext.request.contextPath }/plugins/jquery-numberAnimate/jquery.animateNumbers.js"></script>
+	    <script type="text/javascript" src="${pageContext.request.contextPath }/js/core.js"></script>
 	    <!-- wow页面滚动特效（大类item） -->
-	    <script type="text/javascript" src="<%=basePath%>js/wow.min.js"></script>
-	    <script type="text/javascript" src="<%=basePath%>js/site.js"></script>
+	    <script type="text/javascript" src="${pageContext.request.contextPath }/js/wow.min.js"></script>
+	    <script type="text/javascript" src="${pageContext.request.contextPath }/js/site.js"></script>
 	    <!-- 科技网络化背景特效（因性能问题暂时注释） -->
-	    <!-- <script type="text/javascript" src="js/canvas-nest.min.js"></script> -->             		
+	    <!-- <script type="text/javascript" src="${pageContext.request.contextPath }/js/canvas-nest.min.js"></script> -->             		
 	</body>
 </html>
