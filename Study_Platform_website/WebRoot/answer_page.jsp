@@ -5,7 +5,15 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<%@ page import="net.sf.json.JSONArray" %>
+<%@ page import="net.sf.json.JSONObject" %>
+<%@ page import="com.studyplatform.web.utils.*" %>
+<%@ page import="com.studyplatform.web.bean.*" %>
+<%@ page import="com.studyplatform.web.system.*" %>
+<%@ page import="java.util.*" %>
+<%@ page import="java.math.*" %>
+<%@ page import="com.google.gson.*" %>
+<%@ page import="com.studyplatform.web.servlet.formbean.*" %>
 <!-- html5 -->
 <!DOCTYPE HTML>
 <html>
@@ -60,7 +68,7 @@
 						</div>
 						<div class="navbar-collapse collapse">
 							<ul class="nav navbar-nav navbar-right">
-								<li><a href="${pageContext.request.contextPath }/index.jsp">首&nbsp;页</a></li>
+								<li><a href="${pageContext.request.contextPath }/default.jsp">首&nbsp;页</a></li>
 								<li><a href="#">专&nbsp;业&nbsp;大&nbsp;类</a></li>
 								<li><a href="#">推&nbsp;荐&nbsp;资&nbsp;源</a></li>
 								<li><a href="${pageContext.request.contextPath }/app_download.jsp">移&nbsp;动&nbsp;课&nbsp;堂</a></li>
@@ -85,130 +93,97 @@
 				</div>
 			</div>
 
+            <%
+                String user_answer_json = (String)request.getAttribute("user_answer_json");
+                
+                Gson gson = new Gson();
+                JsonObject answer_json = new JsonParser().parse(user_answer_json).getAsJsonObject();
+                JsonArray question_list = answer_json.get("root").getAsJsonArray();
+                ArrayList<ReplayQuestion> single_questions = new ArrayList<ReplayQuestion>();
+                ArrayList<ReplayQuestion> multi_questions = new ArrayList<ReplayQuestion>();
+                ArrayList<ReplayQuestion> judge_questions = new ArrayList<ReplayQuestion>();
+                for(JsonElement jsonElement : question_list){
+                    JsonObject jo = jsonElement.getAsJsonObject();
+                    ReplayQuestion question = gson.fromJson(jo, ReplayQuestion.class);
+                    switch(question.getQuestion_type()){
+                        case SystemCommonValue.EXAM_QUESTION_TYPE_SINGLE:
+                            single_questions.add(question);
+                            break;
+                            
+                        case SystemCommonValue.EXAM_QUESTION_TYPE_MULTI:
+                            multi_questions.add(question);
+                            break;
+                            
+                        case SystemCommonValue.EXAM_QUESTION_TYPE_JUDGE:
+                            judge_questions.add(question);
+                            break;
+                            
+                       default:
+                            break;
+                    }
+                }
+                
+               /*  for(JsonElement jsonElement : user_answer_list){
+                    JsonObject jo = jsonElement.getAsJsonObject();
+                    String answer = gson.fromJson(jo, String.class);
+                    user_answers.add(answer);
+                } */
+                
+             %>
+
 			<div class="container">
 				<div class="white bg-white padding-30">
                 <div id="testomonials" class="owl-carousel row">
-    				<!--题目-->
-                    <div class="item">
-                        <h4><span class="semi-bold">第1题</span>：关于sleep()和wait()，以下描述错误的一项是？关于sleep()和wait()，以下描述错误的一项是？关于sleep()和wait()，以下描述错误的一项是？关于sleep()和wait()，以下描述错误的一项是？</h4>
-                        <div class="middle">
-                            A、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                        </div>
-                        <div class="middle">
-                            B、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                        </div>
-                        <div class="middle">
-                            C、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                        </div>
-                        <div class="middle">
-                            D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                        </div>
-                        <div class="middle">
-                            E、不知道；<br>
-                        </div>
-                        <br>
-                        <div class="middle">
-                            <span class="semi-bold">您的答案为：A</span><br>
-                        </div>
-
-                        <div class="middle">
-                            <span class="semi-bold">正确答案为：A</span><br>
-                        </div>
-                        <div class="middle">
-                            <span class="semi-bold">解析：</span>D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <h4><span class="semi-bold">第1题</span>：关于sleep()和wait()，以下描述错误的一项是？关于sleep()和wait()，以下描述错误的一项是？关于sleep()和wait()，以下描述错误的一项是？关于sleep()和wait()，以下描述错误的一项是？</h4>
-                        <div class="middle">
-                            A、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                        </div>
-                        <div class="middle">
-                            B、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                        </div>
-                        <div class="middle">
-                            C、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                        </div>
-                        <div class="middle">
-                            D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                        </div>
-                        <div class="middle">
-                            E、不知道；<br>
-                        </div>
-                        <br>
-                        <div class="middle">
-                            <span class="semi-bold">您的答案为：A</span><br>
-                        </div>
-
-                        <div class="middle">
-                            <span class="semi-bold">正确答案为：A</span><br>
-                        </div>
-                        <div class="middle">
-                            <span class="semi-bold">解析：</span>D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <h4><span class="semi-bold">第1题</span>：关于sleep()和wait()，以下描述错误的一项是？关于sleep()和wait()，以下描述错误的一项是？关于sleep()和wait()，以下描述错误的一项是？关于sleep()和wait()，以下描述错误的一项是？</h4>
-                        <div class="middle">
-                            A、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                        </div>
-                        <div class="middle">
-                            B、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                        </div>
-                        <div class="middle">
-                            C、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                        </div>
-                        <div class="middle">
-                            D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                        </div>
-                        <div class="middle">
-                            E、不知道；<br>
-                        </div>
-                        <br>
-                        <div class="middle">
-                            <span class="semi-bold">您的答案为：A</span><br>
-                        </div>
-
-                        <div class="middle">
-                            <span class="semi-bold">正确答案为：A</span><br>
-                        </div>
-                        <div class="middle">
-                            <span class="semi-bold">解析：</span>D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <h4><span class="semi-bold">第1题</span>：关于sleep()和wait()，以下描述错误的一项是？关于sleep()和wait()，以下描述错误的一项是？关于sleep()和wait()，以下描述错误的一项是？关于sleep()和wait()，以下描述错误的一项是？</h4>
-                        <div class="middle">
-                            A、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                        </div>
-                        <div class="middle">
-                            B、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                        </div>
-                        <div class="middle">
-                            C、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                        </div>
-                        <div class="middle">
-                            D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                        </div>
-                        <div class="middle">
-                            E、不知道；<br>
-                        </div>
-                        <br>
-                        <div class="middle">
-                            <span class="semi-bold">您的答案为：A</span><br>
-                        </div>
-
-                        <div class="middle">
-                            <span class="semi-bold">正确答案为：A</span><br>
-                        </div>
-                        <div class="middle">
-                            <span class="semi-bold">解析：</span>D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                        </div>
-                    </div>
-                </div>
+                    <%  
+	                    int num = 0;
+	                    if(single_questions.size()!=0){
+	                        for(ReplayQuestion bean:single_questions){
+	                           num++;
+	                           OptionBean option = bean.getOption();
+	                           String stem = "第" + num + "题：" + bean.getQuestion_stem();
+	                            %>  
+	                                <!--题目-->
+				                    <div class="item">
+				                        <h4><span class="semi-bold">第<%=num %>题</span>：<%=bean.getQuestion_stem() %></h4>
+				                        <div class="middle">
+				                            A、<%=option.getOption_a()%><br>
+				                        </div>
+				                        <div class="middle">
+				                            B、<%=option.getOption_b()%><br>
+				                        </div>
+				                        <div class="middle">
+				                            C、<%=option.getOption_c()%><br>
+				                        </div>
+				                        <div class="middle">
+				                            D、<%=option.getOption_d()%><br>
+				                        </div>
+				                        <br>
+										<div class="middle">
+											<%
+											    if (bean.getUser_answer().isEmpty()) {
+											%>
+											<span class="semi-bold">您的答案为：<%=bean.getUser_answer()%>未填写</span><br>
+											<%
+											    } else {
+											%>
+											<span class="semi-bold">您的答案为：<%=bean.getUser_answer()%></span><br>
+											<%
+											    }
+											%>
+										</div>
+				
+										<div class="middle">
+				                            <span class="semi-bold">正确答案为：<%=bean.getQuestion_answer()%></span><br>
+				                        </div>
+				                        <div class="middle">
+				                            <span class="semi-bold">解析：</span><%=bean.getQuestion_analysis()%><br>
+				                        </div>
+				                    </div>
+	                            <%                                             
+	                        } 
+                        }
+                    %>
+              </div>
             </div>
         </div>
 

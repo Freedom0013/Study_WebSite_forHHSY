@@ -5,6 +5,15 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+<%@ page import="net.sf.json.JSONArray" %>
+<%@ page import="net.sf.json.JSONObject" %>
+<%@ page import="com.studyplatform.web.utils.*" %>
+<%@ page import="com.studyplatform.web.bean.*" %>
+<%@ page import="java.util.*" %>
+<%@ page import="java.math.*" %>
+<%@ page import="com.studyplatform.web.system.*" %>
+<%@ page import="org.apache.commons.lang3.math.*" %>
+<%@ page import="com.google.gson.*" %>
 
 <!-- html5 -->
 <!DOCTYPE HTML>
@@ -64,7 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 					<div class="navbar-collapse collapse">
 						<ul class="nav navbar-nav navbar-right">
-							<li><a href="${pageContext.request.contextPath }/index.jsp">首&nbsp;页</a></li>
+							<li><a href="${pageContext.request.contextPath }/default.jsp">首&nbsp;页</a></li>
 							<li><a href="#">专&nbsp;业&nbsp;大&nbsp;类</a></li>
 							<li><a href="#">推&nbsp;荐&nbsp;资&nbsp;源</a></li>
 							<li><a href="${pageContext.request.contextPath }/app_download.jsp">移&nbsp;动&nbsp;课&nbsp;堂</a></li>
@@ -91,26 +100,80 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="clearfix">
 					</div>
 				</div>
-
+                <% 
+                    int user_score = (Integer)request.getAttribute("user_score");
+                    String question_json_text = (String)request.getAttribute("question_json_text");
+                    String user_answer_json = (String)request.getAttribute("user_answer_json");
+                    String user_ans = user_answer_json.replaceAll("\"", "\'");
+                %>
+                
 				<div class="container">
 					<div class="portfolio-grid portfolioContainer ">
 						<div class="score-container">
 							<h1 class="score-row score-skew-title">  
 								<span>您</span><span>的</span><span>分</span><span>数</span><span>为</span><span class="last">：</span>
-
-								<span class="alt">1</span><span class="alt">0</span><span class="alt">0</span><span class="alt">分</span><span class="alt">!</span><span class="score-alt last">!</span>
+								<%
+								    if (user_score < 100) {
+								%>
+								    <span class="alt"><%=user_score%></span>
+								<%
+								    } else {
+								%>
+								    <span class="alt">满</span>
+								<%
+								    }
+								%>
+								<span class="alt">分</span><span class="alt">!</span><span class="score-alt last">!</span>
 								<!-- <span>T</span><span>E</span><span>X</span><span class="last">T</span> -->
 							</h1>
 						</div>
 					</div>
 				</div>
 				<div class="text-center">
-					<a href="${pageContext.request.contextPath }/answer_page.jsp" class="btn btn-primary btn-lg  btn-large m-r-10">查看答案</a>
+				    <form action="${pageContext.request.contextPath }/servlet/AnswerServlet" target="_blank">
+                        <%-- <input type="hidden" value="<%=question_json_text %>" name="question_json_text"> --%>
+                        <input type="hidden" value="<%=user_ans %>" name="user_answer_json">
+                        <input type="submit" value="查看答案" id="tjbox_submit" class="btn btn-primary btn-lg  btn-large m-r-10">
+                    </form>
 				</div>
 			</div>
 		</div>
 
-		<!-- 专业内容 -->
+		<%
+		    String resourses_json = (String) request.getAttribute("resourses_json");
+		    Gson gson = new Gson();
+		    JsonObject rootJson = new JsonParser().parse(resourses_json).getAsJsonObject();
+		    JsonArray resourses_list = rootJson.get("root").getAsJsonArray();
+		    ArrayList<ResourceBean> allres = new ArrayList<ResourceBean>();
+		    ArrayList<ResourceBean> video_list = new ArrayList<ResourceBean>();
+		    ArrayList<ResourceBean> book_list = new ArrayList<ResourceBean>();
+		    for (JsonElement jsonElement : resourses_list) {
+		        JsonObject jo = jsonElement.getAsJsonObject();
+		        ResourceBean resource = gson.fromJson(jo, ResourceBean.class);
+		        switch (resource.getResource_type()) {
+		        case SystemCommonValue.RESOURCE_CATEGORY_VIDEO:
+		            video_list.add(resource);
+		            break;
+		        case SystemCommonValue.RESOURCE_CATEGORY_BOOK:
+		            book_list.add(resource);
+		            break;
+		        }
+		        allres.add(resource);
+		    }
+
+		    String pic_json = (String) request.getAttribute("pic_json");
+		    Gson gson_pic = new Gson();
+		    JsonObject rootJson_pic = new JsonParser().parse(pic_json).getAsJsonObject();
+		    JsonArray pic_list = rootJson_pic.get("pic").getAsJsonArray();
+		    ArrayList<PictureBean> piclist = new ArrayList<PictureBean>();
+		    for (JsonElement jsonElement : pic_list) {
+		        JsonObject jo = jsonElement.getAsJsonObject();
+		        PictureBean picture = gson.fromJson(jo, PictureBean.class);
+		        piclist.add(picture);
+		    }
+		%>
+
+		<!-- 推荐资源-->
 		<div class="section bg-white">
 			<div class=" p-b-60">
 				<!-- 大标题 -->
@@ -118,78 +181,63 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="container">
 						<div class="row">
 							<div class="col-md-6">
-								<h2 class="semi-bold">
-								推荐资源</h2>
+								<h2 class="semi-bold">根据您的成绩帮您智能推荐下列资源！</h2>
 							</div>
 						</div>
 					</div>
-					<div class="clearfix">
-					</div>
+					<div class="clearfix"></div>
 				</div>
 
 				<div class="container">
 					<div class="portfolio-grid portfolioContainer ">
 						<ul id="thumbs" class="col3">
-							<!-- 1 -->
+							<%
+							    for (ResourceBean bean : allres) {
+							%>
+							<!-- item -->
 							<li class="item web">
 								<div class="portfolio-image-wrapper">
-									<img src="images/system_images/course_xinxi1.1_icon.jpg" width="531" hight="387" alt="" />
+									<%
+									    for (PictureBean pics : piclist) {
+									            int is = bean.getResource_picture_id().compareTo(pics.getPicture_id());
+									            if (is == 0) {
+									                String pic_urls = basePath + pics.getPicture_img();
+									%>
+									<a href="<%=bean.getResource_detail()%>" target="_blank"> <img
+										src="<%=pic_urls%>" width="531" hight="387" alt="" />
+									</a>
+									<%
+									    break;
+									            }
+									        }
+									%>
 									<!-- 鼠标停留覆盖栏 -->
 									<div class="item-info-overlay">
 										<div>
-											<h3 class="text-white semi-bold p-t-60 project-title ">java基础教程</h3>
-											<p class="project-description">2018-01-25 17:49:46</p>
+											<p class="project-description p-t-20 linethree"><%=bean.getResource_caption()%></p>
+											<p class="project-description">
+												更新时间：<%=bean.getResource_addtime()%></p>
 										</div>
 									</div>
-								</div>
-								<!-- 说明 -->
+								</div> <!-- 说明 -->
 								<div class="item-info">
-									<h4 class="text-dark no-margin p-t-10 title semi-bold">java基础教程</h4>
-									<p>2018-01-25 17:49:46</p>
+									<a href="<%=bean.getResource_detail()%>" target="_blank">
+										<h4 class="text-dark no-margin p-t-10 title semi-bold">
+											<%
+											    if (bean.getResource_type() == SystemCommonValue.RESOURCE_CATEGORY_VIDEO) {
+											%>(视频)<%
+											    } else if (bean.getResource_type() == SystemCommonValue.RESOURCE_CATEGORY_BOOK) {
+											%>(书籍)<%
+											    }
+											%><%=bean.getResource_name()%></h4>
+									</a>
+									<p>更新时间：<%=bean.getResource_addtime()%></p>
 								</div>
-								<div class="clearfix">
-								</div>
+								<div class="clearfix"></div>
 							</li>
-
-							<li class="item web">
-								<div class="portfolio-image-wrapper">
-									<img src="images/system_images/course_xinxi1.1_icon.jpg" width="531" hight="387" alt="" />
-									<!-- 鼠标停留覆盖栏 -->
-									<div class="item-info-overlay">
-										<div>
-											<h3 class="text-white semi-bold p-t-60 project-title ">java基础教程</h3>
-											<p class="project-description">2018-01-25 17:49:46</p>
-										</div>
-									</div>
-								</div>
-								<!-- 说明 -->
-								<div class="item-info">
-									<h4 class="text-dark no-margin p-t-10 title semi-bold">java基础教程</h4>
-									<p>2018-01-25 17:49:46</p>
-								</div>
-								<div class="clearfix">
-								</div>
-							</li>
-
-							<li class="item web">
-								<div class="portfolio-image-wrapper">
-									<img src="images/system_images/course_xinxi1.1_icon.jpg" width="531" hight="387" alt="" />
-									<!-- 鼠标停留覆盖栏 -->
-									<div class="item-info-overlay">
-										<div>
-											<h3 class="text-white semi-bold p-t-60 project-title ">java基础教程</h3>
-											<p class="project-description">2018-01-25 17:49:46</p>
-										</div>
-									</div>
-								</div>
-								<!-- 说明 -->
-								<div class="item-info">
-									<h4 class="text-dark no-margin p-t-10 title semi-bold">java基础教程</h4>
-									<p>2018-01-25 17:49:46</p>
-								</div>
-								<div class="clearfix">
-								</div>
-							</li>
+							<%
+							    }
+							%>
 						</ul>
 					</div>
 				</div>

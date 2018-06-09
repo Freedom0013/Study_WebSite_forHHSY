@@ -34,26 +34,31 @@ public class QuestionServlet extends HttpServlet {
         //控制字符集
         WebUtils.setCharSet(request, response);
         
+        //获取上级页面传递的课程id
         String course_id = (String) request.getParameter("course_id");
         int courseid = Integer.parseInt(course_id);
         
         QuestionService service = new QuestionServiceImpl();
         
+        //生成试题
         ArrayList<QuestionBean> questionlist = (ArrayList<QuestionBean>) service.getRandomExaminationByCourse(courseid);
         
+        //封装试题json
         JSONObject question_json = new JSONObject();
         question_json.element("root", JSONArray.fromObject(questionlist));
         DebugUtils.showLog(question_json.toString());
         
+        //响应
         request.setAttribute("question_json",question_json.toString());
         request.setAttribute("course_id", course_id);
         
+        //页面跳转
         RequestDispatcher dispatcher = request.getRequestDispatcher("/test_page.jsp");
         dispatcher.forward(request, response);
     }
     
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    
+        doGet(request, response);
     }
     
     public QuestionServlet() {

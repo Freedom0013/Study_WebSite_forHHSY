@@ -51,13 +51,16 @@ public class ExaminationServlet extends HttpServlet {
         String question_json_text = request.getParameter("question_json_text");
         String text_questions = question_json_text.replaceAll("\'", "\"");
         
+        //获取课程id
         String course_id = request.getParameter("course_id");
+        //做题记录功能待完善
 //        String user_id = request.getParameter("user_id");
         int courseid = Integer.parseInt(course_id);
 //        if(user_id!=null){
 //            int userid = Integer.parseInt(user_id);
 //        }
         
+        //解析页面传来的做题内容
         Gson gson = new Gson();
         JsonObject rootJson = new JsonParser().parse(text_questions).getAsJsonObject();
         JsonArray question_list = rootJson.get("root").getAsJsonArray();
@@ -68,6 +71,7 @@ public class ExaminationServlet extends HttpServlet {
             page_questions.add(question);
         }
         
+        //评分
         int score = 0;
         int index = 0;
         JSONObject user_answer_json = new JSONObject();
@@ -86,7 +90,7 @@ public class ExaminationServlet extends HttpServlet {
         }
         user_answer_json.element("root", JSONArray.fromObject(user_answer_list));
         
-        
+        //推荐资源
         ResourceService rescourse_service = new ResourceServiceImpl();
         ArrayList<ResourceBean> resourseslist = null;
         if(score>=80 && score<=100){
@@ -97,6 +101,7 @@ public class ExaminationServlet extends HttpServlet {
             resourseslist = (ArrayList<ResourceBean>) rescourse_service.getResourceByDegree(SystemCommonValue.RESOURCE_TYPE_PRIMARY, courseid);
         }
         
+        //当推荐资源不等于空，向页面传递资源json
         if(resourseslist!=null && resourseslist.size()!=0){
             JSONObject resourses = new JSONObject();
             resourses.element("root", JSONArray.fromObject(resourseslist));
@@ -115,11 +120,13 @@ public class ExaminationServlet extends HttpServlet {
             request.setAttribute("pic_json",pic_json.toString());
         }
         
+        //传递数据
         DebugUtils.showLog(user_answer_json.toString());
         request.setAttribute("user_answer_json",user_answer_json.toString());
         request.setAttribute("question_json_text", question_json_text);
         request.setAttribute("user_score",score);
         
+        //页面跳转
         RequestDispatcher dispatcher = request.getRequestDispatcher("/test_result.jsp");
         dispatcher.forward(request, response);
     }

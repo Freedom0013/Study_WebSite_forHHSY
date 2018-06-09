@@ -5,6 +5,15 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+<%@ page import="net.sf.json.JSONArray" %>
+<%@ page import="net.sf.json.JSONObject" %>
+<%@ page import="com.studyplatform.web.utils.*" %>
+<%@ page import="com.studyplatform.web.bean.*" %>
+<%@ page import="java.util.*" %>
+<%@ page import="java.math.*" %>
+<%@ page import="org.apache.commons.lang3.math.*" %>
+<%@ page import="com.google.gson.*" %>
+<%@ page import="com.studyplatform.web.system.*" %>
 
 <!DOCTYPE HTML>
 <html>
@@ -56,7 +65,7 @@
 						</div>
 						<div class="navbar-collapse collapse">
 							<ul class="nav navbar-nav navbar-right">
-								<li><a href="${pageContext.request.contextPath }/index.jsp">首&nbsp;页</a></li>
+								<li><a href="${pageContext.request.contextPath }/default.jsp">首&nbsp;页</a></li>
 								<li><a href="#">专&nbsp;业&nbsp;大&nbsp;类</a></li>
 								<li><a href="#">推&nbsp;荐&nbsp;资&nbsp;源</a></li>
 								<li><a href="${pageContext.request.contextPath }/app_download.jsp">移&nbsp;动&nbsp;课&nbsp;堂</a></li>
@@ -66,6 +75,40 @@
 					</div>
 				</div>
 			</div>
+			
+			<%
+                String question_json = (String)request.getAttribute("question_json");
+                String course_id = (String)request.getAttribute("course_id");
+                Gson gson = new Gson();
+                JsonObject rootJson = new JsonParser().parse(question_json).getAsJsonObject();
+                JsonArray question_list = rootJson.get("root").getAsJsonArray();
+                ArrayList<QuestionBean> single_questions = new ArrayList<QuestionBean>();
+                ArrayList<QuestionBean> multi_questions = new ArrayList<QuestionBean>();
+                ArrayList<QuestionBean> judge_questions = new ArrayList<QuestionBean>();
+                for(JsonElement jsonElement : question_list){
+                    JsonObject jo = jsonElement.getAsJsonObject();
+                    QuestionBean question = gson.fromJson(jo, QuestionBean.class);
+                    switch(question.getQuestion_type()){
+                        case SystemCommonValue.EXAM_QUESTION_TYPE_SINGLE:
+                            single_questions.add(question);
+                            break;
+                            
+                        case SystemCommonValue.EXAM_QUESTION_TYPE_MULTI:
+                            multi_questions.add(question);
+                            break;
+                            
+                        case SystemCommonValue.EXAM_QUESTION_TYPE_JUDGE:
+                            judge_questions.add(question);
+                            break;
+                            
+                       default:
+                            break;
+                    }
+                }
+             %>
+			
+			
+			
 			
 			<div class="section first white">
 				<!-- 大标题 -->
@@ -81,120 +124,171 @@
 				</div>
 			</div>
 
-			<div class="container">
-				<div class="white bg-white padding-30">
-               <!-- <div>
+            <%
+            if (single_questions.size() == 0 && multi_questions.size() == 0 && judge_questions.size() == 0) {
+            %>
+                <div>
                     <h2>没有该课程试题，正拼命完善中..</h2>
-                </div>  --> 
-
-                <div id="testomonials" class="owl-carousel row">
-                	<!--题目-->
-                	<div class="item">
-                		<h4><span class="semi-bold">第1题</span>：关于sleep()和wait()，以下描述错误的一项是？关于sleep()和wait()，以下描述错误的一项是？关于sleep()和wait()，以下描述错误的一项是？关于sleep()和wait()，以下描述错误的一项是？</h4>
-                		<div class="middle">
-                			<input type="radio" name="1" class="regular-radio-test" id="radio1" value="A" /><label for="radio1"></label>
-                			A、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                		</div>
-                		<div class="middle">
-                			<input type="radio" name="1" class="regular-radio-test" id="radio2" value="B" /><label for="radio2"></label>
-                			B、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                		</div>
-                		<div class="middle">
-                			<input type="radio" name="1" class="regular-radio-test" id="radio3" value="C" /><label for="radio3"></label>
-                			C、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                		</div>
-                		<div class="middle">
-                			<input type="radio" name="1" class="regular-radio-test" id="radio4" value="D" /><label for="radio4"></label>
-                			D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                		</div>
-                		<div class="middle">
-                			<input type="radio" name="1" class="regular-radio-test" id="radio5" value="E" checked/><label for="radio5"></label>
-                			E、不知道；<br>
-                		</div>
-                	</div>
-
-                	<!--题目-->
-                	<div class="item">
-                		<h4><span class="semi-bold">第2题</span>：关于sleep()和wait()，以下描述错误的一项是？关于sleep()和wait()，以下描述错误的一项是？关于sleep()和wait()，以下描述错误的一项是？关于sleep()和wait()，以下描述错误的一项是？</h4>
-                		<div class="middle">
-                			<input type="radio" name="2" class="regular-radio-test" id="radio6" value="A" /><label for="radio6"></label>
-                			A、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                		</div>
-                		<div class="middle">
-                			<input type="radio" name="2" class="regular-radio-test" id="radio7" value="B" /><label for="radio7"></label>
-                			B、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                		</div>
-                		<div class="middle">
-                			<input type="radio" name="2" class="regular-radio-test" id="radio8" value="C" /><label for="radio8"></label>
-                			C、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                		</div>
-                		<div class="middle">
-                			<input type="radio" name="2" class="regular-radio-test" id="radio9" value="D" /><label for="radio9"></label>
-                			D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                		</div>
-                		<div class="middle">
-                			<input type="radio" name="2" class="regular-radio-test" id="radio10" value="E" checked/><label for="radio10"></label>
-                			E、不知道；<br>
-                		</div>
-                	</div>
-
-                	<!--题目-->
-                	<div class="item">
-                		<h4><span class="semi-bold">第3题</span>：关于sleep()和wait()，以下描述错误的一项是？关于sleep()和wait()，以下描述错误的一项是？关于sleep()和wait()，以下描述错误的一项是？关于sleep()和wait()，以下描述错误的一项是？</h4>
-                		<div class="middle">
-                			<input type="radio" name="3" class="regular-radio-test" id="radio11" value="A" /><label for="radio11"></label>
-                			A、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                		</div>
-                		<div class="middle">
-                			<input type="radio" name="3" class="regular-radio-test" id="radio12" value="B" /><label for="radio12"></label>
-                			B、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                		</div>
-                		<div class="middle">
-                			<input type="radio" name="3" class="regular-radio-test" id="radio13" value="C" /><label for="radio13"></label>
-                			C、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                		</div>
-                		<div class="middle">
-                			<input type="radio" name="3" class="regular-radio-test" id="radio14" value="D" /><label for="radio14"></label>
-                			D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                		</div>
-                		<div class="middle">
-                			<input type="radio" name="3" class="regular-radio-test" id="radio15" value="E" checked/><label for="radio15"></label>
-                			E、不知道；<br>
-                		</div>
-                	</div>
-
-                	<!--题目-->
-                	<div class="item">
-                		<h4><span class="semi-bold">第4题</span>：关于sleep()和wait()，以下描述错误的一项是？关于sleep()和wait()，以下描述错误的一项是？关于sleep()和wait()，以下描述错误的一项是？关于sleep()和wait()，以下描述错误的一项是？</h4>
-                		<div class="middle">
-                			<input type="radio" name="4" class="regular-radio-test" id="radio16" value="A" /><label for="radio16"></label>
-                			A、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                		</div>
-                		<div class="middle">
-                			<input type="radio" name="4" class="regular-radio-test" id="radio17" value="B" /><label for="radio17"></label>
-                			B、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                		</div>
-                		<div class="middle">
-                			<input type="radio" name="4" class="regular-radio-test" id="radio18" value="C" /><label for="radio18"></label>
-                			C、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                		</div>
-                		<div class="middle">
-                			<input type="radio" name="4" class="regular-radio-test" id="radio19" value="D" /><label for="radio19"></label>
-                			D、sleep是线程类（Thread）的方法，wait是Object类的方法；sleep不释放对象锁，wait放弃对象锁；<br>
-                		</div>
-                		<div class="middle">
-                			<input type="radio" name="4" class="regular-radio-test" id="radio20" value="E" checked/><label for="radio20"></label>
-                			E、不知道；<br>
-                		</div>
-                	</div>
                 </div>
-            </div>
-        </div>
-
-        <div class="p-t-10 p-b-20 text-center">
-        	<a href="${pageContext.request.contextPath }/test_result.jsp" class="btn btn-primary btn-lg  btn-large m-r-10">现在交卷！</a>
-        </div>
-
+            <%
+            } else {
+            %>
+            <form action="${pageContext.request.contextPath }/servlet/ExaminationServlet" method="post">
+                <div class="container">
+                    <div class="white bg-white padding-30">
+                        <div id="testomonials" class="owl-carousel row">
+                            <%  
+                            int num = 0;
+                            if(single_questions.size()!=0 && single_questions !=null){
+                                for(QuestionBean bean:single_questions){
+                                   num++;
+                                   OptionBean option = bean.getOption();
+                                   String stem = "第" + num + "题：" + bean.getQuestion_stem();
+                                   %>  
+                                        <!--题目-->
+                                        <div class="item">
+                                            <h4><span class="semi-bold">第<%=num%>题</span>：<%=bean.getQuestion_stem() %>（单选）</h4>
+		                                    <div class="middle">
+		                                        <%String id = num + "A"; %>  
+		                                        <input type="radio" name="<%=bean.getQuestion_id()%>" class="regular-radio-test" id="<%=id %>" value="A" /><label for="<%=id%>"></label>
+		                                        A、<%=option.getOption_a()%><br>
+		                                    </div>
+		                                    <div class="middle">
+                                                <%id = num + "B"; %>  
+		                                        <input type="radio" name="<%=bean.getQuestion_id()%>" class="regular-radio-test" id="<%=id%>" value="B" /><label for="<%=id%>"></label>
+		                                        B、<%=option.getOption_b()%><br>
+		                                    </div>
+		                                    <div class="middle">
+                                                <%id = num + "C"; %>  
+		                                        <input type="radio" name="<%=bean.getQuestion_id()%>" class="regular-radio-test" id="<%=id%>" value="C" /><label for="<%=id%>"></label>
+		                                        C、<%=option.getOption_c()%><br>
+		                                    </div>
+		                                    <div class="middle">
+                                                <%id = num + "D"; %>  
+		                                        <input type="radio" name="<%=bean.getQuestion_id()%>" class="regular-radio-test" id="<%=id%>" value="D" /><label for="<%=id%>"></label>
+		                                        D、<%=option.getOption_d()%><br>
+		                                    </div>
+		                                    <div class="middle">
+                                                <%id = num + "E"; %>  
+		                                        <input type="radio" name="<%=bean.getQuestion_id()%>" class="regular-radio-test" id="<%=id%>" value="null" checked/><label for="<%=id%>"></label>
+		                                        E、不知道；<br>
+		                                    </div>
+                                        </div>
+                            <%                                             
+                                } 
+                            }else if(multi_questions.size()!=0 && multi_questions !=null){
+                                for(QuestionBean bean:multi_questions){
+                                   num++;
+                                   OptionBean option = bean.getOption();
+                                   String stem = "第" + num + "题：" + bean.getQuestion_stem();
+                            %>  
+                                        <!--题目-->
+                                        <div class="item">
+                                            <h4><span class="semi-bold">第<%=num%>题</span>：<%=bean.getQuestion_stem() %>（多选）</h4>
+                                            <div class="middle">
+                                                <%String idd = num + "A"; %> 
+                                                <input type="radio" name="<%=bean.getQuestion_id()%>" class="regular-radio-test" id="<%=idd%>" value="A" /><label for="<%=idd%>"></label>
+                                                A、<%=option.getOption_a()%><br>
+                                            </div>
+                                            <div class="middle">
+                                                <%idd = num + "B"; %> 
+                                                <input type="radio" name="<%=bean.getQuestion_id()%>" class="regular-radio-test" id="<%=idd%>" value="B" /><label for="<%=idd%>"></label>
+                                                B、<%=option.getOption_b()%><br>
+                                            </div>
+                                            <div class="middle">
+                                                <%idd = num + "C"; %> 
+                                                <input type="radio" name="<%=bean.getQuestion_id()%>" class="regular-radio-test" id="<%=idd%>" value="C" /><label for="<%=idd%>"></label>
+                                                C、<%=option.getOption_c()%><br>
+                                            </div>
+                                            <div class="middle">
+                                                <%idd = num + "D"; %> 
+                                                <input type="radio" name="<%=bean.getQuestion_id()%>" class="regular-radio-test" id="<%=idd%>" value="D" /><label for="<%=idd%>"></label>
+                                                D、<%=option.getOption_d()%><br>
+                                            </div>
+	                                        <%  
+	                                            if(option.getOption_e()!=null){
+	                                                %>
+	                                                <div class="middle">
+	                                                   <%idd = num + "E"; %>
+		                                                <input type="radio" name="<%=bean.getQuestion_id()%>" class="regular-radio-test" id="<%=idd%>" value="E"/><label for="<%=idd%>"></label>
+		                                                E、<%=option.getOption_e()%><br>
+	                                                </div>
+	                                                <%
+	                                            }
+	                                        %>
+	                                        <%  
+	                                            if(option.getOption_f()!=null){
+	                                                %>
+	                                                <div class="middle">
+	                                                   <%idd = num + "F"; %>
+	                                                    <input type="radio" name="<%=bean.getQuestion_id()%>" class="regular-radio-test" id="<%=idd%>" value="F"/><label for="<%=idd%>"></label>
+	                                                    F、<%=option.getOption_f()%><br>
+	                                                </div>
+	                                                <%
+	                                            }
+	                                        %>
+	                                        <%  
+	                                            if(option.getOption_g()!=null){
+	                                                %>
+	                                                <div class="middle">
+	                                                   <%idd = num + "G"; %>
+	                                                    <input type="radio" name="<%=bean.getQuestion_id()%>" class="regular-radio-test" id="<%=idd%>" value="G"/><label for="<%=idd%>"></label>
+	                                                    G、<%=option.getOption_g()%><br>
+	                                                </div>
+	                                                <%
+	                                            }
+	                                        %>
+	                                        <div class="middle">
+	                                           <%idd = num + "F"; %>
+	                                             <input type="radio" name="<%=bean.getQuestion_id()%>" class="regular-radio-test" id="<%=idd%>" value="null" checked/><label for="<%=idd%>"></label>
+	                                                                                                                                        不知道；<br>
+	                                        </div>
+	                                    </div>
+                            <%                                             
+                                } 
+                            }else if(judge_questions.size()!=0 && judge_questions !=null){
+                                for(QuestionBean bean:judge_questions){
+                                   num++;
+                                   String stem = "第" + num + "题：" + bean.getQuestion_stem();
+                            %>
+                                    <!--题目-->
+                                        <div class="item">
+                                            <h4><span class="semi-bold">第<%=num%>题</span>：<%=bean.getQuestion_stem() %>（判断）</h4>
+                                            <div class="middle">
+                                            <%String ida = num + "A"; %> 
+                                                <input type="radio" name="<%=bean.getQuestion_id()%>" class="regular-radio-test" id="<%=ida%>" value="A" /><label for="<%=ida%>"></label>
+                                                A、正确！<br>
+                                            </div>
+                                            <div class="middle">
+                                            <%ida = num + "B"; %> 
+                                                <input type="radio" name="<%=bean.getQuestion_id()%>" class="regular-radio-test" id="<%=ida%>" value="B" /><label for="<%=ida%>"></label>
+                                                A、错误！<br>
+                                            </div>
+                                            <div class="middle">
+                                            <%ida = num + "C"; %> 
+                                                <input type="radio" name="<%=bean.getQuestion_id()%>" class="regular-radio-test" id="<%=ida%>" value="null" checked/><label for="<%=ida%>"></label>
+                                                C、不知道；<br>
+                                            </div>
+                                        </div>
+                            <%                                             
+                                } 
+                            }    
+                            String qu = question_json.replaceAll("\"", "\'");
+                         %>                              
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" value="<%=qu %>" name="question_json_text" />
+                <input type="hidden" value="<%=course_id %>" name="course_id" />
+                <input type="hidden" value="${user.user_id}" name="user_id" />
+		        <div class="p-t-10 p-b-20 text-center">
+		        	<input type="submit" id="button1111" class="btn btn-primary btn-lg  btn-large m-r-10" value = "现在交卷！">
+		        </div>
+            </form>
+        <%
+        }
+        %>   
+        
         <!-- footer块 -->
         <div class="section white footer">
         	<div class="container">
