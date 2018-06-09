@@ -34,30 +34,38 @@ public class CourseServlet extends HttpServlet {
         //控制字符集
         WebUtils.setCharSet(request, response);
         
+        //获取上级页面传入的专业id
         String professions_id = (String) request.getParameter("professions_id");
         int professionsid = Integer.parseInt(professions_id);
         
         CourseService service = new CourseServiceImpl();
         
+        //加载课程列表
         ArrayList<CourseBean> courseList = (ArrayList<CourseBean>) service.getAllCourseByProId(professionsid);
-        JSONObject course_json = new JSONObject();
-        course_json.element("root", JSONArray.fromObject(courseList));
-        DebugUtils.showLog(course_json.toString());
         
-        
+        //加载课程图片列表
         PictureService pic_service = new PictureServiceImpl();
         ArrayList<PictureBean> pic_list = new ArrayList<PictureBean>();
         for(CourseBean bean : courseList){
             PictureBean pic = pic_service.getPictureById(bean.getCourse_picture_id());
             pic_list.add(pic);
         }
+        
+        //封装课程信息json
+        JSONObject course_json = new JSONObject();
+        course_json.element("root", JSONArray.fromObject(courseList));
+        DebugUtils.showLog(course_json.toString());
+        
+        //封装课程图片json
         JSONObject pic_json = new JSONObject();
         pic_json.element("pic", JSONArray.fromObject(pic_list));
         DebugUtils.showLog(pic_json.toString());
         
+        //响应数据
         request.setAttribute("course_json",course_json.toString());
         request.setAttribute("pic_json",pic_json.toString());
         
+        //页面跳转
         RequestDispatcher dispatcher = request.getRequestDispatcher("/course.jsp");
         dispatcher.forward(request, response);
     }

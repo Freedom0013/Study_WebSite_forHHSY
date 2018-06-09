@@ -5,6 +5,14 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+<%@ page import="net.sf.json.JSONArray" %>
+<%@ page import="net.sf.json.JSONObject" %>
+<%@ page import="com.studyplatform.web.utils.*" %>
+<%@ page import="com.studyplatform.web.bean.*" %>
+<%@ page import="java.util.*" %>
+<%@ page import="java.math.*" %>
+<%@ page import="org.apache.commons.lang3.math.*" %>
+<%@ page import="com.google.gson.*" %>
 
 <!DOCTYPE HTML>
 <html>
@@ -62,7 +70,7 @@
 
                         <div class="navbar-collapse collapse">
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a href="${pageContext.request.contextPath }/index.jsp">首&nbsp;页</a></li>
+                                <li><a href="${pageContext.request.contextPath }/default.jsp">首&nbsp;页</a></li>
                                 <li><a href="#">专&nbsp;业&nbsp;大&nbsp;类</a></li>
                                 <li><a href="#">推&nbsp;荐&nbsp;资&nbsp;源</a></li>
                                 <li><a href="${pageContext.request.contextPath }/app_download.jsp">移&nbsp;动&nbsp;课&nbsp;堂</a></li>
@@ -73,16 +81,63 @@
                 </div>
             </div>
 
-            <!-- 专业内容 -->
+		<%
+		    String course_list_json = (String) request.getAttribute("course_json");
+		    Gson gson = new Gson();
+		    JsonObject rootJson = new JsonParser().parse(course_list_json).getAsJsonObject();
+		    JsonArray cou_list = rootJson.get("root").getAsJsonArray();
+		    ArrayList<CourseBean> courses_first = new ArrayList<CourseBean>();
+		    ArrayList<CourseBean> courses_second = new ArrayList<CourseBean>();
+		    ArrayList<CourseBean> courses_third = new ArrayList<CourseBean>();
+		    ArrayList<CourseBean> courses_fourth = new ArrayList<CourseBean>();
+
+		    for (JsonElement jsonElement : cou_list) {
+		        JsonObject jo = jsonElement.getAsJsonObject();
+		        CourseBean course = gson.fromJson(jo, CourseBean.class);
+		        switch (course.getCourse_degree()) {
+		        case 1:
+		            courses_first.add(course);
+		            break;
+		        case 2:
+		            courses_second.add(course);
+		            break;
+		        case 3:
+		            courses_third.add(course);
+		            break;
+		        case 4:
+		            courses_fourth.add(course);
+		            break;
+		        default:
+		            courses_fourth.add(course);
+		            break;
+		        }
+		    }
+
+		    String pic_json = (String) request.getAttribute("pic_json");
+		    Gson gson_pic = new Gson();
+		    JsonObject rootJson_pic = new JsonParser().parse(pic_json).getAsJsonObject();
+		    JsonArray pic_list = rootJson_pic.get("pic").getAsJsonArray();
+		    ArrayList<PictureBean> piclist = new ArrayList<PictureBean>();
+		    for (JsonElement jsonElement : pic_list) {
+		        JsonObject jo = jsonElement.getAsJsonObject();
+		        PictureBean picture = gson.fromJson(jo, PictureBean.class);
+		        piclist.add(picture);
+		    }
+		%>
+
+		<!-- 专业内容 -->
             <div class="section first white">
                 <div class=" p-b-60">
+                <% 
+                    if(courses_first.size()!=0){
+                %>
                     <!-- 大标题 -->
                     <div class="section grey p-t-20  p-b-20 m-b-50">
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-6">
                                     <h2 class="semi-bold">
-                                    初阶课程</h2>
+                                                                                                                初阶课程</h2>
                                 </div>
                                 
                             </div>
@@ -94,139 +149,131 @@
                     <div class="container">
                         <div class="portfolio-grid portfolioContainer ">
                             <ul id="thumbs" class="col3">
-                                <!-- 1 -->
-                                <li class="item web">
-                                    <a href="${pageContext.request.contextPath }/course.jsp">
-                                        <div class="portfolio-image-wrapper">
-                                            <img src="${pageContext.request.contextPath }/images/system_images/course_xinxi1.1_icon.jpg" width="531" hight="387" alt="" />
-                                            <!-- 鼠标停留覆盖栏 -->
-                                            <div class="item-info-overlay">
-                                                <div>
-                                                    <h3 class="text-white semi-bold p-t-60 project-title ">java基础教程</h3>
-                                                    <p class="project-description">2018-01-25 17:49:46</p>
+                                <%
+			                         for(CourseBean bean : courses_first){
+			                             String url = basePath+"servlet/CourseDetailServlet?course_id="+bean.getCourse_id();
+			                    %>
+                                        <!-- item -->
+		                                <li class="item web">
+		                                    <a href="<%=url %>" target="_blank">
+		                                        <div class="portfolio-image-wrapper">
+		                                            <%
+		                                              for(PictureBean pics : piclist){
+                                                          int is = bean.getCourse_picture_id().compareTo(pics.getPicture_id());
+                                                          if(is == 0){
+                                                              String pic_urls = basePath+pics.getPicture_img();
+                                                    %>
+		                                                      <img src="<%=pic_urls %>" width="531" hight="387" alt="" />
+		                                            <%        
+		                                                      break;
+                                                          }
+                                                      } 
+                                                    %>
+		                                            <!-- 鼠标停留覆盖栏 -->
+		                                            <div class="item-info-overlay">
+		                                                <div>
+		                                                    <h3 class="text-white semi-bold p-t-60 project-title "><%=bean.getCourse_applypeople() %></h3>
+		                                                    <p class="project-description">更新时间：<%=bean.getCourse_addtime() %></p>
+		                                                </div>
+		                                            </div>
+		                                        </div>
+		                                        <!-- 说明 -->
+		                                        <div class="item-info">
+		                                            <h4 class="text-dark no-margin p-t-10 title semi-bold"><%=bean.getCourse_name() %></h4>
+		                                            <p>更新时间：<%=bean.getCourse_addtime() %></p>
+		                                        </div>
+		                                        <div class="clearfix">
+		                                        </div>
+		                                    </a>
+		                                </li>
+                                <%                                  
+                                     }
+                                %> 
+                            </ul>
+                        </div>
+                    </div>
+                <%
+                    }
+                %>
+                
+                <% 
+                    if(courses_second.size()!=0){
+                %>
+                    <!-- 大标题 -->
+                    <div class="section grey p-t-20  p-b-20 m-b-50">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h2 class="semi-bold">
+                                                                                                               中级课程</h2>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="portfolio-grid portfolioContainer ">
+                            <ul id="thumbs" class="col3">
+                                <%
+                                     for(CourseBean bean : courses_first){
+                                         String url = basePath+"servlet/CourseDetailServlet?course_id="+bean.getCourse_id();
+                                %>
+                                        <!-- item -->
+                                        <li class="item web">
+                                            <a href="<%=url %>" target="_blank">
+                                                <div class="portfolio-image-wrapper">
+                                                    <%
+                                                      for(PictureBean pics : piclist){
+                                                          int is = bean.getCourse_picture_id().compareTo(pics.getPicture_id());
+                                                          if(is == 0){
+                                                              String pic_urls = basePath+pics.getPicture_img();
+                                                    %>
+                                                              <img src="<%=pic_urls %>" width="531" hight="387" alt="" />
+                                                    <%        
+                                                              break;
+                                                          }
+                                                      } 
+                                                    %>
+                                                    <!-- 鼠标停留覆盖栏 -->
+                                                    <div class="item-info-overlay">
+                                                        <div>
+                                                            <h3 class="text-white semi-bold p-t-60 project-title "><%=bean.getCourse_applypeople() %></h3>
+                                                            <p class="project-description">更新时间：<%=bean.getCourse_addtime() %></p>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <!-- 说明 -->
-                                        <div class="item-info">
-                                            <h4 class="text-dark no-margin p-t-10 title semi-bold">java基础教程</h4>
-                                            <p>2018-01-25 17:49:46</p>
-                                        </div>
-                                        <div class="clearfix">
-                                        </div>
-                                    </a>
-                                </li>
-
-                                <li class="item web">
-                                    <div class="portfolio-image-wrapper">
-                                        <img src="${pageContext.request.contextPath }/images/system_images/course_xinxi1.1_icon.jpg" width="531" hight="387" alt="" />
-                                        <!-- 鼠标停留覆盖栏 -->
-                                        <div class="item-info-overlay">
-                                            <div>
-                                                <h3 class="text-white semi-bold p-t-60 project-title ">java基础教程</h3>
-                                                <p class="project-description">2018-01-25 17:49:46</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- 说明 -->
-                                    <div class="item-info">
-                                        <h4 class="text-dark no-margin p-t-10 title semi-bold">java基础教程</h4>
-                                        <p>2018-01-25 17:49:46</p>
-                                    </div>
-                                    <div class="clearfix">
-                                    </div>
-                                </li>
-
-                                <li class="item web">
-                                    <div class="portfolio-image-wrapper">
-                                        <img src="${pageContext.request.contextPath }/images/system_images/course_xinxi1.1_icon.jpg" width="531" hight="387" alt="" />
-                                        <!-- 鼠标停留覆盖栏 -->
-                                        <div class="item-info-overlay">
-                                            <div>
-                                                <h3 class="text-white semi-bold p-t-60 project-title ">java基础教程</h3>
-                                                <p class="project-description">2018-01-25 17:49:46</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- 说明 -->
-                                    <div class="item-info">
-                                        <h4 class="text-dark no-margin p-t-10 title semi-bold">java基础教程</h4>
-                                        <p>2018-01-25 17:49:46</p>
-                                    </div>
-                                    <div class="clearfix">
-                                    </div>
-                                </li>
-
-                                <li class="item web">
-                                    <div class="portfolio-image-wrapper">
-                                        <img src="${pageContext.request.contextPath }/images/system_images/course_xinxi1.1_icon.jpg" width="531" hight="387" alt="" />
-                                        <!-- 鼠标停留覆盖栏 -->
-                                        <div class="item-info-overlay">
-                                            <div>
-                                                <h3 class="text-white semi-bold p-t-60 project-title ">java基础教程</h3>
-                                                <p class="project-description">2018-01-25 17:49:46</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- 说明 -->
-                                    <div class="item-info">
-                                        <h4 class="text-dark no-margin p-t-10 title semi-bold">java基础教程</h4>
-                                        <p>2018-01-25 17:49:46</p>
-                                    </div>
-                                    <div class="clearfix">
-                                    </div>
-                                </li>
-
-                                <li class="item web">
-                                    <div class="portfolio-image-wrapper">
-                                        <img src="${pageContext.request.contextPath }/images/system_images/course_xinxi1.1_icon.jpg" width="531" hight="387" alt="" />
-                                        <!-- 鼠标停留覆盖栏 -->
-                                        <div class="item-info-overlay">
-                                            <div>
-                                                <h3 class="text-white semi-bold p-t-60 project-title ">java基础教程</h3>
-                                                <p class="project-description">2018-01-25 17:49:46</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- 说明 -->
-                                    <div class="item-info">
-                                        <h4 class="text-dark no-margin p-t-10 title semi-bold">java基础教程</h4>
-                                        <p>2018-01-25 17:49:46</p>
-                                    </div>
-                                    <div class="clearfix">
-                                    </div>
-                                </li>
-
-                                <li class="item web">
-                                    <div class="portfolio-image-wrapper">
-                                        <img src="${pageContext.request.contextPath }/images/system_images/course_xinxi1.1_icon.jpg" width="531" hight="387" alt="" />
-                                        <!-- 鼠标停留覆盖栏 -->
-                                        <div class="item-info-overlay">
-                                            <div>
-                                                <h3 class="text-white semi-bold p-t-60 project-title ">java基础教程</h3>
-                                                <p class="project-description">2018-01-25 17:49:46</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- 说明 -->
-                                    <div class="item-info">
-                                        <h4 class="text-dark no-margin p-t-10 title semi-bold">java基础教程</h4>
-                                        <p>2018-01-25 17:49:46</p>
-                                    </div>
-                                    <div class="clearfix">
-                                    </div>
-                                </li>
+                                                <!-- 说明 -->
+                                                <div class="item-info">
+                                                    <h4 class="text-dark no-margin p-t-10 title semi-bold"><%=bean.getCourse_name() %></h4>
+                                                    <p>更新时间：<%=bean.getCourse_addtime() %></p>
+                                                </div>
+                                                <div class="clearfix">
+                                                </div>
+                                            </a>
+                                        </li>
+                                <%                                  
+                                     }
+                                %> 
                             </ul>
                         </div>
                     </div>
-
+                <%
+                    }
+                %>
+                
+                <% 
+                    if(courses_third.size()!=0){
+                %>
                     <!-- 大标题 -->
                     <div class="section grey p-t-20  p-b-20 m-b-50">
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-6">
                                     <h2 class="semi-bold">
-                                    中阶课程</h2>
+                                                                                                               高级课程</h2>
                                 </div>
                                 
                             </div>
@@ -238,69 +285,122 @@
                     <div class="container">
                         <div class="portfolio-grid portfolioContainer ">
                             <ul id="thumbs" class="col3">
-                                <!-- 1 -->
-                                <li class="item web">
-                                    <div class="portfolio-image-wrapper">
-                                        <img src="${pageContext.request.contextPath }/images/system_images/course_xinxi1.1_icon.jpg" width="531" hight="387" alt="" />
-                                        <!-- 鼠标停留覆盖栏 -->
-                                        <div class="item-info-overlay">
-                                            <div>
-                                                <h3 class="text-white semi-bold p-t-60 project-title ">java基础教程</h3>
-                                                <p class="project-description">2018-01-25 17:49:46</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- 说明 -->
-                                    <div class="item-info">
-                                        <h4 class="text-dark no-margin p-t-10 title semi-bold">java基础教程</h4>
-                                        <p>2018-01-25 17:49:46</p>
-                                    </div>
-                                    <div class="clearfix">
-                                    </div>
-                                </li>
-
-                                <li class="item web">
-                                    <div class="portfolio-image-wrapper">
-                                        <img src="${pageContext.request.contextPath }/images/system_images/course_xinxi1.1_icon.jpg" width="531" hight="387" alt="" />
-                                        <!-- 鼠标停留覆盖栏 -->
-                                        <div class="item-info-overlay">
-                                            <div>
-                                                <h3 class="text-white semi-bold p-t-60 project-title ">java基础教程</h3>
-                                                <p class="project-description">2018-01-25 17:49:46</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- 说明 -->
-                                    <div class="item-info">
-                                        <h4 class="text-dark no-margin p-t-10 title semi-bold">java基础教程</h4>
-                                        <p>2018-01-25 17:49:46</p>
-                                    </div>
-                                    <div class="clearfix">
-                                    </div>
-                                </li>
-
-                                <li class="item web">
-                                    <div class="portfolio-image-wrapper">
-                                        <img src="${pageContext.request.contextPath }/images/system_images/course_xinxi1.1_icon.jpg" width="531" hight="387" alt="" />
-                                        <!-- 鼠标停留覆盖栏 -->
-                                        <div class="item-info-overlay">
-                                            <div>
-                                                <h3 class="text-white semi-bold p-t-60 project-title ">java基础教程</h3>
-                                                <p class="project-description">2018-01-25 17:49:46</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- 说明 -->
-                                    <div class="item-info">
-                                        <h4 class="text-dark no-margin p-t-10 title semi-bold">java基础教程</h4>
-                                        <p>2018-01-25 17:49:46</p>
-                                    </div>
-                                    <div class="clearfix">
-                                    </div>
-                                </li>
+                                <%
+                                     for(CourseBean bean : courses_first){
+                                         String url = basePath+"servlet/CourseDetailServlet?course_id="+bean.getCourse_id();
+                                %>
+                                        <!-- item -->
+                                        <li class="item web">
+                                            <a href="<%=url %>" target="_blank">
+                                                <div class="portfolio-image-wrapper">
+                                                    <%
+                                                      for(PictureBean pics : piclist){
+                                                          int is = bean.getCourse_picture_id().compareTo(pics.getPicture_id());
+                                                          if(is == 0){
+                                                              String pic_urls = basePath+pics.getPicture_img();
+                                                    %>
+                                                              <img src="<%=pic_urls %>" width="531" hight="387" alt="" />
+                                                    <%        
+                                                              break;
+                                                          }
+                                                      } 
+                                                    %>
+                                                    <!-- 鼠标停留覆盖栏 -->
+                                                    <div class="item-info-overlay">
+                                                        <div>
+                                                            <h3 class="text-white semi-bold p-t-60 project-title "><%=bean.getCourse_applypeople() %></h3>
+                                                            <p class="project-description">更新时间：<%=bean.getCourse_addtime() %></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- 说明 -->
+                                                <div class="item-info">
+                                                    <h4 class="text-dark no-margin p-t-10 title semi-bold"><%=bean.getCourse_name() %></h4>
+                                                    <p>更新时间：<%=bean.getCourse_addtime() %></p>
+                                                </div>
+                                                <div class="clearfix">
+                                                </div>
+                                            </a>
+                                        </li>
+                                <%                                  
+                                     }
+                                %> 
                             </ul>
                         </div>
                     </div>
+                <%
+                    }
+                %>
+                
+                <% 
+                    if(courses_fourth.size()!=0){
+                %>
+                    <!-- 大标题 -->
+                    <div class="section grey p-t-20  p-b-20 m-b-50">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h2 class="semi-bold">
+                                                                                                               其他课程</h2>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="portfolio-grid portfolioContainer ">
+                            <ul id="thumbs" class="col3">
+                                <%
+                                     for(CourseBean bean : courses_first){
+                                         String url = basePath+"servlet/CourseDetailServlet?course_id="+bean.getCourse_id();
+                                %>
+                                        <!-- item -->
+                                        <li class="item web">
+                                            <a href="<%=url %>" target="_blank">
+                                                <div class="portfolio-image-wrapper">
+                                                    <%
+                                                      for(PictureBean pics : piclist){
+                                                          int is = bean.getCourse_picture_id().compareTo(pics.getPicture_id());
+                                                          if(is == 0){
+                                                              String pic_urls = basePath+pics.getPicture_img();
+                                                    %>
+                                                              <img src="<%=pic_urls %>" width="531" hight="387" alt="" />
+                                                    <%        
+                                                              break;
+                                                          }
+                                                      } 
+                                                    %>
+                                                    <!-- 鼠标停留覆盖栏 -->
+                                                    <div class="item-info-overlay">
+                                                        <div>
+                                                            <h3 class="text-white semi-bold p-t-60 project-title "><%=bean.getCourse_applypeople() %></h3>
+                                                            <p class="project-description">更新时间：<%=bean.getCourse_addtime() %></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- 说明 -->
+                                                <div class="item-info">
+                                                    <h4 class="text-dark no-margin p-t-10 title semi-bold"><%=bean.getCourse_name() %></h4>
+                                                    <p>更新时间：<%=bean.getCourse_addtime() %></p>
+                                                </div>
+                                                <div class="clearfix">
+                                                </div>
+                                            </a>
+                                        </li>
+                                <%                                  
+                                     }
+                                %> 
+                            </ul>
+                        </div>
+                    </div>
+                <%
+                    }
+                %>
+
+
 
                 </div>
             </div>
