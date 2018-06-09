@@ -5,7 +5,14 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<%@ page import="net.sf.json.JSONArray" %>
+<%@ page import="net.sf.json.JSONObject" %>
+<%@ page import="com.studyplatform.web.utils.*" %>
+<%@ page import="com.studyplatform.web.bean.*" %>
+<%@ page import="java.util.*" %>
+<%@ page import="java.math.*" %>
+<%@ page import="org.apache.commons.lang3.math.*" %>
+<%@ page import="com.google.gson.*" %>
 <!DOCTYPE HTML>
 <html>
   <head>
@@ -23,23 +30,23 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<meta content="" name="description" />
 		<meta content="" name="author" />  
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/plugins/owl-carousel/owl.carousel.css" />
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/plugins/owl-carousel/owl.theme.css" />
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/plugins/onescroll/css/demo.css" />
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/plugins/onescroll/css/component.css" />
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/plugins/headereffects/css/component.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/plugins/headereffects/css/normalize.css" />
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/plugins/pace/pace-theme-flash.css" media="screen" />
-    <!-- bootstrap支持 -->
-    <link href="${pageContext.request.contextPath }/plugins/boostrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath }/plugins/boostrapv3/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath }/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <!-- css样式 -->
-    <link href="${pageContext.request.contextPath }/css/style.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath }/css/magic_space.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath }/css/responsive.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath }/css/animate.css" rel="stylesheet" type="text/css" />
-  </head>
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/plugins/owl-carousel/owl.carousel.css" />
+	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/plugins/owl-carousel/owl.theme.css" />
+	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/plugins/onescroll/css/demo.css" />
+	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/plugins/onescroll/css/component.css" />
+	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/plugins/headereffects/css/component.css">
+	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/plugins/headereffects/css/normalize.css" />
+	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/plugins/pace/pace-theme-flash.css" media="screen" />
+	    <!-- bootstrap支持 -->
+	    <link href="${pageContext.request.contextPath }/plugins/boostrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	    <link href="${pageContext.request.contextPath }/plugins/boostrapv3/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+	    <link href="${pageContext.request.contextPath }/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	    <!-- css样式 -->
+	    <link href="${pageContext.request.contextPath }/css/style.css" rel="stylesheet" type="text/css" />
+	    <link href="${pageContext.request.contextPath }/css/magic_space.css" rel="stylesheet" type="text/css" />
+	    <link href="${pageContext.request.contextPath }/css/responsive.css" rel="stylesheet" type="text/css" />
+	    <link href="${pageContext.request.contextPath }/css/animate.css" rel="stylesheet" type="text/css" />
+    </head>
   
 <body>
     <div class="main-wrapper">
@@ -60,7 +67,7 @@
 
     				<div class="navbar-collapse collapse">
     					<ul class="nav navbar-nav navbar-right">
-    						<li><a href="${pageContext.request.contextPath }/index.jsp">首&nbsp;页</a></li>
+    						<li><a href="${pageContext.request.contextPath }/default.jsp">首&nbsp;页</a></li>
     						<li><a href="#">专&nbsp;业&nbsp;大&nbsp;类</a></li>
     						<li><a href="#">推&nbsp;荐&nbsp;资&nbsp;源</a></li>
     						<li><a href="${pageContext.request.contextPath }/app_download.jsp">移&nbsp;动&nbsp;课&nbsp;堂</a></li>
@@ -91,23 +98,43 @@
 	                </div>
 	            </article>
 	        </section> -->
-
+            <% 
+                String course_detail_json = (String)request.getAttribute("course_detail_json");
+                Gson gson = new Gson();
+                JsonObject rootJson = new JsonParser().parse(course_detail_json).getAsJsonObject();
+                JsonObject coursejson = rootJson.get("root").getAsJsonObject();
+                CourseBean course = gson.fromJson(coursejson, CourseBean.class);
+                
+                String pic_json = (String)request.getAttribute("pic_json");
+                Gson gson_pic = new Gson();
+                JsonObject rootJson_pic = new JsonParser().parse(pic_json).getAsJsonObject();
+                JsonArray pic_list = rootJson_pic.get("pic").getAsJsonArray();
+                ArrayList<PictureBean> piclist = new ArrayList<PictureBean>();
+                for(JsonElement jsonElement : pic_list){
+                    JsonObject jo = jsonElement.getAsJsonObject();
+                    PictureBean picture = gson.fromJson(jo, PictureBean.class);
+                    piclist.add(picture);
+                }
+            %>
 	        <section class="cbp-so-section">
-	            <article class="cbp-so-side cbp-so-side-left text-center middle">
-	                <div class="row">
-	                    <div class="col-md-12 p-t-80 col-vlg-8 col-vlg-offset-2">
-	                        <i class="fa fa-check-circle-o fa-4x"></i>
-	                        <h1 class="m-b-20"><span class="semi-bold">Perfect Template</span> for All</h1>
-	                        <p>
-	                            As your business flourishes, we grow as a business and so our team makes sure that
-	                            your growth is supported and we go hand in hand. Every project begins with a round
-	                            of research and discovery. We dig through the values, strategy, and organizational
-	                            culture that make you unique.
-	                        </p>
-	                        <a href="${pageContext.request.contextPath }/test_page.jsp" class="btn btn-primary btn-lg  btn-large m-r-10">开始测试！</a>
-	                    </div>
-	                </div>
-	            </article>
+	            <% 
+                    if(course != null){
+                %>
+		            <article class="cbp-so-side cbp-so-side-left text-center middle">
+		                <div class="row">
+		                    <div class="col-md-12 p-t-80 col-vlg-8 col-vlg-offset-2">
+		                        <i class="fa fa-check-circle-o fa-4x"></i>
+		                        <h1 class="m-b-20"><span class="semi-bold"><%=course.getCourse_name() %></span> 测试</h1>
+		                        <p>
+                                                                                                        课程概述：<%=course.getCourse_summary() %>
+		                        </p>
+		                        <a href="${pageContext.request.contextPath }/servlet/QuestionServlet?course_id=<%=course.getCourse_id()%>" class="btn btn-primary btn-lg  btn-large m-r-10">开始测试！</a>
+		                    </div>
+		                </div>
+		            </article>
+	            <%
+                    }
+                %>
 	            <figure class="cbp-so-side cbp-so-side-right">
 	                <img src="images/condensed.png" alt="img01">
 	            </figure>

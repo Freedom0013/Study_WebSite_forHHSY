@@ -36,16 +36,18 @@ public class CourseDetailServlet extends HttpServlet {
         //控制字符集
         WebUtils.setCharSet(request, response);
         
+        //获取上级页面传入页面id
         String course_id = (String) request.getParameter("course_id");
         int courseid = Integer.parseInt(course_id);
         
         CourseService service = new CourseServiceImpl();
         
+        //封装课程详情Bean
         CourseBean bean = service.getCourseDetailByCouId(courseid);
         JSONObject course_detail_json = new JSONObject();
         course_detail_json.element("root", JSONObject.fromObject(bean));
         
-        
+        //封装课程对应图片信息
         PictureService pic_service = new PictureServiceImpl();
         PictureBean pic = pic_service.getPictureById(bean.getCourse_picture_id());
         JSONObject pic_json = new JSONObject();
@@ -53,16 +55,17 @@ public class CourseDetailServlet extends HttpServlet {
         DebugUtils.showLog(bean.toString());
         DebugUtils.showLog(pic_json.toString());
         
+        //响应添加
         request.setAttribute("course_detail_json",course_detail_json.toString());
         request.setAttribute("pic_json",pic_json.toString());
         
+        //页面跳转
         RequestDispatcher dispatcher = request.getRequestDispatcher("/course_detail.jsp");
         dispatcher.forward(request, response);
-        
     }
     
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    
+        doGet(request, response);
     }
     
     public void init() throws ServletException {
