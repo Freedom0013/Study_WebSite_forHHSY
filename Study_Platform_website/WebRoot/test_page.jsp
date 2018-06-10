@@ -69,7 +69,23 @@
 								<li><a href="#">专&nbsp;业&nbsp;大&nbsp;类</a></li>
 								<li><a href="#">推&nbsp;荐&nbsp;资&nbsp;源</a></li>
 								<li><a href="${pageContext.request.contextPath }/app_download.jsp">移&nbsp;动&nbsp;课&nbsp;堂</a></li>
-								<li><a href="${pageContext.request.contextPath }/login.jsp">登&nbsp;录/注&nbsp;册</a></li>
+	                            <!-- 这里为el表达式的if-else判断，在用户登录成功后显示登录成功的用户，在用户未登录时，显示登录按钮 -->
+	                            <!-- 下面的el表达式判断用户名是否过长，如果过长隐藏过长用户名 -->
+	                            <c:choose>
+	                                <c:when test="${!empty user.user_name}">
+	                                    <c:if test="${fn:length(user.user_name)>6 }">
+	                                        <li><a href="#"><span><font style="color:#ff0000;">${fn:substring(user.user_name, 0, 6)}...,欢迎你</font></span></a></li>
+	                                        <li><a href="${pageContext.request.contextPath }/servlet/WrittenOffServlet">退出登录</a></li>
+	                                    </c:if>
+	                                    <c:if test="${fn:length(user.user_name)<=6}">
+	                                        <li><a href="#"><span><font style="color:#ff0000;">${fn:substring(user.user_name, 0, 6)},欢迎你</font></span></a></li>
+	                                        <li><a href="${pageContext.request.contextPath }/servlet/WrittenOffServlet">退出登录</a></li>
+	                                    </c:if>
+	                                </c:when>
+	                                <c:otherwise>
+	                                   <li><a href="${pageContext.request.contextPath }/login.jsp">登&nbsp;录&nbsp;/&nbsp;注&nbsp;册</a></li>
+	                                </c:otherwise>
+	                            </c:choose>
 							</ul>
 						</div>
 					</div>

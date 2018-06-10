@@ -38,16 +38,16 @@
 					<form action="${pageContext.request.contextPath }/servlet/LoginServlet" method="post">
 						<div class="sign-in-htm">
 							<div class="group">
-								<label for="user" class="label">用户名</label>
-								<input id="user" type="text" class="input" />
+								<label for="username" class="label">用户名</label>
+								<input id="username" name ="username" type="text" class="input" />
 							</div>
 							<div class="group">
-								<label for="pass" class="label">密码</label>
-								<input id="pass" type="password" class="input" data-type="password" />
+								<label for="password" class="label">密码</label>
+								<input id="password" name="password" type="password" class="input" data-type="password" />
 							</div>
 							<div class="group">
-								<input id="check" type="checkbox" class="check" checked />
-								<label for="check"><span class="icon"></span> 记住密码</label>
+								<input id="loginkeeping" name="loginkeeping" type="checkbox" value="loginkeeping" class="check" checked />
+								<label for="loginkeeping"><span class="icon"></span> 记住密码</label>
 							</div>
 							<div class="group">
 								<input type="submit" class="button" value="登录" />
@@ -57,31 +57,38 @@
 								<a href="#">忘记密码?</a>
 							</div>	
 						</div>
-					</form>	
+					</form>
 
-					<!-- 用户注册 -->
+				<%
+				    //获取时间戳
+				    long token = System.currentTimeMillis();
+				    session.setAttribute("token", token);
+				%>
+
+				<!-- 用户注册 -->
 					<form action="${pageContext.request.contextPath }/servlet/LoginServlet" method="post"> 
 						<div class="sign-up-htm">
 							<div class="group">
-								<label for="user" class="label">用户名</label>
-								<input id="user" type="text" class="input" />
+								<label for="regusername" class="label">用户名</label>
+								<input id="regusername" name="regusername" type="text" class="input" />
 							</div>
 
 							<div class="group">
-								<label for="pass" class="label">密码</label>
-								<input id="pass" type="password" class="input" data-type="password" />
+								<label for="regpassword" class="label">密码</label>
+								<input id="regpassword" name="regpassword" type="password" class="input" data-type="password" />
 							</div>
 
 							<div class="group">
-								<label for="pass" class="label">确认密码</label>
+								<label for="sec_regpassword" class="label">确认密码</label>
 								<input id="sec_regpassword" name="sec_regpassword" type="password" class="input" data-type="password" />
 							</div>
 
 							<div class="group">
-								<label for="pass" class="label">昵称</label>
+								<label for="nickname" class="label">昵称</label>
 								<input id="nickname" name="nickname" type="text" class="input" />
+								<p><span>${user.errors.nickname}</span></p>
 							</div>
-
+                            <input type="hidden" value="<%=token %>" name="token" /> <!-- 作为隐藏提交注册时间 -->
 							<div class="group">
 								<input type="submit" class="button" value="注册" />
 							</div>

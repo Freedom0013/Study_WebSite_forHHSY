@@ -49,7 +49,7 @@ public class LoginServlet extends HttpServlet {
                 // 合法用户
 //                DebugUtils.showLog("合法用户");
                 request.getSession().setAttribute("user", user);
-                request.getRequestDispatcher("/index.jsp").forward(request,response);
+                request.getRequestDispatcher("/servlet/DepartmentServlet").forward(request, response);
             } else {
                 // 非法用户
 //                DebugUtils.showLog("非法用户");

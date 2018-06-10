@@ -101,8 +101,24 @@
                                     <li><a href="#">专&nbsp;业&nbsp;大&nbsp;类</a></li>
                                     <li><a href="#">推&nbsp;荐&nbsp;资&nbsp;源</a></li>
                                     <li><a href="${pageContext.request.contextPath }/app_download.jsp">移&nbsp;动&nbsp;课&nbsp;堂</a></li>
-                                    <li><a href="${pageContext.request.contextPath }/login.jsp">登&nbsp;录&nbsp;/&nbsp;注&nbsp;册</a></li>
-                                </ul>
+                                    <!-- 这里为el表达式的if-else判断，在用户登录成功后显示登录成功的用户，在用户未登录时，显示登录按钮 -->
+						            <!-- 下面的el表达式判断用户名是否过长，如果过长隐藏过长用户名 -->
+						            <c:choose>
+						                <c:when test="${!empty user.user_name}">
+						                    <c:if test="${fn:length(user.user_name)>6 }">
+                                                <li><a href="#"><span><font style="color:#ff0000;">${fn:substring(user.user_name, 0, 6)}...,欢迎你</font></span></a></li>
+                                                <li><a href="${pageContext.request.contextPath }/servlet/WrittenOffServlet">退出登录</a></li>
+                                            </c:if>
+                                            <c:if test="${fn:length(user.user_name)<=6}">
+                                                <li><a href="#"><span><font style="color:#ff0000;">${fn:substring(user.user_name, 0, 6)},欢迎你</font></span></a></li>
+                                                <li><a href="${pageContext.request.contextPath }/servlet/WrittenOffServlet">退出登录</a></li>
+                                            </c:if>
+						                </c:when>
+						                <c:otherwise>
+						                    <li><a href="${pageContext.request.contextPath }/login.jsp">登&nbsp;录&nbsp;/&nbsp;注&nbsp;册</a></li>
+						                </c:otherwise>
+						            </c:choose>
+                                </ul>                    
                             </div>
                         </div>
                     </div>
@@ -131,7 +147,23 @@
                                     <li><a href="#">专&nbsp;业&nbsp;大&nbsp;类</a></li>
                                     <li><a href="#">推&nbsp;荐&nbsp;资&nbsp;源</a></li>
                                     <li><a href="${pageContext.request.contextPath }/app_download.jsp">移&nbsp;动&nbsp;课&nbsp;堂</a></li>
-                                    <li><a href="${pageContext.request.contextPath }/login.jsp">登&nbsp;录/注&nbsp;册</a></li>
+                                    <!-- 这里为el表达式的if-else判断，在用户登录成功后显示登录成功的用户，在用户未登录时，显示登录按钮 -->
+                                    <!-- 下面的el表达式判断用户名是否过长，如果过长隐藏过长用户名 -->
+                                    <c:choose>
+                                        <c:when test="${!empty user.user_name}">
+                                            <c:if test="${fn:length(user.user_name)>6 }">
+                                                <li><a href="#"><span><font style="color:#ff0000;">${fn:substring(user.user_name, 0, 6)}...,欢迎你</font></span></a></li>
+                                                <li><a href="${pageContext.request.contextPath }/servlet/WrittenOffServlet">退出登录</a></li>
+                                            </c:if>
+                                            <c:if test="${fn:length(user.user_name)<=6}">
+                                                <li><a href="#"><span><font style="color:#ff0000;">${fn:substring(user.user_name, 0, 6)},欢迎你</font></span></a></li>
+                                                <li><a href="${pageContext.request.contextPath }/servlet/WrittenOffServlet">退出登录</a></li>
+                                            </c:if>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li><a href="${pageContext.request.contextPath }/login.jsp">登&nbsp;录&nbsp;/&nbsp;注&nbsp;册</a></li>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </ul>
                             </div>
                             <!--地址栏结束 -->
@@ -395,9 +427,7 @@
 	                                    <span>马同学</span> 中国 上海
 	                                </div>
 	                                <h3 class="normal text-center">
-	                                    I have always received good service from the Frittt Templates. Timing and quality
-	                                    have always met my expectations and everything is communicated in a professional
-	                                    and timely manner.
+	                                                                                                       知识森林驿站非常好的解决了我的初学疑问，并为我提供了大类资源，资源质量很好，我会努力学习的！
 	                                </h3>
 	                            </div>
 	                        </div>
@@ -412,9 +442,7 @@
 	                                    <span>王同学</span> 中国 北京
 	                                </div>
 	                                <h3 class="normal text-center">
-	                                    We consider the Frittt Templates team a development partner who has proven to be
-	                                    creative in problem resolution, reliable in time commitments, and overall consistent
-	                                    in meeting our expectations.
+	                                    知识森林驿站非常好的解决了我的初学疑问，并为我提供了大类资源，资源质量很好，我会努力学习的！
 	                                </h3>
 	                            </div>
 	                        </div>
@@ -429,8 +457,7 @@
 	                                    <span>张同学</span> 中国 深圳
 	                                </div>
 	                                <h3 class="semi-bold text-center">
-	                                    The work was above and beyond what I could have expected. Excellent service all
-	                                    the way around from start to finish. Keep up the GREAT work! Great job!
+	                                    知识森林驿站非常好的解决了我的初学疑问，并为我提供了大类资源，资源质量很好，我会努力学习的！
 	                                </h3>
 	                            </div>
 	                        </div>
