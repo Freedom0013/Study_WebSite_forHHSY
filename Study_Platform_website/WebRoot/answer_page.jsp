@@ -86,7 +86,7 @@
                                             </c:if>
                                         </c:when>
                                         <c:otherwise>
-                                           <li><a href="${pageContext.request.contextPath }/login.jsp">登&nbsp;录&nbsp;/&nbsp;注&nbsp;册</a></li>
+                                           <li><a href="${pageContext.request.contextPath }/servlet/DepartmentServlet">登&nbsp;录&nbsp;/&nbsp;注&nbsp;册</a></li>
                                         </c:otherwise>
                                     </c:choose>
 							</ul>
