@@ -1,4 +1,4 @@
-package com.studyforest;
+package com.studytree;
 
 import org.junit.Test;
 

@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.studyforest"
+        applicationId "com.studytree"
         minSdkVersion 26
         targetSdkVersion 26
         versionCode 1
@@ -25,7 +25,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation files('libs/eventbus-3.1.1.jar')
     implementation files('libs/glide-3.6.0.jar')
     implementation files('libs/okhttp-3.10.0.jar')
 }

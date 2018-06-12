@@ -1,4 +1,4 @@
-package com.studyforest;
+package com.studytree;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.studyforest", appContext.getPackageName());
+        assertEquals("com.studyforests", appContext.getPackageName());
     }
 }
