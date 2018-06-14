@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.studytree.R;
+import com.studytree.log.Logger;
 
 /**
  * 主页Activity
@@ -12,6 +13,8 @@ import com.studytree.R;
  * @author Freedom0013
  */
 public class MainActivity extends AppCompatActivity {
+    public static final String TAG = MainActivity.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
