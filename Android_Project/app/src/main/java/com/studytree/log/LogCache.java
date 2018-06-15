@@ -20,7 +20,7 @@ import android.util.Log;
  */
 public class LogCache {
     /** 日志标记 */
-    public static final String TAG = "LogCache";
+    public static final String TAG = LogCache.class.getSimpleName();
     /**
      * 日志数量限制
      * 原因：存储卡剩余空间大于50M，规格要求日志总占用不超过4M，考虑rcs.log的打印，最多缓存3个文件
