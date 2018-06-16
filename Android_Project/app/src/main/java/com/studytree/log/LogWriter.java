@@ -57,7 +57,6 @@ public class LogWriter {
      * @param maxSize 文件最大大小
      */
     public LogWriter(File current, int fileAmount, long maxSize) {
-        System.out.println("============"+current.getPath().toString()+"============");
         this.current = current;
         this.fileAmount = fileAmount <= 0 ? this.fileAmount : fileAmount;
         this.maxSize = (maxSize <= 0) ? this.maxSize : maxSize;

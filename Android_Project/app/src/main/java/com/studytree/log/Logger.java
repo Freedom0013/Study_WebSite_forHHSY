@@ -42,7 +42,6 @@ public final class Logger {
         } else {
             currentLevel = INFO;
         }
-        Log.i(TAG, "[Study_tree]：：：：：Loglevel = " + currentLevel);
 	}
 
 	/** 构造器 */
