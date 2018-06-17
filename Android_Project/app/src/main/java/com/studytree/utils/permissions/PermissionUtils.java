@@ -9,7 +9,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.widget.Toast;
 
@@ -26,10 +25,12 @@ import static android.support.v4.app.ActivityCompat.requestPermissions;
  * @date 2018/6/15 17:58
  * @author Freedom0013
  */
-public class PermissionUtils implements ActivityCompat.OnRequestPermissionsResultCallback {
+public class PermissionUtils{
     public static final String TAG = PermissionUtils.class.getSimpleName();
     /** 权限请求显示提示 */
     public String PermissionHintText;
+    /** Context对象 */
+    private Context context = null;
     /** 权限结果监听 */
     private RequestPermissionListener listener = null;
 
@@ -37,7 +38,6 @@ public class PermissionUtils implements ActivityCompat.OnRequestPermissionsResul
      * 构造函数
      */
     public PermissionUtils(){
-
     }
 
     /**
@@ -49,11 +49,22 @@ public class PermissionUtils implements ActivityCompat.OnRequestPermissionsResul
     }
 
     /**
+     * 请求权限构造函数
+     * @param context Context对象
+     * @param listener 权限申请结果监听器
+     */
+    public PermissionUtils(Context context, RequestPermissionListener listener) {
+        this.context = context;
+        this.listener = listener;
+    }
+
+    /**
      * 单个权限检测，true不需要请求权限，false需要请求权限
      * @param permissionName 权限名称
      * @return 是否有该权限
      */
-    public boolean isPermissionGranted(String permissionName, Context context) {
+    public boolean hasPermissionGranted(String permissionName, Context context) {
+        Logger.i(TAG,"单个权限检测！");
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return true;
         }
@@ -70,7 +81,7 @@ public class PermissionUtils implements ActivityCompat.OnRequestPermissionsResul
      * @param permArray 权限组
      * @return 结果集合
      */
-    public List<String> isPermissionsAllGranted(String[] permArray, Context context) {
+    public List<String> hasPermissionsAllGranted(String[] permArray, Context context) {
         List<String> list = new ArrayList<>();
         //获得批量请求但被禁止的权限列表
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
@@ -92,9 +103,10 @@ public class PermissionUtils implements ActivityCompat.OnRequestPermissionsResul
      * @param activity Activity对象
      */
     public void Requestpermission(String s, int requestCode, String defeat, final Activity activity) {
+        Logger.i(TAG,"单个权限请求！");
         PermissionHintText = defeat;
         if (!TextUtils.isEmpty(s)) {
-            boolean granted = isPermissionGranted(s,activity);
+            boolean granted = hasPermissionGranted(s,activity);
             if (granted) {  //有权限，调用方法
                 listener.onPermissionPass(requestCode);
             } else {
@@ -111,9 +123,10 @@ public class PermissionUtils implements ActivityCompat.OnRequestPermissionsResul
      * @param activity Activity对象
      */
     public void Requestpermission(String s[], int requestCode, String defeat, final Activity activity) {
+        Logger.i(TAG,"多个权限请求！");
         PermissionHintText = defeat;
         if (s.length != 0) {
-            List<String> perList = isPermissionsAllGranted(s, activity);
+            List<String> perList = hasPermissionsAllGranted(s, activity);
             if (perList.size() == 0) {  //有权限，调用方法
                 listener.onPermissionPass(requestCode);
             } else {
@@ -123,24 +136,24 @@ public class PermissionUtils implements ActivityCompat.OnRequestPermissionsResul
     }
 
     /**
-     * 6.0权限获取结果回调
-     * @param requestCode  权限请求码
-     * @param permissions  权限组
-     * @param grantResults 请求结果
+     * 处理onRequestPermissionsResult6.0权限获取结果回调
+     * @param requestCode 请求码
+     * @param permissions 权限名称列表
+     * @param grantResults 权限结果（权限通过为0，权限不通过为-1）
      */
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        Logger.w(TAG, "=====权限批准回调======"+requestCode);
-        for (int i : grantResults) {
+    public void handleSingleRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        Logger.w(TAG, "==========权限回调==========requestCode = " + requestCode);
+        for (int i = 0; i < permissions.length; i++) {
+            Logger.w(TAG, "==========permissions==========permissions[" + i + "] = " + permissions[i]);
             //有权限未通过，用户拒绝权限
-            if (i != PackageManager.PERMISSION_GRANTED) {
+            if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
                 Logger.w(TAG, PermissionConfig.getPermissionToString(requestCode) + "权限请求失败！");
-                listener.onPermissionAccreditFailed(requestCode);
+                listener.onPermissionAccreditFailed(requestCode, permissions[i]);
                 return;
             }
-            //用户授予权限
-            Logger.i(TAG, PermissionConfig.getPermissionToString(requestCode) + "权限请求成功！");
         }
+        //未发现拒绝权限==用户全部授予权限
+        Logger.i(TAG, PermissionConfig.getPermissionToString(requestCode) + "权限请求成功！");
         listener.onPermissionAccreditSucceed(requestCode);
     }
 
@@ -182,5 +195,13 @@ public class PermissionUtils implements ActivityCompat.OnRequestPermissionsResul
      */
     public void setRequestPermissionListener(RequestPermissionListener listener){
         this.listener = listener;
+    }
+
+    /**
+     * 设置Context对象
+     * @param context 监听器
+     */
+    public void setRequestPermissionContext(Context context){
+        this.context = context;
     }
 }

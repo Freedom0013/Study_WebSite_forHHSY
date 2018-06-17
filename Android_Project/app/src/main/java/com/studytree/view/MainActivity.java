@@ -1,7 +1,6 @@
 package com.studytree.view;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -14,52 +13,71 @@ import com.studytree.utils.permissions.PermissionUtils;
 import com.studytree.utils.permissions.PermissionConfig;
 import com.studytree.utils.permissions.RequestPermissionListener;
 
-import java.util.List;
 
 /**
  * 主页Activity
+ * AppCompatActivity继承自ActionBarActivity
  * Title: MainActivity
  * @date 2018/6/12 19:16
  * @author Freedom0013
  */
-public class MainActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback{
-    /*
-     * AppCompatActivity继承自ActionBarActivity
-     */
-
+public class MainActivity extends AppCompatActivity {
     public static final String TAG = MainActivity.class.getSimpleName();
+
+    PermissionUtils permissionsutils = new PermissionUtils(MainActivity.this, new RequestPermissionListener() {
+        @Override
+        public void onPermissionPass(int requestCode) {
+            Logger.w(TAG,"已有权限");
+        }
+
+        @Override
+        public void onPermissionAccreditSucceed(int requestCode) {
+            Logger.w(TAG,"权限获取成功");
+        }
+
+        @Override
+        public void onPermissionAccreditFailed(int requestCode, String PermissionName) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                //判断用户是否点击不在提示按钮，true：未选中，false：选中
+                boolean isTip = ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,PermissionName);
+                if (isTip) {//表明用户没有彻底禁止弹出权限请求
+//                    requestPermission(PermissionHelper.getInstance().filterPermissions(permissions));
+                } else {//表明用户已经彻底禁止弹出权限请求
+                    Logger.e(TAG, "==========警告！用户拒绝并不在提示权限==========permission = " + PermissionName);
+                    permissionsutils.popPermissionAlterDialog("我们需要必要的权限来保证应用的正常运行！", MainActivity.this);
+                    finish();
+                }
+            }
+            Logger.e(TAG, "权限获取失败");
+        }
+    });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        PermissionUtils permissions = new PermissionUtils();
-        List<String> list = permissions.isPermissionsAllGranted(PermissionConfig.STORAGE, MainActivity.this);
-        if(!(list.isEmpty())){
-            for (String str : list) {
-                if(str.equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)){
-                    Logger.w(TAG, "============Permission===================" + str);
-                    permissions.Requestpermission(PermissionConfig.STORAGE,PermissionConfig.REQUEST_WRITE_EXTERNAL_STORAGE,"需要请求读写内部储存权限！",MainActivity.this);
-                }
-            }
+        if(!permissionsutils.hasPermissionGranted(PermissionConfig.PERMISSION_WRITE_EXTERNAL_STORAGE,MainActivity.this)){
+            Logger.i(TAG,"没有 = "+PermissionConfig.PERMISSION_WRITE_EXTERNAL_STORAGE+"权限");
+            permissionsutils.Requestpermission(PermissionConfig.PERMISSION_WRITE_EXTERNAL_STORAGE,PermissionConfig.REQUEST_WRITE_EXTERNAL_STORAGE,"需要请求修改内部储存权限！",MainActivity.this);
         }
+    }
 
-        permissions.setRequestPermissionListener(new RequestPermissionListener() {
-            @Override
-            public void onPermissionPass(int requestCode) {
-               Toast.makeText(MainActivity.this, PermissionConfig.getPermissionToString(requestCode) + "权限请求失败！", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onPermissionAccreditSucceed(int requestCode) {
-                Toast.makeText(MainActivity.this, PermissionConfig.getPermissionToString(requestCode) + "权限获取成功！", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onPermissionAccreditFailed(int requestCode) {
-                Toast.makeText(MainActivity.this, PermissionConfig.getPermissionToString(requestCode) + "权限请求失败！", Toast.LENGTH_LONG).show();
-            }
-        });
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode,permissions,grantResults);
+        permissionsutils.handleSingleRequestPermissionsResult(requestCode,permissions,grantResults);
     }
 }
+
+
+//        //请求读写SD卡权限，方法返回的是未拥有的权限名称
+//        List<String> list = permissionsutils.isPermissionsAllGranted(PermissionConfig.STORAGE, MainActivity.this);
+//        //如果列表不为空，代表有未授权的权限
+//        if(!(list.isEmpty())){
+//            for (String str : list) {
+//                Logger.i(TAG,"permissionListStr = "+str);
+//                permissionsutils.Requestpermission(str,PermissionConfig.REQUEST_WRITE_EXTERNAL_STORAGE,"需要请求修改内部储存权限！",MainActivity.this);
+//            }
+//        }else{
+//            // 所有权限均正常
+//        }
