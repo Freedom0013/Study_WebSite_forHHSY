@@ -7,6 +7,8 @@ package com.studytree.commonfile;
  * @author Freedom0013
  */
 public class Constants {
-
+    //本地配置项
+    /** 总SharedPreferences名称 */
+    public static final String PREF_NAME = "studytreePrefs";
 
 }

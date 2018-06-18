@@ -11,7 +11,7 @@ import android.content.res.Configuration;
  */
 public class StudyTreeApplication extends Application {
     private static final String TAG = StudyTreeApplication.class.getSimpleName();
-
+    /** StudyTreeApplication单例 */
     public static StudyTreeApplication app;
 
     /**
@@ -27,6 +27,8 @@ public class StudyTreeApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        //执行初始化类
+        InitManager.getInstance().init(getApplicationContext());
     }
 
     /**

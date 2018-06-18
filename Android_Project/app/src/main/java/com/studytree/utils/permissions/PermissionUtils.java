@@ -144,7 +144,6 @@ public class PermissionUtils{
     public void handleSingleRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         Logger.w(TAG, "==========权限回调==========requestCode = " + requestCode);
         for (int i = 0; i < permissions.length; i++) {
-            Logger.w(TAG, "==========permissions==========permissions[" + i + "] = " + permissions[i]);
             //有权限未通过，用户拒绝权限
             if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
                 Logger.w(TAG, PermissionConfig.getPermissionToString(requestCode) + "权限请求失败！");

@@ -62,22 +62,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 用户权限授权回调
+     * @param requestCode 请求码
+     * @param permissions 权限列表
+     * @param grantResults 授权结果码
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode,permissions,grantResults);
         permissionsutils.handleSingleRequestPermissionsResult(requestCode,permissions,grantResults);
     }
 }
-
-
-//        //请求读写SD卡权限，方法返回的是未拥有的权限名称
-//        List<String> list = permissionsutils.isPermissionsAllGranted(PermissionConfig.STORAGE, MainActivity.this);
-//        //如果列表不为空，代表有未授权的权限
-//        if(!(list.isEmpty())){
-//            for (String str : list) {
-//                Logger.i(TAG,"permissionListStr = "+str);
-//                permissionsutils.Requestpermission(str,PermissionConfig.REQUEST_WRITE_EXTERNAL_STORAGE,"需要请求修改内部储存权限！",MainActivity.this);
-//            }
-//        }else{
-//            // 所有权限均正常
-//        }
