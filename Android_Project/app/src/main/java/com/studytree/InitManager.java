@@ -55,6 +55,8 @@ public class InitManager {
         }
         inited = true;
         this.mContext = context;
+        //初始化异常处理类
+        ExceptionHandler.getInstance().init(mContext.getApplicationContext());
     }
 
     /**
