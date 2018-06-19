@@ -26,7 +26,7 @@ public class InitManager {
     private int mScreenWidth = -1;
     /** 屏幕高度 */
     private int mScreenHeight = -1;
-    /** LayoutInflater对象 */
+    /** LayoutInflater布局服务对象 */
     private LayoutInflater mInflater;
 
     /**
