@@ -37,7 +37,7 @@ public class ExceptionHandler implements Thread.UncaughtExceptionHandler{
      * 初始化应用异常处理类
      * @param context context对象
      */
-    public void init(Context context){
+    public void init(Context context) {
         this.mContext = context;
         //将异常处理类设置为系统默认的异常处理类，当出现异常时，有该类处理
         mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
@@ -48,10 +48,10 @@ public class ExceptionHandler implements Thread.UncaughtExceptionHandler{
      * 获取ExceptionHandler单例
      * @return ExceptionHandler对象
      */
-    public static ExceptionHandler getInstance(){
-        if(__instance == null){
-            synchronized (ExceptionHandler.class){
-                if(__instance == null){
+    public static ExceptionHandler getInstance() {
+        if (__instance == null) {
+            synchronized (ExceptionHandler.class) {
+                if (__instance == null) {
                     __instance = new ExceptionHandler();
                 }
             }
@@ -62,20 +62,20 @@ public class ExceptionHandler implements Thread.UncaughtExceptionHandler{
     @Override
     public void uncaughtException(Thread thread, Throwable exception) {
         //收集设备参数信息
-        if(mContext != null){
+        if (mContext != null) {
             collectDeviceInfo(mContext);
         }
         Logger.e(TAG, "===========知识森驿站警告！！！============CrashHandler uncaughtException================开始===================");
-        Logger.w(TAG, "CrashHandler uncaughtException"+exception.toString());
+        Logger.w(TAG, "CrashHandler uncaughtException" + exception.toString());
         exception.printStackTrace();
-        Logger.w(TAG,exception);
-        Logger.w(TAG,"-----------设备信息开始-----------");
+        Logger.w(TAG, exception);
+        Logger.w(TAG, "-----------设备信息开始-----------");
         for (Map.Entry<String, String> entry : paramsMap.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
-            Logger.w(TAG,key + "=" + value);
+            Logger.w(TAG, key + "=" + value);
         }
-        Logger.w(TAG,"-----------设备信息结束-----------");
+        Logger.w(TAG, "-----------设备信息结束-----------");
         Logger.e(TAG, "===========知识森驿站警告！！！============CrashHandler uncaughtException================结束===================");
         //退出程序
         android.os.Process.killProcess(android.os.Process.myPid());

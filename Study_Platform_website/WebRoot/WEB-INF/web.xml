@@ -60,14 +60,77 @@
     <servlet-name>AnswerServlet</servlet-name>
     <servlet-class>com.studyplatform.web.servlet.AnswerServlet</servlet-class>
   </servlet>
-  
+  <!-- 请求图片 -->
   <servlet>
     <servlet-name>PictureServlet</servlet-name>
     <servlet-class>com.studyplatform.web.servlet.PictureServlet</servlet-class>
   </servlet>
-
-
-
+  
+  <!-- 显示答案forAndroid -->
+  <servlet>
+    <servlet-name>AnswerAction</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.forAndroid.AnswerAction</servlet-class>
+  </servlet>
+  
+  <!-- 课程详情forAndroid -->
+  <servlet>
+    <servlet-name>CourseDetailAction</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.forAndroid.CourseDetailAction</servlet-class>
+  </servlet>
+  
+  <!-- 课程forAndroid -->
+  <servlet>
+    <servlet-name>CouresAction</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.forAndroid.CouresAction</servlet-class>
+  </servlet>
+  
+  <!-- 院系forAndroid -->
+  <servlet>
+    <servlet-name>DepartmentAction</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.forAndroid.DepartmentAction</servlet-class>
+  </servlet>
+  
+  <!-- 试题结果forAndroid -->
+  <servlet>
+    <servlet-name>ExaminationAction</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.forAndroid.ExaminationAction</servlet-class>
+  </servlet>
+  
+  <!-- 登录forAndroid -->
+  <servlet>
+    <servlet-name>LoginAction</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.forAndroid.LoginAction</servlet-class>
+  </servlet>
+  
+  <!-- 图片forAndroid -->
+  <servlet>
+    <servlet-name>PictureAction</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.forAndroid.PictureAction</servlet-class>
+  </servlet>
+  
+  <!-- 专业forAndroid -->
+  <servlet>
+    <servlet-name>ProfessionalAction</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.forAndroid.ProfessionalAction</servlet-class>
+  </servlet>
+  
+  <!-- 试题forAndroid -->
+  <servlet>
+    <servlet-name>QuestionAction</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.forAndroid.QuestionAction</servlet-class>
+  </servlet>
+  
+  <!-- 注册forAndroid -->
+  <servlet>
+    <servlet-name>RegisterAction</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.forAndroid.RegisterAction</servlet-class>
+  </servlet>
+  
+  <!-- 注销forAndroid -->
+  <servlet>
+    <servlet-name>WrittenOffAction</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.forAndroid.WrittenOffAction</servlet-class>
+  </servlet>
 
 
 
@@ -129,6 +192,66 @@
   <servlet-mapping>
     <servlet-name>PictureServlet</servlet-name>
     <url-pattern>/servlet/PictureServlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  
+  
+  
+  <servlet-mapping>
+    <servlet-name>AnswerAction</servlet-name>
+    <url-pattern>/servlet/AnswerAction</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>CourseDetailAction</servlet-name>
+    <url-pattern>/servlet/CourseDetailAction</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>CouresAction</servlet-name>
+    <url-pattern>/servlet/CouresAction</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>DepartmentAction</servlet-name>
+    <url-pattern>/servlet/DepartmentAction</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>ExaminationAction</servlet-name>
+    <url-pattern>/servlet/ExaminationAction</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>LoginAction</servlet-name>
+    <url-pattern>/servlet/LoginAction</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>PictureAction</servlet-name>
+    <url-pattern>/servlet/PictureAction</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>ProfessionalAction</servlet-name>
+    <url-pattern>/servlet/ProfessionalAction</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>QuestionAction</servlet-name>
+    <url-pattern>/servlet/QuestionAction</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>RegisterAction</servlet-name>
+    <url-pattern>/servlet/RegisterAction</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>WrittenOffAction</servlet-name>
+    <url-pattern>/servlet/WrittenOffAction</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>
