@@ -98,7 +98,6 @@ public class MemoryStatus {
      */
     public static String formatSize(long size) {
         String suffix = "B";
-
         if (size >= 1024) {
             suffix = "KiB";
             size /= 1024;
@@ -107,15 +106,12 @@ public class MemoryStatus {
                 size /= 1024;
             }
         }
-
         StringBuilder resultBuffer = new StringBuilder(Long.toString(size));
-
         int commaOffset = resultBuffer.length() - 3;
         while (commaOffset > 0) {
             resultBuffer.insert(commaOffset, ',');
             commaOffset -= 3;
         }
-
         if (suffix != null) {
             resultBuffer.append(suffix);
         }
@@ -141,7 +137,6 @@ public class MemoryStatus {
         long availableMemory = getAvailableExternalMemorySize();
         return !(size > availableMemory);
     }
-
 
     /**
      * 判断手机是否拥有可用空间

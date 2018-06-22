@@ -8,10 +8,13 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.studytree.R;
+import com.studytree.http.HttpResultCallback;
+import com.studytree.http.logic.InitLogic;
 import com.studytree.log.Logger;
 import com.studytree.utils.permissions.PermissionUtils;
 import com.studytree.utils.permissions.PermissionConfig;
 import com.studytree.utils.permissions.RequestPermissionListener;
+import com.studytree.http.logic.InitLogic;
 
 
 /**
@@ -60,6 +63,19 @@ public class MainActivity extends AppCompatActivity {
             Logger.i(TAG,"没有 = "+PermissionConfig.PERMISSION_WRITE_EXTERNAL_STORAGE+"权限");
             permissionsutils.Requestpermission(PermissionConfig.PERMISSION_WRITE_EXTERNAL_STORAGE,PermissionConfig.REQUEST_WRITE_EXTERNAL_STORAGE,"需要请求修改内部储存权限！",MainActivity.this);
         }
+
+        InitLogic initLogic = InitLogic.getInstance();
+        initLogic.getUpdataInfo(new HttpResultCallback() {
+            @Override
+            public void onSuccess(int action, Object obj) {
+                Logger.d(TAG,"接口请求成功！obj = "+obj.toString());
+            }
+
+            @Override
+            public void onFail(int action, int responseCode, String responseMsg) {
+                Logger.d(TAG,"接口请求失败！responseMsg = "+responseMsg);
+            }
+        });
     }
 
     /**

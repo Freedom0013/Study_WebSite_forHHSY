@@ -131,6 +131,11 @@
     <servlet-name>WrittenOffAction</servlet-name>
     <servlet-class>com.studyplatform.web.servlet.forAndroid.WrittenOffAction</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>InitAction</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.forAndroid.InitAction</servlet-class>
+  </servlet>
+
 
 
 
@@ -252,6 +257,11 @@
   <servlet-mapping>
     <servlet-name>WrittenOffAction</servlet-name>
     <url-pattern>/servlet/WrittenOffAction</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>InitAction</servlet-name>
+    <url-pattern>/servlet/InitAction</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>

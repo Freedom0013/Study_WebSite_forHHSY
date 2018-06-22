@@ -60,17 +60,6 @@ public class InitManager {
     }
 
     /**
-     * 获取系统SharedPreferences对象
-     * @return SharedPreferences对象
-     */
-    private SharedPreferences getPrefs(){
-        if(mConfigPrefs == null){
-            mConfigPrefs = mContext.getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE);
-        }
-        return mConfigPrefs;
-    }
-
-    /**
      * 获取屏幕宽度
      * @return 屏幕宽度（获取失败返回-1）
      */
@@ -110,4 +99,109 @@ public class InitManager {
     public Context getContext(){
         return mContext;
     }
+
+    /**
+     * 获取系统SharedPreferences对象
+     * @return SharedPreferences对象
+     */
+    private SharedPreferences getPrefs(){
+        if(mConfigPrefs == null){
+            mConfigPrefs = mContext.getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE);
+        }
+        return mConfigPrefs;
+    }
+
+    /**
+     * 获取String配置项
+     * @param key 键
+     * @return 值
+     */
+    public String getStringPreference(String key){
+        return getPrefs().getString(key, "");
+    }
+
+    /**
+     * 保存String配置项
+     * @param key 键
+     * @param value 值
+     */
+    public void saveStringPreference(String key,String value){
+        SharedPreferences.Editor editor = getPrefs().edit();
+        editor.putString(key, value);
+        editor.commit();
+    }
+
+    /**
+     * 获取Boolean配置项
+     * @param key 键
+     * @return 值
+     */
+    public boolean getBooleanPreference(String key){
+        return getPrefs().getBoolean(key,false);
+    }
+
+    /**
+     * 保存Boolean配置项
+     * @param key 键
+     * @param value 值
+     */
+    public void saveBooleanPreference(String key,boolean value){
+        SharedPreferences.Editor editor = getPrefs().edit();
+        editor.putBoolean(key, value);
+        editor.commit();
+    }
+
+    /**
+     * 保存Int配置项
+     * @param key 键
+     * @param value 值
+     */
+    public void saveIntPreference(String key,int value){
+        SharedPreferences.Editor editor = getPrefs().edit();
+        editor.putInt(key, value);
+        editor.commit();
+    }
+
+    /**
+     * 获取默认值Int配置项
+     * @param key 键
+     * @param defaultValue 默认值
+     * @return 值
+     */
+    public int getIntPreference(String key,int defaultValue){
+        int index = getPrefs().getInt(key,defaultValue);
+        return index;
+    }
+
+    /**
+     * 获取Int配置项
+     * @param key 键
+     * @return 值
+     */
+    public int getIntPreference(String key){
+        int index = getPrefs().getInt(key,-1);
+        return index;
+    }
+
+    /**
+     *获取Long配置项
+     * @param key 键
+     * @return 值
+     */
+    public long getLongPreference(String key){
+        long index = getPrefs().getLong(key,0L);
+        return index;
+    }
+
+    /**
+     * 保存Long配置项
+     * @param key 键
+     * @param value 值
+     */
+    public void saveLongPreference(String key,long value){
+        SharedPreferences.Editor editor = getPrefs().edit();
+        editor.putLong(key, value);
+        editor.commit();
+    }
+
 }
