@@ -78,26 +78,22 @@ public class HttpTransaction extends HttpManager {
     @Override
     protected int getMethod(int action) {
         int method = HttpConstants.METHOD_POST;
+        //如果要改变谋个Action的请求方式只需在这里的switch添加条目即可
+//        switch (action){
+//            case ActionID.ACTION_INIT:
+//                method = HttpConstants.METHOD_GET;
+//                break;
+//        }
         return method;
     }
 
     /**
-     * 发起网络请求
-     * @param action 接口ID
-     * @param sendData 发送数据的集合
-     * @param httpListener 结果监听
+     * 发起请求
+     * @param action
+     * @param sendData
+     * @param httpListener
      */
-    public void send(final int action, final Map<String, Object> sendData, final HttpCallback httpListener) {
-        super.send(action, sendData, httpListener);
-    }
-
-    /**
-     * 发起网络请求
-     * @param action 接口ID
-     * @param sendData 发送数据的集合
-     * @param httpListener 结果监听
-     */
-    public void sendGet(final int action, final Map<String, Object> sendData, final HttpCallback httpListener) {
-        super.sendGet(action, sendData, httpListener);
+    public void send(final int action, final Map<String, Object> sendData, final HttpCallback httpListener){
+        super.send(action,sendData,httpListener);
     }
 }

@@ -15,6 +15,6 @@ public class OkHttpLogger implements HttpLoggingInterceptor.Logger {
 
     @Override
     public void log(String message) {
-        Logger.d(TAG, "=======OkHttpLogger-----message:" + message);
+        Logger.d(TAG, "=======OkHttpLogger-------:" + message);
     }
 }

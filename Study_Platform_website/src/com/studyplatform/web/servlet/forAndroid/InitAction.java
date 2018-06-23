@@ -12,9 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
-
-import com.studyplatform.web.utils.DebugUtils;
 import com.studyplatform.web.utils.WebUtils;
 
 import net.sf.json.JSONArray;
@@ -40,9 +37,9 @@ public class InitAction extends HttpServlet {
         // 控制字符集
         WebUtils.setCharSet(request, response);
         PrintWriter out = response.getWriter();
-        String from = request.getParameter("from");
-        String sign = request.getParameter("sign");
-        DebugUtils.showLog("from = "+from+",sign"+sign);
+//        String from = request.getParameter("from");
+//        String sign = request.getParameter("sign");
+//        DebugUtils.showLog("from = "+from+",sign"+sign);
         
         int visionCode = 1;
         

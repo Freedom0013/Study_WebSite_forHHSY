@@ -1,27 +1,21 @@
 package com.studytree.http;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.studytree.log.Logger;
-import com.studytree.utils.StudyTreeTools;
-
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 
@@ -38,13 +32,39 @@ public abstract class HttpManager {
     /** 线程池对象 */
     private static Executor mFixedThreadPoolExecutor = Executors.newFixedThreadPool(THREAD_POOL_MAX_SIZE);
 
+
     /**
      * 发起请求
      * @param action 接口ID
      * @param sendData 发送数据参数列表
      * @param httpListener 结果监听
      */
-    protected void send(final int action, final Map<String, Object> sendData, final HttpCallback httpListener) {
+    public void send(final int action, final Map<String, Object> sendData, final HttpCallback httpListener){
+        //判断请求方式
+        final int method = getMethod(action);
+        switch (method){
+            case HttpConstants.METHOD_POST:
+                sendPost(action,sendData,httpListener);
+                break;
+            case HttpConstants.METHOD_GET:
+                sendGet(action,sendData,httpListener);
+                break;
+            case HttpConstants.METHOD_PUT:
+                //待定
+                break;
+            case HttpConstants.METHOD_DELETE:
+                //待定
+                break;
+        }
+    }
+
+    /**
+     * 发起Post请求
+     * @param action 接口ID
+     * @param sendData 发送数据参数列表
+     * @param httpListener 结果监听
+     */
+    protected void sendPost(final int action, final Map<String, Object> sendData, final HttpCallback httpListener) {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -84,13 +104,9 @@ public abstract class HttpManager {
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             if (response.isSuccessful() && httpListener!=null) {
-                                Logger.d(TAG, "response.code()==" + response.code());
-                                Logger.d(TAG, "response.message()==" + response.message());
                                 String responseBody = response.body().string();
-                                Logger.d(TAG, "res==" + responseBody);
-                                Gson gson = new Gson();
+                                Logger.d(TAG, "接口返回==" + responseBody);
                                 JsonObject data = new JsonParser().parse(responseBody).getAsJsonObject();
-                                Logger.d(TAG,data.toString());
                                 httpListener.onSuccess(action,response.code(),data);
                             }
                         }
@@ -99,7 +115,7 @@ public abstract class HttpManager {
                         public void onFailure(Call call, IOException e) {
                             if(httpListener!=null){
                                 Logger.e(TAG,"OkHttp请求异常！",e);
-                                httpListener.onFail(0,0,"OkHttp请求异常！");
+                                httpListener.onFail(action,call.request().hashCode(),"OkHttp请求异常！");
                             }
                         }
                     });
@@ -111,8 +127,6 @@ public abstract class HttpManager {
         //线程池创建
         mFixedThreadPoolExecutor.execute(runnable);
     }
-
-
 
     /**
      * 发起Get请求
@@ -163,20 +177,19 @@ public abstract class HttpManager {
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             if (response.isSuccessful() && httpListener!=null) {
-                                Logger.d(TAG, "response.code()==" + response.code());
-                                Logger.d(TAG, "response.message()==" + response.message());
                                 String responseBody = response.body().string();
-                                Logger.d(TAG, "res==" + responseBody);
-                                Gson gson = new Gson();
                                 JsonObject data = new JsonParser().parse(responseBody).getAsJsonObject();
-                                Logger.d(TAG,data.toString());
+                                Logger.d(TAG, "接口返回==" + responseBody);
                                 httpListener.onSuccess(action,response.code(),data);
                             }
                         }
                         //请求失败
                         @Override
                         public void onFailure(Call call, IOException e) {
-
+                            if(httpListener!=null){
+                                Logger.e(TAG,"OkHttp请求异常！",e);
+                                httpListener.onFail(action,call.request().hashCode(),"OkHttp请求异常！");
+                            }
                         }
                     });
                 }catch(Exception e){

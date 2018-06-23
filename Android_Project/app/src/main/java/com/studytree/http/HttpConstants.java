@@ -17,8 +17,7 @@ public class HttpConstants {
     /** Get请求 */
     public static final int METHOD_GET = 2;
 
-//    public static final String METHOD_GET = "GET";
-//    public static final String METHOD_POST = "POST";
-//    public static final String METHOD_PUT = "PUT";
-//    public static final String METHOD_DELETE = "DELETE";
+    public static final int METHOD_PUT = 3;
+
+    public static final int METHOD_DELETE = 4;
 }

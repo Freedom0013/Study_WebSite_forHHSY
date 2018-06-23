@@ -12,7 +12,7 @@ public interface HttpCallback {
     /**
      * 成功
      * @param action 地址
-     * @param responseCode 状态码
+     * @param responseCode http状态码
      * @param obj 响应体
      */
     void onSuccess(int action, int responseCode, JsonObject obj);
@@ -20,8 +20,8 @@ public interface HttpCallback {
     /**
      * 失败
      * @param action 地址
-     * @param responseCode 状态码
+     * @param hashCode call码
      * @param responseMsg 错误信息
      */
-    void onFail(int action, int responseCode, String responseMsg);
+    void onFail(int action, int hashCode, String responseMsg);
 }
