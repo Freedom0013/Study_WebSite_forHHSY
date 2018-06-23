@@ -1,6 +1,5 @@
 package com.studytree.http;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.studytree.log.Logger;

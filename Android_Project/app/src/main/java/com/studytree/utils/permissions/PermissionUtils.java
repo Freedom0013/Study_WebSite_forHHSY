@@ -12,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.studytree.ActivityCleanupStack;
 import com.studytree.log.Logger;
 
 import java.util.ArrayList;
@@ -169,6 +170,7 @@ public class PermissionUtils{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
+                        ActivityCleanupStack.exit();
                     }
                 })
                 .setPositiveButton("设置", new DialogInterface.OnClickListener() {
@@ -184,6 +186,7 @@ public class PermissionUtils{
                             Toast.makeText(context, "跳转失败", Toast.LENGTH_SHORT).show();
                         }
                         dialog.dismiss();
+                        ActivityCleanupStack.exit();
                     }
                 }).create().show();
     }

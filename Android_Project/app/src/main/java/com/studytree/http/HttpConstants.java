@@ -7,11 +7,6 @@ package com.studytree.http;
  * @author Freedom0013
  */
 public class HttpConstants {
-    /** 错误码 */
-    public static final String KEY_ERROR_CODE = "code";
-    /**错误消息  */
-    public static final String KEY_ERROR_MSG = "error";
-
     /** Post请求 */
     public static final int METHOD_POST = 1;
     /** Get请求 */
@@ -20,4 +15,9 @@ public class HttpConstants {
     public static final int METHOD_PUT = 3;
 
     public static final int METHOD_DELETE = 4;
+
+//    /** 错误码 */
+//    public static final String KEY_ERROR_CODE = "code";
+//    /** 错误消息 */
+//    public static final String KEY_ERROR_MSG = "error";
 }

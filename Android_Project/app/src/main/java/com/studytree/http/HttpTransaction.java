@@ -1,7 +1,6 @@
 package com.studytree.http;
 
 import com.studytree.commonfile.Constants;
-import com.studytree.log.Logger;
 
 import java.util.Map;
 
