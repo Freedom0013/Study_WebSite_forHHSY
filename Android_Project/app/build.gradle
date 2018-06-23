@@ -32,6 +32,8 @@ dependencies {
     implementation files('libs/gson-2.8.5.jar')
     implementation files('libs/zxing-core-3.3.3.jar')
     implementation files('libs/universal-image-loader-1.9.5.jar')
+    implementation 'com.umeng.sdk:common:latest.integration'
+    implementation 'com.umeng.sdk:analytics:latest.integration'
 }
 
 configurations.all {

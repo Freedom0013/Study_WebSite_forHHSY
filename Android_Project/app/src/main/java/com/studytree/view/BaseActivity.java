@@ -79,8 +79,11 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     public void finish() {
+        //Activity弹栈
         ActivityCleanupStack.pop(this.getClass());
+        //结束Activity
         super.finish();
+        //垃圾回收
         System.gc();
     }
 

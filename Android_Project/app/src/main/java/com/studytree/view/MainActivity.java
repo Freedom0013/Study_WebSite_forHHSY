@@ -1,5 +1,6 @@
 package com.studytree.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -71,4 +72,10 @@ public class MainActivity extends BaseActivity {
         //交给Base处理
         super.permissionsutils.handleSingleRequestPermissionsResult(requestCode,permissions,grantResults);
     }
+
+//    public static void startForResult(Activity ctx){
+//        Intent intent = new Intent(ctx,MainActivity.class);
+//        intent.putExtra("requestResult",true);
+//        ctx.startActivityForResult(intent, 0);
+//    }
 }
