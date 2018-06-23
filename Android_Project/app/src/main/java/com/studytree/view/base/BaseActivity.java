@@ -1,4 +1,4 @@
-package com.studytree.view;
+package com.studytree.view.base;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +17,7 @@ import com.studytree.ActivityCleanupStack;
 import com.studytree.log.Logger;
 import com.studytree.utils.permissions.PermissionUtils;
 import com.studytree.utils.permissions.RequestPermissionListener;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * Activity基类
@@ -49,6 +50,7 @@ public class BaseActivity extends AppCompatActivity {
         @Override
         public void onPermissionAccreditSucceed(int requestCode) {
             Logger.w(TAG,"权限获取成功");
+            showToast("权限获取成功");
         }
 
         @Override
@@ -68,7 +70,7 @@ public class BaseActivity extends AppCompatActivity {
                     });
                 }
             }
-            Logger.e(TAG, "权限获取失败");
+            showToast("权限获取失败");
         }
     };
 
@@ -125,6 +127,18 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
+
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         return super.onKeyDown(keyCode, event);
     }
@@ -140,18 +154,8 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
     protected void onRestart() {
         super.onRestart();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
     }
 
     @Override

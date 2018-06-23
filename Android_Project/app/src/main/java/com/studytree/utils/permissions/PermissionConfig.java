@@ -142,6 +142,9 @@ public final class PermissionConfig {
     public static final int REQUEST_SMS = 32;
     /** 请求储存卡权限组响应码 */
     public static final int REQUEST_STORAGE = 33;
+    /** 权限组响应码 */
+    public static final int REQUEST_SOME_PERMISSIONS = 34;
+
 
     static {
         //如果API大于Android6.0 创建运行时权限组
@@ -255,6 +258,8 @@ public final class PermissionConfig {
                 return "读取设备外部存储空间（内置SDcard和外置SDCard）";
             case REQUEST_WRITE_EXTERNAL_STORAGE:
                 return "写入外部存储空间";
+            case REQUEST_SOME_PERMISSIONS:
+                return "权限组";
             default:
                 return null;
         }

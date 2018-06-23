@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 
 import com.studytree.commonfile.Constants;
+import com.umeng.commonsdk.UMConfigure;
 
 /**
  * 应用初始化管理
@@ -57,6 +58,8 @@ public class InitManager {
         this.mContext = context;
         //初始化异常处理类
         ExceptionHandler.getInstance().init(mContext.getApplicationContext());
+        //初始化友盟统计
+        UMConfigure.init(mContext,Constants.UMAppKey, Constants.UMChannelID, UMConfigure.DEVICE_TYPE_PHONE ,null);
     }
 
     /**

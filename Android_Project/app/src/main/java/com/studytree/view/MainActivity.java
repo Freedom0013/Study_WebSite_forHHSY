@@ -1,6 +1,5 @@
 package com.studytree.view;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -11,6 +10,9 @@ import com.studytree.http.HttpResultCallback;
 import com.studytree.http.logic.InitLogic;
 import com.studytree.log.Logger;
 import com.studytree.utils.permissions.PermissionConfig;
+import com.studytree.view.base.BaseActivity;
+
+import java.util.List;
 
 
 /**
@@ -38,11 +40,13 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //检查权限
-        if(!super.permissionsutils.hasPermissionGranted(PermissionConfig.PERMISSION_WRITE_EXTERNAL_STORAGE,MainActivity.this)){
-            Logger.i(TAG,"没有 = "+PermissionConfig.PERMISSION_WRITE_EXTERNAL_STORAGE+"权限");
-            //调用BaseActivity检查权限工具类
-            super.permissionsutils.Requestpermission(PermissionConfig.PERMISSION_WRITE_EXTERNAL_STORAGE,PermissionConfig.REQUEST_WRITE_EXTERNAL_STORAGE,"需要请求修改内部储存权限！",MainActivity.this);
+        //权限组检查
+        String[] permissions = { PermissionConfig.PERMISSION_READ_PHONE_STATE,
+                                 PermissionConfig.PERMISSION_WRITE_EXTERNAL_STORAGE };
+        List<String> permissionslist = super.permissionsutils.hasPermissionsAllGranted(permissions, MainActivity.this);
+        if (permissionslist.size() != 0) {
+                //调用BaseActivity检查权限工具类
+                super.permissionsutils.Requestpermission(permissions, PermissionConfig.REQUEST_SOME_PERMISSIONS, "需要请求一些必要权限！", MainActivity.this);
         }
 
         //网络请求

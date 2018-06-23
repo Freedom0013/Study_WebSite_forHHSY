@@ -30,4 +30,10 @@ public class Constants {
     /** MD5加盐 */
     public static final String MD5_PREFIX = "studytree@!123321";
     public static final String MD5KEY = "6938";
+
+    /** 友盟AppKey */
+    public static final String UMAppKey = "5b2e06e6f43e4876f400004f";
+    /** 友盟ChannelID */
+    public static final String UMChannelID = "StudyTree";
+
 }
