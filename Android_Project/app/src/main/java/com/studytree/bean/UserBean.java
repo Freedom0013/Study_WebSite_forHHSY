@@ -1,5 +1,8 @@
 package com.studytree.bean;
 
+import com.google.gson.JsonObject;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,7 +13,7 @@ import java.util.Date;
  * @date 2018年1月21日
  * @author Freedom0013
  */
-public class UserBean {
+public class UserBean implements Serializable{
 	/** 用户id */
 	private int user_id;
 	/** 用户头像编号 */
@@ -55,7 +58,7 @@ public class UserBean {
 	/**
 	 * 空参构造函数
 	 */
-	public UserBean() {
+	public UserBean(JsonObject json) {
 		
 	}
 	
@@ -118,6 +121,10 @@ public class UserBean {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		this.user_register_time = sdf.format(d);
 	}
+
+	public UserBean(){
+
+    }
 	
 	
 	public int getUser_id() {

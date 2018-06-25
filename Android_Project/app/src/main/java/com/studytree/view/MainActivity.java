@@ -5,7 +5,13 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.studytree.R;
+import com.studytree.bean.InitBean;
 import com.studytree.http.HttpResultCallback;
 import com.studytree.http.logic.InitLogic;
 import com.studytree.log.Logger;
@@ -55,6 +61,11 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onSuccess(int action, Object obj) {
                 Logger.d(TAG,"接口请求成功！obj = "+obj.toString());
+                Gson gson = new Gson();
+                JsonObject data = new JsonParser().parse(obj.toString()+"").getAsJsonObject();
+                JsonObject info = data.get("data").getAsJsonObject();
+                InitBean initbean = new InitBean(info);
+                Logger.d(TAG,initbean.toString());
             }
 
             @Override

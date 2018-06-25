@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.studyplatform.web.bean.InitBean;
 import com.studyplatform.web.utils.WebUtils;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 /**
@@ -37,35 +37,14 @@ public class InitAction extends HttpServlet {
         // 控制字符集
         WebUtils.setCharSet(request, response);
         PrintWriter out = response.getWriter();
+        
 //        String from = request.getParameter("from");
 //        String sign = request.getParameter("sign");
 //        DebugUtils.showLog("from = "+from+",sign"+sign);
         
         int visionCode = 1;
-        
-        JSONObject data = new JSONObject();
-        JSONArray data_array = new JSONArray();
-        
-        //更新标识
-        JSONObject updata_flag = new JSONObject();
-        updata_flag.element("updata_flag", "false");
-        data_array.add(updata_flag);
-        
-        //更新标题
-        JSONObject title = new JSONObject();
-        title.element("updata_title","我是更新标题");
-        data_array.add(title);
-        
-        //更新版本号
-        JSONObject vision = new JSONObject();
-        vision.element("updata_visionCode",visionCode);
-        data_array.add(vision);
-        
         //更新日期
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        JSONObject date = new JSONObject();
-        date.element("updata_date",df.format(new Date()));
-        data_array.add(date);
         
         //更新说明
         List<String> UpdataMessage = new ArrayList<String>();
@@ -73,17 +52,10 @@ public class InitAction extends HttpServlet {
         UpdataMessage.add("我是更新日志第二条。");
         UpdataMessage.add("我是更新日志第三条。");
         UpdataMessage.add("我是更新日志第四条。");
-        JSONArray messagearray = new JSONArray();
-        for (int i = 0; i < UpdataMessage.size(); i++) {
-            JSONObject single_message = new JSONObject();
-            single_message.element("updata_Message"+i, UpdataMessage.get(i));
-            messagearray.add(single_message);
-        }
-        JSONObject messages = new JSONObject();
-        messages.element("Messages",messagearray);
-        data_array.add(messages);
+        InitBean info = new InitBean(false, "我是更新标题", visionCode, "http://localhost:8080", df.format(new Date()), UpdataMessage);
         
-        data.element("data", data_array);
+        JSONObject data = new JSONObject();
+        data.element("data", JSONObject.fromObject(info));
         
         out.write(data.toString());  
         out.flush();  

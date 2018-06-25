@@ -2,11 +2,13 @@ package com.studytree.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.studytree.InitManager;
 import com.studytree.commonfile.Constants;
+import com.studytree.log.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +21,7 @@ import java.util.TreeMap;
  * @author Freedom0013
  */
 public class StudyTreeTools {
+    private static final String TAG = StudyTreeTools.class.getSimpleName();
     /** 排序比较器 */
     private static MapKeyComparator mapKeyComparator = new MapKeyComparator();
 
@@ -26,6 +29,22 @@ public class StudyTreeTools {
      * 空参构造函数
      */
     public StudyTreeTools() {
+    }
+
+    /**
+     * 获取版本号
+     * @param _context Context对象
+     * @param _package 包名
+     * @return versionCode
+     */
+    public static String getVerName(Context _context, String _package) {
+        String verCode = "-1";
+        try {
+            verCode = _context.getPackageManager().getPackageInfo(_package, 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            Logger.e(TAG,"getVerName错误！",e);
+        }
+        return verCode;
     }
 
     /**
@@ -94,5 +113,58 @@ public class StudyTreeTools {
             return networkInfo.isAvailable();
         }
         return false;
+    }
+
+    /**
+     * 判断当前网络是否为WiFi链接
+     * @param context Context对象
+     * @return 结果（是wifi：true，否则返回false）
+     */
+    public static boolean isWifi(Context context) {
+        ConnectivityManager connMgr = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo == null) {
+            return false;
+        }
+        int nType = networkInfo.getType();
+        System.out.println("networkInfo.getExtraInfo() is "
+                + networkInfo.getExtraInfo());
+        if (nType == ConnectivityManager.TYPE_MOBILE) {
+            return false;
+        } else if (nType == ConnectivityManager.TYPE_WIFI) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * dp转px
+     * @param dpValue dp值
+     * @return px
+     */
+    public static int dip2px(float dpValue) {
+        final float scale = InitManager.getInstance().getContext().getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
+
+    /**
+     * px转dp
+     * @param pxValue px值
+     * @return dp值
+     */
+    public static int px2dip(float pxValue) {
+        final float scale = InitManager.getInstance().getContext().getResources().getDisplayMetrics().density;
+        return (int) (pxValue / scale + 0.5f);
+    }
+
+    /**
+     * sp转px（文字大小不变）
+     * @param spValue sp值
+     * @return px值
+     */
+    public static int sp2px(float spValue) {
+        final float fontScale = InitManager.getInstance().getContext().getResources().getDisplayMetrics().scaledDensity;
+        return (int) (spValue * fontScale + 0.5f);
     }
 }

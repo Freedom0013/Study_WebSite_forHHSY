@@ -33,15 +33,20 @@ public class InitLogic {
     }
 
     /**
-     * 获取单例
+     * 获取单例（线程安全）
      * @return InitLogic单例
      */
-    public static InitLogic getInstance(){
-        if(_instance == null){
-            _instance = new InitLogic();
+    public static InitLogic getInstance() {
+        if (_instance == null) {
+            synchronized (InitLogic.class) {
+                if (_instance == null) {
+                    _instance = new InitLogic();
+                }
+            }
         }
         return _instance;
     }
+
 
     /**
      * 获取更新信息
@@ -52,50 +57,50 @@ public class InitLogic {
         final HashMap<String, Object> dataMessage = new HashMap<String, Object>();
         dataMessage.put("from", TAG+"我是来自客户端的信息！！");
 //----------------------实例数据start----------------------------------
-        JsonObject data = new JsonObject();
-        JsonArray data_array = new JsonArray();
+//        JsonObject data = new JsonObject();
+//        JsonArray data_array = new JsonArray();
+//
+//        //更新标识
+//        JsonObject updata_flag = new JsonObject();
+//        updata_flag.addProperty("updata_flag", "false");
+//        data_array.add(updata_flag);
+//
+//        //更新标题
+//        JsonObject title = new JsonObject();
+//        title.addProperty("updata_title", "我是更新标题");
+//        data_array.add(title);
+//
+//        //更新版本号
+//        JsonObject vision = new JsonObject();
+//        vision.addProperty("updata_visionCode", 1);
+//        data_array.add(vision);
+//
+//        //更新日期
+//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        JsonObject date = new JsonObject();
+//        date.addProperty("updata_date", df.format(new Date()));
+//        data_array.add(date);
+//
+//        //更新说明
+//        List<String> UpdataMessage = new ArrayList<String>();
+//        UpdataMessage.add("我是更新日志第一条。");
+//        UpdataMessage.add("我是更新日志第二条。");
+//        UpdataMessage.add("我是更新日志第三条。");
+//        UpdataMessage.add("我是更新日志第四条。");
+//        JsonArray messagearray = new JsonArray();
+//        for (int i = 0; i < UpdataMessage.size(); i++) {
+//            JsonObject single_message = new JsonObject();
+//            single_message.addProperty("updata_Message" + i, UpdataMessage.get(i));
+//            messagearray.add(single_message);
+//        }
+//
+//        JsonObject messages = new JsonObject();
+//        messages.add("Messages", messagearray);
+//        data_array.add(messages);
+//        data.add("data", data_array);
+//        dataMessage.put("sign", data.toString());
 
-        //更新标识
-        JsonObject updata_flag = new JsonObject();
-        updata_flag.addProperty("updata_flag", "false");
-        data_array.add(updata_flag);
-
-        //更新标题
-        JsonObject title = new JsonObject();
-        title.addProperty("updata_title", "我是更新标题");
-        data_array.add(title);
-
-        //更新版本号
-        JsonObject vision = new JsonObject();
-        vision.addProperty("updata_visionCode", 1);
-        data_array.add(vision);
-
-        //更新日期
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        JsonObject date = new JsonObject();
-        date.addProperty("updata_date", df.format(new Date()));
-        data_array.add(date);
-
-        //更新说明
-        List<String> UpdataMessage = new ArrayList<String>();
-        UpdataMessage.add("我是更新日志第一条。");
-        UpdataMessage.add("我是更新日志第二条。");
-        UpdataMessage.add("我是更新日志第三条。");
-        UpdataMessage.add("我是更新日志第四条。");
-        JsonArray messagearray = new JsonArray();
-        for (int i = 0; i < UpdataMessage.size(); i++) {
-            JsonObject single_message = new JsonObject();
-            single_message.addProperty("updata_Message" + i, UpdataMessage.get(i));
-            messagearray.add(single_message);
-        }
-
-        JsonObject messages = new JsonObject();
-        messages.add("Messages", messagearray);
-        data_array.add(messages);
-        data.add("data", data_array);
 //----------------------实例数据end----------------------------------
-
-        dataMessage.put("sign", data.toString());
 
         mHttpTransaction.send(ActionID.ACTION_INIT, dataMessage, new HttpCallback() {
             @Override

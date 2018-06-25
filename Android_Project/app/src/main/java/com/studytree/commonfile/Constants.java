@@ -18,7 +18,7 @@ public class Constants {
 
     static {
         if (LOCAL_TEST) {
-            HOST = "192.168.0.102:8080/Study_Platform_website";     //本地地址
+            HOST = "192.168.0.103:8080/Study_Platform_website";     //本地地址
         } else {
             HOST = "" + DOMAIN;
         }

@@ -27,15 +27,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!-- 友盟统计应用Appkey
-        <meta-data
-            android:name="5b2e06e6f43e4876f400004f"
-            android:value="YOUR_APP_KEY"></meta-data>
-        应用的推广渠道名称ChannelID
-        <meta-data
-            android:name="StudyTree"
-            android:value="Channel ID" /> -->
     </application>
 
 </manifest>

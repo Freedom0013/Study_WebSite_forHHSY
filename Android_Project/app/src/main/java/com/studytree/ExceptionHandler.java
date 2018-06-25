@@ -66,7 +66,7 @@ public class ExceptionHandler implements Thread.UncaughtExceptionHandler{
             collectDeviceInfo(mContext);
         }
         Logger.e(TAG, "===========知识森驿站警告！！！============CrashHandler uncaughtException================开始===================");
-        Logger.w(TAG, "CrashHandler uncaughtException" + exception.toString());
+        Logger.w(TAG, "----CrashHandler Exception----" ,exception);
         exception.printStackTrace();
         Logger.w(TAG, exception);
         Logger.w(TAG, "-----------设备信息开始-----------");
