@@ -1,6 +1,9 @@
 package com.studytree.commonfile;
 
-import com.studytree.BuildConfig;
+import android.os.Environment;
+import android.support.v4.content.ContextCompat;
+
+import com.studytree.R;
 
 /**
  * 公共参数类
@@ -18,7 +21,7 @@ public class Constants {
 
     static {
         if (LOCAL_TEST) {
-            HOST = "192.168.0.103:8080/Study_Platform_website";     //本地地址
+            HOST = "192.168.0.101:8080/Study_Platform_website";     //本地地址
         } else {
             HOST = "" + DOMAIN;
         }
@@ -36,4 +39,10 @@ public class Constants {
     /** 友盟ChannelID */
     public static final String UMChannelID = "StudyTree";
 
+    /** 日志文件存储路径 */
+    public static final String LOG_DIR = Environment.getExternalStorageDirectory().getAbsolutePath() + "/StudyTree/log/";
+    /** 图片文件缓存 */
+    public static final String IMAGE_DIR = Environment.getExternalStorageDirectory().getAbsolutePath() + "/StudyTree/cache_images/";
+    /** 默认图片 */
+    public static final int default_image = R.drawable.ic_default_image;
 }

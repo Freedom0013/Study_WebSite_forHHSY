@@ -35,11 +35,11 @@ public class LogCache {
     private static final long MIX_SIZE = 5242880;
     /** LogCache单例 */
     private static final LogCache INSTANCE = new LogCache();
-    /**  */
+    /** 同步队列 */
     private final BlockingQueue<String> queue = new LinkedBlockingQueue<String>();
     /** LogCache启动标识 */
     private volatile boolean started;
-    /**  */
+    /** Log执行线程 */
     private volatile Thread logWorkerThread;
     /** 日志操作类 */
     private LogWriter logWriter = null;
@@ -160,10 +160,8 @@ public class LogCache {
     }
 
     /**
-     * [一句话功能简述]<BR>
-     * [功能详细描述]
-     *
-     * @return CacheSize
+     * 获取缓存大小
+     * @return 大小
      */
     public synchronized long getCacheSize() {
         long size = 0;
@@ -173,10 +171,18 @@ public class LogCache {
         return size;
     }
 
+    /**
+     * 判断服务是否启动
+     * @return 结果
+     */
     public boolean isStarted() {
         return started;
     }
 
+    /**
+     * 判断线程是否为空
+     * @return 结果
+     */
     public boolean isLogThreadNull() {
         return null == logWorkerThread;
     }
@@ -197,12 +203,10 @@ public class LogCache {
     }
 
     /**
-     * [一句话功能简述]<BR>
-     * [功能详细描述]
+     * 停止本地服务
      */
     public synchronized void stop() {
-        Log.v("LogCache",
-                "Log Cache instance is stopping...");
+        Log.v(TAG,"LogCache实例停止中...");
         started = false;
         queue.clear();
         logWriter.close();
@@ -210,42 +214,29 @@ public class LogCache {
             logWorkerThread.interrupt();
             logWorkerThread = null;
         }
-        Log.v("LogCache",
-                "Log Cache instance is stopped");
+        Log.v(TAG,"LogCache实例停止完毕");
     }
 
     /**
-     * [一句话功能简述]<BR>
-     * [功能详细描述]
-     *
-     * @author 盛兴亚
-     * @version [RCS Client V100R001C03, 2012-2-15]
+     * Log线程
      */
     private final class LogTask implements Runnable {
-
         public LogTask() {
             counter++;
         }
-
         private void dealMsg() throws InterruptedException {
             String msg = null;
             while (started && !Thread.currentThread().isInterrupted()) {
                 msg = queue.take();
                 synchronized (logWriter) {
                     if (isExternalMemoryAvailable(msg)) {
-                        // if current file is deleted, rebuild it
                         if (!logWriter.isCurrentExist()) {
-                            Log.v(TAG,
-                                    "current is initialing...");
+                            Log.v(TAG,"current is initialing...");
                             if (!logWriter.initialize()) {
                                 continue;
                             }
-                        }
-                        // if current log file reaches size limitation, log into
-                        // next log file
-                        else if (!logWriter.isCurrentAvailable()) {
-                            Log.v(TAG,
-                                    "current is rotating...");
+                        }else if (!logWriter.isCurrentAvailable()) {
+                            Log.v(TAG,"current is rotating...");
                             if (!logWriter.rotate()) {
                                 continue;
                             }
@@ -257,32 +248,28 @@ public class LogCache {
                         }
                         logWriter.println(msg);
                     } else {
-                        Log.e(TAG,
-                                "can't log into sdcard.");
+                        Log.e(TAG, "写入SD卡错误");
                     }
                 }
             }
         }
 
+        /**
+         * 执行Log线程
+         */
         public void run() {
             try {
                 dealMsg();
             } catch (InterruptedException e) {
-                Log.e(TAG,
-                        Thread.currentThread().toString(),
-                        e);
+                Log.e(TAG,"LogCache::"+Thread.currentThread().toString(),e);
             } catch (RuntimeException e) {
-                Log.e(TAG,
-                        Thread.currentThread().toString(),
-                        e);
-                logWorkerThread = new Thread(new LogTask(),"Log Worker Thread - " + counter);
+                Log.e(TAG,"LogCache::"+Thread.currentThread().toString(),e);
+                logWorkerThread = new Thread(new LogTask(),"LogCache线程工作 - " + counter);
                 started = false;
             } finally {
-                Log.v(TAG, "Log Worker Thread is terminated.");
+                Log.v(TAG, "LogCache线程执行完毕");
             }
         }
-
     }
-
 }
 

@@ -4,8 +4,18 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 
+import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.studytree.commonfile.Constants;
 import com.umeng.commonsdk.UMConfigure;
+
+import java.io.File;
 
 /**
  * 应用初始化管理
@@ -29,6 +39,8 @@ public class InitManager {
     private int mScreenHeight = -1;
     /** LayoutInflater布局服务对象 */
     private LayoutInflater mInflater;
+    /** ImageLoader缓存图片存储目录 */
+    private File ImageLoader_Cache_dir = new File(Constants.IMAGE_DIR);
 
     /**
      * 私有构造函数
@@ -41,8 +53,12 @@ public class InitManager {
      * @return InitManager对象
      */
     public static InitManager getInstance(){
-        if(_instance == null){
-            _instance = new InitManager();
+        if (_instance == null) {
+            synchronized (InitManager.class) {
+                if (_instance == null) {
+                    _instance = new InitManager();
+                }
+            }
         }
         return _instance;
     }
@@ -60,6 +76,27 @@ public class InitManager {
         ExceptionHandler.getInstance().init(mContext.getApplicationContext());
         //初始化友盟统计
         UMConfigure.init(mContext,Constants.UMAppKey, Constants.UMChannelID, UMConfigure.DEVICE_TYPE_PHONE ,null);
+
+        //ImageLoader初始化设置（ImageLoader建造者设计模式）
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(mContext)
+            .threadPoolSize(5) // 线程池大小
+            .threadPriority(Thread.NORM_PRIORITY - 2) // 设置线程优先级
+            .denyCacheImageMultipleSizesInMemory() // 不允许在内存中缓存同一张图片的多个尺寸
+            .tasksProcessingOrder(QueueProcessingType.LIFO) // 设置处理队列的类型，包括LIFO， FIFO
+            .memoryCache(new LruMemoryCache(3 * 1024 * 1024)) // 内存缓存策略
+            .memoryCacheSize(5 * 1024 * 1024)  // 内存缓存大小
+            .memoryCacheExtraOptions(480, 800) // 内存缓存中每个图片的最大宽高
+            .memoryCacheSizePercentage(50) // 内存缓存占总内存的百分比
+            .diskCache(new UnlimitedDiskCache(ImageLoader_Cache_dir)) // 设置磁盘缓存路径
+            .diskCacheSize(50 * 1024 * 1024) // 设置磁盘缓存的大小
+            .diskCacheFileCount(50) // 磁盘缓存文件数量
+            .diskCacheFileNameGenerator(new Md5FileNameGenerator()) // 磁盘缓存时图片名称加密方式
+            .imageDownloader(new BaseImageDownloader(mContext,60 * 1000, 60 * 1000)) // 图片下载器(后面数字为超时时间)
+            .defaultDisplayImageOptions(DisplayImageOptions.createSimple())
+            .writeDebugLogs() // 打印日志
+            .build();
+        //ImageLoader初始化
+        ImageLoader.getInstance().init(config);
     }
 
     /**

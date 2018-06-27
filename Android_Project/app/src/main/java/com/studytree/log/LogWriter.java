@@ -76,8 +76,7 @@ public class LogWriter {
                         .listFiles(new FilenameFilter() {
                             public boolean accept(File dir, String filename) {
                                 final String curName = LogWriter.this.current.getName();
-                                String patt = curName.replace(curName.substring(curName.lastIndexOf(".")),
-                                        "_");
+                                String patt = curName.replace(curName.substring(curName.lastIndexOf(".")),"_");
                                 return filename.contains(patt);
                             }
                         });
@@ -112,11 +111,11 @@ public class LogWriter {
         if (historyLogs.size() >= fileAmount - 1) {
             boolean deleteResult = LogFileUtil.forceDeleteFile(getTheEarliest());
             if (deleteResult) {
-                Log.i(TAG, "old historyLogs: " + historyLogs);
-                Log.i(TAG, "delete " + historyLogs.get(0).getName() + "successfully.");
+                Log.i(TAG, "旧日志文件: " + historyLogs);
+                Log.i(TAG, "删除 " + historyLogs.get(0).getName() + "成功！");
                 historyLogs.remove(0);
             } else {
-                Log.i(TAG, "delete " + historyLogs.get(0).getName() + "abortively.");
+                Log.i(TAG, "删除 " + historyLogs.get(0).getName() + "失败！");
                 return false;
             }
         }
@@ -124,7 +123,7 @@ public class LogWriter {
             close();
             boolean result = current.renameTo(des);
             if (!result || !initialize()) {
-                Log.v(TAG, "rename or initialize error!");
+                Log.v(TAG, "重命名或初始化错误！");
                 return false;
             }
         } catch (Exception e) {
@@ -132,7 +131,7 @@ public class LogWriter {
             return false;
         }
         historyLogs.add(des);
-        Log.i(TAG, "new historyLogs: " + historyLogs);
+        Log.i(TAG, "新的日志路径为: " + historyLogs);
         return true;
     }
     

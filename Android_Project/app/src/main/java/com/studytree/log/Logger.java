@@ -4,6 +4,7 @@ import android.os.Environment;
 import android.util.Log;
 
 import com.studytree.BuildConfig;
+import com.studytree.commonfile.Constants;
 
 /**
  * log打印封装类
@@ -15,7 +16,7 @@ public final class Logger {
     /** 标签 */
     public static final String TAG = "Logger";
     /** log目录地址 */
-    public static final String LOG_DIR = Environment.getExternalStorageDirectory().getAbsolutePath() + "/StudyTree/log/";
+    public static final String LOG_DIR = Constants.LOG_DIR;
     /** log保存地址 */
     public static final String LOG_FILE_PATH = LOG_DIR + "run.log";
     /** 文件数量限制 */
