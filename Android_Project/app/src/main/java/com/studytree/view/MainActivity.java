@@ -45,47 +45,6 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //权限组检查
-        String[] permissions = { PermissionConfig.PERMISSION_READ_PHONE_STATE,
-                                 PermissionConfig.PERMISSION_WRITE_EXTERNAL_STORAGE };
-        List<String> permissionslist = super.permissionsutils.hasPermissionsAllGranted(permissions, MainActivity.this);
-        if (permissionslist.size() != 0) {
-                //调用BaseActivity检查权限工具类
-                super.permissionsutils.Requestpermission(permissions, PermissionConfig.REQUEST_SOME_PERMISSIONS, "需要请求一些必要权限！", MainActivity.this);
-        }
-
-        //网络请求
-        InitLogic initLogic = InitLogic.getInstance();
-        initLogic.getUpdataInfo(new HttpResultCallback() {
-            @Override
-            public void onSuccess(int action, Object obj) {
-                Logger.d(TAG,"接口请求成功！obj = "+obj.toString());
-                Gson gson = new Gson();
-                JsonObject data = new JsonParser().parse(obj.toString()+"").getAsJsonObject();
-                JsonObject info = data.get("data").getAsJsonObject();
-                InitBean initbean = new InitBean(info);
-                Logger.d(TAG,initbean.toString());
-            }
-
-            @Override
-            public void onFail(int action, int responseCode, String responseMsg) {
-                Logger.d(TAG,"接口请求失败！responseMsg = "+responseMsg);
-            }
-        });
-    }
-
-    /**
-     * 用户权限授权回调
-     * @param requestCode 请求码
-     * @param permissions 权限列表
-     * @param grantResults 授权结果码
-     */
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode,permissions,grantResults);
-        //交给Base处理
-        super.permissionsutils.handleSingleRequestPermissionsResult(requestCode,permissions,grantResults);
     }
 
 //    public static void startForResult(Activity ctx){

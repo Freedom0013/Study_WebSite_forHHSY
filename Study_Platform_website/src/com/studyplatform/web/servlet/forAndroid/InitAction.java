@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.studyplatform.web.bean.InitBean;
+import com.studyplatform.web.utils.DebugUtils;
 import com.studyplatform.web.utils.WebUtils;
 
 import net.sf.json.JSONObject;
@@ -52,10 +53,12 @@ public class InitAction extends HttpServlet {
         UpdataMessage.add("我是更新日志第二条。");
         UpdataMessage.add("我是更新日志第三条。");
         UpdataMessage.add("我是更新日志第四条。");
-        InitBean info = new InitBean(false, "我是更新标题", visionCode, "http://localhost:8080", df.format(new Date()), UpdataMessage);
+        InitBean info = new InitBean(false, false,"我是更新标题", visionCode, "http://localhost:8080", df.format(new Date()), UpdataMessage);
         
         JSONObject data = new JSONObject();
         data.element("data", JSONObject.fromObject(info));
+        
+        DebugUtils.showLog(data.toString());
         
         out.write(data.toString());  
         out.flush();  

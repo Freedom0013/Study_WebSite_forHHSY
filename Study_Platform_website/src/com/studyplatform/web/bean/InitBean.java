@@ -12,6 +12,8 @@ import java.util.List;
 public class InitBean {
     /** 更新标记 */
     public boolean  updata_flag;
+    /** 是否为强制更新 */
+    public boolean ismust_updata_flag;
     /** 更新标题 */
     public String updata_title;
     /** 更新版本号 */
@@ -23,9 +25,10 @@ public class InitBean {
     /** 更新说明 */
     List<String> UpdataMessage = new ArrayList<String>();
     
-    public InitBean(boolean updata_flag, String updata_title, int updata_visionCode, String updata_url,
+    public InitBean(boolean updata_flag, boolean ismust_updata_flag, String updata_title, int updata_visionCode, String updata_url,
             String updata_date, List<String> updataMessage) {
         this.updata_flag = updata_flag;
+        this.ismust_updata_flag = ismust_updata_flag;
         this.updata_title = updata_title;
         this.updata_visionCode = updata_visionCode;
         this.updata_url = updata_url;
@@ -38,6 +41,12 @@ public class InitBean {
     }
     public void setUpdata_flag(boolean updata_flag) {
         this.updata_flag = updata_flag;
+    }
+    public boolean isIsmust_updata_flag() {
+        return ismust_updata_flag;
+    }
+    public void setIsmust_updata_flag(boolean ismust_updata_flag) {
+        this.ismust_updata_flag = ismust_updata_flag;
     }
     public String getUpdata_title() {
         return updata_title;
@@ -69,11 +78,12 @@ public class InitBean {
     public void setUpdataMessage(List<String> updataMessage) {
         UpdataMessage = updataMessage;
     }
-    
+
     @Override
     public String toString() {
-        return "InitBean [updata_flag=" + updata_flag + ", updata_title=" + updata_title + ", updata_visionCode="
-                + updata_visionCode + ", updata_url=" + updata_url + ", updata_date=" + updata_date + ", UpdataMessage="
-                + UpdataMessage + "]";
+        return "InitBean [updata_flag=" + updata_flag + ", ismust_updata_flag=" + ismust_updata_flag + ", updata_title="
+                + updata_title + ", updata_visionCode=" + updata_visionCode + ", updata_url=" + updata_url
+                + ", updata_date=" + updata_date + ", UpdataMessage=" + UpdataMessage + "]";
     }
+    
 }

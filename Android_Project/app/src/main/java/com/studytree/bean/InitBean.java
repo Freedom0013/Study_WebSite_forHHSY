@@ -20,6 +20,8 @@ public class InitBean implements Serializable {
     private static final String TAG = InitBean.class.getSimpleName();
     /** 更新标记 */
     public boolean  updata_flag;
+    /** 是否为强制更新 */
+    public boolean ismust_updata_flag;
     /** 更新标题 */
     public String updata_title;
     /** 更新版本号 */
@@ -36,8 +38,9 @@ public class InitBean implements Serializable {
     /**
      * 全参构造函数
      */
-    public InitBean(boolean updata_flag, String updata_title, int updata_visionCode, String updata_url, String updata_date, List<String> updataMessage) {
+    public InitBean(boolean updata_flag, boolean ismust_updata_flag, String updata_title, int updata_visionCode, String updata_url, String updata_date, List<String> updataMessage) {
         this.updata_flag = updata_flag;
+        this.ismust_updata_flag = ismust_updata_flag;
         this.updata_title = updata_title;
         this.updata_visionCode = updata_visionCode;
         this.updata_url = updata_url;
@@ -53,6 +56,7 @@ public class InitBean implements Serializable {
         try{
             //解析普通数据
             this.updata_flag = info.get("updata_flag").getAsBoolean();
+            this.ismust_updata_flag = info.get("ismust_updata_flag").getAsBoolean();
             this.updata_title = info.get("updata_title").getAsString();
             this.updata_visionCode = info.get("updata_visionCode").getAsInt();
             this.updata_url = info.get("updata_url").getAsString();
@@ -70,7 +74,8 @@ public class InitBean implements Serializable {
 
     @Override
     public String toString() {
-        return "InitBean [updata_flag=" + updata_flag + ", updata_title=" + updata_title + ", updata_visionCode="
-                + updata_visionCode + ", updata_url=" + updata_url + ", updata_date=" + updata_date + ", UpdataMessage=" + UpdataMessage.toString() + "]";
+        return "InitBean [updata_flag=" + updata_flag + ", ismust_updata_flag=" + ismust_updata_flag + ", updata_title="
+                + updata_title + ", updata_visionCode=" + updata_visionCode + ", updata_url=" + updata_url
+                + ", updata_date=" + updata_date + ", UpdataMessage=" + UpdataMessage + "]";
     }
 }

@@ -12,6 +12,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
+import com.studytree.bean.DeviceInfoBean;
 import com.studytree.commonfile.Constants;
 import com.umeng.commonsdk.UMConfigure;
 
@@ -28,19 +29,21 @@ public class InitManager {
     /** InitManager单例 */
     private static InitManager _instance = null;
     /** Context对象 */
-    private Context mContext;
+    public Context mContext;
     /** 是否初始化过标识 */
-    private boolean inited = false;
+    public boolean inited = false;
     /** SharedPreferences对象 */
-    private SharedPreferences mConfigPrefs;
+    public SharedPreferences mConfigPrefs;
     /** 屏幕宽度 */
-    private int mScreenWidth = -1;
+    public int mScreenWidth = -1;
     /** 屏幕高度 */
-    private int mScreenHeight = -1;
+    public int mScreenHeight = -1;
     /** LayoutInflater布局服务对象 */
-    private LayoutInflater mInflater;
+    public LayoutInflater mInflater;
     /** ImageLoader缓存图片存储目录 */
-    private File ImageLoader_Cache_dir = new File(Constants.IMAGE_DIR);
+    public File ImageLoader_Cache_dir = new File(Constants.IMAGE_DIR);
+    /** 设备信息DeviceUtils中引用 */
+    public DeviceInfoBean devceinfo;
 
     /**
      * 私有构造函数
