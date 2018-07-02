@@ -5,4 +5,8 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorBlack">#00000000</color>
     <color name="colorWhite">#FFFFFFFF</color>
+    <color name="colorGrey">#f5f5f5</color>
+    <color name="normal_title">#999999</color>
+    <color name="title_color">#01C1DA</color>
+    <color name="divider_color">#cfe3aa</color>
 </resources>

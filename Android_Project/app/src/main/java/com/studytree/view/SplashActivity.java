@@ -79,6 +79,7 @@ public class SplashActivity extends BaseActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         initView();
+        checkingUpdata();
     }
 
     /** 初始化界面 */
@@ -177,7 +178,6 @@ public class SplashActivity extends BaseActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         super.permissionsutils.handleSingleRequestPermissionsResult(requestCode,permissions,grantResults);
-        checkingUpdata();
     }
 
     /**
