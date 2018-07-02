@@ -174,8 +174,8 @@ public class DevicesUtils {
     }
 
     /**
-     * 获取App版本
-     * @return 版本
+     * 获取App版本名
+     * @return 版本名
      */
     private static String getAppVersion() {
         String appVersion = "";
@@ -184,9 +184,26 @@ public class DevicesUtils {
             PackageInfo info = manager.getPackageInfo(InitManager.getInstance().getContext().getPackageName(), 0);
             appVersion = info.versionName; //版本名
         } catch (PackageManager.NameNotFoundException e) {
-            Logger.e(TAG,"获取App版本号失败！",e);
+            Logger.e(TAG,"未找到对应包名，获取App版本名失败！",e);
             appVersion = "";
         }
         return appVersion;
+    }
+
+    /**
+     * 获取版本号
+     * @return 版本号
+     */
+    public static int getVersionCode() {
+        int appVersionCode;
+        PackageManager manager = InitManager.getInstance().getContext().getPackageManager();
+        try {
+            PackageInfo info = manager.getPackageInfo(InitManager.getInstance().getContext().getPackageName(), 0);
+            appVersionCode = info.versionCode; //版本号
+        } catch (PackageManager.NameNotFoundException e) {
+            Logger.e(TAG,"未找到对应包名，获取App版本号失败！",e);
+            appVersionCode = -1;
+        }
+        return appVersionCode;
     }
 }

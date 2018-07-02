@@ -15,9 +15,13 @@ import android.widget.Toast;
 
 import com.studytree.ActivityCleanupStack;
 import com.studytree.log.Logger;
+import com.studytree.utils.DevicesUtils;
+import com.studytree.utils.permissions.PermissionConfig;
 import com.studytree.utils.permissions.PermissionUtils;
 import com.studytree.utils.permissions.RequestPermissionListener;
 import com.umeng.analytics.MobclickAgent;
+
+import java.util.List;
 
 /**
  * Activity基类
@@ -32,8 +36,8 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //去掉AppCompatActivity标题栏自定义
-        getSupportActionBar().hide();
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        getSupportActionBar().hide();
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         //Activity压栈
         ActivityCleanupStack.push(this);
     }
@@ -51,10 +55,12 @@ public class BaseActivity extends AppCompatActivity {
         public void onPermissionAccreditSucceed(int requestCode) {
             Logger.w(TAG,"权限获取成功");
             showToast("权限获取成功");
+            //获取设备信息
+            DevicesUtils.initDevicesInfos();
         }
 
         @Override
-        public void onPermissionAccreditFailed(int requestCode, String PermissionName) {
+        public void onPermissionAccreditFailed(int requestCode, final String PermissionName) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 //判断用户是否点击不在提示按钮，true：未选中，false：选中
                 boolean isTip = ActivityCompat.shouldShowRequestPermissionRationale(BaseActivity.this,PermissionName);
@@ -65,7 +71,8 @@ public class BaseActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            permissionsutils.popPermissionAlterDialog("我们需要必要的权限来保证应用的正常运行！", BaseActivity.this);
+                            permissionsutils.popPermissionAlterDialog("用户您好我们需要必要的权限来保证应用的正常运行！\n" +
+                                    "未授权权限为：" + PermissionConfig.getPermissionNameToString(PermissionName) + "。", BaseActivity.this);
                         }
                     });
                 }
@@ -98,6 +105,7 @@ public class BaseActivity extends AppCompatActivity {
                     .hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(),
                             InputMethodManager.HIDE_NOT_ALWAYS);
         } catch (Exception e) {
+            Logger.e(TAG,"键盘隐藏异常！",e);
         }
     }
 
@@ -110,6 +118,7 @@ public class BaseActivity extends AppCompatActivity {
             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.toggleSoftInputFromWindow(target.getWindowToken(), 0, InputMethodManager.HIDE_NOT_ALWAYS);
         } catch (Exception e) {
+            Logger.e(TAG,"键盘显示异常！",e);
         }
     }
 

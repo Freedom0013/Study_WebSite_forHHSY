@@ -208,7 +208,7 @@ public final class PermissionConfig {
      * @param Request_Code 响应码
      * @return 中文字符串
      */
-    public static String getPermissionToString(int Request_Code){
+    public static String getPermissionToString(final int Request_Code){
         switch (Request_Code){
             case REQUEST_READ_CALENDAR:
                 return "读取日历";
@@ -229,7 +229,7 @@ public final class PermissionConfig {
             case REQUEST_RECORD_AUDIO:
                 return "录制麦克风音频";
             case REQUEST_READ_PHONE_STATE:
-                return "读取电话状态";
+                return "读取手机信息";
             case REQUEST_CALL_PHONE:
                 return "拨打电话";
             case REQUEST_READ_CALL_LOG:
@@ -260,6 +260,66 @@ public final class PermissionConfig {
                 return "写入外部存储空间";
             case REQUEST_SOME_PERMISSIONS:
                 return "权限组";
+            default:
+                return null;
+        }
+    }
+
+    /**
+     * 获取权限全称获取对用中文
+     * @param permission_name 权限全称
+     * @return 中文字符串
+     */
+    public static String getPermissionNameToString(final String permission_name){
+        switch (permission_name){
+            case PERMISSION_READ_CALENDAR:
+                return "读取日历";
+            case PERMISSION_WRITE_CALENDAR:
+                return "修改日历";
+            case PERMISSION_CAMERA:
+                return "使用摄像头";
+            case PERMISSION_READ_CONTACTS:
+                return "读取联系人";
+            case PERMISSION_WRITE_CONTACTS:
+                return "修改联系人";
+            case PERMISSION_GET_ACCOUNTS:
+                return "获取联系人";
+            case PERMISSION_ACCESS_FINE_LOCATION:
+                return "获取精确位置";
+            case PERMISSION_ACCESS_COARSE_LOCATION:
+                return "获取粗略位置信息";
+            case PERMISSION_RECORD_AUDIO:
+                return "录制麦克风音频";
+            case PERMISSION_READ_PHONE_STATE:
+                return "读取手机信息";
+            case PERMISSION_CALL_PHONE:
+                return "拨打电话";
+            case PERMISSION_READ_CALL_LOG:
+                return "读取通话记录";
+            case PERMISSION_WRITE_CALL_LOG:
+                return "修改通话记录";
+            case PERMISSION_ADD_VOICEMAIL:
+                return "添加语音邮箱";
+            case PERMISSION_USE_SIP:
+                return "使用SIP视频电话服务";
+            case PERMISSION_PROCESS_OUTGOING_CALLS:
+                return "监视，修改或放弃播出电话";
+            case PERMISSION_BODY_SENSORS:
+                return "测量身体传感器";
+            case PERMISSION_SEND_SMS:
+                return "发送短信";
+            case PERMISSION_RECEIVE_SMS:
+                return "接收短信";
+            case PERMISSION_READ_SMS:
+                return "读取短信";
+            case PERMISSION_RECEIVE_WAP_PUSH:
+                return "接收WAP PUSH信息";
+            case PERMISSION_RECEIVE_MMS:
+                return "读取日历";
+            case PERMISSION_READ_EXTERNAL_STORAGE:
+                return "读取设备存储（内置SDcard和外置SDCard）";
+            case PERMISSION_WRITE_EXTERNAL_STORAGE:
+                return "读取写入存储";
             default:
                 return null;
         }

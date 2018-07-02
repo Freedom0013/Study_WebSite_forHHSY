@@ -14,7 +14,7 @@ import com.studytree.commonfile.Constants;
  */
 public final class Logger {
     /** 标签 */
-    public static final String TAG = "Logger";
+    public static final String TAG = Logger.class.getSimpleName();
     /** log目录地址 */
     public static final String LOG_DIR = Constants.LOG_DIR;
     /** log保存地址 */
@@ -68,7 +68,7 @@ public final class Logger {
 
         //判断SD卡是否可用
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            Log.w(TAG, "[Study_tree]：：：：：SD卡不可用！");
+            Log.w(TAG, Constants.LOG_HEAD_TEXT + "SD卡不可用！");
             return result;
         }
 
@@ -138,7 +138,7 @@ public final class Logger {
      * @return 写入结果
      */
     public static int v(String tag, String msg) {
-        return println(VERBOSE, tag, "[Study_tree]：：：：：[VERBOSE]" + " " + msg);
+        return println(VERBOSE, tag, Constants.LOG_HEAD_TEXT + "[VERBOSE]" + " " + msg);
     }
     
     /**
@@ -149,7 +149,7 @@ public final class Logger {
      * @return 写入结果
      */
     public static int v(String tag, String msg, Throwable tr) {
-        return println(VERBOSE, tag, "[Study_tree]：：：：：[VERBOSE]" + " " + msg + " " + getStackTraceString(tr));
+        return println(VERBOSE, tag, Constants.LOG_HEAD_TEXT + "[VERBOSE]" + " " + msg + " " + getStackTraceString(tr));
     }
 
     /**
@@ -159,7 +159,7 @@ public final class Logger {
      * @return 写入结果
      */
     public static int d(String tag, String msg) {
-        return println(DEBUG, tag, "[Study_tree]：：：：：[Debug]" + msg);
+        return println(DEBUG, tag, Constants.LOG_HEAD_TEXT + "[Debug]" + msg);
     }
 
     /**
@@ -170,7 +170,7 @@ public final class Logger {
      * @return 写入结果
      */
     public static int d(String tag, String msg, Throwable tr) {
-        return println(DEBUG, tag, "[Study_tree]：：：：：[Debug]" + msg + " " + getStackTraceString(tr));
+        return println(DEBUG, tag, Constants.LOG_HEAD_TEXT + "[Debug]" + msg + " " + getStackTraceString(tr));
     }
 
     /**
@@ -180,7 +180,7 @@ public final class Logger {
      * @return 写入结果
      */
     public static int i(String tag, String msg) {
-        return println(INFO, tag, "[Study_tree]：：：：：[Info]" + " " + msg);
+        return println(INFO, tag, Constants.LOG_HEAD_TEXT + "[Info]" + " " + msg);
     }
 
     /**
@@ -191,7 +191,7 @@ public final class Logger {
      * @return 写入结果
      */
     public static int i(String tag, String msg, Throwable tr) {
-        return println(INFO, tag, "[Study_tree]：：：：：[Info]" + " " + msg + " " + getStackTraceString(tr));
+        return println(INFO, tag, Constants.LOG_HEAD_TEXT + "[Info]" + " " + msg + " " + getStackTraceString(tr));
     }
 
     /**
@@ -201,7 +201,7 @@ public final class Logger {
      * @return 写入结果
      */
     public static int w(String tag, String msg) {
-        return println(WARN, tag, "[Study_tree]：：：：：[Warning]" + " " + msg);
+        return println(WARN, tag, Constants.LOG_HEAD_TEXT + "[Warning]" + " " + msg);
     }
 
     /**
@@ -212,7 +212,7 @@ public final class Logger {
      * @return 写入结果
      */
     public static int w(String tag, String msg, Throwable tr) {
-        return println(WARN, tag, "[Study_tree]：：：：：[Warning]" + " " + msg + " " + getStackTraceString(tr));
+        return println(WARN, tag, Constants.LOG_HEAD_TEXT + "[Warning]" + " " + msg + " " + getStackTraceString(tr));
     }
 
     /**
@@ -221,7 +221,7 @@ public final class Logger {
      * @return 写入结果
      */
     public static int w(String tag, Throwable tr) {
-        return println(WARN, tag, "[Study_tree]：：：：：[Warning]" + " " + getStackTraceString(tr));
+        return println(WARN, tag, Constants.LOG_HEAD_TEXT + "[Warning]" + " " + getStackTraceString(tr));
     }
 
     /**
@@ -231,7 +231,7 @@ public final class Logger {
      * @return 写入结果
      */
     public static int e(String tag, String msg) {
-        return println(ERROR, tag, "[Study_tree]：：：：：[ERROR]" + " " + msg);
+        return println(ERROR, tag, Constants.LOG_HEAD_TEXT + "[ERROR]" + " " + msg);
     }
 
     /**
@@ -242,7 +242,7 @@ public final class Logger {
      * @return 写入结果
      */
     public static int e(String tag, String msg, Throwable tr) {
-        return println(ERROR, tag, "[Study_tree]：：：：：[ERROR]" + " " + msg + " " + getStackTraceString(tr));
+        return println(ERROR, tag, Constants.LOG_HEAD_TEXT + "[ERROR]" + " " + msg + " " + getStackTraceString(tr));
     }
 
     /**

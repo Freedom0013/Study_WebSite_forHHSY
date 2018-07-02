@@ -2,6 +2,7 @@ package com.studytree.http;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.studytree.commonfile.Constants;
 import com.studytree.log.Logger;
 
 import java.io.IOException;
@@ -73,7 +74,7 @@ public abstract class HttpManager {
 
                     //创建OKHttp日志拦截器
                     HttpLoggingInterceptor logInterceptor = new HttpLoggingInterceptor(new OkHttpLogger());
-                    logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+                    logInterceptor.setLevel(Constants.OKHTTP_LOG_LEVEL);
                     clientBuilder.addNetworkInterceptor(logInterceptor);
 
                     //设置超时时间

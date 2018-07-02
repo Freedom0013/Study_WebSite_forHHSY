@@ -31,7 +31,7 @@ public class InitBean implements Serializable {
     /** 更新日期 */
     public String updata_date;
     /** 更新说明 */
-    List<String> UpdataMessage = new ArrayList<String>();
+    public List<String> UpdataMessage = new ArrayList<String>();
 
     public InitBean(){}
 

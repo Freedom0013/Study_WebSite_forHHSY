@@ -27,7 +27,7 @@ public class DeviceInfoBean {
     public String mac = "";
     /** ip地址 */
     public String ip = "";
-    /** 应用版本 */
+    /** 应用版本名 */
     public String appversion = "";
     /** 分辨率 */
     public String screen = "";
