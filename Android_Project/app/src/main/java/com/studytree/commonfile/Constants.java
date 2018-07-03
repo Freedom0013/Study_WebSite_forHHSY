@@ -26,7 +26,7 @@ public class Constants {
 
     static {
         if (LOCAL_TEST) {
-            HOST = "192.168.0.103:8080/Study_Platform_website";     //本地地址
+            HOST = "192.168.0.102:8080/Study_Platform_website";     //本地地址
         } else {
             HOST = "" + DOMAIN;
         }
@@ -43,6 +43,10 @@ public class Constants {
     public static final String UMAppKey = "5b2e06e6f43e4876f400004f";
     /** 友盟ChannelID */
     public static final String UMChannelID = "StudyTree";
+    /** 友盟MessageSecret */
+    public static final String UMMessageSecret = "5bf41572b8e727f2cbb53b2f274cfd09";
+    /** 友盟AppMasterSecret */
+    public static final String UMAppMasterSecret =  "1ekwyh1gze7ute73dgz441maum5qvh2v";
 
     /** 日志文件存储路径 */
     public static final String LOG_DIR = Environment.getExternalStorageDirectory().getAbsolutePath() + "/StudyTree/log/";
