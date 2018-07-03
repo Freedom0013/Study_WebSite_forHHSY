@@ -21,6 +21,7 @@ import com.studytree.R;
  * @author Freedom0013
  */
 public class LoadingDialog extends Dialog {
+    private static final String TAG = LoadingDialog.class.getSimpleName();
     /** Context对象 */
     private Context context;
     /** LoadingDialog对象 */

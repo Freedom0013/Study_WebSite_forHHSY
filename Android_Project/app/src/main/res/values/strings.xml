@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">知识森驿站</string>
+    <string name="loading_text">Loading...</string>
 </resources>

@@ -11,12 +11,10 @@ import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
-import android.view.animation.LinearInterpolator;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.airbnb.lottie.L;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -29,8 +27,6 @@ import com.studytree.utils.DevicesUtils;
 import com.studytree.utils.permissions.PermissionConfig;
 import com.studytree.view.base.BaseActivity;
 import com.studytree.view.widget.LoadingDialog;
-import com.studytree.view.widget.LoadingView;
-import android.animation.ValueAnimator;
 
 import java.util.List;
 

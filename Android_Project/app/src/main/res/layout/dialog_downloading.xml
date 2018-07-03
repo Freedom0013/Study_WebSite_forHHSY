@@ -9,20 +9,21 @@
     android:background="@drawable/loading_dialog_bg"
     >
 
-    <com.studytree.view.widget.LoadingView
-        android:id="@+id/loading"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
+    <ProgressBar
+        android:id="@+id/download_progress"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+        />
 
     <TextView
-        android:id="@+id/loading_text"
+        android:id="@+id/download_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/dialog_normal_text_size"
-        android:layout_gravity="center"
-        android:gravity="center"
+        android:text="正在下载：%"
         android:layout_marginTop="5dp"
-        android:textColor="@color/loading_color"
-        android:text="@string/loading_text"
+        android:textColor="#000000"
         />
+
 </LinearLayout>
