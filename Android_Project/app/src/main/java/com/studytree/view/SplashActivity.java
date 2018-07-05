@@ -1,5 +1,6 @@
 package com.studytree.view;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -20,13 +21,15 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.studytree.R;
 import com.studytree.bean.InitBean;
+import com.studytree.commonfile.Constants;
 import com.studytree.http.HttpResultCallback;
 import com.studytree.http.logic.InitLogic;
+import com.studytree.http.logic.download.DownloadListener;
+import com.studytree.http.logic.download.DownloadProgressManager;
 import com.studytree.log.Logger;
 import com.studytree.utils.DevicesUtils;
 import com.studytree.utils.permissions.PermissionConfig;
 import com.studytree.view.base.BaseActivity;
-import com.studytree.view.widget.LoadingDialog;
 
 import java.util.List;
 
@@ -44,13 +47,19 @@ public class SplashActivity extends BaseActivity {
     private LinearLayout splash_logo_root;
     /** 更新信息 */
     private InitBean initbean;
+    /** 闪屏页广告 */
+    private ImageView splash_logo;
+    /** 闪屏页文字行1 */
+    private ImageView splash_textline1;
+    /** 闪屏页文字行2 */
+    private ImageView splash_textline2;
 
     private static final int CODE_MUST_UPDATE_DIALOG = 1;
     private static final int CODE_UPDATE_DIALOG = 2;
     private static final int CODE_ENTER_HOME = 3;
     private static final int CODE_ANIMATION_END = 8;
 
-    private Handler handler = new Handler(){
+    private Handler mhandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what){
@@ -70,7 +79,6 @@ public class SplashActivity extends BaseActivity {
         }
     };
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,13 +92,26 @@ public class SplashActivity extends BaseActivity {
     }
 
     /** 初始化界面 */
+    @SuppressLint("WrongViewCast")
     private void initView() {
-        Message message = Message.obtain();
         splash_advert_image = findViewById(R.id.splash_advert_image);
+        splash_advert_image.setBackgroundResource(R.drawable.ic_default_splash);
         splash_logo_root = findViewById(R.id.splash_logo_root);
+        splash_logo = findViewById(R.id.splash_logo);
+        splash_logo.setBackgroundResource(R.drawable.logo);
+        splash_textline1 = findViewById(R.id.splash_textline1);
+        splash_textline1.setBackgroundResource(R.drawable.splash_text_line1);
+        splash_textline2 = findViewById(R.id.splash_textline2);
+        splash_textline2.setBackgroundResource(R.drawable.splash_text_line2);
 
-        LoadingDialog dialog = LoadingDialog.showDialog(SplashActivity.this);
-        dialog.show();
+
+
+//        LoadingDialog dialog = LoadingDialog.showDialog(SplashActivity.this);
+//        dialog.show();
+
+
+
+
 
         //动画集合
         AnimationSet animationSet = new AnimationSet(false);
@@ -139,7 +160,7 @@ public class SplashActivity extends BaseActivity {
                 } else {    //没有版本更新
                     message.what = CODE_ENTER_HOME;
                 }
-                handler.sendMessage(message);
+                mhandler.sendMessage(message);
             }
 
             @Override
@@ -207,12 +228,23 @@ public class SplashActivity extends BaseActivity {
         builder.setPositiveButton("立即更新！", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                showToast("立即更新！");
+
+
+
+                new DownloadProgressManager(SplashActivity.this,new DownloadListener(){
+                    @Override
+                    public void onDownloadFinished(boolean success) {
+
+                    }
+                }).showDownloadDialog(Constants.DOWNLOAD_APP_NAME,Constants.DOWNLOAD_URL);
+
+
+
             }
         });
         if (!initbean.ismust_updata_flag) {
             builder.setNegativeButton("以后再说", null);
-            //Dialog取消监听
+            //Dialog取消按键监听
             builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialog) {
@@ -220,7 +252,7 @@ public class SplashActivity extends BaseActivity {
                 }
             });
         } else {
-            builder.setCancelable(false);   //禁用返回键，尽量不用
+            builder.setCancelable(false);   //禁用返回键，尽量不用（强制更新）
         }
         builder.show();
     }

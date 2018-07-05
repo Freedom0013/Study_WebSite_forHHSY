@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5.4"
-        android:background="@drawable/ic_default_splash" />
+         />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
-                android:background="@drawable/logo" />
+                 />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -47,14 +47,14 @@
                     android:layout_width="162dp"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:background="@drawable/splash_text_line1" />
+                     />
 
                 <ImageView
                     android:id="@+id/splash_textline2"
                     android:layout_width="155dp"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:background="@drawable/splash_text_line2" />
+                     />
 
             </LinearLayout>
 

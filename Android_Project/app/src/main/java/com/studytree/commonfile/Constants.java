@@ -23,21 +23,16 @@ public class Constants {
     public static final String LOG_HEAD_TEXT = "[Study_tree]：：：：";
     /** OKHttp日志等级（共四级：NONE、BASIC、HEADERS、BODY） */
     public static final HttpLoggingInterceptor.Level OKHTTP_LOG_LEVEL = HttpLoggingInterceptor.Level.BASIC;
-
     static {
         if (LOCAL_TEST) {
-            HOST = "192.168.0.102:8080/Study_Platform_website";     //本地地址
+            HOST = "192.168.0.103:8080/Study_Platform_website";     //本地地址
         } else {
             HOST = "" + DOMAIN;
         }
     }
 
-    /** 总SharedPreferences名称 */
-    public static final String PREF_NAME = "studytreePrefs";
-
-    /** MD5加盐 */
-    public static final String MD5_PREFIX = "studytree@!123321";
-    public static final String MD5KEY = "6938";
+    public static final String DOWNLOAD_APP_NAME = "studytree.apk";
+    public static final String DOWNLOAD_URL = "http://"+HOST+"/studytree.apk";
 
     /** 友盟AppKey */
     public static final String UMAppKey = "5b2e06e6f43e4876f400004f";
@@ -48,10 +43,19 @@ public class Constants {
     /** 友盟AppMasterSecret */
     public static final String UMAppMasterSecret =  "1ekwyh1gze7ute73dgz441maum5qvh2v";
 
-    /** 日志文件存储路径 */
-    public static final String LOG_DIR = Environment.getExternalStorageDirectory().getAbsolutePath() + "/StudyTree/log/";
-    /** 图片文件缓存 */
-    public static final String IMAGE_DIR = Environment.getExternalStorageDirectory().getAbsolutePath() + "/StudyTree/cache_images/";
+    /** 总SharedPreferences名称 */
+    public static final String PREF_NAME = "studytreePrefs";
+
+    /** MD5加盐 */
+    public static final String MD5_PREFIX = "studytree@!123321";
+    public static final String MD5KEY = "6938";
     /** 默认ImageView图片 */
     public static final int default_image = R.drawable.ic_default_image;
+
+    /** 日志文件存储路径 */
+    public static final String LOG_DIR = Environment.getExternalStorageDirectory().getAbsolutePath() + "/StudyTree/log/";
+    /** 下载文件存储路径 */
+    public static final String DOWNLOAD_DIR = Environment.getExternalStorageDirectory().getAbsolutePath() + "/StudyTree/download/";
+    /** 图片文件缓存 */
+    public static final String IMAGE_DIR = Environment.getExternalStorageDirectory().getAbsolutePath() + "/StudyTree/cache_images/";
 }

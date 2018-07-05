@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -214,4 +215,42 @@ public abstract class HttpManager {
      * @return 请求方式代码
      */
     protected abstract int getMethod(int action);
+
+
+    public Call asyncCall(String url) {
+        OkHttpClient.Builder clientBuilder = new OkHttpClient().newBuilder();
+
+        HttpLoggingInterceptor logInterceptor = new HttpLoggingInterceptor(new OkHttpLogger());
+        logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        clientBuilder.addNetworkInterceptor(logInterceptor);
+
+        clientBuilder.connectTimeout(15, TimeUnit.SECONDS);
+        clientBuilder.readTimeout(30, TimeUnit.SECONDS);
+        clientBuilder.writeTimeout(60, TimeUnit.SECONDS);
+
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        return clientBuilder.build().newCall(request);
+    }
+
+    public Response syncResponse(String url, long start, long end) throws IOException {
+
+        OkHttpClient.Builder clientBuilder = new OkHttpClient().newBuilder();
+
+        HttpLoggingInterceptor logInterceptor = new HttpLoggingInterceptor(new OkHttpLogger());
+        logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        clientBuilder.addNetworkInterceptor(logInterceptor);
+
+        clientBuilder.connectTimeout(15, TimeUnit.SECONDS);
+        clientBuilder.readTimeout(30, TimeUnit.SECONDS);
+        clientBuilder.writeTimeout(60, TimeUnit.SECONDS);
+
+        Request request = new Request.Builder()
+                .url(url)
+                .addHeader("Range", "bytes=" + start + "-" + end)
+                .build();
+        return clientBuilder.build().newCall(request).execute();
+    }
 }

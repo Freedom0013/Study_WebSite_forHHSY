@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!--
+        7.0路径适配
+        files-path	            对应Context.getFilesDir()
+        cache-path	            对应Context.getCacheDir()
+        external-path	        对应Environment.getExternalStorageDirectory()	    /storage/emulated/0/
+        external-files-path	    对应Context.getExternalFilesDir(null)
+        external-cache-path	    对应Context.getExternalCacheDir()
+        -->
+    <root-path name="root_path" path="." />
+    <files-path name="my_files" path="files" /> <!--对应getFilesDir()。-->
+    <cache-path name="my_cache" path="cache" /> <!--对应getCacheDir()。-->
+    <external-path name="my_external_download" path="download" /> <!--对应Environment.getExternalStorageDirectory()。-->
+    <external-path name="my_external_log" path="log" />
+    <external-files-path name="my_external_files" path="external_files" /> <!--对应getExternalFilesDir()。-->
+    <external-cache-path name="my_external_cache" path="external_cache" /> <!--对应getExternalCacheDir()。-->
+</paths>

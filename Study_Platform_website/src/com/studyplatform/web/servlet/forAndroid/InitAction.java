@@ -43,7 +43,7 @@ public class InitAction extends HttpServlet {
 //        String sign = request.getParameter("sign");
 //        DebugUtils.showLog("from = "+from+",sign"+sign);
         
-        int visionCode = 2;
+        int visionCode = 3;
         //更新日期
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         

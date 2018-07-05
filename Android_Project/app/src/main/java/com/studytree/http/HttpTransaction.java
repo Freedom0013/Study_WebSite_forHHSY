@@ -2,7 +2,11 @@ package com.studytree.http;
 
 import com.studytree.commonfile.Constants;
 
+import java.io.IOException;
 import java.util.Map;
+
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * Http支持类
@@ -94,5 +98,12 @@ public class HttpTransaction extends HttpManager {
      */
     public void send(final int action, final Map<String, Object> sendData, final HttpCallback httpListener){
         super.send(action,sendData,httpListener);
+    }
+
+    public Response syncResponse(String url, long start, long end) throws IOException{
+        return super.syncResponse(url,start,end);
+    }
+    public Call asyncCall(String url){
+        return super.asyncCall(url);
     }
 }

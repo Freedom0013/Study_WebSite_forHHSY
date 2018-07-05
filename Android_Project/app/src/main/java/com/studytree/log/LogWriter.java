@@ -27,7 +27,7 @@ import java.util.Comparator;
  */
 public class LogWriter {
     /** LogWriter标签 */
-    public static final String TAG = "LogWriter";
+    public static final String TAG = LogWriter.class.getSimpleName();
     /** log时间格式 */
     private DateFormat TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS.sss");
     /** log日志存放文件封装 */

@@ -2,28 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
-    android:orientation="vertical"
     android:layout_gravity="center"
-    android:gravity="center"
     android:background="@drawable/loading_dialog_bg"
-    >
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="20dp">
 
     <ProgressBar
         android:id="@+id/download_progress"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
         style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
-        />
+        android:layout_width="150dp"
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/download_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/dialog_normal_text_size"
-        android:text="正在下载：%"
         android:layout_marginTop="5dp"
+        android:text="准备下载...."
         android:textColor="#000000"
-        />
-
+        android:textSize="@dimen/dialog_normal_text_size" />
 </LinearLayout>
