@@ -39,7 +39,6 @@
         <!--主页-->
         <activity android:name=".view.MainActivity"/>
 
-
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.studytree.fileprovider"

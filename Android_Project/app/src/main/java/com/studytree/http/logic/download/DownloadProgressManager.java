@@ -1,6 +1,5 @@
 package com.studytree.http.logic.download;
 
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -28,19 +27,35 @@ import com.studytree.utils.StudyTreeTools;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * 更新下载管理
+ * Title: DownloadProgressManager
+ * @date 2018/7/5 21:38
+ * @author Freedom0013
+ */
 public class DownloadProgressManager {
     private static final String TAG = DownloadProgressManager.class.getSimpleName();
     /** activity对象 */
     private Activity mActivity;
+    /** Handler对象 */
     private Handler handler;
+    /** 下载成功监听 */
     private DownloadListener mlistener;
+    /** AlertDialog对象 */
     private AlertDialog dialog;
+    /** 下载进度条 */
     private ProgressBar download_progress;
+    /** 下载进度文字 */
     private TextView download_text;
+    /** 更新UI状态码 */
     private static final int UPDATA_UI = 0x11;
+    /** 安装成功状态码 */
+    public static final int REQUEST_INSTALL_CODE = 0x12;
 
-    public  static final int REQUEST_INSTALL_CODE = 0x12;
-
+    /**
+     * 更新UI
+     * TODO：此处需要优化显示（更新太快造成UI跳帧）
+     */
     private Handler mhandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -75,12 +90,22 @@ public class DownloadProgressManager {
         }
     };
 
+    /**
+     * 构造下载
+     * @param activity Activity对象
+     * @param listener 下载成功监听
+     */
     public DownloadProgressManager(Activity activity, DownloadListener listener){
         this.mActivity = activity;
         this.mlistener = listener;
         handler = new Handler(mActivity.getMainLooper());
     }
 
+    /**
+     * 显示下载对话框
+     * @param fileName 下载文件名
+     * @param downloadURL 下载地址
+     */
     public void showDownloadDialog(final String fileName,final String downloadURL) {
         AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
         builder.setCancelable(false);
@@ -109,6 +134,11 @@ public class DownloadProgressManager {
         doDownload(fileName,downloadURL);
     }
 
+    /**
+     * 准备下载
+     * @param fileName 文件名
+     * @param downloadURL 下载地址
+     */
     private void doDownload(final String fileName,final String downloadURL) {
         //TODO:是否再进行一次权限检查及确认下载文件目录是否存在
         // 设置progressBar初始化
@@ -127,16 +157,19 @@ public class DownloadProgressManager {
 
             @Override
             public void onFailure(Exception e) {
+                Logger.e(TAG,"下载失败！",e);
                 mActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         Toast.makeText(mActivity,"下载失败！",Toast.LENGTH_SHORT).show();
+
                     }
                 });
             }
 
             @Override
             public void onProgress(final long progress, final long currentLength) {
+                //TODO:这里更新UI过快，需要优化以平滑显示ProgressBar动画
                 Message message = new Message();
                 message.what = UPDATA_UI;
                 Bundle bundle = new Bundle();
@@ -153,7 +186,11 @@ public class DownloadProgressManager {
         });
     }
 
-    //普通安装
+    /**
+     * 下载完成自动安装
+     * @param context Context对象
+     * @param file 文件
+     */
     private static void installNormal(Context context, File file) {
         setPermission(file.getPath());
         Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -161,7 +198,15 @@ public class DownloadProgressManager {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {
             // 由于没有在Activity环境下启动Activity,设置下面的标签
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            //参数1 上下文, 参数2 Provider主机地址 和配置文件中保持一致   参数3  共享的文件
+            /* 注意Android7.0之后由于进一步收紧权限，必须使用getUriForFile获取文件地址
+             * 共有四步:
+             * 1.AndroidManifest文件创建provider节点
+             * 2.创建file_path.xml文件
+             * 3.使用getUriForFile生成context://xxx类型路径
+             * 4.授予临时权限（如有用户权限，此项略过）
+             *      intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+             */
+            //参数2 Provider主机地址 和配置文件中保持一致   参数3  共享的文件
             Uri apkUri = FileProvider.getUriForFile(context, "com.studytree.fileprovider", file);
             //添加这一句表示对目标应用临时授权该Uri所代表的文件
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -169,9 +214,17 @@ public class DownloadProgressManager {
         } else {
             intent.setDataAndType(Uri.fromFile(file),"application/vnd.android.package-archive");
         }
+        /*
+         * 更新安装必须写上安装权限，否则将会一闪而过
+    <    * uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+         */
         context.startActivity(intent);
     }
 
+    /**
+     * 提升文件权限
+     * @param filePath 文件路径
+     */
     public static void setPermission(String filePath)  {
         String command = "chmod " + "777" + " " + filePath;
         Runtime runtime = Runtime.getRuntime();

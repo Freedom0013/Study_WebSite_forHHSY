@@ -19,8 +19,8 @@ public class HttpTransaction extends HttpManager {
     /** HttpTransaction单例 */
     private static HttpTransaction _instance;
 
+    /** 空参构造函数 */
     private HttpTransaction(){
-
     }
 
     /**
@@ -34,6 +34,11 @@ public class HttpTransaction extends HttpManager {
         return _instance;
     }
 
+    /**
+     * 获取Url
+     * @param action 接口码
+     * @return Url字符串
+     */
     @Override
     protected String getUrl(int action) {
         String path = "";
@@ -78,6 +83,11 @@ public class HttpTransaction extends HttpManager {
         return "http://" + Constants.HOST + path;
     }
 
+    /**
+     * 获取请求方式（现阶段只有Post）
+     * @param action 接口码
+     * @return 请求方式
+     */
     @Override
     protected int getMethod(int action) {
         int method = HttpConstants.METHOD_POST;
@@ -100,9 +110,22 @@ public class HttpTransaction extends HttpManager {
         super.send(action,sendData,httpListener);
     }
 
+    /**
+     * 多线程下载请求
+     * @param url 下载地址
+     * @param start 下载开始位置
+     * @param end 下载结束位置
+     * @return Response
+     */
     public Response syncResponse(String url, long start, long end) throws IOException{
         return super.syncResponse(url,start,end);
     }
+
+    /**
+     * 获取下载信息
+     * @param url 下载地址
+     * @return Call
+     */
     public Call asyncCall(String url){
         return super.asyncCall(url);
     }

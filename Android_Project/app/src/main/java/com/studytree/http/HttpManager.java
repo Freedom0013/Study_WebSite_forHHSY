@@ -216,7 +216,11 @@ public abstract class HttpManager {
      */
     protected abstract int getMethod(int action);
 
-
+    /**
+     * 获取下载信息
+     * @param url 下载地址
+     * @return Call
+     */
     public Call asyncCall(String url) {
         OkHttpClient.Builder clientBuilder = new OkHttpClient().newBuilder();
 
@@ -235,6 +239,13 @@ public abstract class HttpManager {
         return clientBuilder.build().newCall(request);
     }
 
+    /**
+     * 多线程下载请求
+     * @param url 下载地址
+     * @param start 下载开始位置
+     * @param end 下载结束位置
+     * @return Response
+     */
     public Response syncResponse(String url, long start, long end) throws IOException {
 
         OkHttpClient.Builder clientBuilder = new OkHttpClient().newBuilder();

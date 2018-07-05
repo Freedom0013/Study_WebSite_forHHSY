@@ -87,8 +87,8 @@ public class SplashActivity extends BaseActivity {
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        analysisAutoLogin();
         initView();
-        checkingUpdata();
     }
 
     /** 初始化界面 */
@@ -133,7 +133,7 @@ public class SplashActivity extends BaseActivity {
             }
             @Override
             public void onAnimationEnd(Animation animation) {
-                analysisAutoLogin();
+                checkingUpdata();
             }
         });
         splash_advert_image.startAnimation(animationSet);
@@ -211,10 +211,11 @@ public class SplashActivity extends BaseActivity {
      */
     public void showUpdataDialog(InitBean initbean) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //填充内容
         builder.setTitle("发现新版本：" + initbean.updata_title);
         if (initbean.UpdataMessage != null && initbean.UpdataMessage.size() >= 0) {
             StringBuffer msgstr = new StringBuffer();
-            msgstr.append("更新内容如下：");
+            msgstr.append("更新内容如下：\n");
             for (int i = 0; i < initbean.UpdataMessage.size(); i++) {
                 msgstr.append((i+1) + ".");
                 msgstr.append(initbean.UpdataMessage.get(i));
@@ -225,23 +226,19 @@ public class SplashActivity extends BaseActivity {
         } else {
             builder.setMessage("欢迎更新至最新版本！");
         }
+        //立即更新
         builder.setPositiveButton("立即更新！", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
-
-
                 new DownloadProgressManager(SplashActivity.this,new DownloadListener(){
                     @Override
                     public void onDownloadFinished(boolean success) {
 
                     }
                 }).showDownloadDialog(Constants.DOWNLOAD_APP_NAME,Constants.DOWNLOAD_URL);
-
-
-
             }
         });
+        //以后再说（如果为强制更新，无此选项）
         if (!initbean.ismust_updata_flag) {
             builder.setNegativeButton("以后再说", null);
             //Dialog取消按键监听
