@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -19,9 +18,8 @@ import com.studytree.utils.DevicesUtils;
 import com.studytree.utils.permissions.PermissionConfig;
 import com.studytree.utils.permissions.PermissionUtils;
 import com.studytree.utils.permissions.RequestPermissionListener;
+import com.studytree.view.widget.LoadingDialog;
 import com.umeng.analytics.MobclickAgent;
-
-import java.util.List;
 
 /**
  * Activity基类
@@ -31,6 +29,7 @@ import java.util.List;
  */
 public class BaseActivity extends AppCompatActivity {
     public static final String TAG = BaseActivity.class.getSimpleName();
+    private LoadingDialog mLoadingDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -85,6 +84,33 @@ public class BaseActivity extends AppCompatActivity {
      * 权限检查类
      */
     public PermissionUtils permissionsutils = new PermissionUtils(BaseActivity.this,mPermisssionListener);
+
+    /**
+     * 显示Loading进度条
+     */
+    public void showProgressDialog(){
+        if (isFinishing()) {
+            return;
+        }
+        mLoadingDialog = LoadingDialog.showDialog(BaseActivity.this);
+        mLoadingDialog.show();
+    }
+
+    /**
+     * 关闭Loading进度条
+     */
+    public void dismissProgressDialog(){
+        try {
+            if(mLoadingDialog != null){
+                if(mLoadingDialog.isShowing()){
+                    mLoadingDialog.dismiss();
+                }
+                mLoadingDialog = null;
+            }
+        } catch (Exception e) {
+            Logger.e(TAG,"loading进度圈关闭错误！",e);
+        }
+    }
 
     @Override
     public void finish() {

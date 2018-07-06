@@ -16,7 +16,6 @@ import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.studytree.R;
@@ -104,15 +103,6 @@ public class SplashActivity extends BaseActivity {
         splash_textline2 = findViewById(R.id.splash_textline2);
         splash_textline2.setBackgroundResource(R.drawable.splash_text_line2);
 
-
-
-//        LoadingDialog dialog = LoadingDialog.showDialog(SplashActivity.this);
-//        dialog.show();
-
-
-
-
-
         //动画集合
         AnimationSet animationSet = new AnimationSet(false);
         //渐变动画
@@ -148,7 +138,6 @@ public class SplashActivity extends BaseActivity {
         initLogic.getUpdataInfo(new HttpResultCallback() {
             @Override
             public void onSuccess(int action, Object obj) {
-                Gson gson = new Gson();
                 JsonObject data = new JsonParser().parse(obj.toString()+"").getAsJsonObject();
                 JsonObject info = data.get("data").getAsJsonObject();
                 initbean = new InitBean(info);
