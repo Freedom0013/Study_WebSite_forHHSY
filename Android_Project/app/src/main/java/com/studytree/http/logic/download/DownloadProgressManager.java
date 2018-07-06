@@ -54,7 +54,7 @@ public class DownloadProgressManager {
 
     /**
      * 更新UI
-     * TODO：此处需要优化显示（更新太快造成UI跳帧）
+     * 此处需要优化显示（更新太快造成UI跳帧）
      */
     private Handler mhandler = new Handler(){
         @Override
@@ -162,21 +162,21 @@ public class DownloadProgressManager {
                     @Override
                     public void run() {
                         Toast.makeText(mActivity,"下载失败！",Toast.LENGTH_SHORT).show();
-
                     }
                 });
             }
 
             @Override
             public void onProgress(final long progress, final long currentLength) {
-                //TODO:这里更新UI过快，需要优化以平滑显示ProgressBar动画
-                Message message = new Message();
-                message.what = UPDATA_UI;
-                Bundle bundle = new Bundle();
-                bundle.putLong("progress", progress);
-                bundle.putLong("currentLength", currentLength);
-                message.setData(bundle);
-                mhandler.sendMessage(message);
+                //这里更新UI过快，造成掉帧：Skipped XX frames!  The application may be doing too much work on its main thread.需要优化以平滑显示ProgressBar动画
+                //如果进度在下载中
+                if (progress > 0 && progress < currentLength) {
+                    if(progress%10==0){     //每10的倍数进度更新UI
+                        sendUpdataMessage(progress,currentLength);
+                    }
+                } else {
+                    sendUpdataMessage(progress,currentLength);
+                }
             }
 
             @Override
@@ -184,6 +184,21 @@ public class DownloadProgressManager {
                 //没有暂停操作
             }
         });
+    }
+
+    /**
+     * 发送更新UI消息
+     * @param progress 当前进度
+     * @param currentLength 总进度
+     */
+    public void sendUpdataMessage(final long progress, final long currentLength){
+        Message message = new Message();
+        message.what = UPDATA_UI;
+        Bundle bundle = new Bundle();
+        bundle.putLong("progress", progress);
+        bundle.putLong("currentLength", currentLength);
+        message.setData(bundle);
+        mhandler.sendMessage(message);
     }
 
     /**
