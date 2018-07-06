@@ -31,8 +31,10 @@ public class Constants {
         }
     }
 
+    /** 下载文件名 */
     public static final String DOWNLOAD_APP_NAME = "studytree.apk";
-    public static final String DOWNLOAD_URL = "http://"+HOST+"/studytree.apk";
+    /** 下载路径 */
+    public static final String DOWNLOAD_URL = "http://" + HOST + "/studytree.apk";
 
     /** 友盟AppKey */
     public static final String UMAppKey = "5b2e06e6f43e4876f400004f";
@@ -41,13 +43,14 @@ public class Constants {
     /** 友盟MessageSecret */
     public static final String UMMessageSecret = "5bf41572b8e727f2cbb53b2f274cfd09";
     /** 友盟AppMasterSecret */
-    public static final String UMAppMasterSecret =  "1ekwyh1gze7ute73dgz441maum5qvh2v";
+    public static final String UMAppMasterSecret = "1ekwyh1gze7ute73dgz441maum5qvh2v";
+    /** 小米AppSecret */
+    public static final String MI_AppSecret = "qMLsHW0gMV6v4WlkmDItqg==";
 
     /** 总SharedPreferences名称 */
     public static final String PREF_NAME = "pref_studytree";
     /** 是否进入新手引导 */
     public static final String PREF_INTRO = "pref_enter_intro";
-
 
     /** MD5加盐 */
     public static final String MD5_PREFIX = "studytree@!123321";
