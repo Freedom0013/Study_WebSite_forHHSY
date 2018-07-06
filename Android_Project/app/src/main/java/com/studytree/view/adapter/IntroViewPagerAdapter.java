@@ -22,10 +22,15 @@ public class IntroViewPagerAdapter extends PagerAdapter {
     public static final String TAG = IntroViewPagerAdapter.class.getSimpleName();
     List<View> views;
 
+    /**
+     * 构造适配器
+     * @param views 引导页集合
+     */
     public IntroViewPagerAdapter(List<View> views) {
         this.views = views;
     }
 
+    /** 回收条目 */
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         try {

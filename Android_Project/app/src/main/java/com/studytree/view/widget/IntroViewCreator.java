@@ -18,7 +18,6 @@ public class IntroViewCreator {
     private ImageView mImageView;
 
     public IntroViewCreator() {
-
     }
 
     @SuppressLint("InflateParams")
@@ -29,6 +28,9 @@ public class IntroViewCreator {
         return v;
     }
 
+    /**
+     * 释放资源
+     */
     public void release() {
 
     }
