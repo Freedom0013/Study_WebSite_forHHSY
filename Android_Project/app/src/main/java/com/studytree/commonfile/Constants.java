@@ -45,6 +45,9 @@ public class Constants {
 
     /** 总SharedPreferences名称 */
     public static final String PREF_NAME = "studytreePrefs";
+    /** 是否进入新手引导 */
+    public static final String PREF_INTRO = "pref_enter_intro";
+
 
     /** MD5加盐 */
     public static final String MD5_PREFIX = "studytree@!123321";

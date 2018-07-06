@@ -177,7 +177,7 @@ public class InitManager {
     /**
      * 获取Boolean配置项
      * @param key 键
-     * @return 值
+     * @return 值（默认false）
      */
     public boolean getBooleanPreference(String key){
         return getPrefs().getBoolean(key,false);

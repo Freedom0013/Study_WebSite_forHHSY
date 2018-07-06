@@ -29,6 +29,7 @@ import com.umeng.analytics.MobclickAgent;
  */
 public class BaseActivity extends AppCompatActivity {
     public static final String TAG = BaseActivity.class.getSimpleName();
+    /** 加载进度圈 */
     private LoadingDialog mLoadingDialog;
 
     @Override

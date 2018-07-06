@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.studytree.InitManager;
 import com.studytree.R;
 import com.studytree.bean.InitBean;
 import com.studytree.commonfile.Constants;
@@ -66,7 +67,8 @@ public class SplashActivity extends BaseActivity {
                     showUpdataDialog(initbean);
                     break;
                 case CODE_ENTER_HOME:               //进入下一步
-
+                    enterNextStep();
+                    Logger.d(TAG,"即将进入");
                     break;
                 case CODE_ANIMATION_END:            //
 
@@ -229,17 +231,39 @@ public class SplashActivity extends BaseActivity {
         });
         //以后再说（如果为强制更新，无此选项）
         if (!initbean.ismust_updata_flag) {
-            builder.setNegativeButton("以后再说", null);
+            builder.setNegativeButton("以后再说", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Message message = Message.obtain();
+                    message.what = CODE_ENTER_HOME;
+                    mhandler.sendMessage(message);
+                }
+            });
+
             //Dialog取消按键监听
             builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialog) {
-                    //进入Main
+
                 }
             });
         } else {
             builder.setCancelable(false);   //禁用返回键，尽量不用（强制更新）
         }
         builder.show();
+    }
+
+    /**
+     * 页面跳转
+     */
+    private void enterNextStep(){
+        boolean introShowed = InitManager.getInstance().getBooleanPreference(Constants.PREF_INTRO);
+        if(introShowed){
+            MainActivity.start(SplashActivity.this);
+            finish();
+        }else{
+            IntroActivity.start(SplashActivity.this);
+            finish();
+        }
     }
 }
