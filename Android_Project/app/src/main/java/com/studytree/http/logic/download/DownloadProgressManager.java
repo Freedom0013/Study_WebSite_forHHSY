@@ -68,13 +68,13 @@ public class DownloadProgressManager {
 
                     int current = new Long(currentLength).intValue();
                     int intprogress = new Long(progress).intValue();
+
                     download_progress.setMax(current);
-                    Logger.d(TAG, "当前进度==" + intprogress+"|||||||"+current);
                     download_progress.setProgress(intprogress);
 
                     float temp = progress/(float)currentLength;
                     int tempprogress = (int) (temp * 100);
-                    Logger.d(TAG, "正在下载："+tempprogress+"%");
+
                     download_text.setText("正在下载："+tempprogress+"%");
                     if (tempprogress == 100) {
                         //下载完成
@@ -131,6 +131,7 @@ public class DownloadProgressManager {
         window.setContentView(R.layout.dialog_downloading);
         download_progress = window.findViewById(R.id.download_progress);
         download_text = window.findViewById(R.id.download_text);
+
         doDownload(fileName,downloadURL);
     }
 
@@ -143,6 +144,7 @@ public class DownloadProgressManager {
         //TODO:是否再进行一次权限检查及确认下载文件目录是否存在
         // 设置progressBar初始化
         download_progress.setProgress(0);
+
         DownloadDispatcher.getInstance().startDownload(fileName, downloadURL, new DownloadCallback() {
             @Override
             public void onSuccess(final File file) {
