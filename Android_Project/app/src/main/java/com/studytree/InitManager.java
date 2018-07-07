@@ -14,7 +14,10 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.studytree.bean.DeviceInfoBean;
 import com.studytree.commonfile.Constants;
+import com.studytree.log.Logger;
 import com.umeng.commonsdk.UMConfigure;
+import com.umeng.message.IUmengRegisterCallback;
+import com.umeng.message.PushAgent;
 
 import java.io.File;
 
@@ -78,7 +81,24 @@ public class InitManager {
         //初始化异常处理类
         ExceptionHandler.getInstance().init(mContext.getApplicationContext());
         //初始化友盟统计
-        UMConfigure.init(mContext,Constants.UMAppKey, Constants.UMChannelID, UMConfigure.DEVICE_TYPE_PHONE ,null);
+        UMConfigure.init(mContext,Constants.UMAppKey, Constants.UMChannelID, UMConfigure.DEVICE_TYPE_PHONE ,Constants.UMMessageSecret);
+        UMConfigure.setLogEnabled(true);
+        //初始化友盟推送
+        PushAgent mPushAgent = PushAgent.getInstance(mContext);
+        //注册推送服务，每次调用register方法都会回调该接口
+        mPushAgent.register(new IUmengRegisterCallback() {
+            @Override
+            public void onSuccess(String deviceToken) {
+                //注册成功会返回device token
+                //手动获取device token，可以调用mPushAgent.getRegistrationId()方法（需在注册成功后调用）
+                Logger.d(TAG,"deviceToken = "+deviceToken);
+            }
+
+            @Override
+            public void onFailure(String s, String s1) {
+
+            }
+        });
 
         //ImageLoader初始化设置（ImageLoader建造者设计模式）
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(mContext)

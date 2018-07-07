@@ -20,6 +20,7 @@ import com.studytree.utils.permissions.PermissionUtils;
 import com.studytree.utils.permissions.RequestPermissionListener;
 import com.studytree.view.widget.LoadingDialog;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.message.PushAgent;
 
 /**
  * Activity基类
@@ -40,6 +41,7 @@ public class BaseActivity extends AppCompatActivity {
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         //Activity压栈
         ActivityCleanupStack.push(this);
+        PushAgent.getInstance(BaseActivity.this).onAppStart();
     }
 
     /**

@@ -68,7 +68,6 @@ public class SplashActivity extends BaseActivity {
                     break;
                 case CODE_ENTER_HOME:               //进入下一步
                     enterNextStep();
-                    Logger.d(TAG,"即将进入");
                     break;
                 case CODE_ANIMATION_END:            //
 
