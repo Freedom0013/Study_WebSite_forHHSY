@@ -46,6 +46,8 @@ public class Constants {
     public static final String UMAppMasterSecret = "1ekwyh1gze7ute73dgz441maum5qvh2v";
     /** 小米AppSecret */
     public static final String MI_AppSecret = "qMLsHW0gMV6v4WlkmDItqg==";
+    /** 友盟Log开关 */
+    public static final boolean UM_Log_STATES = true;
 
     /** 总SharedPreferences名称 */
     public static final String PREF_NAME = "pref_studytree";

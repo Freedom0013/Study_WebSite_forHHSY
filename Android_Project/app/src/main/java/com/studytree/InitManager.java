@@ -82,7 +82,8 @@ public class InitManager {
         ExceptionHandler.getInstance().init(mContext.getApplicationContext());
         //初始化友盟统计
         UMConfigure.init(mContext,Constants.UMAppKey, Constants.UMChannelID, UMConfigure.DEVICE_TYPE_PHONE ,Constants.UMMessageSecret);
-        UMConfigure.setLogEnabled(true);
+        //设置是否显示友盟log
+        UMConfigure.setLogEnabled(Constants.UM_Log_STATES);
         //初始化友盟推送
         PushAgent mPushAgent = PushAgent.getInstance(mContext);
         //注册推送服务，每次调用register方法都会回调该接口
