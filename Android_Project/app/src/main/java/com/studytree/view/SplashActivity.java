@@ -157,6 +157,10 @@ public class SplashActivity extends BaseActivity {
             public void onFail(int action, int responseCode, String responseMsg) {
                 Logger.d(TAG,"接口请求失败！responseMsg = "+responseMsg);
                 showToast("网络异常！接口请求失败！");
+                //失败依旧可以进入下一步
+                Message message = Message.obtain();
+                message.what = CODE_ENTER_HOME;
+                mhandler.sendMessage(message);
             }
         });
     }

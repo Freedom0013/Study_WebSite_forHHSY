@@ -2,6 +2,7 @@ package com.studytree.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -11,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
 import com.studytree.InitManager;
 import com.studytree.R;
 import com.studytree.commonfile.Constants;
@@ -55,7 +57,11 @@ public class IntroActivity extends BaseActivity implements View.OnClickListener,
         setContentView(R.layout.activity_intro);
         //去除ActionBar和界面占满屏幕
         getSupportActionBar().hide();
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //透明状态栏
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
+            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
+        }
         //设置已展示新手引导页
         InitManager.getInstance().saveBooleanPreference(Constants.PREF_INTRO,true);
 

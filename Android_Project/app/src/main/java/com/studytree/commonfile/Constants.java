@@ -25,7 +25,7 @@ public class Constants {
     public static final HttpLoggingInterceptor.Level OKHTTP_LOG_LEVEL = HttpLoggingInterceptor.Level.BASIC;
     static {
         if (LOCAL_TEST) {
-            HOST = "192.168.0.103:8080/Study_Platform_website";     //本地地址
+            HOST = "192.168.0.101:8080/Study_Platform_website";     //本地地址
         } else {
             HOST = "" + DOMAIN;
         }
@@ -36,6 +36,8 @@ public class Constants {
     /** 下载路径 */
     public static final String DOWNLOAD_URL = "http://" + HOST + "/studytree.apk";
 
+    /** 友盟Log开关 */
+    public static final boolean UM_Log_STATES = false;
     /** 友盟AppKey */
     public static final String UMAppKey = "5b2e06e6f43e4876f400004f";
     /** 友盟ChannelID */
@@ -46,8 +48,6 @@ public class Constants {
     public static final String UMAppMasterSecret = "1ekwyh1gze7ute73dgz441maum5qvh2v";
     /** 小米AppSecret */
     public static final String MI_AppSecret = "qMLsHW0gMV6v4WlkmDItqg==";
-    /** 友盟Log开关 */
-    public static final boolean UM_Log_STATES = true;
 
     /** 总SharedPreferences名称 */
     public static final String PREF_NAME = "pref_studytree";

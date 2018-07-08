@@ -2,23 +2,12 @@ package com.studytree.view;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.WindowManager;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.studytree.R;
-import com.studytree.bean.InitBean;
-import com.studytree.http.HttpResultCallback;
-import com.studytree.http.logic.InitLogic;
-import com.studytree.log.Logger;
-import com.studytree.utils.permissions.PermissionConfig;
 import com.studytree.view.base.BaseActivity;
-
-import java.util.List;
 
 
 /**
@@ -45,6 +34,14 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //去除ActionBar
+        getSupportActionBar().hide();
+        //沉浸
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
+            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
+        }
+
     }
 
 //    public static void startForResult(Activity ctx){

@@ -92,12 +92,12 @@ public class InitManager {
             public void onSuccess(String deviceToken) {
                 //注册成功会返回device token
                 //手动获取device token，可以调用mPushAgent.getRegistrationId()方法（需在注册成功后调用）
-                Logger.d(TAG,"deviceToken = "+deviceToken);
+                Logger.d(TAG, "友盟：deviceToken = " + deviceToken);
             }
 
             @Override
             public void onFailure(String s, String s1) {
-
+                Logger.e(TAG, "友盟Push注册失败！" + s + "|||" + s1);
             }
         });
 
