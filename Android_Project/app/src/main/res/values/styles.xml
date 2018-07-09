@@ -8,4 +8,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--首页页面选择按钮样式-->
+    <style name="main_tabbar_radio_style">
+        <item name="android:layout_width">0dip</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:button">@null</item>
+        <item name="android:paddingTop">4dip</item>
+        <item name="android:paddingBottom">4dip</item>
+        <item name="android:drawablePadding">0dip</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:background">@null</item>
+    </style>
+
 </resources>

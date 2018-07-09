@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 
 import com.studytree.ActivityCleanupStack;
+import com.studytree.log.Logger;
+import com.studytree.view.widget.LoadingDialog;
 import com.umeng.analytics.MobclickAgent;
 
 /**
@@ -17,6 +19,8 @@ import com.umeng.analytics.MobclickAgent;
  */
 public class BaseFragmentActivity extends FragmentActivity {
     public static final String TAG = BaseFragmentActivity.class.getSimpleName();
+    /** 加载进度圈 */
+    private LoadingDialog mLoadingDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,5 +66,32 @@ public class BaseFragmentActivity extends FragmentActivity {
                 Toast.makeText(BaseFragmentActivity.this, s, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    /**
+     * 显示Loading进度条
+     */
+    public void showProgressDialog(){
+        if (isFinishing()) {
+            return;
+        }
+        mLoadingDialog = LoadingDialog.showDialog(this);
+        mLoadingDialog.show();
+    }
+
+    /**
+     * 关闭Loading进度条
+     */
+    public void dismissProgressDialog(){
+        try {
+            if(mLoadingDialog != null){
+                if(mLoadingDialog.isShowing()){
+                    mLoadingDialog.dismiss();
+                }
+                mLoadingDialog = null;
+            }
+        } catch (Exception e) {
+            Logger.e(TAG,"loading进度圈关闭错误！",e);
+        }
     }
 }
