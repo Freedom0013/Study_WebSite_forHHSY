@@ -1,28 +1,51 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
     android:background="@android:color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
     android:scaleType="centerCrop">
 
-    <android.support.v4.view.ViewPager
+    <View
+        android:id="@+id/statusBarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/theme_blue" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/main_tool"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/theme_blue"
+            app:title="@string/app_name" />
+    </RelativeLayout>
+
+    <com.studytree.view.widget.HorizontalViewPager
         android:id="@+id/main_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="60dp"
-        android:layout_marginTop="60dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="@android:color/white" />
 
-    <FrameLayout
-        android:id="@+id/main_tab_frame"
+    <TextView
         android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="#becaca" />
+
+    <LinearLayout
+        android:id="@+id/main_tab_frame"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="bottom"
         android:background="@color/colorWhite">
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="0.5dp"
-            android:background="#becaca" />
 
         <RadioGroup
             android:id="@+id/main_tab_radio"
@@ -38,10 +61,10 @@
                 android:drawableTop="@drawable/selector_tab_home"
                 android:text="@string/string_tab_home" />
 
-            <TextView
+            <!--<TextView
                 android:layout_width="0.5dp"
                 android:layout_height="fill_parent"
-                android:background="#becaca" />
+                android:background="#becaca" />-->
 
             <RadioButton
                 android:id="@+id/main_tab_news"
@@ -49,10 +72,10 @@
                 android:drawableTop="@drawable/selector_tab_news"
                 android:text="@string/string_tab_news" />
 
-            <TextView
+            <!--<TextView
                 android:layout_width="0.5dp"
                 android:layout_height="fill_parent"
-                android:background="#becaca" />
+                android:background="#becaca" />-->
 
             <RadioButton
                 android:id="@+id/main_tab_me"
@@ -60,23 +83,6 @@
                 android:drawableTop="@drawable/selector_tab_me"
                 android:text="@string/string_tab_me" />
         </RadioGroup>
-    </FrameLayout>
+    </LinearLayout>
+</LinearLayout>
 
-  <!--  <FrameLayout
-        android:id="@+id/main_tool"
-        android:layout_width="fill_parent"
-        android:layout_height="60dp"
-        android:layout_gravity="top"
-        android:background="@color/colorWhite">
-
-        <android.support.v7.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="?attr/colorPrimary" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="0.5dp"
-            android:background="#becaca" />
-    </FrameLayout>-->
-</FrameLayout>

@@ -19,6 +19,7 @@
         <item name="android:paddingBottom">4dip</item>
         <item name="android:drawablePadding">0dip</item>
         <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/selector_tab_text</item>
         <item name="android:background">@null</item>
     </style>
 

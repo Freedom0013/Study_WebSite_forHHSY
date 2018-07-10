@@ -1,7 +1,6 @@
 package com.studytree.view.base;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -17,9 +16,10 @@ import com.umeng.analytics.MobclickAgent;
  * @date 2018/6/23 19:45
  * @author Freedom0013
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends android.support.v4.app.Fragment {
     public static final String TAG = BaseFragment.class.getSimpleName();
-    Activity mActivity;
+    /** Activity对象 */
+    public Activity mActivity;
 
     //Fragment创建
     @Override
@@ -46,16 +46,11 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         initData();
     }
 
-    /**
-     * 初始化数据
-     */
-    public void initData(){
-
-    }
+    /** 初始化数据 */
+    public void initData(){}
 
     @Override
     public void onResume() {
@@ -86,14 +81,28 @@ public abstract class BaseFragment extends Fragment {
 
     protected void showProgress(){
         if(getActivity() != null){
-            if(getActivity() instanceof BaseFragmentActivity){
+            if(getActivity() instanceof BaseActivity){
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        ((BaseFragmentActivity) getActivity()).showProgressDialog();
+                        ((BaseActivity) getActivity()).showProgressDialog();
                     }
                 });
             }
         }
     }
+
+    protected void dismissProgress(){
+        if(getActivity() != null){
+            if(getActivity() instanceof BaseActivity){
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ((BaseActivity) getActivity()).dismissProgressDialog();
+                    }
+                });
+            }
+        }
+    }
+
 }

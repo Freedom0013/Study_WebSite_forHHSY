@@ -4,29 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.studytree.view.MainActivity">
+
     <!--侧滑布局-->
     <com.studytree.view.widget.ResideLayout
+        android:id="@+id/main_residelayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--侧面菜单-->
-        <LinearLayout
+        <!--菜单待替换Fragment-->
+        <FrameLayout
             android:id="@+id/menu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:orientation="vertical"
-            >
+            android:scaleType="centerCrop">
+        </FrameLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="我是菜单"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-        <!--主界面-->
-        <include layout="@layout/main_layout"/>
-
+        <!--主界面待替换Fragment-->
+        <FrameLayout
+            android:id="@+id/main_fram"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:scaleType="centerCrop">
+        </FrameLayout>
     </com.studytree.view.widget.ResideLayout>
 </android.support.constraint.ConstraintLayout>
