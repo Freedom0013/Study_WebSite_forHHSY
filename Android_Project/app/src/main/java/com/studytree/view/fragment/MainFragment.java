@@ -1,5 +1,6 @@
 package com.studytree.view.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -48,23 +49,24 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
      * 主界面Fragment构造函数
      * @param activity Activity对象
      */
+    @SuppressLint("ValidFragment")
     public MainFragment(Activity activity) {
         mActivity = (MainActivity) activity;
     }
 
     @Override
     public View initView() {
-        View view = View.inflate(mActivity, R.layout.fragment_main, null);
+        View mRootView = View.inflate(mActivity, R.layout.fragment_main, null);
         //设置占位View以实现沉浸式状态栏
-        View statusBar = view.findViewById(R.id.statusBarView);
+        View statusBar = mRootView.findViewById(R.id.statusBarView);
         ViewGroup.LayoutParams layoutParams = statusBar.getLayoutParams();
         layoutParams.height = getStatusBarHeight(mActivity);
 
         //初始化Radio
-        mRadioGroup = view.findViewById(R.id.main_tab_radio);
-        rb_tab_home = view.findViewById(R.id.main_tab_home);
-        rb_tab_news = view.findViewById(R.id.main_tab_news);
-        rb_tab_me = view.findViewById(R.id.main_tab_me);
+        mRadioGroup = mRootView.findViewById(R.id.main_tab_radio);
+        rb_tab_home = mRootView.findViewById(R.id.main_tab_home);
+        rb_tab_news = mRootView.findViewById(R.id.main_tab_news);
+        rb_tab_me = mRootView.findViewById(R.id.main_tab_me);
         changeImageSize();
 
         //初始化ViewPager
@@ -73,7 +75,7 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
         mPagerList.add(new NewsFragment(mActivity));
         mPagerList.add(new MineFragment(mActivity));
         //初始化ViewPager
-        main_viewpager = view.findViewById(R.id.main_viewpager);
+        main_viewpager = mRootView.findViewById(R.id.main_viewpager);
 
         //初始化ViewPager适配器
         mPagerAdapter = new MainViewPagerAdapter(mActivity.getSupportFragmentManager(), mActivity, mPagerList);
@@ -85,7 +87,7 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
         //注意setOnPageChangeListener被addOnPageChangeListener取代
         main_viewpager.addOnPageChangeListener(this);
 
-        return view;
+        return mRootView;
     }
 
     @Override

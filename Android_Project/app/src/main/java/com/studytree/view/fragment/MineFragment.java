@@ -1,5 +1,6 @@
 package com.studytree.view.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.View;
 
@@ -23,13 +24,14 @@ public class MineFragment extends BaseFragment {
      * 构造函数
      * @param activity Activity对象
      */
+    @SuppressLint("ValidFragment")
     public MineFragment(Activity activity) {
         mActivity = activity;
     }
 
     @Override
     public View initView() {
-        View view = View.inflate(mActivity, R.layout.tab_mine, null);
-        return view;
+        View mRootView = View.inflate(mActivity, R.layout.tab_mine, null);
+        return mRootView;
     }
 }

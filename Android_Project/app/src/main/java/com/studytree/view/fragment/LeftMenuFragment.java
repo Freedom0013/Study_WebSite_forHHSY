@@ -1,5 +1,6 @@
 package com.studytree.view.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -27,17 +28,18 @@ public class LeftMenuFragment extends BaseFragment {
      * 侧滑菜单Fragment构造函数
      * @param activity Activity对象
      */
+    @SuppressLint("ValidFragment")
     public LeftMenuFragment(Activity activity){
         mActivity = activity;
     }
 
     @Override
     public View initView() {
-        View view = View.inflate(mActivity, R.layout.fragment_left_menu, null);
+        View mRootView = View.inflate(mActivity, R.layout.fragment_left_menu, null);
         //设置侧滑菜单背景
-        root_menu = view.findViewById(R.id.left_ment_foot);
+        root_menu = mRootView.findViewById(R.id.left_menu_root);
         root_menu.setBackgroundResource(R.drawable.menu_background);
 
-        return view;
+        return mRootView;
     }
 }

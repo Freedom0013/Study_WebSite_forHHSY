@@ -1,5 +1,6 @@
 package com.studytree.view.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.View;
 
@@ -20,13 +21,14 @@ public class NewsFragment extends BaseFragment {
      * 构造函数
      * @param activity Activity对象
      */
+    @SuppressLint("ValidFragment")
     public NewsFragment(Activity activity) {
         mActivity = activity;
     }
 
     @Override
     public View initView() {
-        View view = View.inflate(mActivity, R.layout.tab_news, null);
-        return view;
+        View mRootView = View.inflate(mActivity, R.layout.tab_news, null);
+        return mRootView;
     }
 }

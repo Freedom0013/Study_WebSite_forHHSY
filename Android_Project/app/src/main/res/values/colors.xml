@@ -15,4 +15,6 @@
     <color name="loading_color">#FF01EAFF</color>
     <color name="ad_orange_dot">#FF0199ff</color>
     <color name="tab_Grey">#787878</color>
+
+    <color name="left_title_text_color">#FFFFFFFF</color>
 </resources>
