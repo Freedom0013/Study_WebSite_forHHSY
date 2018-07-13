@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@android:color/white" >
-
+    <!--首页系别item-->
     <LinearLayout
         android:id="@+id/department_item_linear"
         android:layout_width="match_parent"

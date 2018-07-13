@@ -134,7 +134,7 @@ public class InitLogic{
     }
 
     /**
-     * 获取Banner信息
+     * 获取Department信息
      * @param listener 结果监听
      */
     public void getDepartmentInfo(final HttpResultCallback listener) {

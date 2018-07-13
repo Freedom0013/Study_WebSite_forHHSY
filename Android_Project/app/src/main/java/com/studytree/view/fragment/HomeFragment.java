@@ -102,10 +102,6 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         return mRootView;
     }
 
-    public boolean isInited(){
-        return isinit;
-    }
-
     @Override
     public void initData() {
         if (isinit)
@@ -131,7 +127,6 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
                 Logger.e(TAG, "获取Department错误");
             }
         });
-
 
         //配置banner
         fixTopFrameSize();
@@ -347,7 +342,15 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         });
     }
 
-    //系别单击事件
+    /**
+     * 获取HomeFragment初始化标识
+     * @return 初始化标识
+     */
+    public boolean isInited(){
+        return isinit;
+    }
+
+    //系别点击事件
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         DepartmentBean bean = (DepartmentBean) mAdapter.getItem(position);
@@ -373,10 +376,9 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
 
     @Override
     public void onPageScrollStateChanged(int state) {
-
     }
 
-    /** Banner点击事件 */
+    //Banner点击事件
     @Override
     public void onSingleTouch(View v) {
         //TODO:待补全Banner进入页面
