@@ -132,4 +132,25 @@ public class InitLogic{
             }
         });
     }
+
+    /**
+     * 获取Banner信息
+     * @param listener 结果监听
+     */
+    public void getDepartmentInfo(final HttpResultCallback listener) {
+        mHttpTransaction.send(ActionID.ACTION_DEPARTMENT, new HashMap<String, Object>(), new HttpCallback() {
+            @Override
+            public void onSuccess(int action, int responseCode, JsonObject obj) {
+                if (listener != null) {
+                    listener.onSuccess(action,obj.toString());
+                }
+            }
+            @Override
+            public void onFail(int action, int responseCode, String responseMsg) {
+                if (listener != null) {
+                    listener.onFail(action, responseCode, responseMsg);
+                }
+            }
+        });
+    }
 }

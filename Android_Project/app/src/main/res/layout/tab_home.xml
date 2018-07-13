@@ -45,6 +45,48 @@
                     android:orientation="horizontal" />
             </FrameLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:paddingRight="10dp" >
+
+                    <TextView
+                        android:id="@+id/department"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/white"
+                        android:drawableLeft="@drawable/home_view_left"
+                        android:drawablePadding="5dp"
+                        android:gravity="left|center_vertical"
+                        android:text="大类详情"
+                        android:textColor="@color/banner_blue_dot"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="#dddddd" />
+
+                <com.studytree.view.widget.UnscrollGridView
+                    android:id="@+id/home_department_grid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#dddddd"
+                    android:cacheColorHint="@android:color/transparent"
+                    android:divider="#dddddd"
+                    android:horizontalSpacing="0.75dp"
+                    android:numColumns="2"
+                    android:verticalSpacing="0.75dp" />
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

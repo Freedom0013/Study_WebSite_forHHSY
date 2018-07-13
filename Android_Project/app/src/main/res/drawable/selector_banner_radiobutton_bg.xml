@@ -4,7 +4,7 @@
     <item android:state_checked="true">
         <shape>
             <size android:width="@dimen/ad_radio_size" android:height="@dimen/ad_radio_size" />
-            <solid android:color="@color/ad_orange_dot" />
+            <solid android:color="@color/banner_blue_dot" />
             <corners android:radius="@dimen/ad_radio_size" />
         </shape>
     </item>

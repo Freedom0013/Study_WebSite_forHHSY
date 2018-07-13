@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -32,6 +34,13 @@ public class BaseActivity extends AppCompatActivity {
     public static final String TAG = BaseActivity.class.getSimpleName();
     /** 加载进度圈 */
     private LoadingDialog mLoadingDialog;
+    /** 屏幕宽度 */
+    public int mScreenWidth;
+    /** 屏幕高度 */
+    public int mScreenHeight;
+    /** Handler对象 */
+    public final Handler mBasehandler = new Handler(Looper.getMainLooper());
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,6 +51,9 @@ public class BaseActivity extends AppCompatActivity {
         //Activity压栈
         ActivityCleanupStack.push(this);
         PushAgent.getInstance(BaseActivity.this).onAppStart();
+
+        mScreenWidth = getWindowManager().getDefaultDisplay().getWidth();
+        mScreenHeight = getWindowManager().getDefaultDisplay().getHeight();
     }
 
     /**

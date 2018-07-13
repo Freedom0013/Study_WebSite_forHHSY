@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -23,13 +24,19 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.studytree.InitManager;
 import com.studytree.R;
 import com.studytree.bean.BannerBean;
+import com.studytree.bean.DepartmentBean;
+import com.studytree.bean.PictureBean;
+import com.studytree.commonfile.Constants;
 import com.studytree.http.HttpResultCallback;
 import com.studytree.http.logic.InitLogic;
 import com.studytree.log.Logger;
 import com.studytree.utils.StringUtils;
+import com.studytree.view.MainActivity;
 import com.studytree.view.adapter.HomeBannerAdapter;
+import com.studytree.view.adapter.HomeDepartmentGridAdapter;
 import com.studytree.view.base.BaseFragment;
 import com.studytree.view.widget.InnerViewPager;
+import com.studytree.view.widget.UnscrollGridView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +47,7 @@ import java.util.List;
  * @date 2018/7/10 17:16
  * @author Freedom0013
  */
-public class HomeFragment extends BaseFragment implements ViewPager.OnPageChangeListener,InnerViewPager.OnSingleTouchListener{
+public class HomeFragment extends BaseFragment implements ViewPager.OnPageChangeListener,InnerViewPager.OnSingleTouchListener,AdapterView.OnItemClickListener{
     private static final String TAG = HomeFragment.class.getSimpleName();
     /** Activity对象 */
     private Activity mActivity;
@@ -56,6 +63,14 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     private List<View> mAdViews;
     /** Banner滑动当前页 */
     private volatile int current;
+    /** HomeFragment初始化完成标识 */
+    private boolean isinit = false;
+    /** 系别GridView */
+    private UnscrollGridView mGridView;
+    /** 系别GridView数据集合 */
+    private List<DepartmentBean> mDepartmentData;
+    /** 系别GridView适配器 */
+    private HomeDepartmentGridAdapter mAdapter;
 
     /** 空参构造函数（必须） */
     public HomeFragment(){}
@@ -81,11 +96,42 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         mAdViewPager.setFocusableInTouchMode(true);
         mAdViewPager.requestFocus();
 
+        //初始化系别GridView
+        mGridView = mRootView.findViewById(R.id.home_department_grid);
+
         return mRootView;
+    }
+
+    public boolean isInited(){
+        return isinit;
     }
 
     @Override
     public void initData() {
+        if (isinit)
+            return;
+        isinit = true;
+
+        //初始化系别GridView
+        mDepartmentData = new ArrayList<DepartmentBean>();
+        mAdapter = new HomeDepartmentGridAdapter((MainActivity)mActivity, mDepartmentData);
+        mGridView.setAdapter(mAdapter);
+        mGridView.setOnItemClickListener(this);
+
+        //获取系别数据
+        doGetDepartment(InitManager.getInstance().getStringPreference("department_list"));
+        InitLogic.getInstance().getDepartmentInfo(new HttpResultCallback() {
+            @Override
+            public void onSuccess(int action, Object obj) {
+                doGetDepartment((String) obj);
+            }
+
+            @Override
+            public void onFail(int action, int responseCode, String responseMsg) {
+                Logger.e(TAG, "获取Department错误");
+            }
+        });
+
 
         //配置banner
         fixTopFrameSize();
@@ -102,6 +148,72 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
             }
         });
         startAutoScroll();
+    }
+
+    /**
+     * 获取到系别数据
+     * @param dataStr 系别Json
+     */
+    public void doGetDepartment(String dataStr) {
+        if (StringUtils.isNullOrEmpty(dataStr)) {
+            return;
+        }
+        //本地缓存Json数据
+        InitManager.getInstance().saveStringPreference("department_list", dataStr);
+        List<DepartmentBean> departmentlist = new ArrayList<DepartmentBean>();
+        if (dataStr != null) {
+            try {
+                //解析Json
+                JsonObject data = new JsonParser().parse(dataStr).getAsJsonObject();
+                Gson gson = new Gson();
+                JsonArray dataArray = data.getAsJsonArray("data");
+                JsonElement rootinfo = dataArray.get(0);
+                JsonObject rootinfos = new JsonParser().parse(rootinfo.toString()).getAsJsonObject();
+                JsonArray root = rootinfos.getAsJsonArray("root");
+                JsonElement picinfo = dataArray.get(1);
+                JsonObject picinfos = new JsonParser().parse(picinfo.toString()).getAsJsonObject();
+                JsonArray pic = picinfos.getAsJsonArray("pic");
+                if (root != null) {
+                    for (JsonElement department : root) {
+                        DepartmentBean departmentbean = gson.fromJson(department, DepartmentBean.class);
+                        departmentlist.add(departmentbean);
+                    }
+                }
+                if (pic != null) {
+                    for (JsonElement picture : pic) {
+                        PictureBean picturebean = gson.fromJson(picture, PictureBean.class);
+                        for (DepartmentBean department : departmentlist) {
+                            int isequals = department.department_picture_id.compareTo(picturebean.picture_id);
+                            if (isequals == 0) {
+                                department.department_image_url = "http://" + Constants.HOST + "/" + picturebean.picture_img;
+                            }
+                        }
+                    }
+                }
+                initDepartmentList(departmentlist);
+            } catch (Exception e) {
+                Logger.e(TAG, "解析系别错误！", e);
+                initDepartmentList(null);
+            }
+        }
+    }
+
+    /**
+     * 更新系别UI
+     * @param list 系别数据
+     */
+    public void initDepartmentList(final List<DepartmentBean> list) {
+        MainActivity act = (MainActivity) mActivity;
+        act.mBasehandler.post(new Runnable() {
+            @Override
+            public void run() {
+                mDepartmentData.clear();
+                if (list != null && !list.isEmpty()) {
+                    mDepartmentData.addAll(list);
+                }
+                mAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     /**
@@ -233,6 +345,13 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
                 mAdViewPager.setOnSingleTouchListener(HomeFragment.this);
             }
         });
+    }
+
+    //系别单击事件
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        DepartmentBean bean = (DepartmentBean) mAdapter.getItem(position);
+        Logger.d(TAG,bean.toString());
     }
 
     @Override
