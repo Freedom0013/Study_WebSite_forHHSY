@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 首页Fragment
+ * 主界面（相对菜单）封装Fragment
  * Title: MainFragment
  * @date 2018/7/10 14:31
  * @author Freedom0013
@@ -62,30 +62,32 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
         ViewGroup.LayoutParams layoutParams = statusBar.getLayoutParams();
         layoutParams.height = getStatusBarHeight(mActivity);
 
-        //初始化Radio
+        //初始化底部Radio
         mRadioGroup = mRootView.findViewById(R.id.main_tab_radio);
         rb_tab_home = mRootView.findViewById(R.id.main_tab_home);
         rb_tab_news = mRootView.findViewById(R.id.main_tab_news);
         rb_tab_me = mRootView.findViewById(R.id.main_tab_me);
         changeImageSize();
 
-        //初始化ViewPager
+        //初始化界面View
         List mPagerList = new ArrayList<BaseFragment>();
         mPagerList.add(new HomeFragment(mActivity));
         mPagerList.add(new NewsFragment(mActivity));
         mPagerList.add(new MineFragment(mActivity));
         //初始化ViewPager
         main_viewpager = mRootView.findViewById(R.id.main_viewpager);
+        //不允许ViewPager创建新的页面以防止出现页面重复显示Bug（在此项目中必须）
+        main_viewpager.setOffscreenPageLimit(3);
 
         //初始化ViewPager适配器
         mPagerAdapter = new MainViewPagerAdapter(mActivity.getSupportFragmentManager(), mActivity, mPagerList);
         main_viewpager.setAdapter(mPagerAdapter);
+        //注意setOnPageChangeListener被addOnPageChangeListener取代
+        main_viewpager.addOnPageChangeListener(this);
         main_viewpager.setCurrentItem(0);
 
         //设置监听
         mRadioGroup.setOnCheckedChangeListener(this);
-        //注意setOnPageChangeListener被addOnPageChangeListener取代
-        main_viewpager.addOnPageChangeListener(this);
 
         return mRootView;
     }
@@ -148,13 +150,13 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch (checkedId) {
-            case R.id.main_tab_home:
+            case R.id.main_tab_home:                //首页
                 main_viewpager.setCurrentItem(0, false);
                 break;
-            case R.id.main_tab_news:
+            case R.id.main_tab_news:                //资讯
                 main_viewpager.setCurrentItem(1, false);
                 break;
-            case R.id.main_tab_me:
+            case R.id.main_tab_me:                  //我的
                 main_viewpager.setCurrentItem(2, false);
                 break;
             default:
@@ -175,5 +177,4 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
             main_viewpager.setCurrentItem(currentIndex);
         }
     }
-
 }

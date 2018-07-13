@@ -135,8 +135,10 @@
     <servlet-name>InitAction</servlet-name>
     <servlet-class>com.studyplatform.web.servlet.forAndroid.InitAction</servlet-class>
   </servlet>
-
-
+  <servlet>
+    <servlet-name>BannerAction</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.forAndroid.BannerAction</servlet-class>
+  </servlet>
 
 
 
@@ -262,6 +264,10 @@
   <servlet-mapping>
     <servlet-name>InitAction</servlet-name>
     <url-pattern>/servlet/InitAction</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>BannerAction</servlet-name>
+    <url-pattern>/servlet/BannerAction</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>

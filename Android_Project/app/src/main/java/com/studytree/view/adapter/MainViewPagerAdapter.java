@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.view.View;
 
+import com.studytree.log.Logger;
 import com.studytree.view.base.BaseFragment;
 
 import java.util.List;
@@ -41,5 +44,16 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         return mPagerList.get(position);
+    }
+
+    @Override
+    public void destroyItem(View container, int position, Object object) {
+        try {
+            ViewPager viewPager = (ViewPager) container;
+            View v = (View) object;
+            viewPager.removeView(v);
+        } catch (Exception e) {
+            Logger.e(TAG, "BannerAdapter异常", e);
+        }
     }
 }

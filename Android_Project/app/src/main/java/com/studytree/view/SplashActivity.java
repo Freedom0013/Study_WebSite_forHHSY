@@ -142,7 +142,6 @@ public class SplashActivity extends BaseActivity {
                 JsonObject data = new JsonParser().parse(obj.toString()+"").getAsJsonObject();
                 JsonObject info = data.get("data").getAsJsonObject();
                 initbean = new InitBean(info);
-                Logger.d(TAG, initbean.toString());
                 //更新逻辑
                 Message message = Message.obtain();
                 if(initbean.updata_visionCode > DevicesUtils.getVersionCode()){     //有版本更新

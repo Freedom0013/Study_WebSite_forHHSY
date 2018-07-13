@@ -86,12 +86,15 @@ public abstract class HttpManager {
                     //创建表单请求体
                     FormBody.Builder formBody = new FormBody.Builder();
 
-                    //解析传递数据Map
-                    final HashMap<String, Object> data = (HashMap<String, Object>) sendData;
-                    for (String key : data.keySet()){
-                        //传递键值对参数
-                        formBody.add(key, data.get(key)+"");
+                    if(sendData != null){
+                        //解析传递数据Map
+                        final HashMap<String, Object> data = (HashMap<String, Object>) sendData;
+                        for (String key : data.keySet()){
+                            //传递键值对参数
+                            formBody.add(key, data.get(key)+"");
+                        }
                     }
+
 
                     //创建Request对象。请注意此处全为Post请求
                     Request request = new Request.Builder()
@@ -157,14 +160,16 @@ public abstract class HttpManager {
                     StringBuffer url = new StringBuffer();
                     url.append(getUrl(action));
 
-                    //解析传递数据Map
-                    final HashMap<String, Object> data = (HashMap<String, Object>) sendData;
-                    if(data.keySet().size()>0 && !data.isEmpty()){
-                        for (String key : data.keySet()){
-                            //传递键值对参数
-                            url.append("?");
-                            url.append(key+"=");
-                            url.append(data.get(key)+"");
+                    if(sendData != null) {
+                        //解析传递数据Map
+                        final HashMap<String, Object> data = (HashMap<String, Object>) sendData;
+                        if (data.keySet().size() > 0 && !data.isEmpty()) {
+                            for (String key : data.keySet()) {
+                                //传递键值对参数
+                                url.append("?");
+                                url.append(key + "=");
+                                url.append(data.get(key) + "");
+                            }
                         }
                     }
 

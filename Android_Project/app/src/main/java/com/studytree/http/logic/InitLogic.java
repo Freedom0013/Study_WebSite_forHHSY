@@ -1,19 +1,12 @@
 package com.studytree.http.logic;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.studytree.http.ActionID;
 import com.studytree.http.HttpCallback;
 import com.studytree.http.HttpResultCallback;
 import com.studytree.http.HttpTransaction;
-import com.studytree.log.Logger;
-import com.studytree.utils.StudyTreeTools;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * 更新信息获取
@@ -21,7 +14,7 @@ import java.util.List;
  * @date 2018/6/21 17:16
  * @author Freedom0013
  */
-public class InitLogic {
+public class InitLogic{
     private static final String TAG = InitLogic.class.getSimpleName();
     /** InitLogic单例 */
     private static InitLogic _instance;
@@ -110,6 +103,27 @@ public class InitLogic {
                 }
             }
 
+            @Override
+            public void onFail(int action, int responseCode, String responseMsg) {
+                if (listener != null) {
+                    listener.onFail(action, responseCode, responseMsg);
+                }
+            }
+        });
+    }
+
+    /**
+     * 获取Banner信息
+     * @param listener 结果监听
+     */
+    public void getBannnerInfo(final HttpResultCallback listener) {
+        mHttpTransaction.send(ActionID.ACTION_BANNER, new HashMap<String, Object>(), new HttpCallback() {
+            @Override
+            public void onSuccess(int action, int responseCode, JsonObject obj) {
+                if (listener != null) {
+                    listener.onSuccess(action,obj.toString());
+                }
+            }
             @Override
             public void onFail(int action, int responseCode, String responseMsg) {
                 if (listener != null) {

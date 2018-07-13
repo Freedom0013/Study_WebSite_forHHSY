@@ -23,4 +23,5 @@ public interface ActionID {
     int ACTION_REGISTER = BASE + 1009;
     int ACTION_WRITTEN_OFF = BASE + 1010;
     int ACTION_ANSWER = BASE + 1011;
+    int ACTION_BANNER = BASE + 1012;
 }

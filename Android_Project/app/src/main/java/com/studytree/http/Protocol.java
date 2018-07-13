@@ -20,4 +20,5 @@ public class Protocol {
     public static final String ACTION_REGISTER = "/servlet/RegisterAction";
     public static final String ACTION_WRITTEN_OFF = "/servlet/WrittenOffAction";
     public static final String ACTION_ANSWER = "/servlet/AnswerAction";
+    public static final String ACTION_BANNER = "/servlet/BannerAction";
 }
