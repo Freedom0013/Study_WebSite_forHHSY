@@ -1,96 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
-    <ScrollView
-        android:id="@+id/home_scrollview"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:scrollbars="none">
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/home_root_ln"
+        <ScrollView
+            android:id="@+id/home_scrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:background="#5cc0e9"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:paddingTop="?android:attr/actionBarSize"
+            android:scrollbars="none">
 
-            <FrameLayout
-                android:id="@+id/home_banner_frame"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone">
-
-                <!-- banner -->
-                <com.studytree.view.widget.InnerViewPager
-                    android:id="@+id/home_banner_viewpager"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:background="@drawable/shape_banner_bg"
-                    android:flipInterval="30"
-                    android:persistentDrawingCache="animation" />
-
-                <!-- banner viewpager 位置指引 -->
-                <RadioGroup
-                    android:id="@+id/home_banner_radiogroup"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/ad_radio_size"
-                    android:layout_gravity="bottom"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="center"
-                    android:orientation="horizontal" />
-            </FrameLayout>
-
-            <!--系别GridView-->
             <LinearLayout
+                android:id="@+id/home_root_ln"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:orientation="vertical" >
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <!--系别页眉-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:gravity="center_vertical"
-                    android:paddingRight="10dp" >
-
-                    <TextView
-                        android:id="@+id/department"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@android:color/white"
-                        android:drawableLeft="@drawable/home_view_left"
-                        android:drawablePadding="5dp"
-                        android:gravity="left|center_vertical"
-                        android:text="大类详情"
-                        android:textColor="@color/banner_blue_dot"
-                        android:textSize="16sp" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="#dddddd" />
-
-                <!--系别GridView-->
-                <com.studytree.view.widget.UnscrollGridView
-                    android:id="@+id/home_department_grid"
+                <FrameLayout
+                    android:id="@+id/home_banner_frame"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#dddddd"
-                    android:cacheColorHint="@android:color/transparent"
-                    android:divider="#dddddd"
-                    android:horizontalSpacing="0.75dp"
-                    android:numColumns="2"
-                    android:verticalSpacing="0.75dp" />
+                    android:visibility="gone">
+
+                    <!-- banner -->
+                    <com.studytree.view.widget.InnerViewPager
+                        android:id="@+id/home_banner_viewpager"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="@drawable/shape_banner_bg"
+                        android:flipInterval="30"
+                        android:persistentDrawingCache="animation" />
+
+                    <!-- banner viewpager 位置指引 -->
+                    <RadioGroup
+                        android:id="@+id/home_banner_radiogroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/ad_radio_size"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center"
+                        android:orientation="horizontal" />
+                </FrameLayout>
+
+                <!--系别GridView-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:orientation="vertical">
+
+                    <!--系别页眉-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:gravity="center_vertical"
+                        android:paddingRight="10dp">
+
+                        <TextView
+                            android:id="@+id/department"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/white"
+                            android:drawableLeft="@drawable/home_view_left"
+                            android:drawablePadding="5dp"
+                            android:gravity="left|center_vertical"
+                            android:text="大类详情"
+                            android:textColor="@color/banner_blue_dot"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#dddddd" />
+
+                    <!--系别GridView-->
+                    <com.studytree.view.widget.UnscrollGridView
+                        android:id="@+id/home_department_grid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#dddddd"
+                        android:cacheColorHint="@android:color/transparent"
+                        android:divider="#dddddd"
+                        android:horizontalSpacing="0.75dp"
+                        android:numColumns="2"
+                        android:verticalSpacing="0.75dp" />
+                </LinearLayout>
+
             </LinearLayout>
+        </ScrollView>
 
-        </LinearLayout>
-    </ScrollView>
+        <!--toolbar标题栏-->
+        <com.studytree.view.widget.StudyTreeTitleBar
+            android:id="@+id/home_tool"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/theme_blue"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:title="@string/app_name" />
 
+        <!--<android.support.v7.widget.Toolbar
+           android:id="@+id/home_main_tool"
+           android:layout_width="match_parent"
+           android:layout_height="?android:attr/actionBarSize"
+           android:background="@color/theme_blue"
+           app:contentInsetLeft="0dp"
+           app:contentInsetStart="0dp"
+           app:title="@string/app_name" />-->
+    </FrameLayout>
 </LinearLayout>

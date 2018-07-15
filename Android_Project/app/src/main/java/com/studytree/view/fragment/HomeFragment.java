@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -36,6 +38,7 @@ import com.studytree.view.adapter.HomeBannerAdapter;
 import com.studytree.view.adapter.HomeDepartmentGridAdapter;
 import com.studytree.view.base.BaseFragment;
 import com.studytree.view.widget.InnerViewPager;
+import com.studytree.view.widget.StudyTreeTitleBar;
 import com.studytree.view.widget.UnscrollGridView;
 
 import java.util.ArrayList;
@@ -47,10 +50,10 @@ import java.util.List;
  * @date 2018/7/10 17:16
  * @author Freedom0013
  */
-public class HomeFragment extends BaseFragment implements ViewPager.OnPageChangeListener,InnerViewPager.OnSingleTouchListener,AdapterView.OnItemClickListener{
+public class HomeFragment extends BaseFragment implements ViewPager.OnPageChangeListener,InnerViewPager.OnSingleTouchListener,AdapterView.OnItemClickListener,StudyTreeTitleBar.TitleBarClickListener{
     private static final String TAG = HomeFragment.class.getSimpleName();
     /** Activity对象 */
-    private Activity mActivity;
+    private MainActivity mActivity;
     /** BannerViewPager */
     private InnerViewPager mAdViewPager;
     /** Banner容器 */
@@ -71,6 +74,12 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     private List<DepartmentBean> mDepartmentData;
     /** 系别GridView适配器 */
     private HomeDepartmentGridAdapter mAdapter;
+    /** 首页滑动层 */
+    private ScrollView home_scrollview;
+    /** 首页ToolBar */
+    private StudyTreeTitleBar home_main_tool;
+    /** 首页toolbar隐藏标识 */
+    private Boolean isShow = true;
 
     /** 空参构造函数（必须） */
     public HomeFragment(){}
@@ -81,12 +90,52 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
      */
     @SuppressLint("ValidFragment")
     public HomeFragment(Activity activity) {
-        mActivity = activity;
+        mActivity = (MainActivity)activity;
     }
 
     @Override
     public View initView() {
         View mRootView = View.inflate(mActivity, R.layout.tab_home, null);
+        //配置toolBar
+        home_scrollview = mRootView.findViewById(R.id.home_scrollview);
+        home_main_tool = mRootView.findViewById(R.id.home_tool);
+        home_main_tool.setTitleRightVisibility(false);
+        //添加系统
+        mActivity.setSupportActionBar(home_main_tool);
+
+        //配置toolbar随滑动消失
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            home_scrollview.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+                @Override
+                public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                    float heightPixels = getContext().getResources().getDisplayMetrics().heightPixels;
+                    final float fscrollY = scrollY;//该值 大于0
+                    final float alpha = 1 - fscrollY / (heightPixels / 3);// 0~1  透明度是1~0
+                    //这里选择的screenHeight的1/3 是alpha改变的速率 （根据你的需要你可以自己定义）
+                    mActivity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            //可设置ToolBar滑动隐藏
+//                            home_main_tool.setTranslationY(-fscrollY);
+                            home_main_tool.setAlpha(alpha);
+                            if (alpha < 0) {
+                                if (isShow) {
+                                    home_main_tool.setVisibility(View.GONE);
+                                    isShow = false;
+                                }
+                            } else {
+                                if (!isShow) {
+                                    home_main_tool.setVisibility(View.VISIBLE);
+                                    isShow = true;
+                                }
+                            }
+                        }
+                    });
+                }
+            });
+        }
+        //设置toolbar点击事件
+        home_main_tool.setOnTitleBarClickedListener(this);
 
         //初始化banner
         mAdFrame = mRootView.findViewById(R.id.home_banner_frame);
@@ -100,12 +149,17 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         mGridView = mRootView.findViewById(R.id.home_department_grid);
 
         return mRootView;
+
+//        final Toolbar home_main_tool = mRootView.findViewById(R.id.home_main_tool);
+//        View titlebar = getLayoutInflater().inflate(R.layout.layout_titlebar, home_main_tool);
+//        mActivity.setSupportActionBar(home_main_tool);
     }
 
     @Override
     public void initData() {
-        if (isinit)
+        if (isinit) {
             return;
+        }
         isinit = true;
 
         //初始化系别GridView
@@ -376,6 +430,23 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
 
     @Override
     public void onPageScrollStateChanged(int state) {
+    }
+
+    //toolbar点击事件
+    @Override
+    public void onTitleLeftClicked() {
+        //打开侧边栏
+        mActivity.main_residelayout.openPane();
+    }
+
+    @Override
+    public void onTitleRightClicked() {
+
+    }
+
+    @Override
+    public void onTitleClicked() {
+
     }
 
     //Banner点击事件

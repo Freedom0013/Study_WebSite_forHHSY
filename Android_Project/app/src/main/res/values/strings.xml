@@ -6,5 +6,9 @@
     <string name="string_tab_news">资 讯</string>
     <string name="string_tab_me">我 的</string>
 
-
+    <string-array name="toolbar_title">
+        <item>首 页</item>
+        <item>资 讯</item>
+        <item>我 的</item>
+    </string-array>
 </resources>

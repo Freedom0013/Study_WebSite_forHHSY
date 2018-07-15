@@ -129,7 +129,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="5dp"
                     android:singleLine="true"
-                    android:text="登陆后可体验更多学习乐趣！"
+                    android:text="登陆后可体验更多学习乐趣~"
                     android:textColor="@color/colorWhite"
                     android:textSize="14sp" />
             </LinearLayout>

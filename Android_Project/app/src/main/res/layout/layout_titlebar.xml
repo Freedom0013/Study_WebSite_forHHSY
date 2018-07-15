@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/actionBarSize"
+    android:background="@color/theme_blue"
+    android:orientation="horizontal">
+    <!--标题栏toolbar替换布局-->
+    <ImageView
+        android:id="@+id/titlebar_left_btn"
+        android:layout_width="38dp"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_alignParentLeft="true"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:src="@drawable/titlebar_home_menu"
+        />
+
+    <TextView
+        android:id="@+id/titlebar_text"
+        android:layout_width="wrap_content"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical"
+        android:text="知识森驿站"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/titlebar_right_btn"
+        android:layout_width="?android:attr/actionBarSize"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_alignParentRight="true"
+        android:padding="20dp"
+        android:src="@drawable/titlebar_home_collection"
+        />
+</RelativeLayout>

@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:background="@color/theme_blue" />
 
-    <RelativeLayout
+    <!--<RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorWhite">
@@ -26,7 +26,7 @@
             android:layout_height="?android:attr/actionBarSize"
             android:background="@color/theme_blue"
             app:title="@string/app_name" />
-    </RelativeLayout>
+    </RelativeLayout>-->
 
     <com.studytree.view.widget.HorizontalViewPager
         android:id="@+id/main_viewpager"

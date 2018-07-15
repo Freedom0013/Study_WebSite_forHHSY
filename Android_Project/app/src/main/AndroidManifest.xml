@@ -45,7 +45,8 @@
         </activity>
 
         <!--主页-->
-        <activity android:name=".view.MainActivity"/>
+        <activity android:name=".view.MainActivity"
+                  android:theme="@style/AppTheme.NoActionBar"/>
 
         <!--新手引导-->
         <activity android:name=".view.IntroActivity"/>

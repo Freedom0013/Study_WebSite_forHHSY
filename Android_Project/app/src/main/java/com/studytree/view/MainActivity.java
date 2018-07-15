@@ -46,7 +46,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //去除ActionBar
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
         //沉浸
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
