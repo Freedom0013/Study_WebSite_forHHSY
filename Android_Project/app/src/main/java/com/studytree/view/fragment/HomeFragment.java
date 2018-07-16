@@ -50,7 +50,7 @@ import java.util.List;
  * @date 2018/7/10 17:16
  * @author Freedom0013
  */
-public class HomeFragment extends BaseFragment implements ViewPager.OnPageChangeListener,InnerViewPager.OnSingleTouchListener,AdapterView.OnItemClickListener,StudyTreeTitleBar.TitleBarClickListener{
+public class HomeFragment extends BaseFragment implements ViewPager.OnPageChangeListener,InnerViewPager.OnSingleTouchListener,AdapterView.OnItemClickListener,StudyTreeTitleBar.TitleBarClickListener,View.OnClickListener{
     private static final String TAG = HomeFragment.class.getSimpleName();
     /** Activity对象 */
     private MainActivity mActivity;
@@ -80,6 +80,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     private StudyTreeTitleBar home_main_tool;
     /** 首页toolbar隐藏标识 */
     private Boolean isShow = true;
+    private LinearLayout history_test_ln;
 
     /** 空参构造函数（必须） */
     public HomeFragment(){}
@@ -137,6 +138,10 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         //设置toolbar点击事件
         home_main_tool.setOnTitleBarClickedListener(this);
 
+        //上次做题记录
+        history_test_ln = mRootView.findViewById(R.id.history_test_ln);
+        history_test_ln.setVisibility(View.GONE);
+
         //初始化banner
         mAdFrame = mRootView.findViewById(R.id.home_banner_frame);
         mAdViewPager = mRootView.findViewById(R.id.home_banner_viewpager);
@@ -161,6 +166,8 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
             return;
         }
         isinit = true;
+
+        history_test_ln.setOnClickListener(this);
 
         //初始化系别GridView
         mDepartmentData = new ArrayList<DepartmentBean>();
@@ -447,6 +454,15 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     @Override
     public void onTitleClicked() {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.history_test_ln:      //历史做题记录点击事件
+
+                break;
+        }
     }
 
     //Banner点击事件

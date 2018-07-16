@@ -52,6 +52,60 @@
                         android:orientation="horizontal" />
                 </FrameLayout>
 
+
+
+                <!-- 做题记录-->
+                <LinearLayout
+                    android:id="@+id/history_test_ln"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@android:color/white"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#dddddd" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/history_test_icon"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="20dp"
+                            android:src="@drawable/history_test_icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="5dp"
+                            android:layout_toRightOf="@id/history_test_icon"
+                            android:gravity="center"
+                            android:text="@string/history_test_text"
+                            android:textColor="@color/theme_blue" />
+
+                        <ImageView
+                            android:layout_width="10dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="20dp"
+                            android:src="@drawable/item_detail_left_icon" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="#dddddd" />
+
                 <!--系别GridView-->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -74,7 +128,7 @@
                             android:drawableLeft="@drawable/home_view_left"
                             android:drawablePadding="5dp"
                             android:gravity="left|center_vertical"
-                            android:text="大类详情"
+                            android:text="@string/home_grid_hint_text"
                             android:textColor="@color/banner_blue_dot"
                             android:textSize="16sp" />
                     </LinearLayout>
