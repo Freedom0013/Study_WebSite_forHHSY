@@ -7,6 +7,10 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.ScaleAnimation;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -134,7 +138,6 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
     }
 
     @Override
@@ -170,6 +173,18 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
      */
     public void setCurrent(int currentIndex){
         RadioButton radioButton = (RadioButton) mRadioGroup.getChildAt(currentIndex);
+        //动画集合
+        AnimationSet animationSet = new AnimationSet(false);
+        //渐变动画
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0.2f,1.0f);
+        alphaAnimation.setDuration(200);
+        //缩放动画
+        ScaleAnimation scaleAnimation = new ScaleAnimation(0.5f,1.0f,0.5f,1.0f, Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+        scaleAnimation.setDuration(200);
+        animationSet.addAnimation(alphaAnimation);
+        animationSet.addAnimation(scaleAnimation);
+        radioButton.startAnimation(animationSet);
+
         if(!radioButton.isChecked()){
             radioButton.setChecked(true);
         }

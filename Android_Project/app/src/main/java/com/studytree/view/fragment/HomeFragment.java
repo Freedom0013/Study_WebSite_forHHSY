@@ -80,6 +80,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     private StudyTreeTitleBar home_main_tool;
     /** 首页toolbar隐藏标识 */
     private Boolean isShow = true;
+    /** 做题历史记录 */
     private LinearLayout history_test_ln;
 
     /** 空参构造函数（必须） */
