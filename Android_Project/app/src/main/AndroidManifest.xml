@@ -22,12 +22,8 @@
     <!--更新安装权限（必须、自动授权）-->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
-
-
-
-
+    <!--android:debuggable="true"-->
     <application
-        android:debuggable="true"
         android:name=".StudyTreeApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -50,6 +46,10 @@
 
         <!--新手引导-->
         <activity android:name=".view.IntroActivity"/>
+
+        <!--专业详情-->
+        <activity android:name=".view.ProfessionalActivity"
+                  android:theme="@style/AppTheme.NoActionBar"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

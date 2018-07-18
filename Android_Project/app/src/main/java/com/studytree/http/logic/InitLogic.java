@@ -1,10 +1,12 @@
 package com.studytree.http.logic;
 
 import com.google.gson.JsonObject;
+import com.studytree.bean.DepartmentBean;
 import com.studytree.http.ActionID;
 import com.studytree.http.HttpCallback;
 import com.studytree.http.HttpResultCallback;
 import com.studytree.http.HttpTransaction;
+import com.studytree.utils.StudyTreeTools;
 
 import java.util.HashMap;
 
@@ -145,6 +147,31 @@ public class InitLogic{
                     listener.onSuccess(action,obj.toString());
                 }
             }
+            @Override
+            public void onFail(int action, int responseCode, String responseMsg) {
+                if (listener != null) {
+                    listener.onFail(action, responseCode, responseMsg);
+                }
+            }
+        });
+    }
+
+    /**
+     * 获取Professional信息
+     * @param listener 结果监听
+     */
+    public void getProfessionInfo(DepartmentBean bean, final HttpResultCallback listener) {
+        HashMap<String, Object> attr = new HashMap<String, Object>();
+        attr.put("department_id", bean.department_id);
+        attr.put("sign", StudyTreeTools.createSign(attr));
+        mHttpTransaction.send(ActionID.ACTION_PROFESSIONAL, attr, new HttpCallback() {
+            @Override
+            public void onSuccess(int action, int responseCode, JsonObject obj) {
+                if (listener != null) {
+                    listener.onSuccess(action, obj.toString());
+                }
+            }
+
             @Override
             public void onFail(int action, int responseCode, String responseMsg) {
                 if (listener != null) {

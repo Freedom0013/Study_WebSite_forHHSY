@@ -48,6 +48,8 @@ public class ProfessionalAction extends HttpServlet {
         //获取上级页面传入的department_id
         String department_id = (String) request.getParameter("department_id");
         int departmentid = Integer.parseInt(department_id);
+        String sign = request.getParameter("sign");
+        DebugUtils.showLog("department_id = "+department_id+",sign"+sign);
         
         //获取专业列表
         ProfessionalService service = new ProfessionalServiceImpl();

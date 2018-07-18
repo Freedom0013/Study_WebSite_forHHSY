@@ -58,6 +58,6 @@
             android:paddingRight="10dp"
             android:singleLine="true"
             android:ellipsize="marquee"
-            android:textColor="#ff7f50"/>
+            android:textColor="@color/home_orange"/>
     </LinearLayout>
 </LinearLayout>

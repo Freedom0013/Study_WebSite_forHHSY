@@ -18,10 +18,20 @@ android {
     }
 }
 
+/*
+* 请注意：
+* 在使用
+*   com.android.support:appcompat-v7
+*   com.android.support:design
+* 等各种支持类库是要保证其版本相同，并与targetSdkVersion版本相同，否则会出现编译失败、包冲突等错误
+*/
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.1'
+    implementation 'com.android.support:design:26.1.0'
+    implementation 'com.android.support:cardview-v7:26.1.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.5.0'
     implementation 'com.airbnb.android:lottie:2.5.4'
     testImplementation 'junit:junit:4.12'
@@ -38,7 +48,16 @@ dependencies {
 }
 
 configurations.all {
-    resolutionStrategy {
-        force 'com.android.support:support-annotations:23.1.1'
+//    resolutionStrategy {
+//        force 'com.android.support:support-annotations:23.1.1'
+//    }
+    //此处代码强制要求所有第三方类库的support包版本使用26.1.0版本，统一避免出现包冲突错误
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '26.1.0'
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.studytree.bean;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -8,7 +9,7 @@ import java.math.BigDecimal;
  * @date 2018年1月26日
  * @author Freedom0013
  */
-public class DepartmentBean {
+public class DepartmentBean implements Serializable {
 	/** 系别编号 */
 	public int department_id;
 	/** 系别名称 */

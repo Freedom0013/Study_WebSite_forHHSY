@@ -34,6 +34,7 @@ import com.studytree.http.logic.InitLogic;
 import com.studytree.log.Logger;
 import com.studytree.utils.StringUtils;
 import com.studytree.view.MainActivity;
+import com.studytree.view.ProfessionalActivity;
 import com.studytree.view.adapter.HomeBannerAdapter;
 import com.studytree.view.adapter.HomeDepartmentGridAdapter;
 import com.studytree.view.base.BaseFragment;
@@ -178,6 +179,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
 
         //获取系别数据
         doGetDepartment(InitManager.getInstance().getStringPreference("department_list"));
+        mActivity.showProgressDialog();
         InitLogic.getInstance().getDepartmentInfo(new HttpResultCallback() {
             @Override
             public void onSuccess(int action, Object obj) {
@@ -186,7 +188,9 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
 
             @Override
             public void onFail(int action, int responseCode, String responseMsg) {
-                Logger.e(TAG, "获取Department错误");
+                Logger.e(TAG, "获取Department错误！responseCode = " + responseCode + "responseMsg = " + responseMsg);
+                showToast("获取大类失败！请检查网络");
+                dismissProgress();
             }
         });
 
@@ -268,6 +272,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
                 if (list != null && !list.isEmpty()) {
                     mDepartmentData.addAll(list);
                 }
+                mActivity.dismissProgressDialog();
                 mAdapter.notifyDataSetChanged();
             }
         });
@@ -416,7 +421,8 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         DepartmentBean bean = (DepartmentBean) mAdapter.getItem(position);
-        Logger.d(TAG,bean.toString());
+        ProfessionalActivity.start(mActivity,bean);
+
     }
 
     @Override

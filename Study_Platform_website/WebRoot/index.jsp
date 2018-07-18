@@ -594,6 +594,6 @@
 	    <script type="text/javascript" src="${pageContext.request.contextPath }/js/wow.min.js"></script>
 	    <script type="text/javascript" src="${pageContext.request.contextPath }/js/site.js"></script>
 	    <!-- 科技网络化背景特效（因性能问题暂时注释） -->
-	    <!-- <script type="text/javascript" src="${pageContext.request.contextPath }/js/canvas-nest.min.js"></script> -->             		
+	    <%-- <script type="text/javascript" src="${pageContext.request.contextPath }/js/canvas-nest.min.js"></script> --%>             		
 	</body>
 </html>

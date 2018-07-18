@@ -2,7 +2,6 @@ package com.studytree.view.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -15,6 +14,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.studytree.R;
+import com.studytree.utils.StudyTreeTools;
 import com.studytree.view.MainActivity;
 import com.studytree.view.adapter.MainViewPagerAdapter;
 import com.studytree.view.base.BaseFragment;
@@ -64,7 +64,7 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
         //设置占位View以实现沉浸式状态栏
         View statusBar = mRootView.findViewById(R.id.statusBarView);
         ViewGroup.LayoutParams layoutParams = statusBar.getLayoutParams();
-        layoutParams.height = getStatusBarHeight(mActivity);
+        layoutParams.height = StudyTreeTools.getStatusBarHeight(mActivity);
 
         //初始化底部Radio
         mRadioGroup = mRootView.findViewById(R.id.main_tab_radio);
@@ -100,20 +100,6 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
     public void initData() {
         super.initData();
         mRadioGroup.check(R.id.main_tab_home);
-    }
-
-    /**
-     * 反射获取系统状态栏高度
-     * @param context Context对象
-     * @return 状态栏高度
-     */
-    private int getStatusBarHeight(Context context) {
-        int result = 0;
-        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            result = context.getResources().getDimensionPixelSize(resourceId);
-        }
-        return result;
     }
 
     /**
