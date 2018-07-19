@@ -209,7 +209,6 @@ public class ProfessionalActivity extends BaseActivity implements StudyTreeTitle
     @Override
     public void onItemClick(View v, int position) {
         ProfessionBean bean = mProfessionData.get(position);
-        Logger.d(TAG, bean.toString());
         CourseActivity.start(ProfessionalActivity.this,bean);
     }
 
