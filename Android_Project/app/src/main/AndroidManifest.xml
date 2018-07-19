@@ -51,6 +51,10 @@
         <activity android:name=".view.ProfessionalActivity"
                   android:theme="@style/AppTheme.NoActionBar"/>
 
+        <!--登录-->
+        <activity android:name=".view.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.studytree.fileprovider"

@@ -12,7 +12,6 @@ import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.widget.ImageView;
 
 import com.studytree.R;

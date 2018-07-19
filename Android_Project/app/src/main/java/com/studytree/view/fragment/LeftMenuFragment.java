@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.studytree.R;
+import com.studytree.view.LoginActivity;
 import com.studytree.view.MainActivity;
 import com.studytree.view.base.BaseFragment;
 import com.studytree.view.widget.CircularImage;
@@ -60,8 +61,6 @@ public class LeftMenuFragment extends BaseFragment implements View.OnClickListen
         //设置侧滑菜单背景
         root_menu = mRootView.findViewById(R.id.left_menu_root);
         root_menu.setBackgroundResource(R.drawable.menu_background);
-        initButtons(mRootView);
-
         //菜单提示语
         menu_sign = mRootView.findViewById(R.id.menu_sign);
 
@@ -74,6 +73,7 @@ public class LeftMenuFragment extends BaseFragment implements View.OnClickListen
         login_score = mRootView.findViewById(R.id.login_score);
         login_exit_ln = mRootView.findViewById(R.id.login_exit_ln);
 
+        initButtons(mRootView);
         return mRootView;
     }
 
@@ -89,6 +89,7 @@ public class LeftMenuFragment extends BaseFragment implements View.OnClickListen
         mRootView.findViewById(R.id.leftmenu_feedback).setOnClickListener(this);
         mRootView.findViewById(R.id.leftmenu_likemine).setOnClickListener(this);
         mRootView.findViewById(R.id.leftmenu_aboutus).setOnClickListener(this);
+        login_ln.setOnClickListener(this);
     }
 
     @Override
@@ -120,6 +121,9 @@ public class LeftMenuFragment extends BaseFragment implements View.OnClickListen
 
             case R.id.leftmenu_aboutus:         //关于我们
 
+                break;
+            case R.id.login_ln:                 //登录
+                LoginActivity.start(mActivity);
                 break;
         }
     }

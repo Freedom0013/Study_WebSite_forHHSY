@@ -164,13 +164,5 @@
             app:contentInsetStart="0dp"
             app:title="@string/app_name" />
 
-        <!--<android.support.v7.widget.Toolbar
-           android:id="@+id/home_main_tool"
-           android:layout_width="match_parent"
-           android:layout_height="?android:attr/actionBarSize"
-           android:background="@color/theme_blue"
-           app:contentInsetLeft="0dp"
-           app:contentInsetStart="0dp"
-           app:title="@string/app_name" />-->
     </FrameLayout>
 </LinearLayout>
