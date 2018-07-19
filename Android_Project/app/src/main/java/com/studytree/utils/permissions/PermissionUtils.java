@@ -162,33 +162,34 @@ public class PermissionUtils{
      * @param PermissionHintText 提示
      * @param context Context对象
      */
-    public void popPermissionAlterDialog(String PermissionHintText,final Context context) {
-        new AlertDialog.Builder(context)
-                .setTitle("权限提示")
-                .setMessage(PermissionHintText)
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        ActivityCleanupStack.exit();
-                    }
-                })
-                .setPositiveButton("设置", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //前往应用详情界面
-                        try {
-                            Uri packUri = Uri.parse("package:" + context.getPackageName());
-                            Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, packUri);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            context.startActivity(intent);
-                        } catch (Exception e) {
-                            Toast.makeText(context, "跳转失败", Toast.LENGTH_SHORT).show();
-                        }
-                        dialog.dismiss();
-                        ActivityCleanupStack.exit();
-                    }
-                }).create().show();
+    public void popPermissionAlterDialog(String PermissionHintText, final Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("权限提示");
+        builder.setMessage(PermissionHintText);
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                ActivityCleanupStack.exit();
+            }
+        });
+        builder.setPositiveButton("设置", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //前往应用详情界面
+                try {
+                    Uri packUri = Uri.parse("package:" + context.getPackageName());
+                    Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, packUri);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                } catch (Exception e) {
+                    Toast.makeText(context, "跳转失败", Toast.LENGTH_SHORT).show();
+                }
+                dialog.dismiss();
+                ActivityCleanupStack.exit();
+            }
+        });
+        builder.create().show();
     }
 
     /**

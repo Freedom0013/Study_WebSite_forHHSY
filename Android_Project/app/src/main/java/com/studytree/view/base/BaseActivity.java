@@ -41,7 +41,6 @@ public class BaseActivity extends AppCompatActivity {
     /** Handler对象 */
     public final Handler mBasehandler = new Handler(Looper.getMainLooper());
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +62,7 @@ public class BaseActivity extends AppCompatActivity {
         @Override
         public void onPermissionPass(int requestCode) {
             Logger.w(TAG,"已有权限");
+            PermissionPass(requestCode);
         }
 
         @Override
@@ -71,6 +71,7 @@ public class BaseActivity extends AppCompatActivity {
             showToast("权限获取成功");
             //获取设备信息
             DevicesUtils.initDevicesInfos();
+            PermissionAccreditSucceed(requestCode);
         }
 
         @Override
@@ -82,22 +83,35 @@ public class BaseActivity extends AppCompatActivity {
 //                    requestPermission(PermissionHelper.getInstance().filterPermissions(permissions));
                 } else {//表明用户已经彻底禁止弹出权限请求
                     Logger.e(TAG, "==========警告！用户拒绝并不在提示权限==========permission = " + PermissionName);
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            permissionsutils.popPermissionAlterDialog("用户您好我们需要必要的权限来保证应用的正常运行！\n" +
-                                    "未授权权限为：" + PermissionConfig.getPermissionNameToString(PermissionName) + "。", BaseActivity.this);
-                        }
-                    });
+                    RequestPermissionRationale(requestCode, PermissionName);
                 }
             }
             showToast("权限获取失败");
+            PermissionAccreditFailed(requestCode, PermissionName);
         }
     };
 
-    /**
-     * 权限检查类
-     */
+    /** 权限通过回调 */
+    public void PermissionPass(int requestCode){}
+
+    /** 权限授权成功 */
+    public void PermissionAccreditSucceed(int requestCode){}
+
+    /** 权限授权失败 */
+    public void PermissionAccreditFailed(int requestCode, final String PermissionName){}
+
+    /** 权限授权且用户点击了不再提示 */
+    public void RequestPermissionRationale(int requestCode, final String PermissionName){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                permissionsutils.popPermissionAlterDialog("用户您好我们需要必要的权限来保证应用的正常运行！\n" +
+                        "未授权权限为：" + PermissionConfig.getPermissionNameToString(PermissionName) + "。", BaseActivity.this);
+            }
+        });
+    }
+
+    /** 权限检查类 */
     public PermissionUtils permissionsutils = new PermissionUtils(BaseActivity.this,mPermisssionListener);
 
     /**

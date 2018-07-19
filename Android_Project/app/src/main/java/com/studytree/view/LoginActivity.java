@@ -23,6 +23,7 @@ import com.studytree.view.widget.StudyTreeTitleBar;
 public class LoginActivity extends BaseActivity implements StudyTreeTitleBar.TitleBarClickListener {
     public static final String TAG = LoginActivity.class.getSimpleName();
 
+
     /**
      * 启动LoginActivity
      * @param ctx 来源Context
@@ -75,5 +76,15 @@ public class LoginActivity extends BaseActivity implements StudyTreeTitleBar.Tit
     @Override
     public void onTitleClicked() {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 }

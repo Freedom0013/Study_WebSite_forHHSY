@@ -178,7 +178,8 @@ public class SplashActivity extends BaseActivity {
         //权限组检查
         String[] permissions = {
                 PermissionConfig.PERMISSION_READ_PHONE_STATE,
-                PermissionConfig.PERMISSION_WRITE_EXTERNAL_STORAGE };
+                PermissionConfig.PERMISSION_WRITE_EXTERNAL_STORAGE,
+        };
         List<String> permissionslist = super.permissionsutils.hasPermissionsAllGranted(permissions, SplashActivity.this);
         if (permissionslist.size() != 0) {
             //调用BaseActivity检查权限工具类

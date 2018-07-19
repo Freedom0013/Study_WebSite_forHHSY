@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.studytree.R;
 import com.studytree.view.LoginActivity;
 import com.studytree.view.MainActivity;
+import com.studytree.view.QRScannerActivity;
 import com.studytree.view.base.BaseFragment;
 import com.studytree.view.widget.CircularImage;
 
@@ -100,7 +101,7 @@ public class LeftMenuFragment extends BaseFragment implements View.OnClickListen
                 break;
 
             case R.id.leftmenu_scan:        //扫一扫
-
+                QRScannerActivity.startForResult(mActivity,mActivity.QR_REQUEST_CODE);
                 break;
 
             case R.id.leftmenu_setting:     //设置

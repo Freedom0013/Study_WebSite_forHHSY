@@ -39,9 +39,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
-    implementation files('libs/glide-3.6.0.jar')
     implementation files('libs/gson-2.8.5.jar')
-    implementation files('libs/zxing-core-3.3.3.jar')
+    implementation 'com.mylhyl:zxingscanner:2.1.1'
+
     implementation 'com.umeng.sdk:common:latest.integration'
     implementation 'com.umeng.sdk:analytics:latest.integration'
     compile project(':push')

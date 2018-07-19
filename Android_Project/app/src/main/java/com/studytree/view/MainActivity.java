@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.WindowManager;
 
 import com.studytree.R;
+import com.studytree.utils.permissions.PermissionConfig;
 import com.studytree.view.base.BaseActivity;
 import com.studytree.view.fragment.LeftMenuFragment;
 import com.studytree.view.fragment.MainFragment;
@@ -30,6 +31,8 @@ public class MainActivity extends BaseActivity {
     private static final String FRAGMENT_LEFT_MENU = "fragment_left_menu";
     /** 侧滑菜单对象 */
     public ResideLayout main_residelayout;
+    /** 扫一扫结果码 */
+    public static final int QR_REQUEST_CODE = 1;
 
     /**
      * 启动MainActivity
@@ -39,6 +42,22 @@ public class MainActivity extends BaseActivity {
         Intent intent = new Intent(ctx, MainActivity.class);
 //        intent.putExtra("键",值);
         ctx.startActivity(intent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case QR_REQUEST_CODE:
+                if(data!=null){                           //当点击不再提示返回时，显示权限提示
+                    if(QRScannerActivity.QR_PERMISSION_ERROR.equals(data.getStringExtra("qu_result"))){
+                        super.RequestPermissionRationale(PermissionConfig.REQUEST_CAMERA,data.getStringExtra("PermissionName"));
+                    }else{                                //扫一扫结果
+                        showToast("扫一扫结果：" + data.getStringExtra("qu_result"));
+                    }
+                }
+                break;
+        }
     }
 
     @Override
@@ -99,7 +118,7 @@ public class MainActivity extends BaseActivity {
         return super.dispatchTouchEvent(ev);
     }
 
-    //    public static void startForResult(Activity ctx){
+//    public static void startForResult(Activity ctx){
 //        Intent intent = new Intent(ctx,MainActivity.class);
 //        intent.putExtra("requestResult",true);
 //        ctx.startActivityForResult(intent, 0);
