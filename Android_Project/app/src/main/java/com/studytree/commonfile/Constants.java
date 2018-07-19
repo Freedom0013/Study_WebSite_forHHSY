@@ -25,7 +25,7 @@ public class Constants {
     public static final HttpLoggingInterceptor.Level OKHTTP_LOG_LEVEL = HttpLoggingInterceptor.Level.BASIC;
     static {
         if (LOCAL_TEST) {
-            HOST = "192.168.0.104:8080/Study_Platform_website";     //本地地址
+            HOST = "192.168.0.105:8080/Study_Platform_website";     //本地地址
         } else {
             HOST = "" + DOMAIN;
         }

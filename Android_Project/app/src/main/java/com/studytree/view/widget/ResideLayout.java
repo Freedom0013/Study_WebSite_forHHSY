@@ -801,6 +801,10 @@ public class ResideLayout extends ViewGroup {
         return wantTouchEvents;
     }
 
+    /**
+     *
+     * 关闭侧滑菜单
+     */
     private boolean closePane(View pane, int initialVelocity) {
         if (mFirstLayout || smoothSlideTo(0.f, initialVelocity)) {
             mPreservedOpenState = false;
@@ -809,6 +813,9 @@ public class ResideLayout extends ViewGroup {
         return false;
     }
 
+    /**
+     * 打开侧滑菜单
+     */
     private boolean openPane(View pane, int initialVelocity) {
         if (mFirstLayout || smoothSlideTo(1.f, initialVelocity)) {
             mPreservedOpenState = true;
