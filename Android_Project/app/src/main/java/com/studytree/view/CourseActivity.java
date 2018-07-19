@@ -10,32 +10,35 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import com.studytree.R;
+import com.studytree.bean.ProfessionBean;
 import com.studytree.utils.StudyTreeTools;
 import com.studytree.view.base.BaseActivity;
 import com.studytree.view.widget.StudyTreeTitleBar;
 
 /**
- * 登录Activity
- * Title: LoginActivity
- * @date 2018/7/19 18:28
+ * 课程Activity
+ * Title: CourseActivity
+ * @date 2018/7/19 18:49
  * @author Freedom0013
  */
-public class LoginActivity extends BaseActivity implements StudyTreeTitleBar.TitleBarClickListener {
-    public static final String TAG = LoginActivity.class.getSimpleName();
+public class CourseActivity extends BaseActivity implements StudyTreeTitleBar.TitleBarClickListener {
+    public static final String TAG = CourseActivity.class.getSimpleName();
+    private ProfessionBean mProfession;
 
     /**
-     * 启动LoginActivity
+     * 启动CourseActivity
      * @param ctx 来源Context
      */
-    public static void start(Context ctx) {
-        Intent intent = new Intent(ctx, LoginActivity.class);
+    public static void start(Context ctx, ProfessionBean bean) {
+        Intent intent = new Intent(ctx, CourseActivity.class);
+        intent.putExtra("ProfessionBean", bean);
         ctx.startActivity(intent);
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_course);
 
         //沉浸
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -43,6 +46,9 @@ public class LoginActivity extends BaseActivity implements StudyTreeTitleBar.Tit
             localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
         }
 
+        //解析上级页面传递来的Bean
+        mProfession = (ProfessionBean) getIntent().getSerializableExtra("ProfessionBean");
+        
         initView();
     }
 
@@ -50,16 +56,18 @@ public class LoginActivity extends BaseActivity implements StudyTreeTitleBar.Tit
         //设置占位View以实现沉浸式状态栏
         View statusBar = findViewById(R.id.statusBarView);
         ViewGroup.LayoutParams layoutParams = statusBar.getLayoutParams();
-        layoutParams.height = StudyTreeTools.getStatusBarHeight(LoginActivity.this);
+        layoutParams.height = StudyTreeTools.getStatusBarHeight(CourseActivity.this);
 
         //配置toolBar
-        StudyTreeTitleBar login_tool = findViewById(R.id.login_tool);
-        login_tool.setTitleRightVisibility(false);
-        login_tool.setLeftDrawable(R.drawable.titlebar_back);
-        login_tool.setTitle("用户登录");
-        login_tool.setOnTitleBarClickedListener(this);
+        StudyTreeTitleBar course_tool = findViewById(R.id.course_tool);
+        course_tool.setTitleRightVisibility(false);
+        course_tool.setLeftDrawable(R.drawable.titlebar_back);
+        course_tool.setTitle(mProfession.profession_name);
+        course_tool.setOnTitleBarClickedListener(this);
         //添加系统
-        setSupportActionBar(login_tool);
+        setSupportActionBar(course_tool);
+
+
     }
 
     @Override

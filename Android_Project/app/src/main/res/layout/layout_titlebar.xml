@@ -22,6 +22,7 @@
         android:layout_centerHorizontal="true"
         android:gravity="center_vertical"
         android:text="知识森驿站"
+        android:maxLines="1"
         android:textColor="@color/colorWhite"
         android:textSize="18sp" />
 

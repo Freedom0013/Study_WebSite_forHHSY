@@ -1,5 +1,6 @@
 package com.studytree.bean;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -8,7 +9,7 @@ import java.math.BigDecimal;
  * @date 2018年1月26日
  * @author Freedom0013
  */
-public class ProfessionBean {
+public class ProfessionBean implements Serializable{
 	/** 专业编号 */
 	public int profession_id;
 	/** 专业名称 */

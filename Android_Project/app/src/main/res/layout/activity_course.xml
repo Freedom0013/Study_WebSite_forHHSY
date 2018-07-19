@@ -14,7 +14,7 @@
 
     <!--toolbar标题栏-->
     <com.studytree.view.widget.StudyTreeTitleBar
-        android:id="@+id/login_tool"
+        android:id="@+id/course_tool"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
         android:background="@color/theme_blue"
