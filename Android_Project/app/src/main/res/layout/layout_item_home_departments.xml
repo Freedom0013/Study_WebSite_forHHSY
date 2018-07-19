@@ -21,7 +21,7 @@
             android:adjustViewBounds="true"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
              />
         <!--android:src="@drawable/department_default"-->
         <LinearLayout

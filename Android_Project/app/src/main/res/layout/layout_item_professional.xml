@@ -18,12 +18,14 @@
         android:orientation="horizontal"
         android:padding="10dp">
 
-        <ImageView
+        <com.studytree.view.widget.RoundImageView
             android:id="@+id/pro_image"
             android:layout_width="150dp"
             android:layout_height="100dp"
-            android:layout_gravity="center_vertical|right"
-            android:src="@drawable/profession_default" />
+            android:layout_gravity="center_vertical"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profession_default"
+            app:type="round" />
 
         <LinearLayout
             android:layout_width="wrap_content"
