@@ -64,9 +64,9 @@
 <body>
 	<div class="main-wrapper">
 		<!-- footer块 -->
-		<div class="section white footer">
+		<!-- <div class="section white footer"> -->
 			<div class="container">
-				<div class="p-t-30 p-b-50">
+				<div class="p-t-60 p-b-60">
 					<div class="row">
 						<div class="col-md-2 col-lg-2 col-sm-2 col-xs-12 xs-m-b-20">
 							<img src="${pageContext.request.contextPath }/images/logo_black.png" alt="" data-src="${pageContext.request.contextPath }/images/logo_black.png"
@@ -103,7 +103,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	<!-- </div> -->
 	<!-- bootstrap js支持 -->
 	    <script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
 	    <!-- 动画支持 -->
