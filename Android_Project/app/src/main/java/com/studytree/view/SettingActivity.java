@@ -15,27 +15,27 @@ import com.studytree.view.base.BaseActivity;
 import com.studytree.view.widget.StudyTreeTitleBar;
 
 /**
- * 登录Activity
- * Title: LoginActivity
- * @date 2018/7/19 18:28
+ * 设置Activity
+ * Title: SettingActivity
+ * @date 2018/7/20 12:24
  * @author Freedom0013
  */
-public class LoginActivity extends BaseActivity implements StudyTreeTitleBar.TitleBarClickListener {
-    public static final String TAG = LoginActivity.class.getSimpleName();
+public class SettingActivity extends BaseActivity implements StudyTreeTitleBar.TitleBarClickListener {
+    public static final String TAG = SettingActivity.class.getSimpleName();
 
     /**
-     * 启动LoginActivity
+     * 启动SettingActivity
      * @param ctx 来源Context
      */
     public static void start(Context ctx) {
-        Intent intent = new Intent(ctx, LoginActivity.class);
+        Intent intent = new Intent(ctx, SettingActivity.class);
         ctx.startActivity(intent);
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_setting);
 
         //沉浸
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -50,16 +50,16 @@ public class LoginActivity extends BaseActivity implements StudyTreeTitleBar.Tit
         //设置占位View以实现沉浸式状态栏
         View statusBar = findViewById(R.id.statusBarView);
         ViewGroup.LayoutParams layoutParams = statusBar.getLayoutParams();
-        layoutParams.height = StudyTreeTools.getStatusBarHeight(LoginActivity.this);
+        layoutParams.height = StudyTreeTools.getStatusBarHeight(SettingActivity.this);
 
         //配置toolBar
-        StudyTreeTitleBar login_tool = findViewById(R.id.login_tool);
-        login_tool.setTitleRightVisibility(false);
-        login_tool.setLeftDrawable(R.drawable.titlebar_back);
-        login_tool.setTitle("用户登录");
-        login_tool.setOnTitleBarClickedListener(this);
+        StudyTreeTitleBar setting_tool = findViewById(R.id.setting_tool);
+        setting_tool.setTitleRightVisibility(false);
+        setting_tool.setLeftDrawable(R.drawable.titlebar_back);
+        setting_tool.setTitle("系统设置");
+        setting_tool.setOnTitleBarClickedListener(this);
         //添加系统
-        setSupportActionBar(login_tool);
+        setSupportActionBar(setting_tool);
     }
 
     @Override
@@ -75,15 +75,5 @@ public class LoginActivity extends BaseActivity implements StudyTreeTitleBar.Tit
     @Override
     public void onTitleClicked() {
 
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
     }
 }

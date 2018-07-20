@@ -2,15 +2,22 @@ package com.studytree.view.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.studytree.R;
+import com.studytree.commonfile.Constants;
 import com.studytree.view.LoginActivity;
 import com.studytree.view.MainActivity;
 import com.studytree.view.QRScannerActivity;
+import com.studytree.view.SettingActivity;
+import com.studytree.view.WebViewActivity;
 import com.studytree.view.base.BaseFragment;
 import com.studytree.view.widget.CircularImage;
 
@@ -97,15 +104,17 @@ public class LeftMenuFragment extends BaseFragment implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.leftmenu_home:        //首页
-                mActivity.main_residelayout.closePane();
+                mActivity.closeMenu();
                 break;
 
             case R.id.leftmenu_scan:        //扫一扫
+                mActivity.closeMenu();
                 QRScannerActivity.startForResult(mActivity,mActivity.QR_REQUEST_CODE);
                 break;
 
             case R.id.leftmenu_setting:     //设置
-
+                mActivity.closeMenu();
+                SettingActivity.start(mActivity);
                 break;
 
             case R.id.leftmenu_share:       //分享
@@ -117,15 +126,33 @@ public class LeftMenuFragment extends BaseFragment implements View.OnClickListen
                 break;
 
             case R.id.leftmenu_likemine:        //给个好评
-
+                mActivity.closeMenu();
+                goToMarket(mActivity,"com.studytree");
                 break;
 
             case R.id.leftmenu_aboutus:         //关于我们
-
+                mActivity.closeMenu();
+                WebViewActivity.start(mActivity, Constants.ABOUT_US_URL,"关于我们",WebViewActivity.WEB_ABOUT);
                 break;
             case R.id.login_ln:                 //登录
+                mActivity.closeMenu();
                 LoginActivity.start(mActivity);
                 break;
+        }
+    }
+
+    /**
+     * 跳转应用商店好评
+     * @param context Context
+     * @param packageName 包名
+     */
+    public static void goToMarket(Context context, String packageName) {
+        Uri uri = Uri.parse("market://details?id=" + packageName);
+        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+        try {
+            context.startActivity(goToMarket);
+        } catch (ActivityNotFoundException e) {
+            e.printStackTrace();
         }
     }
 }

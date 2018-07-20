@@ -25,7 +25,7 @@ public class Constants {
     public static final HttpLoggingInterceptor.Level OKHTTP_LOG_LEVEL = HttpLoggingInterceptor.Level.BASIC;
     static {
         if (LOCAL_TEST) {
-            HOST = "192.168.0.105:8080/Study_Platform_website";     //本地地址
+            HOST = "192.168.0.100:8080/Study_Platform_website";     //本地地址
         } else {
             HOST = "" + DOMAIN;
         }
@@ -35,6 +35,8 @@ public class Constants {
     public static final String DOWNLOAD_APP_NAME = "studytree.apk";
     /** 下载路径 */
     public static final String DOWNLOAD_URL = "http://" + HOST + "/studytree.apk";
+    /** 下载路径 */
+    public static final String ABOUT_US_URL = "http://" + HOST + "/about_us.jsp";
 
     /** 友盟Log开关 */
     public static final boolean UM_Log_STATES = false;
@@ -66,4 +68,6 @@ public class Constants {
     public static final String DOWNLOAD_DIR = Environment.getExternalStorageDirectory().getAbsolutePath() + "/StudyTree/download/";
     /** 图片文件缓存 */
     public static final String IMAGE_DIR = Environment.getExternalStorageDirectory().getAbsolutePath() + "/StudyTree/cache_images/";
+
+
 }

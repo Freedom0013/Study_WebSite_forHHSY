@@ -48,7 +48,7 @@ public class NewsFragment extends BaseFragment implements StudyTreeTitleBar.Titl
 
     @Override
     public void onTitleLeftClicked() {
-        mActivity.main_residelayout.openPane();
+        mActivity.openMenu();
     }
 
     @Override

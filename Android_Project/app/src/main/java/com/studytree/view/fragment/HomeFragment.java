@@ -450,7 +450,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     @Override
     public void onTitleLeftClicked() {
         //打开侧边栏
-        mActivity.main_residelayout.openPane();
+        mActivity.openMenu();
     }
 
     @Override

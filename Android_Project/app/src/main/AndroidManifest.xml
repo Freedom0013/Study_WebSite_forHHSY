@@ -66,6 +66,14 @@
         <activity android:name=".view.QRScannerActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
 
+        <!--系统设置-->
+        <activity android:name=".view.SettingActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <!--网页显示-->
+        <activity android:name=".view.WebViewActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.studytree.fileprovider"

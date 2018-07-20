@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.WindowManager;
 
@@ -33,7 +34,8 @@ public class MainActivity extends BaseActivity {
     public ResideLayout main_residelayout;
     /** 扫一扫结果码 */
     public static final int QR_REQUEST_CODE = 1;
-
+    /** 点击两次返回时间间隔 */
+    private long exitTime = 0;
     /**
      * 启动MainActivity
      * @param ctx 来源Context
@@ -118,6 +120,32 @@ public class MainActivity extends BaseActivity {
         return super.dispatchTouchEvent(ev);
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {
+                // 判断2次点击事件时间
+                if ((System.currentTimeMillis() - exitTime) > 2000) {       //间隔两秒以上弹Toast
+                    showToast("再按一次退出程序");
+                    exitTime = System.currentTimeMillis();
+                } else {                            //直接退出
+                    finish();                       //交由Base处理
+                }
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    /** 打开侧滑菜单 */
+    public void openMenu(){
+        main_residelayout.openPane();
+    }
+
+    /** 关闭侧滑菜单 */
+    public void closeMenu(){
+        main_residelayout.closePane();
+    }
 //    public static void startForResult(Activity ctx){
 //        Intent intent = new Intent(ctx,MainActivity.class);
 //        intent.putExtra("requestResult",true);
