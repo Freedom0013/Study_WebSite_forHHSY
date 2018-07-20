@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.studytree.R;
 import com.studytree.commonfile.Constants;
+import com.studytree.utils.StudyTreeTools;
 import com.studytree.view.LoginActivity;
 import com.studytree.view.MainActivity;
 import com.studytree.view.QRScannerActivity;
@@ -127,7 +128,7 @@ public class LeftMenuFragment extends BaseFragment implements View.OnClickListen
 
             case R.id.leftmenu_likemine:        //给个好评
                 mActivity.closeMenu();
-                goToMarket(mActivity,"com.studytree");
+                goToMarket(mActivity,StudyTreeTools.getAppPackageName(mActivity));
                 break;
 
             case R.id.leftmenu_aboutus:         //关于我们

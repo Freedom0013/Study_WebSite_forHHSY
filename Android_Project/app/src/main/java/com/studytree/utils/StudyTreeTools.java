@@ -1,6 +1,7 @@
 package com.studytree.utils;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
@@ -11,6 +12,7 @@ import com.studytree.commonfile.Constants;
 import com.studytree.log.Logger;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -45,6 +47,25 @@ public class StudyTreeTools {
             Logger.e(TAG,"getVerName错误！",e);
         }
         return verCode;
+    }
+
+    /**
+     * 获取App包名
+     * @param context Context对象
+     * @return App包名
+     */
+    public static String getAppPackageName(Context context) {
+        //当前应用pid
+        int pid = android.os.Process.myPid();
+        //任务管理类
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        //遍历所有应用
+        List<ActivityManager.RunningAppProcessInfo> infos = manager.getRunningAppProcesses();
+        for (ActivityManager.RunningAppProcessInfo info : infos) {
+            if (info.pid == pid)//得到当前应用
+                return info.processName;//返回包名
+        }
+        return "";
     }
 
     /**
