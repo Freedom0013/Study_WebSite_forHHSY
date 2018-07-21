@@ -103,6 +103,23 @@ public class CourseAdapter extends BaseAdapter {
         return position;
     }
 
+    /**
+     * 说明：
+     * 由于四条特殊item加入，要在每次getView时去除特殊条目影响
+     *
+     * position  ------>  low.size() + middle.size() + high.size() + other.size() + 4
+     *
+     *  0  1                lowsize+1   +2        lowsize+middle+2   +3   lowsize+middle+high+3   +3  lowsize+middle+high+other+4
+     *  |--|-------------------------|--|-------------------------|--|-------------------------|--|-------------------------|
+     *  |  |                         |  |                         |  |                         |  |                         |
+     *  |  |                         |  |                         |  |                         |  |                         |
+     *  |  |          初  级         |  |          中  级          |  |          高  级         |  |          其  他         |
+     *  |  |                         |  |                         |  |                         |  |                         |
+     *  |  |                         |  |                         |  |                         |  |                         |
+     *  |--|-------------------------|--|-------------------------|--|-------------------------|--|-------------------------|
+     *  特殊条目                    特殊条目                      特殊条目                     特殊条目
+     *
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         CourseBean course = null;

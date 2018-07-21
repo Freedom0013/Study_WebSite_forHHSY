@@ -60,6 +60,7 @@ public class CourseActivity extends BaseActivity implements StudyTreeTitleBar.Ti
     /**
      * 启动CourseActivity
      * @param ctx 来源Context
+     * @param bean 来源ProfessionBean
      */
     public static void start(Context ctx, ProfessionBean bean) {
         Intent intent = new Intent(ctx, CourseActivity.class);
@@ -216,7 +217,7 @@ public class CourseActivity extends BaseActivity implements StudyTreeTitleBar.Ti
             course = mCourseOther.get(position - 4 - mCourseLow.size() - mCourseMiddle.size() - mCourseHigh.size());
         }
         Logger.d(TAG,course.toString());
-
+        CourseDetailActivity.start(CourseActivity.this,course);
     }
 
     /**

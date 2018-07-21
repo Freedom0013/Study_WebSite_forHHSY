@@ -74,6 +74,10 @@
         <activity android:name=".view.WebViewActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
 
+        <!--课程详情-->
+        <activity android:name=".view.CourseDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.studytree.fileprovider"
