@@ -46,6 +46,8 @@ public class CouresAction extends HttpServlet {
         //获取上级页面传入的专业id
         String professions_id = (String) request.getParameter("professions_id");
         int professionsid = Integer.parseInt(professions_id);
+        String sign = request.getParameter("sign");
+        DebugUtils.showLog("professions_id = "+professions_id+",sign"+sign);
         
         CourseService service = new CourseServiceImpl();
         
