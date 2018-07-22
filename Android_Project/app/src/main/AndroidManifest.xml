@@ -78,6 +78,10 @@
         <activity android:name=".view.CourseDetailActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
 
+        <!--课程测试-->
+        <activity android:name=".view.ExaminationActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.studytree.fileprovider"

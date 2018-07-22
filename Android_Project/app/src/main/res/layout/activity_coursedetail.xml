@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="#dad9d8"
     android:orientation="vertical">
 
     <View
@@ -21,4 +21,310 @@
         app:contentInsetLeft="0dp"
         app:contentInsetStart="0dp"
         app:title="@string/app_name" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/rank_header_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/rank_header_top_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/theme_blue"
+                    android:gravity="bottom"
+                    android:minHeight="200dp"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/ranking_top_2_score"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:text="100"
+                            android:textColor="#ff3d65"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/ranking_top_2_nick"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@id/ranking_top_2_score"
+                            android:layout_centerHorizontal="true"
+                            android:text="nickname"
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/ranking_top_2_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@id/ranking_top_2_nick"
+                            android:layout_centerHorizontal="true"
+                            android:text="NO.2"
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp" />
+
+                        <com.studytree.view.widget.CircularImage
+                            android:id="@+id/ranking_top_2_avatar"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_above="@id/ranking_top_2_no"
+                            android:layout_centerHorizontal="true"
+                            android:src="@drawable/icon_user_left_normal" />
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="21dp"
+                            android:layout_above="@id/ranking_top_2_avatar"
+                            android:layout_marginBottom="-8dp"
+                            android:layout_marginRight="-24dp"
+                            android:layout_toLeftOf="@id/ranking_top_2_avatar"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/icon_rank_2" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/ranking_top_1_score"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:text=""
+                            android:textColor="#fee82c"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/ranking_top_1_nick"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@id/ranking_top_1_score"
+                            android:layout_centerHorizontal="true"
+                            android:text=""
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/ranking_top_1_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@id/ranking_top_1_nick"
+                            android:layout_centerHorizontal="true"
+                            android:text="NO.1"
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp" />
+
+                        <com.studytree.view.widget.CircularImage
+                            android:id="@+id/ranking_top_1_avatar"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_above="@+id/ranking_top_1_no"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="10dp"
+                            android:src="@drawable/icon_user_left_normal" />
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="21dp"
+                            android:layout_above="@id/ranking_top_1_avatar"
+                            android:layout_gravity="top|left"
+                            android:layout_marginBottom="-8dp"
+                            android:layout_marginRight="-28dp"
+                            android:layout_toLeftOf="@id/ranking_top_1_avatar"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/icon_rank_1" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/ranking_top_3_score"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:text=""
+                            android:textColor="#3c73f4"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/ranking_top_3_nick"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@id/ranking_top_3_score"
+                            android:layout_centerHorizontal="true"
+                            android:text=""
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/ranking_top_3_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@id/ranking_top_3_nick"
+                            android:layout_centerHorizontal="true"
+                            android:text="NO.3"
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp" />
+
+                        <com.studytree.view.widget.CircularImage
+                            android:id="@+id/ranking_top_3_avatar"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_above="@id/ranking_top_3_no"
+                            android:layout_centerHorizontal="true"
+                            android:src="@drawable/icon_user_left_normal" />
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="21dp"
+                            android:layout_above="@id/ranking_top_3_avatar"
+                            android:layout_gravity="top|left"
+                            android:layout_marginBottom="-8dp"
+                            android:layout_marginRight="-24dp"
+                            android:layout_toLeftOf="@id/ranking_top_3_avatar"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/icon_rank_3" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/course_detail_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    app:cardCornerRadius="10dp"
+                    app:elevation="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <com.studytree.view.widget.RoundImageView
+                            android:id="@+id/course_detail_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="140dp"
+                            android:layout_gravity="center_horizontal"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/course_default"
+                            app:type="round" />
+
+                        <TextView
+                            android:id="@+id/cou_detail_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="10dp"
+                            android:text="计算机微机应用"
+                            android:textColor="@color/home_orange"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:id="@+id/cou_detail_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:text="更新时间：2018-03-25 15:38:04"
+                            android:textColor="@color/tab_Grey"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/cou_detail_description_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="10dp"
+                            android:text="课程描述"
+                            android:textColor="@color/banner_blue_dot"
+                            android:textSize="18sp"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/cou_detail_description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="10dp"
+                            android:gravity="left"
+                            android:text=""
+                            android:textColor="#787878"
+                            android:textSize="18sp"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/cou_detail_people_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="10dp"
+                            android:text="适用人群"
+                            android:textColor="@color/banner_blue_dot"
+                            android:textSize="18sp"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/cou_detail_people"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="10dp"
+                            android:gravity="left"
+                            android:text=""
+                            android:textColor="#787878"
+                            android:textSize="18sp"
+                            android:visibility="gone" />
+
+
+                        <Button
+                            android:id="@+id/begin_test"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_margin="20dp"
+                            android:background="@drawable/selector_begin_test_bg"
+                            android:gravity="center"
+                            android:text="开始测试！"
+                            android:textColor="@color/selector_begin_testtext_bg" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

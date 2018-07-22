@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--可用已按下-->
+    <item android:state_enabled="true" android:state_pressed="true">
+        <shape>
+            <!--颜色透明-->
+            <solid android:color="@android:color/transparent" />
+            <!--描边-->
+            <stroke android:width="1dp" android:color="@color/theme_title_color" />
+            <!--圆角-->
+            <corners android:radius="30dip" />
+        </shape>
+    </item>
+    <!--可用未按下-->
+    <item android:state_enabled="true" android:state_pressed="false">
+        <shape>
+            <solid android:color="@color/theme_title_color" />】
+            <!--圆角-->
+            <corners android:radius="30dip" />
+        </shape>
+    </item>
+    <!--不可用-->
+    <item android:state_enabled="false">
+        <shape>
+            <solid android:color="#d1d1d1" />
+            <corners android:radius="30dip" />
+        </shape>
+    </item>
+</selector>
