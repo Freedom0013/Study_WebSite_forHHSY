@@ -1,6 +1,7 @@
 package com.studytree.http.logic;
 
 import com.google.gson.JsonObject;
+import com.studytree.bean.CourseBean;
 import com.studytree.bean.DepartmentBean;
 import com.studytree.bean.ProfessionBean;
 import com.studytree.http.ActionID;
@@ -191,6 +192,31 @@ public class InitLogic{
         attr.put("professions_id", bean.profession_id);
         attr.put("sign", StudyTreeTools.createSign(attr));
         mHttpTransaction.send(ActionID.ACTION_COURSE, attr, new HttpCallback() {
+            @Override
+            public void onSuccess(int action, int responseCode, JsonObject obj) {
+                if (listener != null) {
+                    listener.onSuccess(action, obj.toString());
+                }
+            }
+
+            @Override
+            public void onFail(int action, int responseCode, String responseMsg) {
+                if (listener != null) {
+                    listener.onFail(action, responseCode, responseMsg);
+                }
+            }
+        });
+    }
+
+    /**
+     * 获取试题信息
+     * @param listener 结果监听
+     */
+    public void getQuestionsInfo(CourseBean bean, final HttpResultCallback listener) {
+        HashMap<String, Object> attr = new HashMap<String, Object>();
+        attr.put("course_id", bean.course_id);
+        attr.put("sign", StudyTreeTools.createSign(attr));
+        mHttpTransaction.send(ActionID.ACTION_QUESTION, attr, new HttpCallback() {
             @Override
             public void onSuccess(int action, int responseCode, JsonObject obj) {
                 if (listener != null) {

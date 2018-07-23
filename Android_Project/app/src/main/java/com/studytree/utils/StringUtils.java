@@ -1,5 +1,8 @@
 package com.studytree.utils;
 
+import android.text.Html;
+import android.widget.TextView;
+
 import com.studytree.log.Logger;
 
 import java.util.Collection;
@@ -344,5 +347,31 @@ public class StringUtils {
                 || ub == Character.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION
                 || ub == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS;
 
+    }
+
+    /**
+     * 去除字符串中Html代码
+     * @param content 文本
+     * @param label 设置TextView
+     */
+    public static void setTextOrHtml(String content, TextView label) {
+        if (isNullOrEmpty(content)) {
+            label.setText("");
+            return;
+        }
+        if (content.contains("</") || content.contains("<br>")) {
+            try {
+                CharSequence cs = Html.fromHtml(content);
+                if (cs == null || isNullOrEmpty(cs.toString().trim())) {
+                    label.setText(content);
+                } else {
+                    label.setText(Html.fromHtml(content));
+                }
+            } catch (Exception e) {
+                label.setText(content);
+            }
+        } else {
+            label.setText(content);
+        }
     }
 }

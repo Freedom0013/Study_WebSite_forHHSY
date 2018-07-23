@@ -1,5 +1,6 @@
 package com.studytree.bean;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -8,23 +9,23 @@ import java.math.BigDecimal;
  * @date 2018年1月26日
  * @author Freedom0013
  */
-public class OptionBean {
+public class OptionBean implements Serializable{
 	/** 选项编号 */
-	private BigDecimal option_id;
+	public BigDecimal option_id;
 	/** 选项A */
-	private String option_a;
+	public String option_a;
 	/** 选项B */
-	private String option_b;
+	public String option_b;
 	/** 选项C */
-	private String option_c;
+	public String option_c;
 	/** 选项D */
-	private String option_d;
+	public String option_d;
 	/** 选项E */
-	private String option_e;
+	public String option_e;
 	/** 选项F */
-	private String option_f;
+	public String option_f;
 	/** 选项G */
-	private String option_g;
+	public String option_g;
 	
 	/**
 	 * 空参构造函数
@@ -60,56 +61,7 @@ public class OptionBean {
 		this.option_f = option_f;
 		this.option_g = option_g;
 	}
-	
-	public BigDecimal getOption_id() {
-		return option_id;
-	}
-	public void setOption_id(BigDecimal option_id) {
-		this.option_id = option_id;
-	}
-	public String getOption_a() {
-		return option_a;
-	}
-	public void setOption_a(String option_a) {
-		this.option_a = option_a;
-	}
-	public String getOption_b() {
-		return option_b;
-	}
-	public void setOption_b(String option_b) {
-		this.option_b = option_b;
-	}
-	public String getOption_c() {
-		return option_c;
-	}
-	public void setOption_c(String option_c) {
-		this.option_c = option_c;
-	}
-	public String getOption_d() {
-		return option_d;
-	}
-	public void setOption_d(String option_d) {
-		this.option_d = option_d;
-	}
-	public String getOption_e() {
-		return option_e;
-	}
-	public void setOption_e(String option_e) {
-		this.option_e = option_e;
-	}
-	public String getOption_f() {
-		return option_f;
-	}
-	public void setOption_f(String option_f) {
-		this.option_f = option_f;
-	}
-	public String getOption_g() {
-		return option_g;
-	}
-	public void setOption_g(String option_g) {
-		this.option_g = option_g;
-	}
-	
+
 	@Override
 	public String toString() {
 		return "OptionBean [option_id=" + option_id + ", option_a=" + option_a + ", option_b=" + option_b
