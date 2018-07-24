@@ -14,4 +14,6 @@
 
     <string name="history_test_text">历史测试</string>
     <string name="home_grid_hint_text">大类详情</string>
+
+    <string name="exam_result_hint_text">根据您的分数 为您推荐</string>
 </resources>

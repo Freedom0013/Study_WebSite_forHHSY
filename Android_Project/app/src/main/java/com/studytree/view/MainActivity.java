@@ -36,6 +36,7 @@ public class MainActivity extends BaseActivity {
     public static final int QR_REQUEST_CODE = 1;
     /** 点击两次返回时间间隔 */
     private long exitTime = 0;
+
     /**
      * 启动MainActivity
      * @param ctx 来源Context

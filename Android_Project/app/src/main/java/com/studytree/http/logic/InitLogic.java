@@ -232,4 +232,31 @@ public class InitLogic{
             }
         });
     }
+
+    /**
+     * 获取测试结果
+     * @param listener 结果监听
+     */
+    public void getExamResultInfo(String questionJsonData, CourseBean bean, String user_answer_map, final HttpResultCallback listener) {
+        HashMap<String, Object> attr = new HashMap<String, Object>();
+        attr.put("course_id", bean.course_id);
+        attr.put("question_json_text", questionJsonData);
+        attr.put("user_answer_map", user_answer_map.toString());
+        attr.put("sign", StudyTreeTools.createSign(attr));
+        mHttpTransaction.send(ActionID.ACTION_EXAMINATION, attr, new HttpCallback() {
+            @Override
+            public void onSuccess(int action, int responseCode, JsonObject obj) {
+                if (listener != null) {
+                    listener.onSuccess(action, obj.toString());
+                }
+            }
+
+            @Override
+            public void onFail(int action, int responseCode, String responseMsg) {
+                if (listener != null) {
+                    listener.onFail(action, responseCode, responseMsg);
+                }
+            }
+        });
+    }
 }

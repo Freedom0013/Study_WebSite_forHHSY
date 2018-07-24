@@ -1,11 +1,14 @@
 package com.studytree.view;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -17,6 +20,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.studytree.InitManager;
 import com.studytree.R;
 import com.studytree.bean.CourseBean;
 import com.studytree.bean.QuestionBean;
@@ -33,7 +37,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 课程测试Activity
@@ -60,7 +63,8 @@ public class ExaminationActivity extends BaseActivity implements StudyTreeTitleB
     /** 提交测试 */
     private Button upload_test;
     /** 用户做题结果记录 */
-    private Map<BigDecimal,String> user_answer_map;
+    private HashMap<BigDecimal,String> user_answer_map;
+    private String questionJsonData;
 
     /**
      * 启动ExaminationActivity
@@ -150,6 +154,9 @@ public class ExaminationActivity extends BaseActivity implements StudyTreeTitleB
         if (StringUtils.isNullOrEmpty(dataStr)) {
             return;
         }
+        questionJsonData = dataStr;
+        //本地缓存Json数据
+        InitManager.getInstance().saveStringPreference("questionBean_list", dataStr);
 
         List<QuestionBean> questionlist = new ArrayList<QuestionBean>();
         if (dataStr != null) {
@@ -202,7 +209,7 @@ public class ExaminationActivity extends BaseActivity implements StudyTreeTitleB
 
     @Override
     public void onTitleLeftClicked() {
-        finish();
+        showEnterResultDialog();
     }
 
     @Override
@@ -241,8 +248,50 @@ public class ExaminationActivity extends BaseActivity implements StudyTreeTitleB
     }
 
     @Override
-    public void onClick(View v) {
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {
+                showEnterResultDialog();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
+    private void showEnterResultDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //填充内容
+        builder.setTitle("确定结束测试吗？");
+        builder.setMessage("您还有 " + (questionCount - user_answer_map.size()) + " 道题未做完！");
+        builder.setPositiveButton("立即结束！", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                enterResult();
+            }
+        });
+        builder.setNegativeButton("我再等等", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        //Dialog取消按键监听
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+            }
+        });
+        builder.show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        enterResult();
+    }
+
+    private void enterResult() {
+        ExamResultActivity.start(ExaminationActivity.this,questionJsonData,mCourseBean,user_answer_map);
+        finish();
     }
 
     /**
