@@ -244,7 +244,6 @@ public class ExamResultActivity extends BaseActivity implements StudyTreeTitleBa
 
     @Override
     public void onItemClick(View v, int position) {
-        showToast("点击了");
         WebViewActivity.start(ExamResultActivity.this,mResourcelist.get(position).resource_detail,"资源推荐",2);
     }
 
