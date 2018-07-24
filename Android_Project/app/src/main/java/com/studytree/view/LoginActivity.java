@@ -51,7 +51,8 @@ public class LoginActivity extends BaseActivity implements StudyTreeTitleBar.Tit
         View statusBar = findViewById(R.id.statusBarView);
         ViewGroup.LayoutParams layoutParams = statusBar.getLayoutParams();
         layoutParams.height = StudyTreeTools.getStatusBarHeight(LoginActivity.this);
-
+        statusBar.setAlpha(0.95f);
+        
         //配置toolBar
         StudyTreeTitleBar login_tool = findViewById(R.id.login_tool);
         login_tool.setTitleRightVisibility(false);
@@ -60,6 +61,8 @@ public class LoginActivity extends BaseActivity implements StudyTreeTitleBar.Tit
         login_tool.setOnTitleBarClickedListener(this);
         //添加系统
         setSupportActionBar(login_tool);
+        login_tool.setAlpha(0.95f);
+
     }
 
     @Override
