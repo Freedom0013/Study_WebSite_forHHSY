@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ import com.studytree.http.logic.InitLogic;
 import com.studytree.log.Logger;
 import com.studytree.utils.StringUtils;
 import com.studytree.utils.StudyTreeTools;
+import com.studytree.view.adapter.ResourceListAdapter;
 import com.studytree.view.base.BaseActivity;
 import com.studytree.view.widget.StudyTreeTitleBar;
 
@@ -41,15 +43,26 @@ import java.util.List;
  * @date 2018/7/24 11:26
  * @author Freedom0013
  */
-public class ExamResultActivity extends BaseActivity implements StudyTreeTitleBar.TitleBarClickListener {
+public class ExamResultActivity extends BaseActivity implements StudyTreeTitleBar.TitleBarClickListener,ResourceListAdapter.ResourceItemOnClickListener {
     public static final String TAG = ExamResultActivity.class.getSimpleName();
+    /** 课程bean */
     private CourseBean mCourseBean;
+    /** 测试试题Json信息 */
     private String questionJsonData;
+    /** 测试用户答案信息 */
     private HashMap<BigDecimal, String> user_answer_map;
+    /** 分数 */
     private String score;
+    /** 分数显示 */
     private TextView user_score;
+    /** 分数提示 */
     private TextView exam_result_hint;
+    /** 资源RecyclerView */
     private RecyclerView resource_list;
+    /** 资源列表 */
+    private List<ResourceBean> mResourcelist;
+    /** 资源RecyclerView适配器 */
+    private ResourceListAdapter mResAdapter;
 
     /**
      * 启动SettingActivity
@@ -84,6 +97,11 @@ public class ExamResultActivity extends BaseActivity implements StudyTreeTitleBa
         initView();
     }
 
+    /**
+     * Hash数据转换Json
+     * @param user_answer_map 用户测试输入数据
+     * @return Json
+     */
     private String HashMapToJson(HashMap<BigDecimal, String> user_answer_map) {
         List<AnswerQuestionBean> Answerlist = new ArrayList<AnswerQuestionBean>();
         int index = 0;
@@ -100,6 +118,9 @@ public class ExamResultActivity extends BaseActivity implements StudyTreeTitleBa
         return returnData.toString();
     }
 
+    /**
+     * 初始化界面
+     */
     private void initView() {
         //设置占位View以实现沉浸式状态栏
         View statusBar = findViewById(R.id.statusBarView);
@@ -115,10 +136,18 @@ public class ExamResultActivity extends BaseActivity implements StudyTreeTitleBa
         //添加系统
         setSupportActionBar(exam_result_tool);
 
+        //分数显示区
         user_score = findViewById(R.id.user_score);
         exam_result_hint = findViewById(R.id.exam_result_hint);
-        resource_list = findViewById(R.id.resource_list);
 
+        //初始化RecyclerView
+        resource_list = findViewById(R.id.resource_list);
+        mResourcelist = new ArrayList<ResourceBean>();
+        mResAdapter = new ResourceListAdapter(ExamResultActivity.this,mResourcelist,this);
+        resource_list.setLayoutManager(new LinearLayoutManager(ExamResultActivity.this));
+        resource_list.setAdapter(mResAdapter);
+
+        //用户做题数据
         String user_answer_jsonStr = HashMapToJson(user_answer_map);
 
         showProgressDialog();
@@ -138,6 +167,10 @@ public class ExamResultActivity extends BaseActivity implements StudyTreeTitleBa
         });
     }
 
+    /**
+     * 解析Json
+     * @param dataStr json
+     */
     private void doGetTestResult(String dataStr) {
         if (StringUtils.isNullOrEmpty(dataStr)) {
             return;
@@ -188,16 +221,31 @@ public class ExamResultActivity extends BaseActivity implements StudyTreeTitleBa
         }
     }
 
-    private void initResourceList(List<ResourceBean> resourcelist) {
+    /**
+     * 更新UI
+     * @param resourcelist 资源列表
+     */
+    private void initResourceList(final List<ResourceBean> resourcelist) {
         dismissProgressDialog();
-        Logger.d(TAG,resourcelist.toString());
-
-        runOnUiThread(new Runnable() {
+        ExamResultActivity.this.mBasehandler.post(new Runnable() {
             @Override
             public void run() {
-                user_score.setText(score);
+                user_score.setText(score+"分");
+                mResourcelist.clear();
+                if (resourcelist != null && !resourcelist.isEmpty()) {
+                    mResourcelist.addAll(resourcelist);
+                }
+                //去除进度
+                dismissProgressDialog();
+                mResAdapter.notifyDataSetChanged();
             }
         });
+    }
+
+    @Override
+    public void onItemClick(View v, int position) {
+        showToast("点击了");
+        WebViewActivity.start(ExamResultActivity.this,mResourcelist.get(position).resource_detail,"资源推荐",2);
     }
 
     @Override

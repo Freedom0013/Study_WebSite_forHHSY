@@ -112,6 +112,7 @@ public class ProfessionalActivity extends BaseActivity implements StudyTreeTitle
         mProRecyclerview.setLayoutManager(new LinearLayoutManager(ProfessionalActivity.this));
         mProRecyclerview.setAdapter(mProAdapter);
 
+
         //显示进度
         showProgressDialog();
         InitLogic.getInstance().getProfessionInfo(mDepartment, new HttpResultCallback() {
