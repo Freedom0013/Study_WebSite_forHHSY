@@ -13,7 +13,7 @@ import com.studytree.utils.StudyTreeTools;
 import java.util.HashMap;
 
 /**
- * 更新信息获取
+ * 信息获取逻辑类
  * Title: InitLogic
  * @date 2018/6/21 17:16
  * @author Freedom0013

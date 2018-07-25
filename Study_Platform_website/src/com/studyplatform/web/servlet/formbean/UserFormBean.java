@@ -31,8 +31,8 @@ public class UserFormBean {
         if(regusername == "" || regusername == null){
             errors.put("username", "用户名不能为空") ;
         }else{
-            if(regusername.length() > 8 || regusername.length() < 3){
-                errors.put("username", "用户名长度必须在3~8位之间") ;
+            if(regusername.length() > 11 || regusername.length() < 3){
+                errors.put("username", "用户名长度必须在3~11位之间") ;
             }
         }
         

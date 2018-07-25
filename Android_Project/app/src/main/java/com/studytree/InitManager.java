@@ -4,6 +4,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
@@ -13,8 +18,11 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.studytree.bean.DeviceInfoBean;
+import com.studytree.bean.PictureBean;
+import com.studytree.bean.UserBean;
 import com.studytree.commonfile.Constants;
 import com.studytree.log.Logger;
+import com.studytree.utils.StringUtils;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
@@ -47,6 +55,8 @@ public class InitManager {
     public File ImageLoader_Cache_dir = new File(Constants.IMAGE_DIR);
     /** 设备信息DeviceUtils中引用 */
     public DeviceInfoBean devceinfo;
+    /** 用户信息Bean */
+    private UserBean mUserBean;
 
     /**
      * 私有构造函数
@@ -121,6 +131,65 @@ public class InitManager {
             .build();
         //ImageLoader初始化
         ImageLoader.getInstance().init(config);
+    }
+
+    /**
+     * 初始化保存的用户信息
+     */
+    public UserBean getUserInfo() {
+        if (mUserBean == null) {
+            String userinfoStr = getStringPreference(Constants.PREF_USER_INFO);
+            if (!StringUtils.isNullOrEmpty(userinfoStr)) {
+                try {
+                    Gson gson = new Gson();
+                    JsonObject data = new JsonParser().parse(userinfoStr).getAsJsonObject();
+                    JsonArray dataArray = data.getAsJsonArray("data");
+                    //解析数据
+                    JsonElement userinfo = dataArray.get(0);
+                    JsonObject userinfos = new JsonParser().parse(userinfo.toString()).getAsJsonObject();
+                    JsonElement userdata = userinfos.getAsJsonObject("userdata");
+                    mUserBean = gson.fromJson(userdata, UserBean.class);
+                    //解析头像
+                    //解析数据
+                    JsonElement picinfo = dataArray.get(1);
+                    JsonObject picinfos = new JsonParser().parse(picinfo.toString()).getAsJsonObject();
+                    JsonElement picdata = picinfos.getAsJsonObject("pic");
+                    PictureBean picture = gson.fromJson(picdata, PictureBean.class);
+                    mUserBean.user_picture_url = "http://" + Constants.HOST + "/" + picture.picture_img;
+                } catch (Exception e) {
+                    mUserBean = null;
+                }
+            }
+        }
+        return mUserBean;
+    }
+
+    /**
+     * 本地保存用户信息
+     * @param user 用户Bean
+     * @param userinfo JsonObject
+     */
+    public void setUserInfo(UserBean user, JsonObject userinfo) {
+        Logger.d(TAG, "保存用户信息: " + (userinfo == null ? "null" : userinfo.toString()));
+        if (user == null || userinfo == null) {
+            saveStringPreference(Constants.PREF_USER_INFO, "");
+        } else {
+            saveStringPreference(Constants.PREF_USER_INFO, userinfo.toString());
+        }
+        mUserBean = user;
+    }
+
+    /**
+     * 保存用户登录名、密码
+     * @param phone 登录名
+     * @param password 密码
+     */
+    public void savePhoneAndPasswordToPrefs(String phone, String password) {
+        if (StringUtils.isNullOrEmpty(phone) || StringUtils.isNullOrEmpty(password)) {
+            saveStringPreference(Constants.PREF_LOGIN_IN_SAVE, "");
+        } else {
+            saveStringPreference(Constants.PREF_LOGIN_IN_SAVE, phone + "_" + password);
+        }
     }
 
     /**

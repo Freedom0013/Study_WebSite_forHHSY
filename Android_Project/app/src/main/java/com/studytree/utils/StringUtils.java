@@ -18,6 +18,24 @@ import java.util.regex.Pattern;
  */
 public class StringUtils {
     private static final String TAG = StringUtils.class.getSimpleName();
+    /**
+     * 正则：手机号（精确）[需要保持更新]
+     * 移动：134(0-8)、135、136、137、138、139、147、150、151、152、157、158、159、178、182、183、184、187、188、198
+     * 联通：130、131、132、145、155、156、175、176、185、186、166
+     * 电信：133、153、173、177、180、181、189、199
+     * 全球星：1349
+     * 虚拟运营商：170
+     */
+    public static final String MOBILE_EXACT = "^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\\d{8}$";
+
+    /**
+     * 验证手机号（精确）
+     * @param phone 待验证文本
+     * @return 结果
+     */
+    public static boolean isMobile(CharSequence phone) {
+        return isMatch(MOBILE_EXACT, phone);
+    }
 
     /**
      * 判断字符串是否为空
@@ -26,6 +44,16 @@ public class StringUtils {
      */
     public static boolean isNullOrEmpty(final String string) {
         return string == null || string.trim().length() == 0 || string.equalsIgnoreCase("null");
+    }
+
+    /**
+     * 匹配正则
+     * @param regex 正则表达式
+     * @param input 字符串
+     * @return 结果
+     */
+    private static boolean isMatch(String regex, CharSequence input) {
+        return input != null && input.length() > 0 && Pattern.matches(regex, input);
     }
 
     /**

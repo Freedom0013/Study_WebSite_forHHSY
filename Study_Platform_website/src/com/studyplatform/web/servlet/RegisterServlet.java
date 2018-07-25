@@ -85,18 +85,19 @@ public class RegisterServlet extends HttpServlet {
                 response.getWriter().write("恭喜你，注册成功，2秒后转向登陆页面");
                 response.setHeader("Refresh", "2;url=" + request.getContextPath() + "/login.jsp");
             } catch (UserExistException e) {
+                DebugUtils.showLog("此用户名已经被注册过了");
                 // 说明用户已经注册过了
                 ufb.getErrors().put("username", "此用户名已经被注册过了，请换一个");
                 // 将ufb存入request对象
                 request.setAttribute("user", ufb);
-                request.getRequestDispatcher(request.getContextPath() + "/login.jsp#toregister").forward(request, response);
+                request.getRequestDispatcher("/login.jsp").forward(request, response);
             }
         } else {
             // 验证不通过
             // 完成数据的回显操作，把ufb对象存放到request
             request.setAttribute("user", ufb);
             DebugUtils.showLog("拷贝："+ufb.toString());
-            request.getRequestDispatcher(request.getContextPath() + "/login.jsp#toregister").forward(request, response);
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
     }
 

@@ -32,7 +32,7 @@ public class WrittenOffServlet extends HttpServlet {
         }  
         session.removeAttribute("user");  
         //重定向到主页
-        response.sendRedirect(request.getContextPath() + "/index.jsp");  
+        response.sendRedirect(request.getContextPath() + "/servlet/DepartmentServlet");  
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

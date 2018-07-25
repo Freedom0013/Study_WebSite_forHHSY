@@ -2,17 +2,24 @@ package com.studytree.view.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.studytree.InitManager;
 import com.studytree.R;
+import com.studytree.bean.UserBean;
 import com.studytree.commonfile.Constants;
+import com.studytree.log.Logger;
 import com.studytree.utils.StudyTreeTools;
 import com.studytree.view.LoginActivity;
 import com.studytree.view.MainActivity;
@@ -34,7 +41,6 @@ public class LeftMenuFragment extends BaseFragment implements View.OnClickListen
     private MainActivity mActivity;
     /** 菜单根布局 */
     private LinearLayout root_menu;
-
     /** 登陆点击区域 */
     private LinearLayout login_ln;
     /** 头像（default login） */
@@ -50,7 +56,9 @@ public class LeftMenuFragment extends BaseFragment implements View.OnClickListen
     /** 菜单提示 */
     private TextView menu_sign;
     /** 退出登录点击区域（default gone） */
-    private LinearLayout login_exit_ln;
+    private RelativeLayout login_exit_rl;
+    /** 用户Bean */
+    private UserBean mUserBean;
 
     /** 空参构造函数（必须） */
     public LeftMenuFragment(){}
@@ -72,6 +80,7 @@ public class LeftMenuFragment extends BaseFragment implements View.OnClickListen
         root_menu.setBackgroundResource(R.drawable.menu_background);
         //菜单提示语
         menu_sign = mRootView.findViewById(R.id.menu_sign);
+        menu_sign.setText("登陆后可体验更多学习乐趣~");
 
         //登陆附属控件
         login_ln = mRootView.findViewById(R.id.login_ln);
@@ -80,7 +89,7 @@ public class LeftMenuFragment extends BaseFragment implements View.OnClickListen
         rank_level_fm = mRootView.findViewById(R.id.rank_level_fm);
         rank_level_number = mRootView.findViewById(R.id.rank_level_number);
         login_score = mRootView.findViewById(R.id.login_score);
-        login_exit_ln = mRootView.findViewById(R.id.login_exit_ln);
+        login_exit_rl = mRootView.findViewById(R.id.login_exit_rl);
 
         initButtons(mRootView);
         return mRootView;
@@ -99,6 +108,13 @@ public class LeftMenuFragment extends BaseFragment implements View.OnClickListen
         mRootView.findViewById(R.id.leftmenu_likemine).setOnClickListener(this);
         mRootView.findViewById(R.id.leftmenu_aboutus).setOnClickListener(this);
         login_ln.setOnClickListener(this);
+        login_exit_rl.setOnClickListener(this);
+
+        mUserBean = InitManager.getInstance().getUserInfo();
+        if(mUserBean !=null){
+            Logger.d(TAG,"本地保存的用户信息："+ mUserBean.toString());
+            updataLoginUser(mUserBean);
+        }
     }
 
     @Override
@@ -123,7 +139,9 @@ public class LeftMenuFragment extends BaseFragment implements View.OnClickListen
                 break;
 
             case R.id.leftmenu_feedback:        //反馈
-
+                if(mUserBean !=null){
+                    showToast("请先登录~");
+                }
                 break;
 
             case R.id.leftmenu_likemine:        //给个好评
@@ -137,9 +155,41 @@ public class LeftMenuFragment extends BaseFragment implements View.OnClickListen
                 break;
             case R.id.login_ln:                 //登录
                 mActivity.closeMenu();
-                LoginActivity.start(mActivity);
+                LoginActivity.startForResult(mActivity,mActivity.LOGIN_REQUEST_CODE);
+                break;
+            case R.id.login_exit_rl:            //退出登录
+                mActivity.closeMenu();
+                showWrittenOffDialog();
                 break;
         }
+    }
+
+    /**
+     * 注销登录确认框
+     */
+    private void showWrittenOffDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+        //填充内容
+        builder.setTitle("您确定退出登录吗？");
+        builder.setMessage("退出后将无法再积累积分和等级");
+        builder.setPositiveButton("立即注销！", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                writtenOfflogin();
+            }
+        });
+        builder.setNegativeButton("暂不注销", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        //Dialog取消按键监听
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+            }
+        });
+        builder.show();
     }
 
     /**
@@ -155,5 +205,51 @@ public class LeftMenuFragment extends BaseFragment implements View.OnClickListen
         } catch (ActivityNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 登录成功更新UI
+     * @param bean 用户Bean
+     */
+    public void updataLoginUser(final UserBean bean) {
+        Logger.d(TAG, bean.toString());
+        mActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                menu_sign.setText("您已登陆，请前往我的界面查看详情~");
+                menu_name.setText(bean.user_nickname);
+                ImageLoader.getInstance().displayImage(bean.user_picture_url, menu_avatar);
+                rank_level_fm.setVisibility(View.VISIBLE);
+                rank_level_number.setText("Lv." + bean.user_status);
+                login_score.setVisibility(View.VISIBLE);
+                login_score.setText("积分：" + bean.user_integral + "分");
+                login_exit_rl.setVisibility(View.VISIBLE);
+                login_ln.setOnClickListener(null);
+            }
+        });
+    }
+
+    /**
+     * 注销登录
+     */
+    private void writtenOfflogin() {
+        mActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                InitManager.getInstance().setUserInfo(null, null);
+                InitManager.getInstance().savePhoneAndPasswordToPrefs(null, null);
+                menu_sign.setVisibility(View.VISIBLE);
+                menu_sign.setText("登陆后可体验更多学习乐趣~");
+                menu_name.setText("立即登录");
+                menu_avatar.setImageDrawable(getResources().getDrawable(R.drawable.icon_user_left_normal));
+                rank_level_number.setText("");
+                rank_level_fm.setVisibility(View.GONE);
+                login_score.setText("");
+                login_score.setVisibility(View.GONE);
+                login_exit_rl.setVisibility(View.GONE);
+                showToast("注销成功！");
+                login_ln.setOnClickListener(LeftMenuFragment.this);
+            }
+        });
     }
 }

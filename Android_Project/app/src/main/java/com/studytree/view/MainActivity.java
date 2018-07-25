@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.WindowManager;
 
 import com.studytree.R;
+import com.studytree.bean.UserBean;
 import com.studytree.utils.permissions.PermissionConfig;
 import com.studytree.view.base.BaseActivity;
 import com.studytree.view.fragment.LeftMenuFragment;
@@ -32,6 +33,8 @@ public class MainActivity extends BaseActivity {
     private static final String FRAGMENT_LEFT_MENU = "fragment_left_menu";
     /** 侧滑菜单对象 */
     public ResideLayout main_residelayout;
+    /** 登录结果码 */
+    public static final int LOGIN_REQUEST_CODE = 0;
     /** 扫一扫结果码 */
     public static final int QR_REQUEST_CODE = 1;
     /** 点击两次返回时间间隔 */
@@ -57,6 +60,15 @@ public class MainActivity extends BaseActivity {
                         super.RequestPermissionRationale(PermissionConfig.REQUEST_CAMERA,data.getStringExtra("PermissionName"));
                     }else{                                //扫一扫结果
                         showToast("扫一扫结果：" + data.getStringExtra("qu_result"));
+                    }
+                }
+                break;
+            case LOGIN_REQUEST_CODE:                //用户登录回调
+                if (data != null) {
+                    UserBean bean = (UserBean) data.getSerializableExtra("userbean");
+                    if (bean != null) {
+                        showToast("登录成功！");
+                        getLeftMenuFragment().updataLoginUser(bean);
                     }
                 }
                 break;

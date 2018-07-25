@@ -25,7 +25,7 @@ public class Constants {
     public static final HttpLoggingInterceptor.Level OKHTTP_LOG_LEVEL = HttpLoggingInterceptor.Level.BASIC;
     static {
         if (LOCAL_TEST) {
-            HOST = "192.168.0.102:8080/Study_Platform_website";     //本地地址
+            HOST = "192.168.0.103:8080/Study_Platform_website";     //本地地址
         } else {
             HOST = "" + DOMAIN;
         }
@@ -55,6 +55,10 @@ public class Constants {
     public static final String PREF_NAME = "pref_studytree";
     /** 是否进入新手引导 */
     public static final String PREF_INTRO = "pref_enter_intro";
+    /** 用户信息 */
+    public static final String PREF_USER_INFO = "user_info";
+    /** 用户登录名、密码记录 */
+    public static final String PREF_LOGIN_IN_SAVE = "user_login_save";
 
     /** MD5加盐 */
     public static final String MD5_PREFIX = "studytree@!123321";
@@ -68,6 +72,4 @@ public class Constants {
     public static final String DOWNLOAD_DIR = Environment.getExternalStorageDirectory().getAbsolutePath() + "/StudyTree/download/";
     /** 图片文件缓存 */
     public static final String IMAGE_DIR = Environment.getExternalStorageDirectory().getAbsolutePath() + "/StudyTree/cache_images/";
-
-
 }

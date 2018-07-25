@@ -55,8 +55,7 @@
                     android:layout_height="90dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="70dp"
-                    android:src="@drawable/logo"
-                    />
+                    android:src="@drawable/logo" />
             </FrameLayout>
 
             <LinearLayout
@@ -65,17 +64,20 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/phone_nubmber_edit"
+                    android:id="@+id/phone_phone_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="25dp"
                     android:layout_marginRight="25dp"
+                    android:layout_marginTop="25dp"
                     android:background="@drawable/selector_login_edit_bg"
                     android:drawableLeft="@drawable/login_person"
                     android:drawablePadding="10dp"
-                    android:hint="请输入手机号"
+                    android:drawableStart="@drawable/login_person"
+                    android:hint="请输入手机号码"
                     android:maxLength="15"
                     android:maxLines="1"
+                    android:inputType="number"
                     android:paddingBottom="5dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="5dp"
@@ -89,18 +91,19 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="25dp"
                     android:layout_marginRight="25dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="25dp"
                     android:background="@drawable/selector_login_edit_bg"
                     android:drawableLeft="@drawable/login_password"
                     android:drawablePadding="10dp"
+                    android:drawableStart="@drawable/login_password"
                     android:hint="请输入密码"
+                    android:inputType="numberPassword"
                     android:maxLength="16"
                     android:maxLines="1"
                     android:paddingBottom="5dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="5dp"
                     android:paddingTop="5dp"
-                    android:inputType="numberPassword"
                     android:textColorHint="#d3d3d3"
                     android:textSize="16sp" />
 
@@ -108,25 +111,25 @@
                     android:id="@+id/do_login"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_margin="20dp"
+                    android:layout_margin="25dp"
                     android:background="@drawable/selector_begin_test_bg"
                     android:gravity="center"
                     android:text="登  录"
                     android:textColor="@color/selector_begin_testtext_bg" />
 
                 <TextView
-                    android:id="@+id/intro_enter"
+                    android:id="@+id/register_enter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_gravity="bottom|right"
                     android:layout_marginBottom="150dp"
+                    android:padding="5dp"
+                    android:layout_marginRight="25dp"
                     android:text="没有账号？立即注册>>"
                     android:textColor="@color/banner_blue_dot"
-                    android:textSize="18sp"
-                    />
+                    android:textSize="18sp" />
 
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

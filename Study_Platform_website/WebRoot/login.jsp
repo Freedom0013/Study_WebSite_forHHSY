@@ -66,7 +66,7 @@
 				%>
 
 				<!-- 用户注册 -->
-					<form action="${pageContext.request.contextPath }/servlet/LoginServlet" method="post"> 
+					<form action="${pageContext.request.contextPath }/servlet/RegisterServlet" method="post"> 
 						<div class="sign-up-htm">
 							<div class="group">
 								<label for="regusername" class="label">用户名</label>
