@@ -54,6 +54,12 @@ public class UserBean implements Serializable{
 	public int user_admin_flag;
     /** 用户头像url */
 	public String user_picture_url;
+	/** 未定义性别 */
+	public static final int USER_UNDEFINE = 0;
+	/** 性别女 */
+	public static final int USER_FEMALE = 1;
+	/** 性别男 */
+	public static final int USER_MALE = 2;
 
 	/**
 	 * 必要参数构造函数

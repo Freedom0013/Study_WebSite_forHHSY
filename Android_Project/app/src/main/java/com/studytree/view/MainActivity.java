@@ -69,6 +69,7 @@ public class MainActivity extends BaseActivity {
                     if (bean != null) {
                         showToast("登录成功！");
                         getLeftMenuFragment().updataLoginUser(bean);
+                        getMainFragment().getMine_pager().updataLoginUser(bean);
                     }
                 }
                 break;

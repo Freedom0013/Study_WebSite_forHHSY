@@ -37,13 +37,16 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
-    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
-    implementation files('libs/gson-2.8.5.jar')
-    implementation 'com.mylhyl:zxingscanner:2.1.1'
-    implementation 'com.scwang.wave:MultiWaveHeader:1.0.0-alpha-1'
-    implementation 'com.umeng.sdk:common:latest.integration'
-    implementation 'com.umeng.sdk:analytics:latest.integration'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'                                     //OkHttp
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'         //ImageLoader
+    implementation files('libs/gson-2.8.5.jar')                                             //Gson
+    implementation 'com.mylhyl:zxingscanner:2.1.1'                                          //Zxing
+    implementation 'com.umeng.sdk:common:latest.integration'                                //友盟
+    implementation 'com.umeng.sdk:analytics:latest.integration'                             //友盟
+    implementation 'com.scwang.wave:MultiWaveHeader:1.0.0-alpha-1'                          //水波纹
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-12'              //smartRefresh
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-12'              //没有使用特殊Header，可以不加这行
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.3'                        //一个开源gif控件
     compile project(':push')
 }
 

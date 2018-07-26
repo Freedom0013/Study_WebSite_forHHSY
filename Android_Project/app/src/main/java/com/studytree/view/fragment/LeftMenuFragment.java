@@ -80,7 +80,7 @@ public class LeftMenuFragment extends BaseFragment implements View.OnClickListen
         root_menu.setBackgroundResource(R.drawable.menu_background);
         //菜单提示语
         menu_sign = mRootView.findViewById(R.id.menu_sign);
-        menu_sign.setText("登陆后可体验更多学习乐趣~");
+        menu_sign.setText("登录后可体验更多学习乐趣~");
 
         //登陆附属控件
         login_ln = mRootView.findViewById(R.id.login_ln);
@@ -216,7 +216,7 @@ public class LeftMenuFragment extends BaseFragment implements View.OnClickListen
         mActivity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                menu_sign.setText("您已登陆，请前往我的界面查看详情~");
+                menu_sign.setText("您已登录，请前往我的界面查看详情~");
                 menu_name.setText(bean.user_nickname);
                 ImageLoader.getInstance().displayImage(bean.user_picture_url, menu_avatar);
                 rank_level_fm.setVisibility(View.VISIBLE);
@@ -239,7 +239,7 @@ public class LeftMenuFragment extends BaseFragment implements View.OnClickListen
                 InitManager.getInstance().setUserInfo(null, null);
                 InitManager.getInstance().savePhoneAndPasswordToPrefs(null, null);
                 menu_sign.setVisibility(View.VISIBLE);
-                menu_sign.setText("登陆后可体验更多学习乐趣~");
+                menu_sign.setText("登录后可体验更多学习乐趣~");
                 menu_name.setText("立即登录");
                 menu_avatar.setImageDrawable(getResources().getDrawable(R.drawable.icon_user_left_normal));
                 rank_level_number.setText("");
@@ -249,6 +249,7 @@ public class LeftMenuFragment extends BaseFragment implements View.OnClickListen
                 login_exit_rl.setVisibility(View.GONE);
                 showToast("注销成功！");
                 login_ln.setOnClickListener(LeftMenuFragment.this);
+                mActivity.getMainFragment().getMine_pager().writtenOfflogin();
             }
         });
     }

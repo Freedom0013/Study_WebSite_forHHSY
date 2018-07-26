@@ -45,6 +45,9 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
     private HorizontalViewPager main_viewpager;
     /** 主界面ViewPager适配器 */
     private MainViewPagerAdapter mPagerAdapter;
+    private HomeFragment home_pager;
+    private NewsFragment news_pager;
+    private MineFragment mine_pager;
 
     /** 空参构造函数（必须） */
     public MainFragment(){}
@@ -75,9 +78,12 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
 
         //初始化界面View
         List mPagerList = new ArrayList<BaseFragment>();
-        mPagerList.add(new HomeFragment(mActivity));
-        mPagerList.add(new NewsFragment(mActivity));
-        mPagerList.add(new MineFragment(mActivity));
+        home_pager = new HomeFragment(mActivity);
+        news_pager = new NewsFragment(mActivity);
+        mine_pager = new MineFragment(mActivity);
+        mPagerList.add(home_pager);
+        mPagerList.add(news_pager);
+        mPagerList.add(mine_pager);
         //初始化ViewPager
         main_viewpager = mRootView.findViewById(R.id.main_viewpager);
         //不允许ViewPager创建新的页面以防止出现页面重复显示Bug（在此项目中必须）
@@ -120,6 +126,18 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
         Drawable drawableMe = getResources().getDrawable(R.drawable.selector_tab_me);
         drawableMe.setBounds(0, marginVertical, size, size);
         rb_tab_me.setCompoundDrawables(null, drawableMe, null, null);
+    }
+
+    public HomeFragment getHome_pager() {
+        return home_pager;
+    }
+
+    public MineFragment getMine_pager() {
+        return mine_pager;
+    }
+
+    public NewsFragment getNews_pager() {
+        return news_pager;
     }
 
     @Override
