@@ -86,6 +86,10 @@
         <activity android:name=".view.ExamResultActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
 
+        <!--用户注册-->
+        <activity android:name=".view.RegisterActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.studytree.fileprovider"

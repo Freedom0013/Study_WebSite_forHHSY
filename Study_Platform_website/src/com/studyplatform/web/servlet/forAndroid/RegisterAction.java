@@ -3,20 +3,30 @@ package com.studyplatform.web.servlet.forAndroid;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.studyplatform.web.bean.PictureBean;
 import com.studyplatform.web.bean.UserBean;
 import com.studyplatform.web.exception.UserExistException;
+import com.studyplatform.web.service.PictureService;
 import com.studyplatform.web.service.UserService;
+import com.studyplatform.web.service.impl.PictureServiceImpl;
 import com.studyplatform.web.service.impl.UserServiceImpl;
 import com.studyplatform.web.servlet.formbean.UserFormBean;
 import com.studyplatform.web.utils.DebugUtils;
 import com.studyplatform.web.utils.MD5Utils;
 import com.studyplatform.web.utils.WebUtils;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 /**
  * 
@@ -35,46 +45,40 @@ public class RegisterAction extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-     // 控制字符集
+        // 控制字符集
         WebUtils.setCharSet(request, response);
         PrintWriter out = response.getWriter();
-        
-        
-        // 检查token，这里如果不理解可以不管
-        long token = Long.parseLong(request.getParameter("token"));
-        long tokenInSession = Long.parseLong(request.getSession().getAttribute("token") + "");
-//        DebugUtils.showLog("token："+token +",tokenInSession:"+tokenInSession);
-        
-//        for(String key:request.getParameterMap().keySet()){
-//            DebugUtils.showLog(key);
-//        }
-//        for(String[] value:request.getParameterMap().values()){
-//            for(int i = 0;i<value.length;i++){
-//                DebugUtils.showLog(value[i]);
-//            }
-//        }
-        if (token == tokenInSession) {
-            response.getWriter().println("ok"); // 如果是第一次请求，则产生新的token
-            request.getSession().setAttribute("token", System.currentTimeMillis());
-        } else {
-            response.getWriter().println("do not repeat submit");
-        }
-        
-        //封装数据到userbean中
-        UserFormBean ufb = WebUtils.fillFormBean(UserFormBean.class, request);
-        ufb.setToken(WebUtils.transferLongToDate("yyyy-MM-dd HH:mm:ss", token));
-        
-        //验证数据
+
+        String userJson = request.getParameter("userJson");
+        String tokenstr = request.getParameter("token");
+        long token = Long.valueOf(tokenstr).longValue();
+        Gson gson = new Gson();
+        UserBean bean = gson.fromJson(userJson, UserBean.class);
+        // 封装数据到userbean中
+        UserFormBean ufb = new UserFormBean();
+        ufb.setRegusername(bean.getUser_name());
+        ufb.setRegpassword(bean.getUser_password());
+        ufb.setSec_regpassword(bean.getUser_password());
+        ufb.setNickname(bean.getUser_nickname());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date(token);
+        ufb.setToken(sdf.format(date));
+
+        // 封装数据
+        JSONObject data = new JSONObject();
+        JSONArray data_array = new JSONArray();
+        int responseCode = 0;
+        // 验证数据
         if (ufb.validate()) {
-            //验证通过
-            //将formbean中的数据拷贝到UserBean对象
+            // 验证通过
+            // 将formbean中的数据拷贝到UserBean对象
             UserBean user = new UserBean();
             user.setUser_name(ufb.getRegusername());
             user.setUser_password(MD5Utils.getMD5(ufb.getRegpassword()));
             user.setUser_register_time(ufb.getToken());
             user.setUser_nickname(ufb.getNickname());
             user.setUser_lastlogin_time(ufb.getToken());
-            BigDecimal volumn = new BigDecimal("0");
+            BigDecimal volumn = new BigDecimal("6");
             user.setUser_picture_id(volumn);
             user.setUser_qq(volumn);
             user.setUser_status(1);
@@ -87,28 +91,45 @@ public class RegisterAction extends HttpServlet {
                 DebugUtils.showLog("注册");
                 us.register(user);
                 // 注册成功
-                // 返回登陆页面
-                response.getWriter().write("恭喜你，注册成功，2秒后转向登陆页面");
-                response.setHeader("Refresh", "2;url=" + request.getContextPath() + "/login.jsp");
+                responseCode = 0;
+                // 合法用户
+                JSONObject user_json = new JSONObject();
+                user_json.element("userdata", JSONObject.fromObject(user));
+                data_array.add(user_json);
+                // 获取用户图片
+                PictureService pic_service = new PictureServiceImpl();
+                PictureBean pic = pic_service.getPictureById(user.getUser_picture_id());
+                JSONObject pic_json = new JSONObject();
+                pic_json.element("pic", JSONObject.fromObject(pic));
+                data_array.add(pic_json);
             } catch (UserExistException e) {
-                // 说明用户已经注册过了
-                ufb.getErrors().put("username", "此用户名已经被注册过了，请换一个");
-                // 将ufb存入request对象
-                request.setAttribute("user", ufb);
-                request.getRequestDispatcher(request.getContextPath() + "/login.jsp#toregister").forward(request, response);
+                responseCode = 1;
+                JSONObject errormessage_json = new JSONObject();
+                errormessage_json.element("errormessage", "此用户名已经被注册过了，请重新输入！");
+                data_array.add(errormessage_json);
             }
         } else {
             // 验证不通过
             // 完成数据的回显操作，把ufb对象存放到request
-            request.setAttribute("user", ufb);
-            DebugUtils.showLog("拷贝："+ufb.toString());
-            request.getRequestDispatcher(request.getContextPath() + "/login.jsp#toregister").forward(request, response);
+            HashMap<String,String> errors = (HashMap<String, String>) ufb.getErrors();
+            responseCode = 1;
+            JSONObject errormessage_json = new JSONObject();
+            for(String errorindex :errors.keySet()){
+                String error = errors.get(errorindex);
+                if(error != null){
+                    errormessage_json.element("errormessage", error);
+                }
+            }
+            data_array.add(errormessage_json);
         }
-        
-//        out.write(question_answer_json.toString());  
-//        out.flush();  
-//        out.close();  
-//        DebugUtils.showLog(question_answer_json.toString());
+
+        data.element("responseCode", responseCode);
+        data.element("data", data_array);
+        DebugUtils.showLog(data.toString());
+
+        out.write(data.toString());
+        out.flush();
+        out.close();
     }
 
     public RegisterAction() {

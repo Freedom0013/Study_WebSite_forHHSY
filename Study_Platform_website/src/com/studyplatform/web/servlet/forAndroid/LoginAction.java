@@ -2,7 +2,6 @@ package com.studyplatform.web.servlet.forAndroid;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.studyplatform.web.bean.PictureBean;
-import com.studyplatform.web.bean.ProfessionBean;
 import com.studyplatform.web.bean.UserBean;
 import com.studyplatform.web.service.PictureService;
 import com.studyplatform.web.service.UserService;
@@ -39,29 +37,29 @@ public class LoginAction extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-     // 控制字符集
+        // 控制字符集
         WebUtils.setCharSet(request, response);
         PrintWriter out = response.getWriter();
-        
+
         String name = request.getParameter("username");
         String pass = request.getParameter("password");
-        DebugUtils.showLog("页面接收用户名：" + name +",密码：" + pass);
-        
-        //封装数据
+        DebugUtils.showLog("页面接收用户名：" + name + ",密码：" + pass);
+
+        // 封装数据
         JSONObject data = new JSONObject();
         JSONArray data_array = new JSONArray();
         int responseCode = 0;
-        
-        //初步判断是否为空
+
+        // 初步判断是否为空
         if (name.equals(null) || name == "") {
             responseCode = 2;
             JSONObject errormessage_json = new JSONObject();
-            errormessage_json.element("errormessage","用户名不能为空!");
+            errormessage_json.element("errormessage", "用户名不能为空!");
             data_array.add(errormessage_json);
         } else if (pass.equals(null) || pass == "") {
             responseCode = 3;
             JSONObject errormessage_json = new JSONObject();
-            errormessage_json.element("errormessage","密码不能为空!");
+            errormessage_json.element("errormessage", "密码不能为空!");
             data_array.add(errormessage_json);
         } else {
             UserService us = new UserServiceImpl();
@@ -72,7 +70,7 @@ public class LoginAction extends HttpServlet {
                 user_json.element("userdata", JSONObject.fromObject(user));
                 data_array.add(user_json);
                 responseCode = 0;
-                //获取用户图片
+                // 获取用户图片
                 PictureService pic_service = new PictureServiceImpl();
                 PictureBean pic = pic_service.getPictureById(user.getUser_picture_id());
                 JSONObject pic_json = new JSONObject();
@@ -81,19 +79,19 @@ public class LoginAction extends HttpServlet {
             } else {
                 // 非法用户
                 JSONObject errormessage_json = new JSONObject();
-                errormessage_json.element("errormessage","手机号或密码错误请重新输入！");
+                errormessage_json.element("errormessage", "手机号或密码错误请重新输入！");
                 responseCode = 1;
                 data_array.add(errormessage_json);
             }
         }
-        
+
         data.element("responseCode", responseCode);
         data.element("data", data_array);
         DebugUtils.showLog(data.toString());
-        
-        out.write(data.toString());  
-        out.flush();  
-        out.close();  
+
+        out.write(data.toString());
+        out.flush();
+        out.close();
     }
 
     public LoginAction() {

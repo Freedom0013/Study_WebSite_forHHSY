@@ -69,16 +69,18 @@ public class AccountLogic {
 
 
     /**
-     * 用户登录
+     * 用户注册
      * @param listener 结果监听
      */
     public void regisier(UserBean bean, final HttpResultCallback listener) {
         Gson gson = new Gson();
         String userJson = gson.toJson(bean);
-        Logger.d(TAG, userJson);
         HashMap<String, Object> attr = new HashMap<String, Object>();
+        long time = System.currentTimeMillis();
         attr.put("userJson", userJson);
+        attr.put("token", time);
         attr.put("sign", StudyTreeTools.createSign(attr));
+        Logger.d(TAG, attr.toString());
         mHttpTransaction.send(ActionID.ACTION_REGISTER, attr, new HttpCallback() {
             @Override
             public void onSuccess(int action, int responseCode, JsonObject obj) {

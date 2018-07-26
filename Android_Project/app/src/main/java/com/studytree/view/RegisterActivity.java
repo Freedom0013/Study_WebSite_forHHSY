@@ -12,14 +12,12 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.studytree.InitManager;
 import com.studytree.R;
 import com.studytree.bean.PictureBean;
 import com.studytree.bean.UserBean;
@@ -33,44 +31,44 @@ import com.studytree.view.base.BaseActivity;
 import com.studytree.view.widget.StudyTreeTitleBar;
 
 /**
- * 登录Activity
- * Title: LoginActivity
- * @date 2018/7/19 18:28
+ * 用户注册
+ * Title: RegisterActivity
+ * @date 2018/7/26 10:00
  * @author Freedom0013
  */
-public class LoginActivity extends BaseActivity implements StudyTreeTitleBar.TitleBarClickListener,View.OnClickListener {
-    public static final String TAG = LoginActivity.class.getSimpleName();
-    /** 电话 */
-    private EditText phone_phone_edit;
-    /** 密码 */
-    private EditText phone_password_edit;
-    /** 登录按钮 */
-    private Button do_login;
-    /** 注册按钮 */
-    private TextView register_enter;
+public class RegisterActivity extends BaseActivity implements StudyTreeTitleBar.TitleBarClickListener,View.OnClickListener {
+    private static final String TAG = RegisterActivity.class.getSimpleName();
     /** 上级页请求码 */
     private static int mRequestCode;
+    /** 用户名输入框 */
+    private EditText register_phone_edit;
+    /** 密码输入框 */
+    private EditText register_password_edit;
+    /** 确认密码输入框 */
+    private EditText register_password_admit_edit;
+    /** 昵称输入框 */
+    private EditText register_nickname_edit;
+    /** 注册按钮 */
+    private Button do_register;
     /** Gson对象 */
     private Gson gson;
-    /** 用户注册请求码 */
-    public static final int REGISTER_REQUEST_CODE = 0;
 
     /**
-     * 启动LoginActivity
+     * 启动RegisterActivity
      * @param ctx 来源Context
      */
     public static void start(Context ctx) {
-        Intent intent = new Intent(ctx, LoginActivity.class);
+        Intent intent = new Intent(ctx, RegisterActivity.class);
         ctx.startActivity(intent);
     }
 
     /**
-     * 启动LoginActivity
+     * 启动RegisterActivity
      * @param ctx 来源Activity
      * @param requestCode 请求码
      */
     public static void startForResult(Activity ctx, int requestCode){
-        Intent intent = new Intent(ctx,LoginActivity.class);
+        Intent intent = new Intent(ctx,RegisterActivity.class);
         intent.putExtra("requestResult",true);
         mRequestCode = requestCode;
         ctx.startActivityForResult(intent, requestCode);
@@ -79,7 +77,7 @@ public class LoginActivity extends BaseActivity implements StudyTreeTitleBar.Tit
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
 
         //沉浸
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -90,71 +88,56 @@ public class LoginActivity extends BaseActivity implements StudyTreeTitleBar.Tit
         initView();
     }
 
-    /**
-     * 初始化界面
-     */
     private void initView() {
         //设置占位View以实现沉浸式状态栏
         View statusBar = findViewById(R.id.statusBarView);
         ViewGroup.LayoutParams layoutParams = statusBar.getLayoutParams();
-        layoutParams.height = StudyTreeTools.getStatusBarHeight(LoginActivity.this);
+        layoutParams.height = StudyTreeTools.getStatusBarHeight(RegisterActivity.this);
         statusBar.setAlpha(0.95f);
 
         //配置toolBar
-        StudyTreeTitleBar login_tool = findViewById(R.id.login_tool);
-        login_tool.setTitleRightVisibility(false);
-        login_tool.setLeftDrawable(R.drawable.titlebar_back);
-        login_tool.setTitle("用户登录");
-        login_tool.setOnTitleBarClickedListener(this);
+        StudyTreeTitleBar register_tool = findViewById(R.id.register_tool);
+        register_tool.setTitleRightVisibility(false);
+        register_tool.setLeftDrawable(R.drawable.titlebar_back);
+        register_tool.setTitle("用户注册");
+        register_tool.setOnTitleBarClickedListener(this);
         //添加系统
-        setSupportActionBar(login_tool);
-        login_tool.setAlpha(0.95f);
+        setSupportActionBar(register_tool);
+        register_tool.setAlpha(0.95f);
 
-        //初始化输入框
-        phone_phone_edit = findViewById(R.id.phone_phone_edit);
-        phone_password_edit = findViewById(R.id.phone_password_edit);
+        //输入框
+        register_phone_edit = findViewById(R.id.register_phone_edit);
+        register_password_edit = findViewById(R.id.register_password_edit);
+        register_password_admit_edit = findViewById(R.id.register_password_admit_edit);
+        register_nickname_edit = findViewById(R.id.register_nickname_edit);
 
-        initEditImage(phone_phone_edit);
-        initEditImage(phone_password_edit);
+        //格式化小图标
+        initEditImage(register_phone_edit);
+        initEditImage(register_password_edit);
+        initEditImage(register_password_admit_edit);
+        initEditImage(register_nickname_edit);
 
-        //登录按钮
-        do_login = findViewById(R.id.do_login);
-        register_enter = findViewById(R.id.register_enter);
-        do_login.setOnClickListener(this);
-        register_enter.setOnClickListener(this);
-    }
-
-    /**
-     * 设置输入框左边图片大小
-     * @param editText 输入框
-     */
-    private void initEditImage(EditText editText) {
-        Drawable leftDrawable = editText.getCompoundDrawables()[0];
-        if (leftDrawable != null) {
-            leftDrawable.setBounds(0, 0, 60, 60);
-            editText.setCompoundDrawables(leftDrawable, editText.getCompoundDrawables()[1], editText.getCompoundDrawables()[2], editText.getCompoundDrawables()[3]);
-        }
+        do_register = findViewById(R.id.do_register);
+        do_register.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.do_login:             //登录
-                submitLogin();
-                break;
-
-            case R.id.register_enter:          //注册
-                RegisterActivity.startForResult(LoginActivity.this,REGISTER_REQUEST_CODE);
+            case R.id.do_register:      //注册
+                preRegister();
                 break;
         }
     }
 
     /**
-     * 提交登录
+     * 检查注册数据
      */
-    private void submitLogin() {
-        final String mobile = phone_phone_edit.getText().toString();
-        final String password = phone_password_edit.getText().toString();
+    private void preRegister() {
+        final String mobile = register_phone_edit.getText().toString();
+        final String password = register_password_edit.getText().toString();
+        final String admit_password = register_password_admit_edit.getText().toString();
+        final String nickname = register_nickname_edit.getText().toString();
 
         if(StringUtils.isNullOrEmpty(mobile)){
             showToast("请输入手机号");
@@ -168,12 +151,32 @@ public class LoginActivity extends BaseActivity implements StudyTreeTitleBar.Tit
             showToast("请输入密码");
             return;
         }
+        if(StringUtils.isNullOrEmpty(admit_password)){
+            showToast("请输入确认密码");
+            return;
+        }
+        if(!password.equals(admit_password)){
+            showToast("请检查两次输入的密码是否相同");
+            return;
+        }
+        if(StringUtils.isNullOrEmpty(nickname)){
+            showToast("请输入昵称");
+            return;
+        }else if(nickname.length()<3){
+            showToast("请输入大于三个字符的昵称");
+            return;
+        }
+
+        UserBean user = new UserBean();
+        user.user_name = mobile;
+        user.user_password = password;
+        user.user_nickname = nickname;
 
         showProgressDialog();
-        AccountLogic.getInstance().login(mobile, password, new HttpResultCallback() {
+        AccountLogic.getInstance().regisier(user, new HttpResultCallback() {
             @Override
             public void onSuccess(int action, Object obj) {
-                initLogin((String) obj);
+                initRegisier((String) obj);
             }
 
             @Override
@@ -186,10 +189,10 @@ public class LoginActivity extends BaseActivity implements StudyTreeTitleBar.Tit
     }
 
     /**
-     * 解析登录数据
+     * 解析注册Json
      * @param dataStr Json
      */
-    private void initLogin(String dataStr) {
+    private void initRegisier(String dataStr) {
         if (StringUtils.isNullOrEmpty(dataStr)) {
             showToast("网络异常！请重试！");
             dismissProgressDialog();
@@ -218,24 +221,24 @@ public class LoginActivity extends BaseActivity implements StudyTreeTitleBar.Tit
                     PictureBean picture = gson.fromJson(picdata, PictureBean.class);
                     userbean.user_picture_url = "http://" + Constants.HOST + "/" + picture.picture_img;
 
-                    doLoginSuccess(userbean, data);
+                    doRegisterSuccess(userbean, data);
                 } else {
-                    doLoginFail(responseCode, data);
+                    doRegisterFail(responseCode, data);
                 }
             } catch (Exception e) {
-                Logger.e(TAG, "登录解析错误！", e);
-                showToast("登录解析错误！");
+                Logger.e(TAG, "注册解析错误！", e);
+                showToast("注册解析错误！");
                 dismissProgressDialog();
             }
         }
     }
 
     /**
-     * 登录失败
+     * 注册失败
      * @param responseCode 状态码
-     * @param data 失败信息
+     * @param data Json
      */
-    private void doLoginFail(int responseCode, JsonObject data) {
+    private void doRegisterFail(int responseCode, JsonObject data) {
         try {
             JsonArray dataArray = data.getAsJsonArray("data");
             JsonElement errorinfo = dataArray.get(0);
@@ -244,39 +247,34 @@ public class LoginActivity extends BaseActivity implements StudyTreeTitleBar.Tit
             dismissProgressDialog();
             showToast(errormessage);
         } catch (Exception e) {
-            Logger.e(TAG, "登录解析错误！", e);
-            showToast("登录解析错误！");
+            Logger.e(TAG, "注册解析错误！", e);
+            showToast("注册解析错误！");
             dismissProgressDialog();
         }
     }
 
     /**
-     * 登录成功
+     * 注册成功
      * @param userbean 用户Bean
-     * @param userJson 用户Json
+     * @param data 数据
      */
-    private void doLoginSuccess(UserBean userbean, JsonObject userJson) {
-        dismissProgressDialog();
-        InitManager.getInstance().setUserInfo(userbean, userJson);
-        InitManager.getInstance().savePhoneAndPasswordToPrefs(userbean.user_name, userbean.user_password);
+    private void doRegisterSuccess(UserBean userbean, JsonObject data) {
         Intent intent = new Intent();
         intent.putExtra("userbean", userbean);
-        LoginActivity.this.setResult(mRequestCode, intent);
-        LoginActivity.this.finish();
+        intent.putExtra("JsonObject", data.toString());
+        RegisterActivity.this.setResult(mRequestCode, intent);
+        RegisterActivity.this.finish();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case REGISTER_REQUEST_CODE:                //注册回调
-                if (data != null) {
-                    UserBean bean = (UserBean) data.getSerializableExtra("userbean");
-                    String dataStr = data.getStringExtra("JsonObject");
-                    JsonObject Json = new JsonParser().parse(dataStr).getAsJsonObject();
-                    doLoginSuccess(bean,Json);
-                }
-                break;
+    /**
+     * 设置输入框左边图片大小
+     * @param editText 输入框
+     */
+    private void initEditImage(EditText editText) {
+        Drawable leftDrawable = editText.getCompoundDrawables()[0];
+        if (leftDrawable != null) {
+            leftDrawable.setBounds(0, 0, 60, 60);
+            editText.setCompoundDrawables(leftDrawable, editText.getCompoundDrawables()[1], editText.getCompoundDrawables()[2], editText.getCompoundDrawables()[3]);
         }
     }
 
@@ -293,15 +291,5 @@ public class LoginActivity extends BaseActivity implements StudyTreeTitleBar.Tit
     @Override
     public void onTitleClicked() {
 
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
     }
 }

@@ -40,8 +40,8 @@ public class UserFormBean {
         if(nickname == "" || nickname == null){
             errors.put("nickname", "昵称不能为空") ;
         }else{
-            if(nickname.length() > 8 || nickname.length() < 3){
-                errors.put("nickname", "昵称长度必须在3~8位之间") ;
+            if(nickname.length() > 12 || nickname.length() < 3){
+                errors.put("nickname", "昵称长度必须在3~12位之间") ;
             }
         }
         
