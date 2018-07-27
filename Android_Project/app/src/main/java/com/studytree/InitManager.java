@@ -26,6 +26,7 @@ import com.studytree.utils.StringUtils;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
+import com.umeng.socialize.PlatformConfig;
 
 import java.io.File;
 
@@ -110,6 +111,11 @@ public class InitManager {
                 Logger.e(TAG, "友盟Push注册失败！" + s + "|||" + s1);
             }
         });
+
+        //TODO：等待QQ、微信应用AppKey
+        PlatformConfig.setWeixin("", "");
+        PlatformConfig.setSinaWeibo("616658324", "13b450fe7cd86de1c91021601148cda8","http://sns.whalecloud.com");
+        PlatformConfig.setQQZone("", "");
 
         //ImageLoader初始化设置（ImageLoader建造者设计模式）
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(mContext)

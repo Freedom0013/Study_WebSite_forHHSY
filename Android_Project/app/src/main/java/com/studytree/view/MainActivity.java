@@ -17,6 +17,7 @@ import com.studytree.view.base.BaseActivity;
 import com.studytree.view.fragment.LeftMenuFragment;
 import com.studytree.view.fragment.MainFragment;
 import com.studytree.view.widget.ResideLayout;
+import com.umeng.socialize.UMShareAPI;
 
 /**
  * 主页Activity
@@ -74,6 +75,7 @@ public class MainActivity extends BaseActivity {
                 }
                 break;
         }
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

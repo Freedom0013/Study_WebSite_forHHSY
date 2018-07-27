@@ -179,6 +179,9 @@ public class SplashActivity extends BaseActivity {
         String[] permissions = {
                 PermissionConfig.PERMISSION_READ_PHONE_STATE,
                 PermissionConfig.PERMISSION_WRITE_EXTERNAL_STORAGE,
+                PermissionConfig.PERMISSION_ACCESS_FINE_LOCATION,
+//                PermissionConfig.PERMISSION_CALL_PHONE,
+//                PermissionConfig.PERMISSION_GET_ACCOUNTS,
         };
         List<String> permissionslist = super.permissionsutils.hasPermissionsAllGranted(permissions, SplashActivity.this);
         if (permissionslist.size() != 0) {
