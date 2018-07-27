@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.studyplatform.web.bean.BannerBean;
+import com.studyplatform.web.system.SystemCommonValue;
 import com.studyplatform.web.utils.WebUtils;
 
 import net.sf.json.JSONArray;
@@ -52,7 +53,7 @@ public class BannerAction extends HttpServlet {
             BannerBean bean = new BannerBean();
             bean.setBannner_id(i);
             bean.setBanner_title("欢迎来到知识深林"+(i+1));
-            bean.setBanner_image("http://192.168.0.101:8080/Study_Platform_website/images/android_images/banner_"+(i+1)+".jpg");
+            bean.setBanner_image("http://" + SystemCommonValue.HOST + "/images/android_images/banner_" + (i + 1) + ".jpg");
             bean.setBanner_url("url");
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             bean.setBanner_updata_date(df.format(new Date()));

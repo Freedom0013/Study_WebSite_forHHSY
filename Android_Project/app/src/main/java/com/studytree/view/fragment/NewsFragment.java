@@ -4,13 +4,24 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.View;
 
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.studytree.InitManager;
 import com.studytree.R;
+import com.studytree.bean.NewsBean;
+import com.studytree.http.HttpResultCallback;
+import com.studytree.http.logic.InitLogic;
+import com.studytree.log.Logger;
+import com.studytree.utils.StringUtils;
 import com.studytree.view.MainActivity;
 import com.studytree.view.base.BaseFragment;
 import com.studytree.view.widget.StudyTreeTitleBar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 资讯页面Fragment
@@ -22,6 +33,9 @@ public class NewsFragment extends BaseFragment implements StudyTreeTitleBar.Titl
     private static final String TAG = NewsFragment.class.getSimpleName();
     private MainActivity mActivity;
     private StudyTreeTitleBar news_tool;
+    /** NewsFragment初始化完成标识 */
+    private boolean isinit = false;
+    private ArrayList<NewsBean> mNewsList;
 
     /** 空参构造函数（必须） */
     public NewsFragment(){}
@@ -46,22 +60,69 @@ public class NewsFragment extends BaseFragment implements StudyTreeTitleBar.Titl
         mActivity.setSupportActionBar(news_tool);
         news_tool.setOnTitleBarClickedListener(this);
 
-        RefreshLayout refreshLayout = mRootView.findViewById(R.id.refreshLayout);
-        refreshLayout.autoRefresh();//自动刷新
-        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(1000/*,false*/);//传入false表示刷新失败
-            }
-        });
-        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore(RefreshLayout refreshlayout) {
-                refreshlayout.finishLoadMore(1000/*,false*/);//传入false表示加载失败
-            }
-        });
+        mNewsList = new ArrayList<NewsBean>();
 
         return mRootView;
+    }
+
+    @Override
+    public void initData() {
+        if (isinit) {
+            return;
+        }
+        isinit = true;
+
+        //获取资讯数据
+        doGetNews(InitManager.getInstance().getStringPreference("news_list"));
+        InitLogic.getInstance().getNewsInfo(new HttpResultCallback() {
+            @Override
+            public void onSuccess(int action, Object obj) {
+                doGetNews((String) obj);
+            }
+
+            @Override
+            public void onFail(int action, int responseCode, String responseMsg) {
+                Logger.e(TAG, "获取News错误！responseCode = " + responseCode + "responseMsg = " + responseMsg);
+                showToast("获取News失败！请检查网络");
+            }
+        });
+    }
+
+    /**
+     * 解析资讯数据
+     * @param dataStr Json
+     */
+    private void doGetNews(String dataStr) {
+        if (StringUtils.isNullOrEmpty(dataStr)) {
+            return;
+        }
+        //本地缓存Json数据
+        InitManager.getInstance().saveStringPreference("news_list", dataStr);
+        List<NewsBean> newslist = new ArrayList<NewsBean>();
+        if (dataStr != null) {
+            try {
+                //解析Json
+                JsonObject data = new JsonParser().parse(dataStr).getAsJsonObject();
+                Gson gson = new Gson();
+                String datapri = data.getAsJsonPrimitive("data").getAsString();
+                datapri = datapri.replaceAll("\\\\","");
+                JsonArray jsonArray = new JsonParser().parse(datapri).getAsJsonArray();
+                if (jsonArray != null) {
+                    for (JsonElement news : jsonArray) {
+                        NewsBean newsbean = gson.fromJson(news, NewsBean.class);
+                        newslist.add(newsbean);
+                    }
+                }
+                initNewsList(newslist);
+            } catch (Exception e) {
+                Logger.e(TAG, "解析资讯错误！", e);
+                initNewsList(null);
+            }
+        }
+    }
+
+    private void initNewsList(List<NewsBean> newslist) {
+        Logger.d(TAG,newslist.toString());
     }
 
     @Override

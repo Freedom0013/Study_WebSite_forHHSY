@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.studyplatform.web.bean.InitBean;
+import com.studyplatform.web.system.SystemCommonValue;
 import com.studyplatform.web.utils.DebugUtils;
 import com.studyplatform.web.utils.WebUtils;
 
@@ -49,11 +50,11 @@ public class InitAction extends HttpServlet {
         
         //更新说明
         List<String> UpdataMessage = new ArrayList<String>();
-        UpdataMessage.add("我是更新日志第一条。");
-        UpdataMessage.add("我是更新日志第二条。");
-        UpdataMessage.add("我是更新日志第三条。");
-        UpdataMessage.add("我是更新日志第四条。");
-        InitBean info = new InitBean(false, false,"我是更新标题", visionCode, "http://localhost:8080", df.format(new Date()), UpdataMessage);
+        UpdataMessage.add("更新日志第一条。");
+        UpdataMessage.add("更新日志第二条。");
+        UpdataMessage.add("更新日志第三条。");
+        UpdataMessage.add("更新日志第四条。");
+        InitBean info = new InitBean(false, false,"知识森驿站更新V1.4", visionCode, SystemCommonValue.DOWNLOAD_URL, df.format(new Date()), UpdataMessage);
         
         JSONObject data = new JSONObject();
         data.element("data", JSONObject.fromObject(info));

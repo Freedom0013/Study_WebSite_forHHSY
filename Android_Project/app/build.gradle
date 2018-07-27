@@ -9,6 +9,15 @@ android {
         versionCode 2
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        /**
+         * 解决Android 错误 couldn't find "xxx.so" is 32-bit instead of 64-bit
+         * 如果导入一个开源项目，导入后运行本地报错：错误couldn't find "xxx.so"
+         * 报错 lib/arm64/xxx.so" is 32-bit instead of 64-bit，看来是不兼容。
+         * 用一下ndk设置，64位也可以调用32位的so方法
+         */
+        ndk{
+            abiFilters("armeabi", "armeabi-v7a", "x86", "mips")
+        }
     }
     buildTypes {
         release {
@@ -44,8 +53,6 @@ dependencies {
     implementation 'com.umeng.sdk:common:latest.integration'                                //友盟
     implementation 'com.umeng.sdk:analytics:latest.integration'                             //友盟
     implementation 'com.scwang.wave:MultiWaveHeader:1.0.0-alpha-1'                          //水波纹
-    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-12'              //smartRefresh
-    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-12'              //没有使用特殊Header，可以不加这行
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.3'                        //一个开源gif控件
     compile project(':push')
 }

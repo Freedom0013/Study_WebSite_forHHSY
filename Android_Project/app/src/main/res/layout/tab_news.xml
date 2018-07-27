@@ -14,46 +14,19 @@
         app:contentInsetStart="0dp"
         app:title="@string/app_name" />
 
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/refreshLayout"
+
+    <!--<pl.droidsonroids.gif.GifImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/gif_header_repast"
+        app:layout_srlBackgroundColor="@android:color/transparent"
+        app:layout_srlSpinnerStyle="Scale" />-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:srlEnableRefresh="false"
-        app:srlEnableLoadMore="false"
-        android:background="@color/colorWhite"
-        app:srlAccentColor="@color/colorWhite"
-        app:srlDragRate="0.7"
-        app:srlEnablePreviewInEditMode="true"
-        app:srlHeaderMaxDragRate="1.3"
-        app:srlPrimaryColor="@color/colorWhite">
-
-        <!--srlAccentColor srlPrimaryColor 将会改变 Header 和 Footer 的主题颜色-->
-        <!--srlEnablePreviewInEditMode 可以开启和关闭预览功能-->
-        <com.scwang.smartrefresh.layout.header.ClassicsHeader
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            app:srlDrawableProgressSize="20dp"
-            >
-
-            <pl.droidsonroids.gif.GifImageView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/gif_header_repast"
-                app:layout_srlBackgroundColor="@android:color/transparent"
-                app:layout_srlSpinnerStyle="Scale" />
-
-        </com.scwang.smartrefresh.layout.header.ClassicsHeader>
-
-        <ListView
-            android:id="@+id/news_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+        android:background="@android:color/white" />
 
 </LinearLayout>

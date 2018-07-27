@@ -25,7 +25,7 @@ public class Constants {
     public static final HttpLoggingInterceptor.Level OKHTTP_LOG_LEVEL = HttpLoggingInterceptor.Level.BASIC;
     static {
         if (LOCAL_TEST) {
-            HOST = "192.168.0.101:8080/Study_Platform_website";     //本地地址
+            HOST = "192.168.0.106:8080/Study_Platform_website";     //本地地址
         } else {
             HOST = "" + DOMAIN;
         }
@@ -35,7 +35,7 @@ public class Constants {
     public static final String DOWNLOAD_APP_NAME = "studytree.apk";
     /** 下载路径 */
     public static final String DOWNLOAD_URL = "http://" + HOST + "/studytree.apk";
-    /** 下载路径 */
+    /** 关于我们路径 */
     public static final String ABOUT_US_URL = "http://" + HOST + "/about_us.jsp";
 
     /** 友盟Log开关 */

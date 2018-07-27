@@ -7,6 +7,32 @@ package com.studyplatform.web.system;
  * @author Freedom0013
  */
 public class SystemCommonValue {
+    /** 上线/测试地址切换标识（true：本地 false：线上）*/
+    public static final boolean isTest = true;
+    /** Log标识（true：显示  false：隐藏） */
+    public static final boolean isDebug = true;
+    /** 显示常规级信息 */
+    public static final boolean Logger = true;
+    /** 显示错误级信息 */
+    public static final boolean Error = true;
+    
+    /** 本地地址 */
+    public static final String HOST;
+    /** 云服务器地址 */
+    public static final String DOMAIN = "119.27.161.250:8080/Study_Platform_website";
+    static {
+        if (isTest) {
+            HOST = "192.168.0.106:8080/Study_Platform_website";     //本地地址
+        } else {
+            HOST = "" + DOMAIN;
+        }
+    }
+    
+    /** 下载文件名 */
+    public static final String DOWNLOAD_APP_NAME = "studytree.apk";
+    /** 下载路径 */
+    public static final String DOWNLOAD_URL = "http://" + HOST + "/studytree.apk";
+    
     /** 执行成功状态码  :: 0*/
     public static final int OPERATION_SUCCESS = 0;
     /** 执行失败状态码  :: 1*/

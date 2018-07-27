@@ -131,14 +131,25 @@
     <servlet-name>WrittenOffAction</servlet-name>
     <servlet-class>com.studyplatform.web.servlet.forAndroid.WrittenOffAction</servlet-class>
   </servlet>
+  
+  <!-- Android更新信息获取 -->
   <servlet>
     <servlet-name>InitAction</servlet-name>
     <servlet-class>com.studyplatform.web.servlet.forAndroid.InitAction</servlet-class>
   </servlet>
+  
+  <!-- Android获取Banner -->
   <servlet>
     <servlet-name>BannerAction</servlet-name>
     <servlet-class>com.studyplatform.web.servlet.forAndroid.BannerAction</servlet-class>
   </servlet>
+  
+  <!-- Android获取资讯 -->
+  <servlet>
+    <servlet-name>NewsAction</servlet-name>
+    <servlet-class>com.studyplatform.web.servlet.forAndroid.NewsAction</servlet-class>
+  </servlet>
+
 
 
 
@@ -268,6 +279,10 @@
   <servlet-mapping>
     <servlet-name>BannerAction</servlet-name>
     <url-pattern>/servlet/BannerAction</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>NewsAction</servlet-name>
+    <url-pattern>/servlet/NewsAction</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>

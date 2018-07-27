@@ -82,6 +82,9 @@ public class HttpTransaction extends HttpManager {
             case ActionID.ACTION_BANNER:
                 path = Protocol.ACTION_BANNER;
                 break;
+            case ActionID.ACTION_NEWS:
+                path = Protocol.ACTION_NEWS;
+                break;
         }
         return "http://" + Constants.HOST + path;
     }

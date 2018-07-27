@@ -21,4 +21,7 @@ public class Protocol {
     public static final String ACTION_WRITTEN_OFF = "/servlet/WrittenOffAction";
     public static final String ACTION_ANSWER = "/servlet/AnswerAction";
     public static final String ACTION_BANNER = "/servlet/BannerAction";
+    public static final String ACTION_NEWS = "/servlet/NewsAction";
+
+
 }
