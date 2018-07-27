@@ -1,5 +1,6 @@
 package com.studytree.view.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,7 @@ public class QuestionFragment extends BaseFragment {
     /** 选项G */
     private View optionG;
 
+    @SuppressLint({"NewApi", "ValidFragment"})
     public QuestionFragment(){
 
     }

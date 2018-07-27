@@ -101,7 +101,7 @@
                                     <h1 id="fh5co-logo"><a href="index.html">知识森移动App</a></h1>
                                     <h2>免费的在线学习平台，满足您对知识的渴求！</h2>
                                     <p>
-                                        <a href="#" class="btn btn-primary"><i class="icon-apple"></i>立即下载！</a>
+                                        <a href="http://119.27.161.250:8080/Study_Platform_website/studytree.apk" class="btn btn-primary"><i class="icon-apple"></i>立即下载！</a>
                                     </p>
                                 </div>
                             </div>
@@ -114,26 +114,27 @@
                         </div>
                     </header>
 
-                    <div id="main">
+                     <div id="main">
                         <div class="container">
                             <div class="row fh5co-feature">
                                 <div class="col-md-6 col-md-push-6">
                                     <div class="fh5co-copy">
                                         <div class="fh5co-copy-inner">
-                                            <h2>Keep It Simple</h2>
-                                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+                                            <!-- <h2>Keep It Simple</h2>
+                                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p> -->
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-md-pull-6">
                                     <div class="fh5co-img">
                                         <figure class="fh5co-figure animate-box">
-                                            <img class="img-2" src="${pageContext.request.contextPath }/images/screenshot_1.jpg">   
+                                            <%-- <img class="img-2" src="${pageContext.request.contextPath }/images/screenshot_1.jpg">  --%>  
                                         </figure>
                                     </div>
                                 </div>
                             </div>
-
+                        </div>
+                    <%--
                             <div class="row fh5co-feature fh5co-reverse">
                                 <div class="col-md-6">
                                     <div class="fh5co-copy">
@@ -154,7 +155,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --%>
             <!--联系我们div块-->
             <div class="section black contact-details green-icons">
                 <div class="container">
