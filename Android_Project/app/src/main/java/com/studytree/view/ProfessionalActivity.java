@@ -198,6 +198,8 @@ public class ProfessionalActivity extends BaseActivity implements StudyTreeTitle
                 if (list != null && !list.isEmpty()) {
                     mProfessionData.addAll(list);
                     Logger.d(TAG, mProfessionData.toString());
+                }else{
+                    showToast("暂时没有数据，拼命补充中....");
                 }
                 //去除进度
                 dismissProgressDialog();

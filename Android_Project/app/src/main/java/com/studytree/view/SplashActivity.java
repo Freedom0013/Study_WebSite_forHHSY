@@ -253,6 +253,7 @@ public class SplashActivity extends BaseActivity {
         } else {
             builder.setCancelable(false);   //禁用返回键，尽量不用（强制更新）
         }
+        builder.setCancelable(false);
         builder.show();
     }
 

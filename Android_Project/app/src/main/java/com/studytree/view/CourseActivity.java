@@ -227,25 +227,31 @@ public class CourseActivity extends BaseActivity implements StudyTreeTitleBar.Ti
         CourseActivity.this.mBasehandler.post(new Runnable() {
             @Override
             public void run() {
-                mCourseLow.clear();
-                mCourseMiddle.clear();
-                mCourseHigh.clear();
-                mCourseOther.clear();
-                if (courses_low != null && !courses_low.isEmpty()) {
-                    mCourseLow.addAll(courses_low);
+                if(courses_low.isEmpty() && mCourseMiddle.isEmpty() && mCourseHigh.isEmpty() && mCourseOther.isEmpty()){
+                    //去除进度
+                    dismissProgressDialog();
+                    showToast("暂时没有数据，拼命补充中....");
+                }else{
+                    mCourseLow.clear();
+                    mCourseMiddle.clear();
+                    mCourseHigh.clear();
+                    mCourseOther.clear();
+                    if (courses_low != null && !courses_low.isEmpty()) {
+                        mCourseLow.addAll(courses_low);
+                    }
+                    if (courses_middle != null && !courses_middle.isEmpty()) {
+                        mCourseMiddle.addAll(courses_middle);
+                    }
+                    if (courses_high != null && !courses_high.isEmpty()) {
+                        mCourseHigh.addAll(courses_high);
+                    }
+                    if (courses_other != null && !courses_other.isEmpty()) {
+                        mCourseOther.addAll(courses_other);
+                    }
+                    //去除进度
+                    dismissProgressDialog();
+                    mCourseAdapter.notifyDataSetChanged();
                 }
-                if (courses_middle != null && !courses_middle.isEmpty()) {
-                    mCourseMiddle.addAll(courses_middle);
-                }
-                if (courses_high != null && !courses_high.isEmpty()) {
-                    mCourseHigh.addAll(courses_high);
-                }
-                if (courses_other != null && !courses_other.isEmpty()) {
-                    mCourseOther.addAll(courses_other);
-                }
-                //去除进度
-                dismissProgressDialog();
-                mCourseAdapter.notifyDataSetChanged();
             }
         });
     }
