@@ -6,7 +6,7 @@
     <color name="colorPrimary">#FF3F51B5</color>
     <color name="colorPrimaryDark">#FF303F9F</color>
     <color name="colorAccent">#FFFF4081</color>
-    <color name="colorBlack">#00000000</color>
+    <color name="colorBlack">#000000</color>
     <color name="colorWhite">#FFFFFFFF</color>
     <color name="colorGrey">#FFf5f5f5</color>
     <color name="normal_title">#FF999999</color>
