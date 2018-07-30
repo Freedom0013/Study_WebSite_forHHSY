@@ -21,4 +21,251 @@
         app:contentInsetLeft="0dp"
         app:contentInsetStart="0dp"
         app:title="@string/app_name" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_alignParentTop="true"
+                    android:background="@drawable/payment_selection_top_line" />
+
+                <LinearLayout
+                    android:id="@+id/total"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/shape_corner_gray_no_top"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:text="共需要支付："
+                        android:textColor="@color/banner_blue_dot"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/payment_selection_total_money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/home_orange"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="元"
+                        android:textColor="@color/banner_blue_dot"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/discount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/total"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/shape_corner_gray_no_top"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:text="优 惠 券："
+                        android:textColor="@color/banner_blue_dot"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/payment_selection_discount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textColor="@color/home_orange"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <ImageView style="@style/taetao_arrow_style" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/total_pay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/discount"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/shape_corner_gray_no_top"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:text="应付总额："
+                        android:textColor="@color/banner_blue_dot"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/payment_selection_total_pay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/home_orange"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="元"
+                        android:textColor="@color/banner_blue_dot"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:text="请选择支付方式:"
+                    android:textColor="@color/banner_blue_dot"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:background="#becaca" />
+
+            <RadioGroup
+                android:id="@+id/pay_type_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <com.studytree.view.widget.PayRadioButton
+                    android:id="@+id/pay_type_alipay"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@android:color/transparent"
+                    android:button="@null"
+                    android:drawableEnd="@drawable/selector_blue_small_check_button"
+                    android:drawableLeft="@drawable/selector_payment_alipay"
+                    android:drawableRight="@drawable/selector_blue_small_check_button"
+                    android:drawableStart="@drawable/selector_payment_alipay"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.5dp"
+                    android:background="#becaca" />
+
+                <com.studytree.view.widget.PayRadioButton
+                    android:id="@+id/pay_type_wechat"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@android:color/transparent"
+                    android:button="@null"
+                    android:drawableEnd="@drawable/selector_blue_small_check_button"
+                    android:drawableLeft="@drawable/selector_payment_wechat"
+                    android:drawableRight="@drawable/selector_blue_small_check_button"
+                    android:drawableStart="@drawable/selector_payment_wechat"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.5dp"
+                    android:background="#becaca" />
+
+
+                <com.studytree.view.widget.PayRadioButton
+                    android:id="@+id/pay_type_test"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@android:color/transparent"
+                    android:button="@null"
+                    android:drawableEnd="@drawable/selector_blue_small_check_button"
+                    android:drawableRight="@drawable/selector_blue_small_check_button"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="支付宝测试通道" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/pay_bottom_divider"
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:background="#becaca" />
+
+            <Button
+                android:id="@+id/pay_selection_submit"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/selector_begin_test_bg"
+                android:enabled="true"
+                android:gravity="center"
+                android:text="支付"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

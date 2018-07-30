@@ -65,4 +65,13 @@
         <item name="android:layout_height">@dimen/divider_height</item>
         <item name="android:background">@color/divider_color_darker</item>
     </style>
+
+    <!-- 更多箭头样式 -->
+    <style name="taetao_arrow_style">
+        <item name="android:layout_width">7.5dip</item>
+        <item name="android:layout_height">13dip</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:src">@drawable/item_detail_left_icon</item>
+    </style>
 </resources>
