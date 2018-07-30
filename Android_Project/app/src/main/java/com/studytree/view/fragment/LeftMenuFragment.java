@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -24,6 +25,7 @@ import com.studytree.log.Logger;
 import com.studytree.utils.StudyTreeTools;
 import com.studytree.view.LoginActivity;
 import com.studytree.view.MainActivity;
+import com.studytree.view.PaymentSelectionActivity;
 import com.studytree.view.QRScannerActivity;
 import com.studytree.view.SettingActivity;
 import com.studytree.view.WebViewActivity;
@@ -63,6 +65,7 @@ public class LeftMenuFragment extends BaseFragment implements View.OnClickListen
     private RelativeLayout login_exit_rl;
     /** 用户Bean */
     private UserBean mUserBean;
+    private Button join_button;
 
     /** 空参构造函数（必须） */
     public LeftMenuFragment(){}
@@ -84,7 +87,7 @@ public class LeftMenuFragment extends BaseFragment implements View.OnClickListen
         root_menu.setBackgroundResource(R.drawable.menu_background);
         //菜单提示语
         menu_sign = mRootView.findViewById(R.id.menu_sign);
-        menu_sign.setText("登录后可体验更多学习乐趣~");
+        menu_sign.setText("加入会员可查看更多专属题目~");
 
         //登陆附属控件
         login_ln = mRootView.findViewById(R.id.login_ln);
@@ -94,6 +97,8 @@ public class LeftMenuFragment extends BaseFragment implements View.OnClickListen
         rank_level_number = mRootView.findViewById(R.id.rank_level_number);
         login_score = mRootView.findViewById(R.id.login_score);
         login_exit_rl = mRootView.findViewById(R.id.login_exit_rl);
+        join_button = mRootView.findViewById(R.id.join_button);
+        join_button.setVisibility(View.GONE);
 
         initButtons(mRootView);
         return mRootView;
@@ -111,8 +116,10 @@ public class LeftMenuFragment extends BaseFragment implements View.OnClickListen
         mRootView.findViewById(R.id.leftmenu_feedback).setOnClickListener(this);
         mRootView.findViewById(R.id.leftmenu_likemine).setOnClickListener(this);
         mRootView.findViewById(R.id.leftmenu_aboutus).setOnClickListener(this);
+
         login_ln.setOnClickListener(this);
         login_exit_rl.setOnClickListener(this);
+        join_button.setOnClickListener(this);
 
         mUserBean = InitManager.getInstance().getUserInfo();
         if(mUserBean !=null){
@@ -166,6 +173,10 @@ public class LeftMenuFragment extends BaseFragment implements View.OnClickListen
             case R.id.login_exit_rl:            //退出登录
                 mActivity.closeMenu();
                 showWrittenOffDialog();
+                break;
+            case R.id.join_button:              //加入会员
+                mActivity.closeMenu();
+                PaymentSelectionActivity.startForResult(mActivity,mActivity.PAY_REQUEST_CODE);
                 break;
         }
     }
@@ -222,7 +233,8 @@ public class LeftMenuFragment extends BaseFragment implements View.OnClickListen
         mActivity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                menu_sign.setText("您已登录，请前往我的界面查看详情~");
+                join_button.setVisibility(View.VISIBLE);
+                menu_sign.setText("加入会员可查看更多专属题目~");
                 menu_name.setText(bean.user_nickname);
                 ImageLoader.getInstance().displayImage(bean.user_picture_url, menu_avatar);
                 rank_level_fm.setVisibility(View.VISIBLE);
@@ -245,6 +257,7 @@ public class LeftMenuFragment extends BaseFragment implements View.OnClickListen
                 InitManager.getInstance().setUserInfo(null, null);
                 InitManager.getInstance().savePhoneAndPasswordToPrefs(null, null);
                 menu_sign.setVisibility(View.VISIBLE);
+                join_button.setVisibility(View.GONE);
                 menu_sign.setText("登录后可体验更多学习乐趣~");
                 menu_name.setText("立即登录");
                 menu_avatar.setImageDrawable(getResources().getDrawable(R.drawable.icon_user_left_normal));

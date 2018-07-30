@@ -94,6 +94,9 @@
         <activity android:name=".view.RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
 
+        <!--选择支付-->
+        <activity android:name=".view.PaymentSelectionActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
 
         <!--分享-->

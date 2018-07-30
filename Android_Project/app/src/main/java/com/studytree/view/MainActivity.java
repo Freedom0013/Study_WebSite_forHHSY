@@ -38,6 +38,8 @@ public class MainActivity extends BaseActivity {
     public static final int LOGIN_REQUEST_CODE = 0;
     /** 扫一扫结果码 */
     public static final int QR_REQUEST_CODE = 1;
+    /** 会员支付结果码 */
+    public static final int PAY_REQUEST_CODE = 2;
     /** 点击两次返回时间间隔 */
     private long exitTime = 0;
 
