@@ -67,7 +67,7 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/exam_over_title_text_bg"
                         android:gravity="center"
-                        android:text="100分"
+                        android:text=""
                         android:textColor="@color/colorWhite"
                         android:textSize="20sp" />
 

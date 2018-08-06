@@ -191,6 +191,8 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp">
 
+                <!--这里的android:background="@android:color/transparent"属性必须添加
+                        ，否则会出现RadioButton异常赋予系统点击水波纹动画-->
                 <com.studytree.view.widget.PayRadioButton
                     android:id="@+id/pay_type_alipay"
                     android:layout_width="match_parent"

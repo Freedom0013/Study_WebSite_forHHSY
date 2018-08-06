@@ -216,7 +216,11 @@ public class CourseActivity extends BaseActivity implements StudyTreeTitleBar.Ti
         } else if (mCourseLow.size() + mCourseMiddle.size() + mCourseHigh.size() + 4 <= position && position < mCourseLow.size() + mCourseMiddle.size() + mCourseHigh.size() + mCourseOther.size() + 4) {
             course = mCourseOther.get(position - 4 - mCourseLow.size() - mCourseMiddle.size() - mCourseHigh.size());
         }
-        Logger.d(TAG,course.toString());
+        //特殊条目不处理点击
+        if(course == null){
+            return;
+        }
+//        Logger.d(TAG,course.toString());
         CourseDetailActivity.start(CourseActivity.this,course);
     }
 

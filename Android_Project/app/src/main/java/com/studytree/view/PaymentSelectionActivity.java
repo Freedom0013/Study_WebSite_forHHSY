@@ -55,7 +55,7 @@ public class PaymentSelectionActivity extends BaseActivity implements StudyTreeT
 
     /**
      * 启动PaymentSelectionActivity
-     * @param ctx         来源Activity
+     * @param ctx 来源Activity
      * @param requestCode 请求码
      */
     public static void startForResult(Activity ctx, int requestCode) {
@@ -171,6 +171,10 @@ public class PaymentSelectionActivity extends BaseActivity implements StudyTreeT
         });
     }
 
+    /**
+     * 检查微信是否安装
+     * @return 结果
+     */
     private boolean isWechatInstalled() {
         String WeChatPkg = "com.tencent.mm";
         boolean isInstalled = false;
@@ -185,6 +189,10 @@ public class PaymentSelectionActivity extends BaseActivity implements StudyTreeT
         return isInstalled;
     }
 
+    /**
+     * 检查支付宝是否安装
+     * @return 结果
+     */
     private boolean isAlipayInstalled() {
         String AlipayPkg = "com.eg.android.AlipayGphone";
         boolean isInstalled = false;
